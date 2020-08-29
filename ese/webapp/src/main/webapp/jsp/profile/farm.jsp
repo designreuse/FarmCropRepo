@@ -79,16 +79,16 @@ $("#calendarFormat").datepicker({
                     	
                     	var farmerId = '<s:property value="farmerId" />';
                     	
-                    	if(!isEmpty(farmerId)){
-                    		$.post("farm_detailCheckForCertifiedFarmer", {selectedFarmerId: cerf}, function (data) {
+                    	//if(!isEmpty(farmerId)){
+                    	//	$.post("farm_detailCheckForCertifiedFarmer", {selectedFarmerId: cerf}, function (data) {
                               	//alert(data);
-                    			if ("YES" == data) {
+                    	//		if ("YES" == data) {
                                 	
-                                }else{
+                         //       }else{
                                 	
-                                }
-                            });
-                    	}
+                         //       }
+                          //  });
+                    	//}
                     	hideFields();
                     	 
                     	$("#organicStatus").val("In process");
@@ -2936,7 +2936,7 @@ function butTreeDelete(indx){
         			}
         			if(error){
         				<s:if test="currentTenantId!='griffith'">
-        				validateImage();
+        				//validateImage();
         				</s:if>
                  	   
                  	  var tableBody = jQuery("#treeData");
