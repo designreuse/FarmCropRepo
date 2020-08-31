@@ -84,7 +84,7 @@ public class FarmCropsValidator implements IValidator {
             errorCodes.put("emptyFarmCropsProcurementVariety", "empty.procurementVariety");
         }
         if(!tenantId.equalsIgnoreCase(ESESystem.GRIFFITH_TENANT_ID) && !tenantId.equalsIgnoreCase(ESESystem.WELSPUN_TENANT_ID) && !tenantId.equalsIgnoreCase(ESESystem.LIVELIHOOD_TENANT_ID)
-        		&& !tenantId.equalsIgnoreCase("kenyafpo")){
+        		&& !tenantId.equalsIgnoreCase("kenyafpo") && !tenantId.equalsIgnoreCase(ESESystem.AGRO_TENANT)){
 	        if(aFarmCrops.getSeedSource() == null||aFarmCrops.getSeedSource().equalsIgnoreCase("")){
 	       	 errorCodes.put("seedSource", "empty.seedSource");
 	       }

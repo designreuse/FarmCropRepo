@@ -129,6 +129,7 @@ jQuery(document).ready(function() {
 	});
 	if('<s:property value="command"/>'=="update"){
 		calTotalHshld();
+		
 	}
 	if(tenant=="kenyafpo"){
 		$("input[name='farmer.isCertifiedFarmer'][value='0']").attr("checked", true);
@@ -179,6 +180,27 @@ jQuery(document).ready(function() {
 	
 	if('<s:property value="command"/>'=="update"){
 		setDynamicFieldUpdateValues();
+		var bankAccType = '<s:property value="bankAccType" />';
+		var accName = '<s:property value="accName" />';
+		var accNo = '<s:property value="accNo" />';
+		var bankName = '<s:property value="bankName" />';
+		var bankBranchName = '<s:property value="bankBranchName" />';
+		var sortCode = '<s:property value="sortCode" />';
+		
+		$("#accName").val(accName);
+		$("#accNo").val(accNo);
+		$("#bankName").val(bankName);
+		$("#branchName").val(bankBranchName);
+		$("#sortCode").val(sortCode);
+
+		var jsonString=$('#jsonString').val();
+		if(jsonString != null && !isEmpty(jsonString)){
+			var jsonObj=JSON.parse(jsonString);
+			var bankInformation=jsonObj[0];
+			$("#accountType").val(bankInformation.accTypeCode);
+		}
+		
+		
 	}
 	if('<s:property value="command"/>'=="create"){
 	if(tenant=="livelihood"){
@@ -1632,6 +1654,7 @@ function getBankDetails(){
 	var jsonObj=[];
 	var bankInformation = {};	
 	
+	bankInformation["accType"] = $("#accountType").val();
 	bankInformation["accTypeCode"] = $("#accountType").val();
 	bankInformation["accName"] = $("#accName").val();
 	bankInformation["accNo"] = $("#accNo").val();

@@ -1543,39 +1543,7 @@
 
 									</div>
 
-									<div class="row">
 
-
-										<div class="col-md-4">
-											<p class="form-group ">
-												<s:property value="%{getLocaleProperty('farmer.photo')}" />
-											</p>
-
-											<img src="assets/images/product/img-1.png" alt=""
-												class="img-fluid mx-auto d-block"
-												data-zoom="assets/images/product/img-1.png">
-
-
-										</div>
-
-										<div class="col-md-8">
-											<p class="form-group ">
-												<s:property
-													value="%{getLocaleProperty('farmer.idProofImg')}" />
-											</p>
-
-											<img src=<s:property value="idProofImgString" /> alt=""
-												class="img-fluid mx-auto d-block"
-												data-zoom="assets/images/product/img-1.png">
-
-											<p id="latlonStr">
-												<s:property value="farm.latitude" />
-												:
-												<s:property value="farm.longitude" />
-											</p>
-										</div>
-
-									</div>
 
 								</div>
 							</div>
@@ -1733,30 +1701,57 @@
 							</div>
 							<!-- need to be deleted end -->
 							<div class="dynamicFieldsRender"></div>
-							<div class="button-items float-right">
-								<sec:authorize ifAllGranted="profile.farmer.update">
-									<button type="submit" id="update"
-										class="btn btn-success waves-effect waves-light">
-										<i class="ri-check-line align-middle mr-2"></i>Edit
+
+
+
+							<!-- btn start  -->
+							<div class="flexItem flex-layout flexItemStyle float-right">
+								<div class="">
+									<sec:authorize ifAllGranted="profile.farmer.update">
+
+										<span id="update" class=""><span class="first-child">
+												<button type="button" class="edit-btn btn btn-success"
+													onclick="onUpdate()">
+													<i class="ri-check-line align-middle mr-2"></i> <FONT
+														color="#FFFFFF"> <b><s:text name="edit.button" /></b>
+													</font>
+												</button>
+										</span></span>
+
+										<%-- <span id="update" class=""><span class="first-child actStatus">
+									<button type="button" class="edit-btn btn btn-success"
+										onclick="onUpdateActPlan()">
+										<FONT color="#FFFFFF"> <b><s:text
+													name="followup.button" /></b>
+										</font>
 									</button>
+							</span></span> --%>
+									</sec:authorize>
+									<sec:authorize ifAllGranted="profile.farmer.delete">
 
-								</sec:authorize>
+										<span id="delete" class=""><span class="first-child">
+												<button type="button" onclick="onDelete()"
+													class="delete-btn btn btn-warning">
+													<i class="ri-close-line align-middle mr-2"></i> <FONT
+														color="#FFFFFF"> <b><s:text
+																name="delete.button" /></b>
+													</font>
 
-								<sec:authorize ifAllGranted="profile.farmer.delete">
-									<button type="button" id="delete"
-										class="btn btn-danger waves-effect waves-light">
-										<i class="ri-close-line align-middle mr-2"></i>
-										<s:text name="delete.button" />
-									</button>
-								</sec:authorize>
+												</button>
+										</span></span>
 
-								<button type="button" id="cancel"
-									class="btn btn-warning waves-effect waves-light">
-									<i class="ri-error-warning-line align-middle mr-2"></i>
-									<s:text name="back.button" />
-								</button>
-
+									</sec:authorize>
+									<span id="cancel" class=""><span class="first-child">
+											<button type="button" class="back-btn btn btn-primary"
+												onclick="onCancel()">
+												<i class="ri-error-warning-line align-middle mr-2"></i> <b><FONT
+													color="#FFFFFF"><s:text name="back.button" /> </font></b>
+											</button>
+									</span></span>
+								</div>
 							</div>
+							<!-- btn end  -->
+
 
 						</s:form>
 					</div>
@@ -1911,6 +1906,71 @@
 			</div>
 		</div>
 	</div>
+
+
+	<s:form name="updateform" action="farm_update.action">
+		<s:hidden name="id" value="%{farm.id}" />
+		<s:hidden key="currentPage" />
+		<s:hidden name="farmerId" value="%{farmerId}" />
+		<s:hidden name="sangham" value="%{farm.farmer.sangham}" />
+		<s:hidden name="tabIndexFarmer" value="%{tabIndex}" />
+		<s:hidden id="isFollowUp" name="isFollowUp" />
+	</s:form>
+	<s:form name="updateActform" action="farm_updateActPlan.action">
+		<s:hidden name="id" value="%{farm.id}" />
+		<s:hidden key="currentPage" />
+		<s:hidden name="farmerId" value="%{farmerId}" />
+		<s:hidden name="sangham" value="%{farm.farmer.sangham}" />
+		<s:hidden name="tabIndexFarmer" value="%{tabIndex}" />
+		<s:hidden id="isFollowUp" name="isFollowUp" />
+	</s:form>
+	<s:form name="deleteform" action="farm_delete.action">
+		<s:hidden key="id" />
+		<s:hidden key="currentPage" />
+		<s:hidden name="farmerId" value="%{farmerId}" />
+		<s:hidden name="sangham" value="%{farm.farmer.sangham}" />
+		<s:hidden name="tabIndexFarmer" value="%{tabIndexFarmerZ}" />
+		<s:hidden value="%{farm.farmer.id}" name="farmerUniqueId" />
+	</s:form>
+	<s:form name="cancelform" action="farmer_detail.action">
+		<s:hidden name="farmerId" />
+		<s:hidden name="id" value="%{farmerUniqueId}" />
+		<s:hidden name="tabIndex" value="%{tabIndexFarmerZ}" />
+		<s:hidden name="currentPage" />
+	</s:form>
+	<s:form name="redirectform" action="farmInventory_list.action">
+		<s:hidden name="farmId" value="%{farm.id}" />
+		<s:hidden key="currentPage" />
+	</s:form>
+	<s:form name="redirectforms" action="animalHusbandary_list.action">
+		<s:hidden name="farmId" value="%{farm.id}" />
+		<s:hidden key="currentPage" />
+
+
+	</s:form>
+
+	<s:form id="audioFileDownload" action="farm_populateDownload.action">
+		<s:hidden id="loadId" name="id" />
+	</s:form>
+	<s:form id="documentDownload" action="farm_populateDownloadFile">
+		<s:hidden id="fileId" name="documentFileId" />
+	</s:form>
+
+
+<s:hidden key="farm.id" id="farmId"  class="uId"/>
+				<s:form name="form">
+					<s:hidden key="currentPage" />
+					<s:hidden key="id" />
+					<s:hidden key="farm.id" />
+					<s:hidden value="dateOfInspection" />
+					<s:hidden key="farm.lockExist" id="locked" />
+					<s:hidden key="command" />
+					<s:hidden id="landInAcres" name="landInAcres"
+						value="%{farm.farmDetailedInfo.totalLandHolding}" />
+					<s:hidden id="plantingArea" name="plantingArea"
+						value="%{farm.farmDetailedInfo.proposedPlantingArea}" />
+				</s:form>
+
 	<!-- JAVASCRIPT -->
 	<script src="assets/libs/jquery/jquery.min.js"></script>
 	<script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>

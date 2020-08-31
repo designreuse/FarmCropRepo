@@ -104,6 +104,7 @@
 					$(".nav").parent().addClass("hide");
 					$("#cancelform").prop("action","farmer_list.action?type=2");
 				} 
+			 
 			 hideFields();
 				jQuery.post("farmer_populateHideFn.action", {type:type}, function(result) {
 					
@@ -132,7 +133,8 @@
 					$(".farmerDynamicField").removeClass("hide");
 					
 				});
-				
+				$(".detailField").show();
+				$(".inputField").hide();
 			
 			
 			callGrids();
@@ -786,15 +788,13 @@ if('<s:property value="getBranchId()"/>'=='Individual'){
 	var tenant='<s:property value="getCurrentTenantId()"/>';
 		$(document).ready(function() {
 		
-							$('#update').on(
-											'click',
-											function(e) {
-											//	alert("ft");
-												//alert(document.getElementById('farmerId').value());
-												//document.updatfrm.id.value = document.getElementById('farmerId').value;
-												//document.updatfrm.currentPage.value = document.form.currentPage.value;
-												document.updatfrm.submit();
-											});
+			$('#update').on(
+					'click',
+					function(e) {
+						document.updatfrm.id.value = document.getElementById('farmerId').value;
+						document.updatfrm.currentPage.value = document.form.currentPage.value;
+						document.updatfrm.submit();
+					});
 							$('#delete')
 									.on(
 											'click',
@@ -2258,7 +2258,21 @@ if('<s:property value="getBranchId()"/>'=='Individual'){
 			});
 		 }
 		 
-		 
+		function populateFarmerDataForUpdate(){
+			$(".detailField").hide();
+			$(".inputField").show();
+			
+			var firstName = '<s:property value="farmer.firstName" />';
+			var lastName = '<s:property value="farmer.lastName" />';
+			var surName = '<s:property value="farmer.surName" />';
+			var gender = '<s:property value="farmer.gender" />';
+			
+			$('[name="farmer.firstName"]').val(firstName);
+			$('[name="farmer.lastName"]').val(lastName);
+			$('[name="farmer.surName"]').val(surName);
+			$('[name="farmer.gender"]').val(gender);
+			
+		 }
 		 
 	</script>
 	<div class="row">
@@ -2354,9 +2368,14 @@ if('<s:property value="getBranchId()"/>'=='Individual'){
 													<s:property
 														value="%{getLocaleProperty('farmer.firstName')}" />
 												</p>
-												<p class="form-control" name="farmer.firstName">
+												<p class="form-control detailField" name="farmer.firstName">
 													<s:property value="farmer.firstName" />
 												</p>
+
+												<s:textfield id="firstName" name="farmer.firstName"
+													maxlength="50" onkeypress="return isAlphabet(event)"
+													cssClass="upercls form-control inputField" />
+
 											</div>
 
 										</div>
@@ -2364,35 +2383,51 @@ if('<s:property value="getBranchId()"/>'=='Individual'){
 											<p class="form-group">
 												<s:property value="%{getLocaleProperty('farmer.lastName')}" />
 											</p>
-											<p class="form-control" name="farmer.lastName">
+											<p class="form-control detailField" name="farmer.lastName">
 												<s:property value="farmer.lastName" />
 											</p>
+
+											<s:textfield id="lastName" name="farmer.lastName"
+												maxlength="50" cssClass="upercls form-control inputField" />
 										</div>
 
 										<div class="col-md-4">
 											<p class="form-group">
 												<s:property value="%{getLocaleProperty('farmer.surName')}" />
 											</p>
-											<p class="form-control" name="farmer.surName">
+											<p class="form-control detailField" name="farmer.surName">
 												<s:property value="farmer.surName" />
 											</p>
+
+											<s:textfield id="surName" name="farmer.surName"
+												maxlength="50" cssClass="upercls form-control inputField" />
 										</div>
 
 										<div class="col-md-4">
 											<p class="form-group">
 												<s:property value="%{getLocaleProperty('farmer.gender')}" />
 											</p>
-											<p class="form-control" name="farmer.gender">
+											<p class="form-control detailField" name="farmer.gender">
 												<s:text name='%{farmer.gender}' />
 											</p>
+											
+											<s:select list="genderType" listKey="key" listValue="value"
+										cssClass="form-control inputField" id="gender" name="farmer.gender" />
+											
 										</div>
 										<div class="col-md-4">
 											<p class="form-group dateName">
 												<s:text name="farmer.dateOfBirth" />
 											</p>
-											<p class="form-control font-weight-bold" name="calendar">
+											<p class="form-control font-weight-bold detailField" name="calendar">
 												<s:property value="dateOfBirth" />
 											</p>
+											
+											<s:textfield value='%{dateOfBirth}' readonly="true"
+										name="calendar" onchange="calculateAge()" id="calendar"
+										data-date-format="%{getGeneralDateFormat().toLowerCase()}"
+										size="20" cssClass="date-picker form-control inputField" />
+											
 										</div>
 										<div class="col-md-4">
 											<p class="form-group">
@@ -2947,10 +2982,10 @@ if('<s:property value="getBranchId()"/>'=='Individual'){
 													<div class="wizard-label">
 
 														<h3 class="wizard-title">
-															<s:property
-																value="%{getLocaleProperty('Image Info')}" />
+															<s:property value="%{getLocaleProperty('Image Info')}" />
 														</h3>
-														<div class="wizard-desc">Farmer photo and Id proof photo</div>
+														<div class="wizard-desc">Farmer photo and Id proof
+															photo</div>
 													</div>
 												</div>
 												<i
@@ -2969,15 +3004,18 @@ if('<s:property value="getBranchId()"/>'=='Individual'){
 
 											<div class="col-md-6">
 												<p class="form-group ">
-													<s:property
-														value="%{getLocaleProperty('farmer.photo')}" />
+													<s:property value="%{getLocaleProperty('farmer.photo')}" />
 												</p>
 
 												<img src=<s:property value="farmerImageByteString" /> alt=""
 													class="img-fluid mx-auto d-block"
 													data-zoom="assets/images/product/img-1.png">
 
-												<p id="latlonStr"><s:property value="farmer.latitude" /> : <s:property value="farmer.longitude" /></p>
+												<p id="latlonStr">
+													<s:property value="farmer.latitude" />
+													:
+													<s:property value="farmer.longitude" />
+												</p>
 											</div>
 
 											<div class="col-md-6">
@@ -2989,8 +3027,12 @@ if('<s:property value="getBranchId()"/>'=='Individual'){
 												<img src=<s:property value="idProofImgString" /> alt=""
 													class="img-fluid mx-auto d-block"
 													data-zoom="assets/images/product/img-1.png">
-													
-												<p id="idProofStr" ><s:property value="idProofCatalogueName" /> : <s:property value="farmer.proofNo" /></p>	
+
+												<p id="idProofStr">
+													<s:property value="idProofCatalogueName" />
+													:
+													<s:property value="farmer.proofNo" />
+												</p>
 
 											</div>
 
@@ -3001,192 +3043,192 @@ if('<s:property value="getBranchId()"/>'=='Individual'){
 									</div>
 								</div>
 							</div>
-					
 
-					<!-- images end  -->
-					
-					<!-- id proof string start -->
-					
-					<!-- id proof string end -->
 
-					<div class="dynamicFieldsRender"></div>
-					<div class="button-items float-right">
-						<sec:authorize ifAllGranted="profile.farmer.update">
-							<button type="submit" id="update"
-								class="btn btn-success waves-effect waves-light">
-								<i class="ri-check-line align-middle mr-2"></i>Edit
-							</button>
+							<!-- images end  -->
 
-						</sec:authorize>
+							<!-- id proof string start -->
 
-						<sec:authorize ifAllGranted="profile.farmer.delete">
-							<button type="button" id="delete"
-								class="btn btn-danger waves-effect waves-light">
-								<i class="ri-close-line align-middle mr-2"></i>
-								<s:text name="delete.button" />
-							</button>
-						</sec:authorize>
+							<!-- id proof string end -->
 
-						<button type="button" id="cancel"
-							class="btn btn-warning waves-effect waves-light">
-							<i class="ri-error-warning-line align-middle mr-2"></i>
-							<s:text name="back.button" />
-						</button>
+							<div class="dynamicFieldsRender"></div>
+							<div class="button-items float-right">
+								<sec:authorize ifAllGranted="profile.farmer.update">
+									<button type="button" id="update"
+										class="btn btn-success waves-effect waves-light">
+										<i class="ri-check-line align-middle mr-2"></i>Edit
+									</button>
 
+								</sec:authorize>
+
+								<sec:authorize ifAllGranted="profile.farmer.delete">
+									<button type="button" id="delete"
+										class="btn btn-danger waves-effect waves-light">
+										<i class="ri-close-line align-middle mr-2"></i>
+										<s:text name="delete.button" />
+									</button>
+								</sec:authorize>
+
+								<button type="button" id="cancel"
+									class="btn btn-warning waves-effect waves-light">
+									<i class="ri-error-warning-line align-middle mr-2"></i>
+									<s:text name="back.button" />
+								</button>
+
+							</div>
+
+						</s:form>
 					</div>
-
+					<s:form name="updatfrm" action="farmer_update.action">
+						<s:hidden key="id" />
+						<s:hidden name="farmerName" value="%{farmerName}" />
+						<s:hidden name="farmerCode" value="%{farmerCode}" />
+						<s:hidden key="currentPage" />
+						<s:hidden name="type" class="type" />
 					</s:form>
-				</div>
-				<s:form name="updatfrm" action="farmer_update.action">
-					<s:hidden key="id" />
-					<s:hidden name="farmerName" value="%{farmerName}" />
-					<s:hidden name="farmerCode" value="%{farmerCode}" />
-					<s:hidden key="currentPage" />
-					<s:hidden name="type" class="type" />
-				</s:form>
-				<s:form name="deleteform" action="farmer_delete.action">
-					<s:hidden key="id" />
-					<s:hidden key="farmerImageByteString" />
-					<s:hidden key="currentPage" />
-				</s:form>
-				<s:form name="approveform" action="farmer_approve.action">
-					<s:hidden key="id" />
-					<s:hidden key="farmerImageByteString" />
-					<s:hidden key="currentPage" />
-				</s:form>
+					<s:form name="deleteform" action="farmer_delete.action">
+						<s:hidden key="id" />
+						<s:hidden key="farmerImageByteString" />
+						<s:hidden key="currentPage" />
+					</s:form>
+					<s:form name="approveform" action="farmer_approve.action">
+						<s:hidden key="id" />
+						<s:hidden key="farmerImageByteString" />
+						<s:hidden key="currentPage" />
+					</s:form>
 
-				<s:form id="cancelform" name="cancelform"
-					action="farmer_list.action">
-					<s:hidden key="id" />
-					<s:hidden key="currentPage" />
-					<s:hidden name="postdata" id="postdata" />
-				</s:form>
-				<s:form name="redirectform"
-					action="distributionAgentLogin_execute.action" method="get">
-					<s:hidden key="type" value="distribution" id='type' />
-					<s:hidden key="fId" />
-				</s:form>
-				<div class="tab-pane" id="profile-1" role="tabpanel">
-					<div id="errorDiv" style="color: red;">
-						<s:if test='#session.farmcropsExist!=null'>
-							<ul style="list-style-type:">
-								<li><%=(String) request.getSession().getAttribute("farmcropsExist")%>
-								</li>
-							</ul>
-						</s:if>
-						<%
+					<s:form id="cancelform" name="cancelform"
+						action="farmer_list.action">
+						<s:hidden key="id" />
+						<s:hidden key="currentPage" />
+						<s:hidden name="postdata" id="postdata" />
+					</s:form>
+					<s:form name="redirectform"
+						action="distributionAgentLogin_execute.action" method="get">
+						<s:hidden key="type" value="distribution" id='type' />
+						<s:hidden key="fId" />
+					</s:form>
+					<div class="tab-pane" id="profile-1" role="tabpanel">
+						<div id="errorDiv" style="color: red;">
+							<s:if test='#session.farmcropsExist!=null'>
+								<ul style="list-style-type:">
+									<li><%=(String) request.getSession().getAttribute("farmcropsExist")%>
+									</li>
+								</ul>
+							</s:if>
+							<%
 								request.getSession().removeAttribute("farmcropsExist");
 							%>
-					</div>
-
-					<sec:authorize ifAllGranted="profile.farmer.create">
-						<button type="BUTTON" id="add"
-							onclick="document.createform.submit()"
-							class="btn btn-success mb-2 float-right">
-							Add Farm<i class="ri-menu-add-line align-middle ml-2"></i>
-						</button>
-					</sec:authorize>
-					<div>
-						<div class="table-responsive mt-3" id="baseDiv1">
-							<table
-								class="table table-centered datatable dt-responsive nowrap"
-								style="border-collapse: collapse; border-spacing: 0; width: 100%;"
-								id="detail1"></table>
-							<div id="pagerForDetail1"></div>
 						</div>
-					</div>
-					<s:form name="createform" action="farm_create">
-						<s:hidden name="farmerId" value="%{farmer.farmerId}" />
-						<s:hidden name="farmerUniqueId" value="%{farmer.id}" />
-						<s:hidden name="farmerName" value="%{farmer.name}" />
-						<s:hidden name="sangham" value="%{farmer.sangham}" />
-						<s:hidden name="branch" value="%{farmer.branchId}" />
-						<s:hidden name="tabIndex" />
-						<s:hidden key="currentPage" />
-					</s:form>
 
-					<s:form name="farmdetailform" action="farm_detail">
-						<s:hidden name="farmerId" value="%{farmer.farmerId}" />
-						<s:hidden name="farmerUniqueId" value="%{farmer.id}" />
-						<s:hidden name="sangham" value="%{farmer.sangham}" />
-						<s:hidden name="id" />
-						<s:hidden name="tabIndex" />
-						<s:hidden key="currentPage" />
-					</s:form>
-
-					<s:form name="farmupdatfrm" action="farm_update">
-						<s:hidden name="farmerId" value="%{farmer.farmerId}" />
-						<s:hidden name="farmerUniqueId" value="%{farmer.id}" />
-						<s:hidden name="farmerName" value="%{farmer.name}" />
-						<s:hidden name="sangham" value="%{farmer.sangham}" />
-						<s:hidden name="id" />
-						<s:hidden name="tabIndex" />
-						<s:hidden key="currentPage" />
-					</s:form>
-
-					<s:form name="farmdeleteform" action="farm_delete">
-						<s:hidden name="farmerId" value="%{farmer.farmerId}" />
-						<s:hidden name="sangham" value="%{farmer.sangham}" />
-						<s:hidden name="id" />
-						<s:hidden name="tabIndex" />
-					</s:form>
-				</div>
-				<div class="tab-pane" id="messages-1" role="tabpanel">
-
-
-					<sec:authorize ifAllGranted="profile.farmer.create">
-						<button type="BUTTON" id="add" onclick="addfarmCrop()"
-							class="btn btn-success mb-2 float-right">
-							Add Farm Crop<i class="ri-menu-add-line align-middle ml-2"></i>
-						</button>
-					</sec:authorize>
-
-
-					<div>
-						<div class="table-responsive mt-3" id="baseDiv">
-							<table
-								class="table table-centered datatable dt-responsive nowrap"
-								style="border-collapse: collapse; border-spacing: 0; width: 100%;"
-								id="cropDetail"></table>
-							<div id="cropPagerForDetail"></div>
+						<sec:authorize ifAllGranted="profile.farmer.create">
+							<button type="BUTTON" id="add"
+								onclick="document.createform.submit()"
+								class="btn btn-success mb-2 float-right">
+								Add Farm<i class="ri-menu-add-line align-middle ml-2"></i>
+							</button>
+						</sec:authorize>
+						<div>
+							<div class="table-responsive mt-3" id="baseDiv1">
+								<table
+									class="table table-centered datatable dt-responsive nowrap"
+									style="border-collapse: collapse; border-spacing: 0; width: 100%;"
+									id="detail1"></table>
+								<div id="pagerForDetail1"></div>
+							</div>
 						</div>
+						<s:form name="createform" action="farm_create">
+							<s:hidden name="farmerId" value="%{farmer.farmerId}" />
+							<s:hidden name="farmerUniqueId" value="%{farmer.id}" />
+							<s:hidden name="farmerName" value="%{farmer.name}" />
+							<s:hidden name="sangham" value="%{farmer.sangham}" />
+							<s:hidden name="branch" value="%{farmer.branchId}" />
+							<s:hidden name="tabIndex" />
+							<s:hidden key="currentPage" />
+						</s:form>
+
+						<s:form name="farmdetailform" action="farm_detail">
+							<s:hidden name="farmerId" value="%{farmer.farmerId}" />
+							<s:hidden name="farmerUniqueId" value="%{farmer.id}" />
+							<s:hidden name="sangham" value="%{farmer.sangham}" />
+							<s:hidden name="id" />
+							<s:hidden name="tabIndex" />
+							<s:hidden key="currentPage" />
+						</s:form>
+
+						<s:form name="farmupdatfrm" action="farm_update">
+							<s:hidden name="farmerId" value="%{farmer.farmerId}" />
+							<s:hidden name="farmerUniqueId" value="%{farmer.id}" />
+							<s:hidden name="farmerName" value="%{farmer.name}" />
+							<s:hidden name="sangham" value="%{farmer.sangham}" />
+							<s:hidden name="id" />
+							<s:hidden name="tabIndex" />
+							<s:hidden key="currentPage" />
+						</s:form>
+
+						<s:form name="farmdeleteform" action="farm_delete">
+							<s:hidden name="farmerId" value="%{farmer.farmerId}" />
+							<s:hidden name="sangham" value="%{farmer.sangham}" />
+							<s:hidden name="id" />
+							<s:hidden name="tabIndex" />
+						</s:form>
 					</div>
+					<div class="tab-pane" id="messages-1" role="tabpanel">
 
 
-					<s:form name="cropCreateform" action="farmCrops_create.action">
-						<s:hidden name="farmId" value="%{farm.id}" />
-						<s:hidden name="farmName" value="%{farm.farmName}" />
-						<s:hidden name="farmerId" value="%{farmer.id}" />
-						<s:hidden name="farmerName" value="%{farm.farmer.name}" />
-						<s:hidden name="branch" value="%{farm.farmer.branchId}" />
-						<%-- <s:hidden name="tabIndexz" value="#tabs-5" /> --%>
-						<s:hidden key="currentPage" />
-					</s:form>
+						<sec:authorize ifAllGranted="profile.farmer.create">
+							<button type="BUTTON" id="add" onclick="addfarmCrop()"
+								class="btn btn-success mb-2 float-right">
+								Add Farm Crop<i class="ri-menu-add-line align-middle ml-2"></i>
+							</button>
+						</sec:authorize>
 
-					<s:form name="detailfarmCrops" action="farmCrops_detail">
-						<s:hidden name="farmId" value="%{farm.id}" />
-						<s:hidden name="farmerId" value="%{farm.farmer.farmerId}" />
-						<s:hidden name="farmerName" value="%{farm.farmer.name}" />
-						<s:hidden name="farmName" value="%{farm.farmName}" />
-						<s:hidden name="tabIndexz" value="#tabs-3" />
-						<s:hidden name="tabIndex" />
-						<s:hidden key="currentPage" />
-						<s:hidden name="id" />
-					</s:form>
 
+						<div>
+							<div class="table-responsive mt-3" id="baseDiv">
+								<table
+									class="table table-centered datatable dt-responsive nowrap"
+									style="border-collapse: collapse; border-spacing: 0; width: 100%;"
+									id="cropDetail"></table>
+								<div id="cropPagerForDetail"></div>
+							</div>
+						</div>
+
+
+						<s:form name="cropCreateform" action="farmCrops_create.action">
+							<s:hidden name="farmId" value="%{farm.id}" />
+							<s:hidden name="farmName" value="%{farm.farmName}" />
+							<s:hidden name="farmerId" value="%{farmer.id}" />
+							<s:hidden name="farmerName" value="%{farm.farmer.name}" />
+							<s:hidden name="branch" value="%{farm.farmer.branchId}" />
+							<%-- <s:hidden name="tabIndexz" value="#tabs-5" /> --%>
+							<s:hidden key="currentPage" />
+						</s:form>
+
+						<s:form name="detailfarmCrops" action="farmCrops_detail">
+							<s:hidden name="farmId" value="%{farm.id}" />
+							<s:hidden name="farmerId" value="%{farm.farmer.farmerId}" />
+							<s:hidden name="farmerName" value="%{farm.farmer.name}" />
+							<s:hidden name="farmName" value="%{farm.farmName}" />
+							<s:hidden name="tabIndexz" value="#tabs-3" />
+							<s:hidden name="tabIndex" />
+							<s:hidden key="currentPage" />
+							<s:hidden name="id" />
+						</s:form>
+
+					</div>
+					<div class="tab-pane" id="settings-1" role="tabpanel">
+						<p class="mb-0">Trust fund seitan letterpress, keytar raw
+							denim keffiyeh etsy art party before they sold out master cleanse
+							gluten-free squid scenester freegan cosby sweater. Fanny pack
+							portland seitan DIY, art party locavore wolf cliche high life
+							echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi
+							before they sold out farm-to-table.</p>
+					</div>
 				</div>
-				<div class="tab-pane" id="settings-1" role="tabpanel">
-					<p class="mb-0">Trust fund seitan letterpress, keytar raw denim
-						keffiyeh etsy art party before they sold out master cleanse
-						gluten-free squid scenester freegan cosby sweater. Fanny pack
-						portland seitan DIY, art party locavore wolf cliche high life echo
-						park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before
-						they sold out farm-to-table.</p>
-				</div>
+
 			</div>
-
 		</div>
-	</div>
 	</div>
 	<!-- JAVASCRIPT -->
 	<script src="assets/libs/jquery/jquery.min.js"></script>
