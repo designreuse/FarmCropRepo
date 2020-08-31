@@ -365,7 +365,7 @@
 		}
 		function onUpdate() {
 			document.updateform.id.value = document.getElementById('farmId').value;
-			document.updateform.currentPage.value = document.form.currentPage.value;
+			//document.updateform.currentPage.value = document.form.currentPage.value;
 			document.updateform.submit();
 		}
 
@@ -456,7 +456,9 @@
 				<!-- Tab panes -->
 				<div class="tab-content p-3 text-muted">
 					<div class="tab-pane active" id="home-1" role="tabpanel">
+					
 						<s:form name="form">
+						<s:hidden key="farm.id" id="farmId"  class="uId"/>
 							<s:hidden key="currentPage" />
 							<s:hidden key="farmer.id" id="farmerId" class='uId' />
 							<s:hidden key="command" />
