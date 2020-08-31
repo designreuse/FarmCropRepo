@@ -2360,6 +2360,23 @@ if('<s:property value="getBranchId()"/>'=='Individual'){
 								</div>
 								<div class="card-body">
 
+
+									<div class="row">
+										<div class="col-md-4">
+											<div class="form-group farmerCode">
+												<label for="txt"> <s:property
+														value="%{getLocaleProperty('farmer.farmerCode')}" /><sup
+													style="color: red;">*</sup>
+												</label>
+												<div class="">
+													<p class="form-control detailField" name="farmer.farmerCode">
+													<s:property value="farmer.farmerCode" />
+												</p>
+												</div>
+											</div>
+										</div>
+									</div>
+
 									<div class="row">
 
 										<div class="col-md-4">
@@ -2410,24 +2427,26 @@ if('<s:property value="getBranchId()"/>'=='Individual'){
 											<p class="form-control detailField" name="farmer.gender">
 												<s:text name='%{farmer.gender}' />
 											</p>
-											
+
 											<s:select list="genderType" listKey="key" listValue="value"
-										cssClass="form-control inputField" id="gender" name="farmer.gender" />
-											
+												cssClass="form-control inputField" id="gender"
+												name="farmer.gender" />
+
 										</div>
 										<div class="col-md-4">
 											<p class="form-group dateName">
 												<s:text name="farmer.dateOfBirth" />
 											</p>
-											<p class="form-control font-weight-bold detailField" name="calendar">
+											<p class="form-control font-weight-bold detailField"
+												name="calendar">
 												<s:property value="dateOfBirth" />
 											</p>
-											
+
 											<s:textfield value='%{dateOfBirth}' readonly="true"
-										name="calendar" onchange="calculateAge()" id="calendar"
-										data-date-format="%{getGeneralDateFormat().toLowerCase()}"
-										size="20" cssClass="date-picker form-control inputField" />
-											
+												name="calendar" onchange="calculateAge()" id="calendar"
+												data-date-format="%{getGeneralDateFormat().toLowerCase()}"
+												size="20" cssClass="date-picker form-control inputField" />
+
 										</div>
 										<div class="col-md-4">
 											<p class="form-group">

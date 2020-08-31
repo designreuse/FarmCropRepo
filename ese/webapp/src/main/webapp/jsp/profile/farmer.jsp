@@ -2267,6 +2267,22 @@ function isAlphabet(evt) {
 				<div class="card-body">
 
 					<div class="row">
+						<div class="col-md-4">
+							<div class="form-group farmerCode">
+								<label for="txt"> <s:property
+										value="%{getLocaleProperty('farmer.farmerCode')}" /><sup
+									style="color: red;">*</sup>
+								</label>
+								<div class="">
+									<s:textfield id="farmerCode" name="farmer.farmerCode"
+										maxlength="50" 
+										cssClass="upercls form-control" />
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
 
 						<div class="col-md-4">
 							<div class="form-group firstName">
