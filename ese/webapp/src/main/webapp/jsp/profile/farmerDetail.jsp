@@ -2375,10 +2375,7 @@ if('<s:property value="getBranchId()"/>'=='Individual'){
 												</div>
 											</div>
 										</div>
-									</div>
-
-									<div class="row">
-
+										
 										<div class="col-md-4">
 											<div class="dynamic-flexItem2">
 												<p class="form-group nameLab">
@@ -2396,6 +2393,7 @@ if('<s:property value="getBranchId()"/>'=='Individual'){
 											</div>
 
 										</div>
+										
 										<div class="col-md-4">
 											<p class="form-group">
 												<s:property value="%{getLocaleProperty('farmer.lastName')}" />
@@ -2407,6 +2405,13 @@ if('<s:property value="getBranchId()"/>'=='Individual'){
 											<s:textfield id="lastName" name="farmer.lastName"
 												maxlength="50" cssClass="upercls form-control inputField" />
 										</div>
+										
+									</div>
+
+									<div class="row">
+
+										
+										
 
 										<div class="col-md-4">
 											<p class="form-group">

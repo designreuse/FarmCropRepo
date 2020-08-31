@@ -2275,14 +2275,10 @@ function isAlphabet(evt) {
 								</label>
 								<div class="">
 									<s:textfield id="farmerCode" name="farmer.farmerCode"
-										maxlength="50" 
-										cssClass="upercls form-control" />
+										maxlength="50" cssClass="upercls form-control" />
 								</div>
 							</div>
 						</div>
-					</div>
-
-					<div class="row">
 
 						<div class="col-md-4">
 							<div class="form-group firstName">
@@ -2297,6 +2293,7 @@ function isAlphabet(evt) {
 								</div>
 							</div>
 						</div>
+
 						<div class="col-md-4">
 							<div class="form-group lastName">
 								<label for="txt"> <s:property
@@ -2309,6 +2306,13 @@ function isAlphabet(evt) {
 								</div>
 							</div>
 						</div>
+
+					</div>
+
+					<div class="row">
+
+
+
 
 
 						<div class="col-md-4">
@@ -2324,9 +2328,6 @@ function isAlphabet(evt) {
 						</div>
 
 
-					</div>
-
-					<div class="row">
 						<div class="col-md-4">
 							<div class="form-group gender">
 								<label for="txt"><s:property
@@ -2350,6 +2351,11 @@ function isAlphabet(evt) {
 								</div>
 							</div>
 						</div>
+
+					</div>
+
+					<div class="row">
+
 						<div class="col-md-4">
 							<div class="form-group age">
 								<label for="txt"><s:property
@@ -2361,36 +2367,6 @@ function isAlphabet(evt) {
 								</div>
 							</div>
 						</div>
-					</div>
-
-
-					<div class="row">
-
-
-
-						<!-- <div class="col-md-4">
-							<div class="form-group photo">
-								<label for="txt"> <s:property
-										value="%{getLocaleProperty('farmer.photo')}" /> <%-- <span style="font-size: 8px"> <s:text
-									name="farmer.imageTypes" /> <font color="red"> <s:text
-										name="imgSizeMsg" /></font> --%> </span>
-								</label>
-								<div class="">
-									<s:file name="farmerImage" id="farmerImage"
-										tooltip="Upload Farmer Photo" label="Farmer Photo"
-										onchange="validateImage()" cssClass="form-control" />
-
-									<s:if test="command =='update' && farmer.imageInfo!=null">
-
-										<button type='button' class='btn btn-sm pull-right photo'
-											style='margin-right: 15%'
-											onclick="enableFarmerPhotoModal(<s:property value="farmer.id"/>,1)">
-											<i class='fa fa-picture-o' aria-hidden='true'></i>
-										</button>
-									</s:if>
-								</div>
-							</div>
-						</div> -->
 
 						<div class="col-md-4">
 							<div class="form-group">
@@ -2414,6 +2390,70 @@ function isAlphabet(evt) {
 							</div>
 
 						</div>
+
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="txt"> <s:property
+										value="%{getLocaleProperty('photo')}" /> <span
+									style="font-size: 8px"> <s:text name="farmer.imageTypes" />
+										<font color="red"> <s:text name="imgSizeMsg" /></font>
+								</span>
+								</label>
+								<div class="custom-file">
+
+
+									<input type="file" class="custom-file-input" name="idProofImg"
+										id="idProofImg" onchange="checkImgHeightAndWidth(this)"
+										tooltip="Upload Id Proof" label="Id Proof"> <label
+										class="custom-file-label" for="customFile"><s:property
+											value="%{getLocaleProperty('farmer.idProofImg')}" /></label>
+
+								</div>
+
+							</div>
+
+						</div>
+
+
+					</div>
+
+
+					<!--	<div class="row">
+
+
+
+						 <div class="col-md-4">
+							<div class="form-group photo">
+								<label for="txt"> <s:property
+										value="%{getLocaleProperty('farmer.photo')}" /> <%-- <span style="font-size: 8px"> <s:text
+									name="farmer.imageTypes" /> <font color="red"> <s:text
+										name="imgSizeMsg" /></font> --%> </span>
+								</label>
+								<div class="">
+									<s:file name="farmerImage" id="farmerImage"
+										tooltip="Upload Farmer Photo" label="Farmer Photo"
+										onchange="validateImage()" cssClass="form-control" />
+
+									<s:if test="command =='update' && farmer.imageInfo!=null">
+
+										<button type='button' class='btn btn-sm pull-right photo'
+											style='margin-right: 15%'
+											onclick="enableFarmerPhotoModal(<s:property value="farmer.id"/>,1)">
+											<i class='fa fa-picture-o' aria-hidden='true'></i>
+										</button>
+									</s:if>
+								</div>
+							</div>
+						</div> 
+
+
+
+
+
+						
+					</div> -->
+					<div class="row">
+
 
 						<div class="col-md-4">
 							<div class="form-group idProof">
@@ -2440,8 +2480,7 @@ function isAlphabet(evt) {
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="row">
+
 						<div class="col-md-4 proofIdOther">
 							<div class="form-group ">
 								<label for="txt"> <s:text name="farmer.otherProof" />
@@ -2453,28 +2492,9 @@ function isAlphabet(evt) {
 							</div>
 						</div>
 
-						<div class="col-md-4">
-							<div class="form-group">
-								<label for="txt"> <s:property
-										value="%{getLocaleProperty('photo')}" /> <span
-									style="font-size: 8px"> <s:text name="farmer.imageTypes" />
-										<font color="red"> <s:text name="imgSizeMsg" /></font>
-								</span>
-								</label>
-								<div class="custom-file">
 
 
-									<input type="file" class="custom-file-input" name="idProofImg"
-										id="idProofImg" onchange="checkImgHeightAndWidth(this)"
-										tooltip="Upload Id Proof" label="Id Proof"> <label
-										class="custom-file-label" for="customFile"><s:property
-											value="%{getLocaleProperty('farmer.idProofImg')}" /></label>
 
-								</div>
-
-							</div>
-
-						</div>
 
 						<!-- <div class="col-md-4">
 							<div class="form-group idProofImg">
