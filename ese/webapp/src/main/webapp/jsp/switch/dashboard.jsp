@@ -126,6 +126,58 @@
 </script>
 
 <body>
+<div class="row">
+                            <div class="col-lg-3">
+                                <div class="card border border-primary">
+                                    <div class="card-header bg-transparent border-primary">
+                                        <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow mr-3"></i><s:property value="%{getLocaleProperty('totalFarmersCount')}" /></h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title mt-0" id="farmerCount">0</h5>
+                                      
+                                    </div>
+                                </div>
+                            </div>
+                            
+                              <div class="col-lg-3">
+                                <div class="card border border-warning">
+                                    <div class="card-header bg-transparent border-warning">
+                                        <h5 class="my-0 text-warning"><i class="mdi mdi-bullseye-arrow mr-3"></i><s:property
+										value="%{getLocaleProperty('farmingTotalLand')}" /></h5>
+                                    </div>
+                                    <div class="card-body">
+                                     <h5 class="card-title mt-0" id="farmLandCount">0</h5>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <div class="col-lg-3">
+                                <div class="card border border-danger">
+                                    <div class="card-header bg-transparent border-danger">
+                                        <h5 class="my-0 text-danger"><i class="mdi mdi-block-helper mr-3"></i><s:property
+											value="%{getLocaleProperty('totalFarms')}" /></h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title mt-0" id="farmCount">0</h5>
+                                     
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <div class="col-lg-3">
+                                <div class="card border border-success">
+                                    <div class="card-header bg-transparent border-success">
+                                        <h5 class="my-0 text-success"><i class="mdi mdi-check-all mr-3"></i><s:property value="%{getLocaleProperty('txt.mobileUsers')}" /></h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title mt-0" id="mobileUserCount">0</h5>
+                                    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
 	<div id="accordion" class="custom-accordion farm_info">
 		<div class="card-header card mb-1 shadow-none">
 			<a href="#farmInfo" class="text-dark" data-toggle="collapse"

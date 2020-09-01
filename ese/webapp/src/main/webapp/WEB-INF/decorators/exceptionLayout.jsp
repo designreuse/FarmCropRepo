@@ -109,119 +109,15 @@
 margin-top: -35px;
 }
 </style>
-<%-- <style>
-@media screen and (min-width: 0px) and (max-width: 754px) {
-      #div-mobile {    display: block;  }
-      .div-desktop {    display: none;  }
-      .wrapper {    display: block;  }
-      .contentArea{ padding-left : 50px; }
-      #div-mobile .dropdown-menu > li.user-header {
-		    height: auto;
-		    padding: 20px 10px;
-		    text-align: center;
-		    min-height: 150px;
-		}
 
-	.dashboardPageWrapper { margin-top:70px; }
-	.headerBar { position: fixed;  z-index: 999999; width: 100%; padding-right:60px; }
-}
-
-@media screen and (min-width: 755px) and (max-width: 3000px) {
-      #div-mobile {    display: none;  }
-      .div-desktop {    display: block;  }
-
-} 
-</style> --%>
 
 <body data-sidebar="dark">
-	<%-- <script>
-		try {
-			if (typeof (Storage) !== "undefined") {
-				if (localStorage.leftMenuPosition
-						&& localStorage.leftMenuPosition == 0) {
-					$('body').addClass('navigation-small');
-				}
-			}
-		} catch (err) {
-			console.log(err);
-		}
-	</script> --%>
+	
 	<%
 		Map<String, Object> userInfo = (Map<String, Object>) session.getAttribute("USER_INFO");
 		Long userId = (Long) userInfo.get("USER_REC_ID");
 	%>
-<%-- 	<script>
 
-function isEmpty(val){
-	  if(val==null||val==undefined||val.toString().trim()==""){
-	   return true;
-	  }
-	  return false;
-	}
-
-function showPopup(content,msg)
-{
-	$(function () {
-	   
-	        $("#dialog").dialog({
-	            modal: true,
-	            title: msg,
-	            width: 300,
-	            height: 150,
-	            hide: {
-	                effect: "explode",
-	                duration: 100
-	              },
-	            open: function (event, ui) {
-	            	 var markup = content;
-	                 $(this).html(markup);
-	                setTimeout(function () {
-	                    $("#dialog").dialog("close");
-	                }, 2700);
-	            }
-	            
-	           
-	              
-	        });
-	        if(msg=='Error')
-	        	 $(".ui-dialog").find(".ui-widget-header").css("background", "red");
-          	else
-          		 $(".ui-dialog").find(".ui-widget-header").css("background", "#41A1C9");
-          	 
-	        
-	        
-	  
-	});
-}	
-
-$(function () {
-
-$(".menuToggle > a").click(function(){
-    $("body").toggleClass("showFixedSideMenu");
-    if($("body").hasClass('showFixedSideMenu')) {
-      var ct = 0;
-      $(".submenu").each(function(){
-        $(this).addClass('submenu'+ct);
-        ct++;
-      })
-    }
-    else {
-      var submenuLength = $('.submenu').length;
-      for(var i = 0; i<submenuLength; i++){
-        $('.submenu').removeClass('submenu'+i);
-      }
-    }
-  });
-  $(".closeMnu").click(function(){
-    $("body").toggleClass("showFixedSideMenu");
-    var submenuLength = $('.submenu').length;
-    for(var i = 0; i<submenuLength; i++){
-      $('.submenu').removeClass('submenu'+i);
-    }
-  })
-  
-})
-</script> --%>
 <!-- Begin page -->
 	 <div id="layout-wrapper">
 	 
@@ -249,32 +145,7 @@ $(".menuToggle > a").click(function(){
                           
                               <!-- Language-->
                         <div class="dropdown d-none d-sm-inline-block">
-                           <%--  <button type="button" class="btn header-item waves-effect"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img class="" src="assets/images/flags/us.jpg" alt="Header Language" height="16">
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                    
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <img src="assets/images/flags/spain.jpg" alt="user-image" class="mr-1" height="12"> <span class="align-middle">Spanish</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <img src="assets/images/flags/germany.jpg" alt="user-image" class="mr-1" height="12"> <span class="align-middle">German</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <img src="assets/images/flags/italy.jpg" alt="user-image" class="mr-1" height="12"> <span class="align-middle">Italian</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <img src="assets/images/flags/russia.jpg" alt="user-image" class="mr-1" height="12"> <span class="align-middle">Russian</span>
-                                </a>
-                            </div> --%>
+                          
                             <%=session.getAttribute("languageMenu")%>
                         </div>
                            
@@ -288,22 +159,25 @@ $(".menuToggle > a").click(function(){
                         </div>
                         
                          <!-- Profile-->
-                <div class="dropdown d-inline-block user-dropdown">
+                         <div class="dropdown d-inline-block user-dropdown">
                             <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img class="rounded-circle header-profile-user" src="assets/images/users/avatar-2.jpg"
-                                    alt="Header Avatar">
-                                <span class="d-none d-xl-inline-block ml-1">Kevin</span>
+                                <img class="rounded-circle header-profile-user" src="user_getUserAvatar.action?id=<%=userId%>"
+                                    alt="User Avatar">
+                                <span class="d-none d-xl-inline-block ml-1"><%=session.getAttribute("user")%></span>
                                 <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <!-- item-->
-                                <a class="dropdown-item" href="#"><i class="ri-user-line align-middle mr-1"></i> Profile</a>
-                                <a class="dropdown-item" href="#"><i class="ri-wallet-2-line align-middle mr-1"></i> My Wallet</a>
-                                <a class="dropdown-item d-block" href="#"><span class="badge badge-success float-right mt-1">11</span><i class="ri-settings-2-line align-middle mr-1"></i> Settings</a>
-                                <a class="dropdown-item" href="#"><i class="ri-lock-unlock-line align-middle mr-1"></i> Lock screen</a>
+                                <a class="dropdown-item" href="#"><i class="ri-user-line align-middle mr-1"></i> Role : <%=session.getAttribute("role")%> </a>
+                                <a class="dropdown-item" href="user_detail.action?id=<%=userId%>"><i class="ri-user-line align-middle mr-1"></i> <s:text name="myProfile" /></a>
+                                <a class="dropdown-item" href="changePassword_edit.action"><i class="ri-lock-unlock-line align-middle mr-1"></i> <s:text name="changePwd" /></a>
+                               <sec:authorize ifAllGranted="system.prefernces.list">
+                                <a class="dropdown-item d-block" href="prefernce_list.action"><i class="ri-settings-2-line align-middle mr-1"></i> Settings</a>
+                                </sec:authorize>
+                               
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item text-danger" href="#"><i class="ri-shut-down-line align-middle mr-1 text-danger"></i> Logout</a>
+                                <a class="dropdown-item text-danger" href="logout"><i class="ri-shut-down-line align-middle mr-1 text-danger"></i> Logout</a>
                             </div>
                         </div>
                           </div>

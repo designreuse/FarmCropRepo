@@ -14,14 +14,15 @@
 <html lang="en" class="no-js">
 <head>
 <title>THE FARM CORP - Next Generation Tech Solution</title>
+
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<meta content="" name="description" />
-<%-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> --%>
- <script src="assets/libs/jquery/jquery.min.js"></script> 
+<meta content="Next Generation Tech Solution" name="description" />
+
+<script src="assets/libs/jquery/jquery.min.js"></script>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" />
 
@@ -34,35 +35,21 @@
 <link rel="stylesheet" type="text/css" media="screen" href="assets/libs/jquery-ui-dist/jquery-ui.min.css" />
 
 <link rel="shortcut icon" type="image/x-icon" href="auth_populateLogo.action?logoType=favicon" />
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.7/css/perfect-scrollbar.min.css" /> -->
-<!-- jquery.vectormap css -->
+
 <link href="assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
-
-
-
 
 <link href="assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
 
 <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
 
+<link href="assets/css/app.css" rel="stylesheet" type="text/css" />
+
 <link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
-  <!-- Sweet Alert-->
-<link href="assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />      
-<!-- Plugins css -->
-<link href="assets/libs/dropzone/min/dropzone.min.css" rel="stylesheet" type="text/css" />
-        
+
+<link href="assets/libs/select2/css/select2.min.css" rel="stylesheet" type="text/css" /> 
 
 <script src="assets/libs/twitter-bootstrap-wizard/bootstrap/js/bootstrap.min.js"></script>
-<script src="js/bootstrap-hover-dropdown.min.js"></script>
 
-
-<%-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.7/js/min/perfect-scrollbar.jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script> --%>
-
-
-
-
-  
   
 </head>
 <style>
@@ -83,7 +70,7 @@
 .wizard-icon .svg-icon svg g [fill] {
             -webkit-transition: fill 0.3s ease;
             transition: fill 0.3s ease;
-            fill: #B5B5C3; }
+            fill: #5664d2; }
 .wizard-icon .svg-icon svg:hover g [fill] {
             -webkit-transition: fill 0.3s ease;
             transition: fill 0.3s ease; }
@@ -108,119 +95,15 @@
 margin-top: -35px;
 }
 </style>
-<%-- <style>
-@media screen and (min-width: 0px) and (max-width: 754px) {
-      #div-mobile {    display: block;  }
-      .div-desktop {    display: none;  }
-      .wrapper {    display: block;  }
-      .contentArea{ padding-left : 50px; }
-      #div-mobile .dropdown-menu > li.user-header {
-		    height: auto;
-		    padding: 20px 10px;
-		    text-align: center;
-		    min-height: 150px;
-		}
 
-	.dashboardPageWrapper { margin-top:70px; }
-	.headerBar { position: fixed;  z-index: 999999; width: 100%; padding-right:60px; }
-}
-
-@media screen and (min-width: 755px) and (max-width: 3000px) {
-      #div-mobile {    display: none;  }
-      .div-desktop {    display: block;  }
-
-} 
-</style> --%>
 
 <body data-sidebar="dark">
-	<%-- <script>
-		try {
-			if (typeof (Storage) !== "undefined") {
-				if (localStorage.leftMenuPosition
-						&& localStorage.leftMenuPosition == 0) {
-					$('body').addClass('navigation-small');
-				}
-			}
-		} catch (err) {
-			console.log(err);
-		}
-	</script> --%>
+
 	<%
 		Map<String, Object> userInfo = (Map<String, Object>) session.getAttribute("USER_INFO");
 		Long userId = (Long) userInfo.get("USER_REC_ID");
 	%>
-<%-- 	<script>
 
-function isEmpty(val){
-	  if(val==null||val==undefined||val.toString().trim()==""){
-	   return true;
-	  }
-	  return false;
-	}
-
-function showPopup(content,msg)
-{
-	$(function () {
-	   
-	        $("#dialog").dialog({
-	            modal: true,
-	            title: msg,
-	            width: 300,
-	            height: 150,
-	            hide: {
-	                effect: "explode",
-	                duration: 100
-	              },
-	            open: function (event, ui) {
-	            	 var markup = content;
-	                 $(this).html(markup);
-	                setTimeout(function () {
-	                    $("#dialog").dialog("close");
-	                }, 2700);
-	            }
-	            
-	           
-	              
-	        });
-	        if(msg=='Error')
-	        	 $(".ui-dialog").find(".ui-widget-header").css("background", "red");
-          	else
-          		 $(".ui-dialog").find(".ui-widget-header").css("background", "#41A1C9");
-          	 
-	        
-	        
-	  
-	});
-}	
-
-$(function () {
-
-$(".menuToggle > a").click(function(){
-    $("body").toggleClass("showFixedSideMenu");
-    if($("body").hasClass('showFixedSideMenu')) {
-      var ct = 0;
-      $(".submenu").each(function(){
-        $(this).addClass('submenu'+ct);
-        ct++;
-      })
-    }
-    else {
-      var submenuLength = $('.submenu').length;
-      for(var i = 0; i<submenuLength; i++){
-        $('.submenu').removeClass('submenu'+i);
-      }
-    }
-  });
-  $(".closeMnu").click(function(){
-    $("body").toggleClass("showFixedSideMenu");
-    var submenuLength = $('.submenu').length;
-    for(var i = 0; i<submenuLength; i++){
-      $('.submenu').removeClass('submenu'+i);
-    }
-  })
-  
-})
-</script> --%>
 <!-- Begin page -->
 	 <div id="layout-wrapper">
 	 
@@ -248,32 +131,7 @@ $(".menuToggle > a").click(function(){
                           
                               <!-- Language-->
                         <div class="dropdown d-none d-sm-inline-block">
-                           <%--  <button type="button" class="btn header-item waves-effect"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img class="" src="assets/images/flags/us.jpg" alt="Header Language" height="16">
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                    
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <img src="assets/images/flags/spain.jpg" alt="user-image" class="mr-1" height="12"> <span class="align-middle">Spanish</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <img src="assets/images/flags/germany.jpg" alt="user-image" class="mr-1" height="12"> <span class="align-middle">German</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <img src="assets/images/flags/italy.jpg" alt="user-image" class="mr-1" height="12"> <span class="align-middle">Italian</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <img src="assets/images/flags/russia.jpg" alt="user-image" class="mr-1" height="12"> <span class="align-middle">Russian</span>
-                                </a>
-                            </div> --%>
+                         
                             <%=session.getAttribute("languageMenu")%>
                         </div>
                            
@@ -615,7 +473,8 @@ $(".menuToggle > a").click(function(){
 
 	<%-- <script src="js/main.js"></script> --%>
 
-       
+        <!-- JAVASCRIPT -->
+   
         <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
         <script src="assets/libs/metismenu/metisMenu.min.js"></script>
         <script src="assets/libs/simplebar/simplebar.min.js"></script>
@@ -624,20 +483,21 @@ $(".menuToggle > a").click(function(){
          <script src="assets/libs/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 
         <script src="assets/js/pages/form-element.init.js"></script>
+        
+         <script src="assets/libs/select2/js/select2.min.js"></script>
+         
+          <script src="assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+     
+        <script src="assets/libs/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
+
+        <script src="assets/js/pages/form-advanced.init.js"></script>
 
         <!-- jquery.vectormap map -->
         <script src="assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js"></script>
         <script src="assets/libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-us-merc-en.js"></script>
 
-      
- <!-- Sweet Alerts js -->
-        <script src="assets/libs/sweetalert2/sweetalert2.min.js"></script>
+      <script src="js/bootstrap-hover-dropdown.min.js"></script>  
 
-        <!-- Sweet alert init js-->
-        <script src="assets/js/pages/sweet-alerts.init.js"></script>
-        
-        <!-- Plugins js -->
-        <script src="assets/libs/dropzone/min/dropzone.min.js"></script>
         
      <script src="assets/js/app.js"></script>
 	<%--  <script>
