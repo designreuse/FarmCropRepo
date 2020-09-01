@@ -211,7 +211,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	 */
 	public Farm findFarmById(Long id) {
 
-		return (Farm) find("FROM Farm fm  WHERE fm.id = ?", id);
+		return (Farm) find("FROM Farm fm left join fetch fm.farmDetailedInfo fdi WHERE fm.id = ?", id);
 	}
 
 	/*

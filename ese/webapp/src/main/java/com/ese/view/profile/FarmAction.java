@@ -3726,7 +3726,7 @@ public class FarmAction extends SwitchValidatorAction {
 			} else {
 
 				if (farm.getPhoto() != null)
-					setFarmImageByteString(Base64Util.encoder(farm.getPhoto()));
+					setFarmImageByteString("data:image/jpeg;base64,"+Base64Util.encoder(farm.getPhoto()));
 
 				if (getCurrentTenantId().equalsIgnoreCase("atma")) {
 					farmerSoilTestingList = farmerService.listFarmerSoilTestingByFarmId(String.valueOf(farm.getId()));

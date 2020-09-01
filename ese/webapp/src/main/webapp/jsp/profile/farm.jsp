@@ -79,16 +79,16 @@ $("#calendarFormat").datepicker({
                     	
                     	var farmerId = '<s:property value="farmerId" />';
                     	
-                    	if(!isEmpty(farmerId)){
-                    		$.post("farm_detailCheckForCertifiedFarmer", {selectedFarmerId: cerf}, function (data) {
+                    	//if(!isEmpty(farmerId)){
+                    	//	$.post("farm_detailCheckForCertifiedFarmer", {selectedFarmerId: cerf}, function (data) {
                               	//alert(data);
-                    			if ("YES" == data) {
+                    	//		if ("YES" == data) {
                                 	
-                                }else{
+                         //       }else{
                                 	
-                                }
-                            });
-                    	}
+                         //       }
+                          //  });
+                    	//}
                     	hideFields();
                     	 
                     	$("#organicStatus").val("In process");
@@ -2189,7 +2189,7 @@ function butTreeDelete(indx){
 						</div>
 					</div>
             </div>
-             <div class="col-md-4">
+            <!--  <div class="col-md-4 ">
                        <div class="form-group farmAddress">
 						<label for="txt"><s:property
 								value="%{getLocaleProperty('organicStatus')}" /> </label>
@@ -2198,9 +2198,9 @@ function butTreeDelete(indx){
 								name="farm.farmIcsConv.organicStatus" cssClass="form-control" />
 						</div>
 					</div>
-            </div>
-				</div>
-				<div class="row">
+            </div> -->
+				
+				<!--  <div class="row">  -->
 			
 				 <div class="col-md-4">
                        <div class="form-group totalLand">
@@ -2216,7 +2216,9 @@ function butTreeDelete(indx){
 						</div>
 					</div>
             </div>
-            </div>
+           <!--  </div> -->
+           
+           </div>
 
 </div></div></div>
 		
@@ -2936,7 +2938,7 @@ function butTreeDelete(indx){
         			}
         			if(error){
         				<s:if test="currentTenantId!='griffith'">
-        				validateImage();
+        				//validateImage();
         				</s:if>
                  	   
                  	  var tableBody = jQuery("#treeData");

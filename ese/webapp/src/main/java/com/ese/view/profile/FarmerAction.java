@@ -3602,6 +3602,23 @@ if(getCurrentTenantId().equalsIgnoreCase("symrise") || getCurrentTenantId().equa
 			if (!ObjectUtil.isEmpty(bankInfoSet)) {
 				farmer.setJsonString(bankInformationToJson(bankInfoSet));
 			}
+			
+			if (!StringUtil.isEmpty(bankInfo)) {
+				for (BankInformation bank : bankInfo) {
+					FarmCatalogue catalogue = getCatlogueValueByCode(bank.getAccType());
+					if (!StringUtil.isEmpty(catalogue)) {
+						bankAccType = catalogue.getName();
+						bank.setAccType(bankAccType);
+					}
+					accName = bank.getAccName();
+					accNo = bank.getAccNo();
+					bankName = bank.getBankName();
+					bankBranchName = bank.getBranchName();
+					sortCode = bank.getSortCode();
+				}
+
+			}
+			
 			if (getCurrentTenantId().equalsIgnoreCase("chetna")) {
 
 				/*

@@ -4,56 +4,77 @@
 <link rel="stylesheet" href="plugins/select2/select2.min.css">
 <head>
 <style>
-.prefixBox{
-width: 45% !important;
-    margin-right: 1% !important;
-    position: absolute;
+.prefixBox {
+	width: 45% !important;
+	margin-right: 1% !important;
+	position: absolute;
 }
-.suffixBox{
-width: 35% !important;
-    position: absolute;
-    margin-left: 165px;
+
+.suffixBox {
+	width: 35% !important;
+	position: absolute;
+	margin-left: 165px;
 }
+
 .hide {
-  display: none; }
-  
- .wizard-wrapper {
-          display: -webkit-box;
-          display: -ms-flexbox;
-          display: flex; }
+	display: none;
+}
+
+.wizard-wrapper {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+}
+
 .wizard-icon {
-          font-size: 2.5rem;
-          margin-right: 1.1rem;
-          -webkit-transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, -webkit-box-shadow 0.15s ease;
-          transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, -webkit-box-shadow 0.15s ease;
-          transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
-          transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, -webkit-box-shadow 0.15s ease; }
+	font-size: 2.5rem;
+	margin-right: 1.1rem;
+	-webkit-transition: color 0.15s ease, background-color 0.15s ease,
+		border-color 0.15s ease, -webkit-box-shadow 0.15s ease;
+	transition: color 0.15s ease, background-color 0.15s ease, border-color
+		0.15s ease, -webkit-box-shadow 0.15s ease;
+	transition: color 0.15s ease, background-color 0.15s ease, border-color
+		0.15s ease, box-shadow 0.15s ease;
+	transition: color 0.15s ease, background-color 0.15s ease, border-color
+		0.15s ease, box-shadow 0.15s ease, -webkit-box-shadow 0.15s ease;
+}
+
 .wizard-icon .svg-icon svg g [fill] {
-            -webkit-transition: fill 0.3s ease;
-            transition: fill 0.3s ease;
-            fill: #B5B5C3; }
+	-webkit-transition: fill 0.3s ease;
+	transition: fill 0.3s ease;
+	fill: #B5B5C3;
+}
+
 .wizard-icon .svg-icon svg:hover g [fill] {
-            -webkit-transition: fill 0.3s ease;
-            transition: fill 0.3s ease; }
+	-webkit-transition: fill 0.3s ease;
+	transition: fill 0.3s ease;
+}
+
 .wizard-label {
-          display: -webkit-box;
-          display: -ms-flexbox;
-          display: flex;
-          -webkit-box-orient: vertical;
-          -webkit-box-direction: normal;
-          -ms-flex-direction: column;
-          flex-direction: column;
-          -webkit-box-pack: center;
-          -ms-flex-pack: center;
-          justify-content: center; }
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+}
+
 .wizard-label .wizard-title {
-            color: #181C32;
-            font-weight: 500;
-            font-size: 1.1rem; }
+	color: #181C32;
+	font-weight: 500;
+	font-size: 1.1rem;
+}
+
 .wizard-label .wizard-desc {
-            color: #7E8299; }
-.collapse-icon-custom{
-margin-top: -35px;
+	color: #7E8299;
+}
+
+.collapse-icon-custom {
+	margin-top: -35px;
 }
 </style>
 </head>
@@ -66,7 +87,7 @@ margin-top: -35px;
 		<s:hidden name="farmerId" value="%{farmerId}" />
 		<s:hidden name="farmfarmerName" value="%{farmfarmerName}" />
 		<s:hidden name="farmerfarmName" value="%{farmerfarmName}" />
-<s:hidden name="branch" value="%{branch}" />
+		<s:hidden name="branch" value="%{branch}" />
 		<s:hidden name="farmId" value="%{farmId}" />
 		<s:hidden name="farmCrops.farm.id" value="%{farmId}" />
 		<s:hidden name="tabIndexz" value="%{tabIndexz}" />
@@ -74,241 +95,287 @@ margin-top: -35px;
 		<s:hidden id="farmerDynamicDatas" name="farmerDynamicDatas" />
 		<s:hidden id="farmerDynamicValIds" name="farmerDynamicValIds" />
 		<s:hidden id="dynamicFieldsArray" name="dynamicFieldsArray" />
-		<s:hidden id="dynamicListArray" name="dynamicListArray" />	
+		<s:hidden id="dynamicListArray" name="dynamicListArray" />
 		<s:if test='"update".equalsIgnoreCase(command)'>
 			<s:hidden key="farmCrops.id" class="uId" />
 		</s:if>
 		<s:hidden key="command" />
- <div class="ferror" id="errorDiv" class=" hide alert alert-danger" >
-					<s:actionerror theme="bootstrap" />
-					<s:fielderror theme="bootstrap" />
-			</div>
-			
-	<div id="accordion" class="custom-accordion farmerCrop_Info" >
+		<div class="ferror" id="errorDiv" class=" hide alert alert-danger">
+			<s:actionerror theme="bootstrap" />
+			<s:fielderror theme="bootstrap" />
+		</div>
+
+		<div id="accordion" class="custom-accordion farmerCrop_Info">
 			<div class="card-header card mb-1 shadow-none">
-			 <a href="#farmerCrop_Info" class="text-dark" data-toggle="collapse" aria-expanded="true"  aria-controls="collapseOne">
-                                                    <div class="card-header" id="headingOne">
-                                                        <h6 class="m-0">
-                                                        <div class="wizard-wrapper">
-															<div class="wizard-icon">
-															<span class="svg-icon svg-icon-2x">
-																	<!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/General/User.svg-->
-																	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-																		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+				<a href="#farmerCrop_Info" class="text-dark" data-toggle="collapse"
+					aria-expanded="true" aria-controls="collapseOne">
+					<div class="card-header" id="headingOne">
+						<h6 class="m-0">
+							<div class="wizard-wrapper">
+								<div class="wizard-icon">
+									<span class="svg-icon svg-icon-2x"> <!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/General/User.svg-->
+										<svg xmlns="http://www.w3.org/2000/svg"
+											xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+											height="24px" viewBox="0 0 24 24" version="1.1">
+																		<g stroke="none" stroke-width="1" fill="none"
+												fill-rule="evenodd">
 																			<polygon points="0 0 24 0 24 24 0 24"></polygon>
-																			<path d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
-																			<path d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z" fill="#000000" fill-rule="nonzero"></path>
+																			<path
+												d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z"
+												fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+																			<path
+												d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z"
+												fill="#000000" fill-rule="nonzero"></path>
 																		</g>
-																	</svg>
-																	<!--end::Svg Icon-->
-																</span>
-															
-															</div>
-																<div class="wizard-label">
-																	
-																<h3 class="wizard-title"><s:property value="%{getLocaleProperty('info.farmCrops')}" /></h3>
-																<div class="wizard-desc">Setup Farmer Crop Information Details</div>
-															</div>
-														</div>   
-                                                            <i class="mdi mdi-minus float-right accor-plus-icon collapse-icon-custom"></i>
-                                                        </h6>
-                                                    </div>
-                                                </a>
-			
+																	</svg> <!--end::Svg Icon-->
+									</span>
+
+								</div>
+								<div class="wizard-label">
+
+									<h3 class="wizard-title">
+										<s:property value="%{getLocaleProperty('info.farmCrops')}" />
+									</h3>
+									<div class="wizard-desc">Setup Farmer Crop Information
+										Details</div>
+								</div>
+							</div>
+							<i
+								class="mdi mdi-minus float-right accor-plus-icon collapse-icon-custom"></i>
+						</h6>
+					</div>
+				</a>
+
 			</div>
 
-			<div id="farmerCrop_Info" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+			<div id="farmerCrop_Info" class="collapse show"
+				aria-labelledby="headingOne" data-parent="#accordion">
 				<div class="card-body">
 
-				<div class="row">
-                               
-                                                <div class="col-md-4">
-                                                   <div class="form-group farmName">
-						<label for="txt"> <s:property value="%{getLocaleProperty('farm.name')}" /> <sup
-							style="color: red;">*</sup>
-						</label>
-						
-						<s:if test='"update".equalsIgnoreCase(command)'>
-							<div class="">
-							<p class="form-control">	<s:property value="farmerfarmName" /></p>
-							</div>
-						</s:if>
-						<s:else>
-							<div class="">
-								<s:select list="farmList" name="selectedFarm"
-									cssClass="form-control" />
-							</div>
-						</s:else>
-						
-					</div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                   	<div class="form-group cropCategory">
-						<label for="txt"> <s:text
-								name="farmcrops.cropCategory.prop" />
-						</label>
-						<div class="">
-						<s:radio name="farmCrops.cropCategory"
-								onchange="cropDiv(this,'onchange');"
-								value="defaultCropCategoryValue" list="cropCategories"
-								id="cropCat" />
-						</div>
-					</div>
-                                                </div>
-                                                
-                                                
-                                       <div class="col-md-4">
-                                                   	<div class="form-group cropSeason">
-						<label for="txt"> <s:property
-									value="%{getLocaleProperty('farmcrops.cropSeason')}" />
-									
-									<sup style="color: red;">*</sup>
-							</label>
-						<div class="">
-							 <s:select cssClass="form-control select2" id="cropSeasonValue"
-									name="cropSeasonCode" headerKey="-1" listKey="key"
-									listValue="value" headerValue="%{getText('txt.select')}"
-									list="harvestseasonsLang" /> 
-						</div>
-					</div>
-                                                </div>               
-                                                
-                                                
-                   			 </div>	
+					<div class="row">
 
-				<div class="row">
-				 <div class="col-md-4">
-                       <div class="form-group cultivationType">
-						<label for="txt"> <s:property
+						<div class="col-md-4">
+							<div class="form-group farmName">
+								<label for="txt"> <s:property
+										value="%{getLocaleProperty('farm.name')}" /> <sup
+									style="color: red;">*</sup>
+								</label>
+
+								<s:if test='"update".equalsIgnoreCase(command)'>
+									<div class="">
+										<p class="form-control">
+											<s:property value="farmerfarmName" />
+										</p>
+									</div>
+								</s:if>
+								<s:else>
+									<div class="">
+										<s:select list="farmList" name="selectedFarm"
+											cssClass="form-control" />
+									</div>
+								</s:else>
+
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group cropCategory">
+								<label for="txt"> <s:text
+										name="farmcrops.cropCategory.prop" />
+								</label>
+								<div class="">
+									<s:radio name="farmCrops.cropCategory"
+										onchange="cropDiv(this,'onchange');"
+										value="defaultCropCategoryValue" list="cropCategories"
+										id="cropCat" />
+								</div>
+							</div>
+						</div>
+
+
+						<div class="col-md-4">
+							<div class="form-group cropSeason">
+								<label for="txt"> <s:property
+										value="%{getLocaleProperty('farmcrops.cropSeason')}" /> <sup
+									style="color: red;">*</sup>
+								</label>
+								<div class="">
+									<s:select cssClass="form-control select2" id="cropSeasonValue"
+										name="cropSeasonCode" headerKey="-1" listKey="key"
+										listValue="value" headerValue="%{getText('txt.select')}"
+										list="harvestseasonsLang" />
+								</div>
+							</div>
+						</div>
+
+
+					</div>
+
+					<div class="row">
+						<div class="col-md-4">
+							<div class="form-group cultivationType">
+								<label for="txt"> <s:property
 										value="%{getLocaleProperty('farmCrops.CultivationType')}" /><sup
 									style="color: red;"></sup>
 								</label>
-						<div class="">
-							<s:select name="selectedCropCategoryList"
+								<div class="">
+									<s:select name="selectedCropCategoryList"
 										list="cropCategoryList" listKey="key" listValue="value"
 										headerKey="" headerValue="%{getText('txt.select')}"
-									id="cropCategory"
-										cssClass="form-control select2" />
+										id="cropCategory" cssClass="form-control select2" />
+								</div>
+							</div>
 						</div>
-					</div>
-            </div>
-				 <div class="col-md-4">
-                       <div class="form-group farmcropName">
-							<label for="txt"> <s:property
-									value="%{getLocaleProperty('farmcropName')}" /> <sup
-								style="color: red;">*</sup>
-							</label>
-						<div class="">
-						<s:select cssClass="form-control" id="farmCropsMasters"
-									name="selectedCrop" headerKey=""
-									headerValue="%{getText('txt.select')}" listKey="key"
-									listValue="value" list="listProcurementProductLang"
-									onchange="listVariety(this)" />
-						</div>
-					</div>
-            </div>
-				 <div class="col-md-4">
-                       <div class="form-group variety">
-						<label for="txt"> <s:property
-								value="%{getLocaleProperty('variety')}" /> <sup
-							style="color: red;">*</sup>
-						</label>
-						<div class="">
-							<s:select cssClass="form-control" id="farmVarietyMaster"
-								name="selectedVariety" headerKey="-1"
-								headerValue="%{getText('txt.select')}" listKey="key"
-								listValue="value" list="listProcurementVarietyMap" />
-						</div>
-					</div>
-            </div>
-				</div>
-				<s:if test="cropInfoEnabled==1">
-<div class="row">
-				 <div class="col-md-4">
-                       <div class="form-group cultiArea">
-						<label for="txt"> <s:property
-										value="%{getLocaleProperty('cultiArea')}" />
-										
-									 
-										(<s:property value="%{getAreaType()}" />)
-										
-										<sup style="color: red;">*</sup>
+						<div class="col-md-4">
+							<div class="form-group farmcropName">
+								<label for="txt"> <s:property
+										value="%{getLocaleProperty('farmcropName')}" /> <sup
+									style="color: red;">*</sup>
 								</label>
-						<div class="">
-							<s:textfield id="cultiArea" name="farmCrops.cultiArea"
-									cssClass="form-control input-sm"	maxlength="35" onkeyup="calculateActualSeedCotton();">
-									</s:textfield>
+								<div class="">
+									<s:select cssClass="form-control" id="farmCropsMasters"
+										name="selectedCrop" headerKey=""
+										headerValue="%{getText('txt.select')}" listKey="key"
+										listValue="value" list="listProcurementProductLang"
+										onchange="listVariety(this)" />
+								</div>
+							</div>
 						</div>
-					</div>
-            </div>
-				 <div class="col-md-4" id="sowingDate">
-                       <div class="form-group sowingDate">
-							<label for="txt"> <s:property
-									value="%{getLocaleProperty('farmcrops.sowingDate')}" />
-								(MM/DD/YYYY)
-								
-								<sup style="color: red;">*</sup>
-							</label>
-						<div class="">
-						<s:textfield cssClass="form-control input-sm" name="sowingDate"
-									id="calendarSowingDate"  listValue="value" onchange="getDate(this.value);" />
-						</div>
-					</div>
-            </div>
-				 <div class="col-md-4" id="typetr">
-                       <div class="form-group type">
-						<label for="txt"> <s:property
-									value="%{getLocaleProperty('type')}" />
-							</label>
-						<div class="">
-							<div class="form-element">
-								<s:select cssClass="form-control select2" id="type"
-									name="farmCrops.type" headerKey="-1"
-									headerValue="%{getText('txt.select')}"
-									onchange="showOther(this.value)" listKey="key"
-									listValue="value" list="listType" />
+						<div class="col-md-4">
+							<div class="form-group variety">
+								<label for="txt"> <s:property
+										value="%{getLocaleProperty('variety')}" /> <sup
+									style="color: red;">*</sup>
+								</label>
+								<div class="">
+									<s:select cssClass="form-control" id="farmVarietyMaster"
+										name="selectedVariety" headerKey="-1"
+										headerValue="%{getText('txt.select')}" listKey="key"
+										listValue="value" list="listProcurementVarietyMap" />
+								</div>
 							</div>
 						</div>
 					</div>
-            </div>
-				</div>
-				
-	<div class="row">
-				 <div class="col-md-4">
-                       <div class="form-group estimatedYeild">
-						<label for="txt"><s:property value="%{getLocaleProperty('farmfarmcrops.estimatedYeild')}" /> 
-								</label>
-						<div class="">
-							<s:textfield id="estYldPfx" name="farmCrops.estYldPfx"
-										onkeypress="return isNumber(event)"
-										onkeyup="convertKgToMetric()" maxlength="7"
-										cssClass="prefixBox form-control" cssStyle="width: 45% !important;margin-right: 1% !important;position: absolute;"  />
+					<s:if test="cropInfoEnabled==1">
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group cultiArea">
+									<label for="txt"> <s:property
+											value="%{getLocaleProperty('cultiArea')}" /> (<s:property
+											value="%{getAreaType()}" />) <sup style="color: red;">*</sup>
+									</label>
+									<div class="">
+										<s:textfield id="cultiArea" name="farmCrops.cultiArea"
+											cssClass="form-control input-sm" maxlength="35"
+											onkeyup="calculateActualSeedCotton();">
+										</s:textfield>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4" id="sowingDate">
+								<div class="form-group sowingDate">
+									<label for="txt"> <s:property
+											value="%{getLocaleProperty('farmcrops.sowingDate')}" />
+										(MM/DD/YYYY) <sup style="color: red;">*</sup>
+									</label>
+									<div class="">
+										<s:textfield cssClass="form-control input-sm"
+											name="sowingDate" id="calendarSowingDate" listValue="value"
+											onchange="getDate(this.value);" />
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4" id="typetr">
+								<div class="form-group type">
+									<label for="txt"> <s:property
+											value="%{getLocaleProperty('type')}" />
+									</label>
+									<div class="">
+										<div class="form-element">
+											<s:select cssClass="form-control select2" id="type"
+												name="farmCrops.type" headerKey="-1"
+												headerValue="%{getText('txt.select')}"
+												onchange="showOther(this.value)" listKey="key"
+												listValue="value" list="listType" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 
-									<s:textfield id="estYldSfx" name="farmCrops.estYldSfx"
-										onkeypress="return isNumber(event)"
-										onkeyup="convertKgToMetric()" theme="simple" maxlength="3"
-										cssClass="suffixBox form-control" cssStyle="width: 35% !important;position: absolute;margin-left: 165px;" />
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group estimatedYeild">
+									<label for="txt"><s:property
+											value="%{getLocaleProperty('farmfarmcrops.estimatedYeild')}" />
+									</label>
+									<div class="">
+										<s:textfield id="estYldPfx" name="farmCrops.estYldPfx"
+											onkeypress="return isNumber(event)"
+											onkeyup="convertKgToMetric()" maxlength="7"
+											cssClass="prefixBox form-control"
+											cssStyle="width: 45% !important;margin-right: 1% !important;position: absolute;" />
+
+										<s:textfield id="estYldSfx" name="farmCrops.estYldSfx"
+											onkeypress="return isNumber(event)"
+											onkeyup="convertKgToMetric()" theme="simple" maxlength="3"
+											cssClass="suffixBox form-control"
+											cssStyle="width: 35% !important;position: absolute;margin-left: 165px;" />
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4" id="sowingDate">
+								<div class="form-group sowingDate">
+									<label for="txt"><s:property
+											value="%{getLocaleProperty('farmfarmcrops.estimatedYeild.tonnes')}" />
+									</label>
+									<div class="">
+
+										<s:label id="plantTonnesValues" cssClass="form-control" />
+									</div>
+								</div>
+							</div>
+
 						</div>
-					</div>
-            </div>
-				 <div class="col-md-4" id="sowingDate">
-                       <div class="form-group sowingDate">
-							<label for="txt"><s:property value="%{getLocaleProperty('farmfarmcrops.estimatedYeild.tonnes')}" />
-							</label>
-						<div class="">
-					
-						<s:label id="plantTonnesValues" cssClass="form-control" />
-						</div>
-					</div>
-            </div>
-				
-				</div>			
-				
-				
-				</s:if>
-</div></div></div>			
-			
-			
+
+
+					</s:if>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="flexItem flex-layout flexItemStyle float-right">
+			<s:if test="command =='create'">
+				<span id="button" class="yui-button"><span
+					class="first-child">
+						<button type="button" class="save-btn btn btn-success"
+							onclick="submitCreate();" id="createBtn">
+							<font color="#FFFFFF"> <b><s:text name="save.button" /></b>
+							</font>
+						</button>
+				</span></span>
+			</s:if>
+			<s:else>
+				<span id="button" class="yui-button"><span
+					class="first-child">
+						<button type="button" id="update" onclick="submitUpdate();"
+							class="btn btn-success waves-effect waves-light">
+							<i class="ri-check-line align-middle mr-2"></i><b><s:text
+									name="update.button" /></b>
+						</button>
+						
+				</span></span>
+			</s:else>
+			<span id="cancel" class="yui-button"><span class="first-child">
+					<button type="button" id="cancel" onclick="onCancel()"
+						class="btn btn-warning waves-effect waves-light">
+						<i class="ri-error-warning-line align-middle mr-2"></i>
+						<s:text name="back.button" />
+					</button>
+
+			</span></span>
+		</div>
+
 	</s:form>
 
 	<s:form name="cancelform" action="farmer_detail.action%{tabIndexz}">
@@ -333,9 +400,13 @@ margin-top: -35px;
 		document.cancelform.submit();
 	}
 	function submitCreate(){
-		if(addDynamicField()){
-		//document.form.submit();
-			}
+		//if(addDynamicField()){
+		document.form.submit();
+			//}
+	}
+	
+	function submitUpdate(){
+		document.form.submit();
 	}
 	function onFarmList(){
 		document.listForm.submit();
