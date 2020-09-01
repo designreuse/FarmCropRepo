@@ -1,69 +1,12 @@
-<%@ taglib uri="/struts-tags" prefix="s"%>
-<%@ taglib uri="/ese-tags" prefix="e"%>
-<%@ taglib uri="http://www.springframework.org/security/tags"
-	prefix="sec"%>
+<%@ include file="/jsp/common/grid-assets.jsp"%>
+
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
 
 <head>
 <META name="decorator" content="swithlayout">
 
-<style type="text/css">
-body {
-	font: normal normal normal 10px/1.5 Arial, Helvetica, sans-serif;
-}
-
-.ui-dialog-osx {
-	-moz-border-radius: 0 0 8px 8px;
-	-webkit-border-radius: 0 0 8px 8px;
-	border-radius: 0 0 8px 8px;
-	border-width: 0 8px 8px 8px;
-}
-
-.popupBackground {
-	position: absolute;
-	display: none;
-	background-color: #000;
-	opacity: 0.5;
-	filter: alpha(opacity = 50);
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
-}
-
-.popupPanelContent {
-	background: #fff;
-	border: 5px solid #aad2ca;
-	box-shadow: 1px 2px 15px #b8ebed;
-}
-
-.popClose {
-	width: 20px;
-	height: 20px;
-	position: absolute;
-	top: 10px;
-	right: 10px;
-	cursor: pointer;
-}
-
-.popClose:hover {
-	cursor: pointer;
-}
-
-.popAlert {
-	display: none;
-	clear: both;
-	position: absolute;
-	width: 400px;
-	margin-left: -200px;
-	z-index: 1;
-}
-</style>
 </head>
-<%@ include file="/jsp/common/grid-assets.jsp"%>
 
-<div id='warn' class="error">
-	<s:actionerror />
-</div>
 
 <script type="text/javascript">
 
@@ -79,6 +22,8 @@ $.fn.regexMask = function(mask) {
 
 $(document).ready(function(){
 	//$( "#dialog-form" ).hide();
+	
+
 	
 	latestVersion();
 	
@@ -96,13 +41,7 @@ $(document).ready(function(){
 			datatype: "json",
 			styleUI : 'Bootstrap',
 			colNames:[
-					  <s:if test='branchId==null'>
-						 '<s:text name="app.branch"/>',
-					  </s:if>
-						 
-						 <s:if test='isMultiBranch=="1"&&(getIsParentBranch()==1||branchId==null)'>
-							'<s:text name="app.subBranch"/>',
-						</s:if>
+					 
 		  		   	  '<s:text name="profile.device.code" />',
 		  		      '<s:text name="profile.device.name" />',
 		  		      '<s:text name="profile.device.serialNumber" />',
@@ -113,23 +52,7 @@ $(document).ready(function(){
 		      	 ],
 
 		   colModel : [		
-		<s:if test='branchId==null'>
-			{name:'branchId',index:'branchId',width:125,sortable: false,width :125,search:true,stype: 'select',searchoptions: {
-				value: '<s:property value="parentBranchFilterText"/>',
-				dataEvents: [ 
-				          {
-				            type: "change",
-				            fn: function () {
-				            	console.log($(this).val());
-				             	getSubBranchValues($(this).val())
-				            }
-				        }]
-				
-				}},	   				   		
-			</s:if>
-	<s:if test='isMultiBranch=="1"&&(getIsParentBranch()==1||branchId==null)'>
-		{name:'subBranchId',index:'subBranchId',width:125,sortable: false,width :125,search:true,stype: 'select',searchoptions: { value: '<s:property value="childBranchFilterText"/>' }},	   				   		
-	</s:if>
+
 		      	      {name:'code',index:'code',sortable:true, width:125},
 		      	      {name:'name',index:'name', sortable:true, width:125},
 		      	      {name:'serialNumber',index:'serialNumber',sortable:true, width:125},
@@ -139,10 +62,10 @@ $(document).ready(function(){
 		      	    {name:'logintime',index:'logintime', sortable:true,search:false, width:125}
 		      	 ],			
 		    height: 301, 
-			width: $("#baseDiv").width(),
+			width: 989,
 			scrollOffset: 0,
-			rowNum:10,
-			rowList : [10,25,50],
+			rowNum:15,
+			rowList : [15,30,45],
 			sortname: 'id',
 			sortorder: 'desc',
 			viewrecords: true,
@@ -158,27 +81,12 @@ $(document).ready(function(){
 	        }
 	   });
 	
-	jQuery("#detail").jqGrid("setLabel","branchId","",{"text-align":"center"});
-	jQuery("#detail").jqGrid("setLabel","code","",{"text-align":"center"});
-	jQuery("#detail").jqGrid("setLabel","name","",{"text-align":"center"});
-	jQuery("#detail").jqGrid("setLabel","serialNumber","",{"text-align":"center"});
-	jQuery("#detail").jqGrid("setLabel","enabled","",{"text-align":"center"});
-	jQuery("#detail").jqGrid("setLabel","agentName","",{"text-align":"center"});
+	
 	
 	jQuery("#detail").jqGrid('navGrid','#pagerForDetail',{edit:false,add:false,del:false,search:false,refresh:true})
 	jQuery("#detail").jqGrid('filterToolbar',{stringResult: true,searchOnEnter : false});			
 
-	colModel = jQuery("#detail").jqGrid('getGridParam', 'colModel');
-    $('#gbox_' + $.jgrid.jqID(jQuery("#detail")[0].id) +
-        ' tr.ui-jqgrid-labels th.ui-th-column').each(function (i) {
-        var cmi = colModel[i], colName = cmi.name;
-
-        if (cmi.sortable !== false) {
-            $(this).find('>div.ui-jqgrid-sortable>span.s-ico').show();
-        } else if (!cmi.sortable && colName !== 'rn' && colName !== 'cb' && colName !== 'subgrid') {
-            $(this).find('>div.ui-jqgrid-sortable').css({cursor: 'default'});
-        }
-    });
+	
 
     jQuery("#unRegDetail").jqGrid(
 			{
@@ -202,10 +110,10 @@ $(document).ready(function(){
 		      	   	 {name:'update',index:'update', sortable:false, width:125,search:false,align:'center'}
 		      	 
 		      	 ],			
-		    height: 255, 
+		    height: 501, 
 			width: $("#baseDiv").width(),
-			rowNum:10,
-			rowList : [10,25,50],
+			rowNum:15,
+			rowList : [15,30,45],
 			sortname: 'id',
 			sortorder: 'desc',
 			viewrecords: true,
@@ -218,25 +126,7 @@ $(document).ready(function(){
 	        }
 	   });
    
-    jQuery("#unRegDetail").jqGrid("setLabel","modifiedTime","",{"text-align":"center"});
-    jQuery("#unRegDetail").jqGrid("setLabel","serialNo","",{"text-align":"center"});
-    jQuery("#unRegDetail").jqGrid("setLabel","lastUpdatedUsername","",{"text-align":"center"});
-    jQuery("#unRegDetail").jqGrid("setLabel","update","",{"text-align":"center"});
-    
-	jQuery("#unRegDetail").jqGrid('navGrid','#unRegPagerForDetail',{edit:false,add:false,del:false,search:false,refresh:true})
-	jQuery("#unRegDetail").jqGrid('filterToolbar',{stringResult: true,searchOnEnter : false});			
-	 
-	colModel = jQuery("#unRegDetail").jqGrid('getGridParam', 'colModel');
-    $('#gbox_' + $.jgrid.jqID(jQuery("#unRegDetail")[0].id) +
-        ' tr.ui-jqgrid-labels th.ui-th-column').each(function (i) {
-        var cmi = colModel[i], colName = cmi.name;
-
-        if (cmi.sortable !== false) {
-            $(this).find('>div.ui-jqgrid-sortable>span.s-ico').show();
-        } else if (!cmi.sortable && colName !== 'rn' && colName !== 'cb' && colName !== 'subgrid') {
-            $(this).find('>div.ui-jqgrid-sortable').css({cursor: 'default'});
-        }
-    });
+   
 
 });
 
@@ -252,10 +142,15 @@ function deleteUnregisteredDevice(deviceId){
 }
 
 function openModel(serialNo,devId){
+	//alert("AAAA");
 	$("#popSerialNoTxt").html(serialNo);
 	$("#popSerialNo").html(serialNo);
 	document.getElementById("popDeviceId").value=devId;
 	//enablePopup();
+	$('#slide').modal({
+		  show:true,
+		  closeOnEscape: true
+		});
 }
 function exportXLS(){
 	 if(isDataAvailable("#detail")){
@@ -335,73 +230,106 @@ function latestVersion() {
 }
 </script>
 <body>
-	<div id="baseDiv" style="width:97%"> 	</div>
-	<div class="appContentWrapper marginBottom">
-		<ul class="nav nav-pills">
-			<li class="active" id="tab1"><a data-toggle="pill" href="#tabs-1"><s:text
-						name="device.reg" /></a></li>
-			<li id="tab2"><a data-toggle="pill" href="#tabs-2"><s:text
-						name="device.unreg" /> </a></li>
-		</ul>
-	</div>
+	<div class="ferror" id="warn" class=" hide alert alert-danger">
+			<s:actionerror theme="bootstrap" />
+			
+		</div>
 
-	
-		<div class="tab-content">
-			<div id="tabs-1" class="tab-pane fade in active">
-				<s:if test="branchId!=null || currentTenantId=='pratibha'">
-					<sec:authorize ifAllGranted="profile.device.create">
-						<input class="btn btn-sts" type="BUTTON" id="add"
-							value="<s:text name="create.button"/>"
-							onclick="document.createform.submit()" />
-					</sec:authorize>
-				</s:if>
+				<!-- Nav tabs -->
+				<ul class="nav nav-pills nav-justified" role="tablist">
+					<li class="nav-item waves-effect waves-light"><a
+			class="nav-link active  border py-10 d-flex flex-grow-1 rounded flex-column align-items-center"
+			data-toggle="pill"
+			href="#register-device-tabs">
+				<span class="nav-icon py-2 w-auto"> <span
+					class="svg-icon svg-icon-3x"> 
+						<svg xmlns="http://www.w3.org/2000/svg"
+							xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+							height="24px" viewBox="0 0 24 24" version="1.1">
+																		<g stroke="none" stroke-width="1" fill="none"
+								fill-rule="evenodd">
+																			<rect x="0" y="0" width="24" height="24"></rect>
+																			<path
+								d="M5,3 L6,3 C6.55228475,3 7,3.44771525 7,4 L7,20 C7,20.5522847 6.55228475,21 6,21 L5,21 C4.44771525,21 4,20.5522847 4,20 L4,4 C4,3.44771525 4.44771525,3 5,3 Z M10,3 L11,3 C11.5522847,3 12,3.44771525 12,4 L12,20 C12,20.5522847 11.5522847,21 11,21 L10,21 C9.44771525,21 9,20.5522847 9,20 L9,4 C9,3.44771525 9.44771525,3 10,3 Z"
+								fill="#000000"></path>
+																			<rect fill="#000000" opacity="0.3"
+								transform="translate(17.825568, 11.945519) rotate(-19.000000) translate(-17.825568, -11.945519)"
+								x="16.3255682" y="2.94551858" width="3" height="18" rx="1"></rect>
+																		</g>
+																	</svg> <!--end::Svg Icon-->
+				</span>
+			</span> <span
+				class="nav-text font-size-lg py-2 font-weight-bold text-center">Register Device Details</span>
+		</a></li>
+					<li class="nav-item waves-effect waves-light"><a
+			class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center"
+			data-toggle="pill"
+			href="#un-register-device-tabs">
+				<span class="nav-icon py-2 w-auto"> <span
+					class="svg-icon svg-icon-3x"> <!--begin::Svg Icon | path:/metronic/theme/html/demo3/dist/assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
+						<svg xmlns="http://www.w3.org/2000/svg"
+							xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+							height="24px" viewBox="0 0 24 24" version="1.1">
+																		<g stroke="none" stroke-width="1" fill="none"
+								fill-rule="evenodd">
+																			<rect x="0" y="0" width="24" height="24"></rect>
+																			<rect fill="#000000" x="4" y="4" width="7" height="7"
+								rx="1.5"></rect>
+																			<path
+								d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z"
+								fill="#000000" opacity="0.3"></path>
+																		</g>
+																	</svg> <!--end::Svg Icon-->
+				</span>
+			</span> <span
+				class="nav-text font-size-lg py-2 font-weight-bolder text-center">UnRegistered Device Details</span>
+		</a></li>
+					
+				</ul>
 				
-						
-				<div class="dropdown" align="right">
-				<span>
+					<!-- Tab panes -->
+				<div class="tab-content p-3 text-muted">
+					<div class="tab-pane active" id="register-device-tabs" role="tabpanel">
+					
+						<div class="hide">
+		
+			<sec:authorize ifAllGranted="profile.device.create">
+			<button type="BUTTON" id="add" onclick="document.createform.submit()" class="btn btn-success mb-2 float-right" >Add Device <i class="ri-menu-add-line align-middle ml-2"></i></button>
+			</sec:authorize>
+
+</div>
+	<div class="dropdown" align="right">
+				<span class="bold">
 					<s:text name="Latest Version"/>: <span id="version" />	</span>				
-					<button id="dLabel" class="btn btn-primary btn-sts" type="button"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						<i class="fa fa-share"></i>
-						<s:text name="export" />
-						<span class="caret"></span>
-					</button>
-					<ul class="dropdown-menu dropdown-menu-right"
-						aria-labelledby="myTabDrop1" id="myTabDrop1-contents">
-						<li role="presentation"><a href="#" onclick="exportXLS()"
-							tabindex="-1" role="menuitem"> <s:text name="excel" />
-						</a></li>
-						
-					</ul>
-				</div>
-				<div class="appContentWrapper ">
-				<div style="width: 99%;" id="baseDiv">
+		</div>
 
-					<table id="detail"></table>
+	 <div class="deviceResponsiveDiv table table-striped table-hover mt-3"  id="baseDiv">
+			<table class="table table-centered datatable dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;" id="detail"></table>
+			<div id="pagerForDetail"></div>
+		</div> 
 
-					<div id="pagerForDetail"></div>
-				</div>
-				</div>
-			</div>
-
-			<div id="tabs-2" class="tab-pane fade">
-
+					</div>
+					
+			<div class="tab-pane" id="un-register-device-tabs" role="tabpanel">
 				<div id="popUp" class="popAlert">
 					<div class="popupPanelContent" style="padding: 25px;">
 						<div class="popClose" onclick="disableExtendAlert();"></div>
 
 					</div>
 				</div>
-			<div class="appContentWrapper ">
-				<div style="width: 100%;" id="baseDiv2">
-					<table id="unRegDetail"></table>
-					<div id="unRegPagerForDetail"></div>
+		
+				 <div class="deviceResponsiveDiv table table-striped table-hover  mt-3"  id="baseDiv2">
+			<table class="table table-centered datatable dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;" id="unRegDetail"></table>
+			<div id="unRegPagerForDetail"></div>
+		</div> 
+			
+			</div>		
+					
+					
+					
+					
 				</div>
-				</div>
-			</div>
-
-		</div>
-
+				
 		<s:form id="deviceForm" name="createform" action="device_create">
 			<s:hidden id="deviceType" name="deviceType" />
 			<s:hidden name="command" />
@@ -422,10 +350,9 @@ function latestVersion() {
 			<s:hidden name="device.serialNumber" />
 			<s:hidden name="device.name" />
 		</s:form>
-
-
-	<div id="slide" class="modal fade" role="dialog">
-		<div class="modal-dialog">
+		
+	<div id="slide" class="modal fade bs-example-modal-center" role="dialog">
+		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" id="model-close-btn" class="close"
@@ -474,6 +401,8 @@ function latestVersion() {
 				</div>
 			</div>
 		</div>
-	</div>
+	</div>		
+
+
 </body>
 </html>

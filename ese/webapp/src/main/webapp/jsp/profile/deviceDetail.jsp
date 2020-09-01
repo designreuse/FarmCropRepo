@@ -9,196 +9,167 @@
 <META name="decorator" content="swithlayout">
 
 
-<%-- <style>
-			
-			#overlay {
-				position:fixed; 
-				top:0;
-				left:0;
-				width:100%;
-				height:100%;
-				background:#000;
-				opacity:0.5;
-				filter:alpha(opacity=50);
-			}
-
-			#modal {
-				position:absolute;
-				background:#565656 0 0 repeat;
-				background:rgba(0,0,0,0.2);
-				border-radius:5px;
-				padding:8px;
-			}
-
-			#content {
-				border-radius:8px;
-				background:#fff;
-				padding:20px;
-				height:auto;
-				width:200px;
-				font-family: Arial;
-				font-size: 12px;				
-			}
-			
-			button {
-				border:solid 1px #565656;
-				margin:10px 0 0 0px;
-				cursor:pointer;
-				font-size:12px;
-				padding:5px;
-				
-			}
-
-			#close {
-				position:absolute;
-				background:url(close.png) 0 0 no-repeat;				
-				width:30px;
-				height:30px;
-				display:block;
-				text-indent:-9999px;
-				top:-7px;
-				right:-7px;
-			}
-		</style>
-		 --%>
 </head>
 <body>
-	<div id="style" style="padding-left: 30px;">
-		<font color="red"> <s:actionerror />
-		</font> <br />
-	</div>
 
-	<div class="fullwidth">
-		<div class="flexWrapper">
-			<div class="flexLeft appContentWrapper">
-				<div class="formContainerWrapper dynamic-form-con">
-					<h2>
-						<s:text name="info.detail" />
-					</h2>
-					<s:if test='branchId==null'>
-						<div class="dynamic-flexItem">
-							<p class="flexItem">
-								<s:text name="app.branch" />
-							</p>
-							<p class="flexItem">
-								<s:property value="%{getBranchName(country.branchId)}" />
-							</p>
-						</div>
-					</s:if>
-					<div class="dynamic-flexItem">
-						<p class="flexItem">
-							<s:text name="profile.device.code" />
-						</p>
-						<p class="flexItem">
-							<s:property value="device.code" />
-						</p>
-					</div>
-					<div class="dynamic-flexItem">
-						<p class="flexItem">
-							<s:text name="profile.device.serialNumber" />
-						</p>
-						<p class="flexItem">
-							<s:property value="device.serialNumber" />
-						</p>
-					</div>
+<div class="ferror" id="errorDiv" class=" hide alert alert-danger">
+			<s:actionerror theme="bootstrap" />
+			<s:fielderror theme="bootstrap" />
+		</div>
+<div id="accordion" class="custom-accordion device_info">
+								<div class="card-header card mb-1 shadow-none">
+									<a href="#deviceInfo" class="text-dark" data-toggle="collapse"
+										aria-expanded="true" aria-controls="collapseOne">
+										<div class="card-header" id="headingOne">
+											<h6 class="m-0">
+												<div class="wizard-wrapper">
+													<div class="wizard-icon">
+														<span class="svg-icon svg-icon-2x"> <!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/General/User.svg-->
+															<svg xmlns="http://www.w3.org/2000/svg"
+																xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+																height="24px" viewBox="0 0 24 24" version="1.1">
+																		<g stroke="none" stroke-width="1" fill="none"
+																	fill-rule="evenodd">
+																			<polygon points="0 0 24 0 24 24 0 24"></polygon>
+																			<path
+																	d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z"
+																	fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+																			<path
+																	d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z"
+																	fill="#000000" fill-rule="nonzero"></path>
+																		</g>
+																	</svg> <!--end::Svg Icon-->
+														</span>
 
-					<div class="dynamic-flexItem">
-						<p class="flexItem">
-							<s:text name="profile.device.name" />
-						</p>
-						<p class="flexItem">
-							<s:property value="device.name" />
-						</p>
-					</div>
+													</div>
+													<div class="wizard-label">
 
-				<%-- 	<div class="dynamic-flexItem">
-						<p class="flexItem">
-							<s:text name="profile.device.deviceType" />
-						</p>
-						<p class="flexItem">
-							<s:text name="%{device.deviceType}" />
-						</p>
-					</div> --%>
+														<h3 class="wizard-title">
+															<s:property value="%{getLocaleProperty('info.detail')}" />
+														</h3>
+														<div class="wizard-desc">Setup Device Information Details</div>
+													</div>
+												</div>
+												<i
+													class="mdi mdi-minus float-right accor-plus-icon collapse-icon-custom"></i>
+											</h6>
+										</div>
+									</a>
 
-					<div class="dynamic-flexItem">
-						<p class="flexItem">
-							<s:text name="profile.device.deviceStatus" />
-						</p>
-						<p class="flexItem">
-							<s:if test='device.enabled'>
-								<s:text name="status.enabled" />
-							</s:if>
-							<s:else>
-								<s:text name="status.disabled" />
-							</s:else>
-						</p>
-					</div>
+								</div>
+								<div class="card-body">
 
-					<div class="dynamic-flexItem">
-						<p class="flexItem">
-							<s:property value="%{getLocaleProperty('agentName')}" />
-						</p>
-						<p class="flexItem">
-							<s:if test='((agentName==null)||(agentName.equals(" ")))'>
-								<s:text name="noMapWithAgent" />&nbsp;
-							</s:if>
-							<s:else>
-								<s:property value="agentName" />&nbsp;
-							</s:else>
-						</p>
-					</div>
+									<div class="row">
 
+										<div class="col-md-4">
+											<div class="dynamic-flexItem2">
+												<p class="form-group deviceCode">
+													<s:text name="profile.device.code" />
+												</p>
+												<p class="form-control" name="device.code">
+													<s:property value="device.code" />
+												</p>
+											</div>
 
+										</div>
+										<div class="col-md-4">
+											<p class="form-group serialNumber">
+												<s:text name="profile.device.serialNumber" />
+											</p>
+											<p class="form-control" name="serialNumber">
+												<s:property value="device.serialNumber" />
+											</p>
+										</div>
 
-				</div>
+										<div class="col-md-4">
+											<p class="form-group deviceName">
+												<s:text name="profile.device.name" />
+											</p>
+											<p class="form-control" name="deviceName">
+												<s:property value="device.name" />
+											</p>
+										</div>
 
-				<div class="yui-skin-sam">
-					<sec:authorize ifAllGranted="profile.device.update">
-						<span id="update" class=""><span class="first-child">
-								<button type="button" onclick="onUpdate();"
-									class="edit-btn btn btn-success">
-									<FONT color="#FFFFFF"> <b><s:text name="edit.button" /></b>
-									</font>
-								</button>
-						</span></span>
-					</sec:authorize>
-					<sec:authorize ifAllGranted="profile.device.delete">
-						<span id="delete" class=""><span class="first-child">
-								<button type="button" onclick="onDelete();"
-									class="delete-btn btn btn-warning">
-									<FONT color="#FFFFFF"> <b><s:text
-												name="delete.button" /></b>
-									</font>
-								</button>
-						</span></span>
-					</sec:authorize>
-					<span id="cancel"> <span class="first-child"><button
-								type="button" onclick="onCancel();" class="back-btn btn btn-sts">
-								<b><FONT color="#FFFFFF"><s:text name="back.button" />
-								</font></b>
-							</button></span></span>
+							
+									</div>
+									
+									<div class="row">
 
+										<div class="col-md-4">
+											<div class="dynamic-flexItem2">
+												<p class="form-group deviceStatus">
+													<s:text name="profile.device.deviceStatus" />
+												</p>
+												<p class="form-control" name="deviceStatus">
+												<s:if test='device.enabled'>
+											<s:text name="status.enabled" />
+										</s:if>
+										<s:else>
+											<s:text name="status.disabled" />
+										</s:else>
+												</p>
+											</div>
 
-					<s:if test='device.agent!=null'>
+										</div>
+										<div class="col-md-4">
+											<p class="form-group agentName">
+											<s:property value="%{getLocaleProperty('agentName')}" />
+											</p>
+											<p class="form-control" name="agentName">
+												<s:if test='((agentName==null)||(agentName.equals(" ")))'>
+													<s:text name="noMapWithAgent" />&nbsp;
+												</s:if>
+												<s:else>
+													<s:property value="agentName" />&nbsp;
+												</s:else>
+											</p>
+										</div>
+
+						
+
+							
+									</div>
+									
+									
+								</div>
+</div>
+				<div class="button-items float-right">
 						<sec:authorize ifAllGranted="profile.device.update">
-							<span id="reset" class=""> <span class="first-child">
+							<button type="button" id="update" onclick="onUpdate();"
+								class="btn btn-success waves-effect waves-light">
+								<i class="ri-check-line align-middle mr-2"></i>Edit
+							</button>
+
+						</sec:authorize>
+
+						<sec:authorize ifAllGranted="profile.farmer.delete">
+							<button type="button" id="delete" onclick="onDelete();"
+								class="btn btn-danger waves-effect waves-light">
+								<i class="ri-close-line align-middle mr-2"></i>
+								<s:text name="delete.button" />
+							</button>
+						</sec:authorize>
+
+						<button type="button" id="cancel" onclick="onCancel();"
+							class="btn btn-warning waves-effect waves-light">
+							<i class="ri-error-warning-line align-middle mr-2"></i>
+							<s:text name="back.button" />
+						</button>
+						
+							<s:if test='device.agent!=null'>
+						<sec:authorize ifAllGranted="profile.device.update">
+						
 									<button type="button" onclick="onReset();"
-										class="reset-btn btn btn-sts">
-										<b> <FONT color="#FFFFFF"> <s:text
-													name="reset.button" />
-										</FONT>
-										</b>
+										class="btn btn-secondary waves-effect waves-light">
+											<i class="ri-loader-2-fill align-middle mr-2"></i>
+									<s:text name="reset.button" />
+										
 									</button>
-							</span>
-							</span>
+							
 						</sec:authorize>
 					</s:if>
-				</div>
-			</div>
 
-		</div>
-	</div>
-
+					</div>
 	
 	<script type="text/javascript">
 		function resetComplete(){

@@ -994,21 +994,7 @@ public class FarmerAction extends SwitchValidatorAction {
 			jsonObject.put("id", farmer.getId());
 			jsonObject.put("cell", rows);
 		} else {
-			if ((getIsMultiBranch().equalsIgnoreCase("1")
-					&& (getIsParentBranch().equals("1") || StringUtil.isEmpty(branchIdValue)))) {
-
-				if (StringUtil.isEmpty(branchIdValue)) {
-					rows.add(!StringUtil.isEmpty(getBranchesMap().get(getParentBranchMap().get(farmer.getBranchId())))
-							? getBranchesMap().get(getParentBranchMap().get(farmer.getBranchId()))
-							: getBranchesMap().get(farmer.getBranchId()));
-				}
-				rows.add(getBranchesMap().get(farmer.getBranchId()));
-
-			} else {
-				if (StringUtil.isEmpty(branchIdValue)) {
-					rows.add(branchesMap.get(farmer.getBranchId()));
-				}
-			}
+	
 			if (getCurrentTenantId().equalsIgnoreCase(ESESystem.PRATIBHA_TENANT_ID)) {
 				if (StringUtil.isEmpty(getBranchId())) {
 					rows.add(farmer.getBranchId().equalsIgnoreCase("bci")?farmer.getFarmerCode():farmer.getFarmersCodeTracenet());
@@ -1156,6 +1142,10 @@ public class FarmerAction extends SwitchValidatorAction {
 					+ farmer.getId() + ")'> Print ID </button>");
 				}
 			}
+			if(farmer.getStatus()==1){
+				rows.add("<button class='faDelete' title='" + getText("farm.printQr") + "' onclick='printQR("
+					+ farmer.getId() + ")'> Print ID </button>");
+				}
 			// rows.add(getText("<font color=\"#0000FF\">delete</font>"));
 			jsonObject.put("id", farmer.getId());
 			jsonObject.put("cell", rows);

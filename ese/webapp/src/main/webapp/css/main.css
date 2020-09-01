@@ -3727,26 +3727,6 @@ height: auto !important;
 	text-align: right;
 }
 
-.authentication-bg {
-    background-image: url(../img/authentication-bg.jpg);
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-}
-.authentication-bg .bg-overlay {
-    background-color: #292626;
-}
-.bg-overlay {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    top: 0;
-    opacity: .7;
-    background-color: #000;
-}
 
 .custon-radio-inline,
 .custom-radio-inline + .radio-inline,

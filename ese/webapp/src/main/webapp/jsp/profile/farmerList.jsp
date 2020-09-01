@@ -50,13 +50,8 @@ $(document).ready(function(){
 		
 	   	
 	   	colNames:[	
-					<s:if test='branchId==null'>
-						 '<s:text name="app.branch"/>',
-					</s:if>
-						 
-					<s:if test='isMultiBranch=="1"&&(getIsParentBranch()==1||branchId==null)'>
-						'<s:text name="app.subBranch"/>',
-					</s:if>
+					
+				
 					<s:if test="currentTenantId=='ocp'"> 
 						'<s:text name="%{getLocaleProperty('farmerCode')}"/>',
 					</s:if>
@@ -150,26 +145,10 @@ $(document).ready(function(){
 	  		'<s:text name="%{getLocaleProperty('Updated UserName')}" />',
 	  			 '<s:text name="Print ID Card"/>'
 	  			 </s:if>
+	  		 '<s:text name="Print ID Card"/>'
 	      	 ],
 	   	colModel:[						
 
-<s:if test='branchId==null'>
-{name:'branchId',index:'branchId',width:125,sortable: false,width :125,search:true,stype: 'select',searchoptions: {
-	value: '<s:property value="parentBranchFilterText"/>',
-	dataEvents: [ 
-	          {
-	            type: "change",
-	            fn: function () {
-	            	console.log($(this).val());
-	             	getSubBranchValues($(this).val())
-	            }
-	        }]
-	
-	}},	   				   		
-</s:if>
-<s:if test='isMultiBranch=="1"&&(getIsParentBranch()==1||branchId==null)'>
-{name:'subBranchId',index:'subBranchId',width:125,sortable: false,width :125,search:true,stype: 'select',searchoptions: { value: '<s:property value="childBranchFilterText"/>' }},	   				   		
-</s:if>
 			   			<s:if test="currentTenantId=='ocp'"> 
 			   			{name:'farmerId',index:'farmerId',width:125,sortable:true},
 			   		</s:if>
@@ -200,13 +179,13 @@ $(document).ready(function(){
 	   		{name:'locality.name',index:'locality.name',width:130,sortable:true},
 	   		{name:'city.name',index:'city.name',width:130,sortable:true},
 			</s:if>
-	   		{name:'v.name',index:'v.name',width:125,sortable:true},	   	
+	   		{name:'v.name',index:'v.name',width:125,sortable:true,search:false},	   	
 	   		<s:if test="currentTenantId=='symrise'">
 	   		//{name:'cs.name',index:'cs.name',width:125,sortable:false, id:"certificateStandardCtrl", search:true, stype: 'select', searchoptions: { value: '<s:property value="certificateStandardFilterText"/>' }},
 	   		{name:'certificationLevel',index:'certificationLevel',width:125,sortable:false, id:"certificationLevelCtrl", search:true, stype: 'select', searchoptions: { value: '<s:property value="certificationLevelsFilterText"/>' }},
 	  		</s:if>
 	    	 <s:if test="currentTenantId!='farmAgg'">
-	   		{name:'s.name',index:'s.name',width:125,sortable:true},	   
+	   		{name:'s.name',index:'s.name',width:125,sortable:true,search:false},	   
 	   		</s:if>
 	   		<%--{name:'cs.name',index:'cs.name',width:125,sortable:false, id:"certificateStandardCtrl", search:true, stype: 'select', searchoptions: { value: '<s:property value="certificateStandardFilterText"/>' }},
 	   		{name:'certificationType',index:'certificationType',width:125,sortable:false, id:"certificationTypeCtrl", search:true, stype: 'select', searchoptions: { value: '<s:property value="certificationTypesFilterText"/>' }},--%>
@@ -266,23 +245,24 @@ $(document).ready(function(){
 	   		{name:'lastUpdatedUsername',index:'lastUpdatedUsername',width:125,sortable:true},
 		    {name:'printQR',index:'printQR',width:125,sortable:true},
 		    </s:if>
+		    {name:'printQR',index:'printQR',width:125,sortable:true,search:false},
 	   		],
 	   	height: 401, 
 	    width: $("#baseDiv").width(), // assign parent div width
 	    scrollOffset: 0,
-	   	rowNum:15,
-	   	rowList : [15,30,45],
+	   	rowNum:10,
+	   	rowList : [10,20,30],
 	   	autowidth: true,
 	   	shrinkToFit: true,
 	    sortname:'id',			  
 	    sortorder: "desc",
 	    pager: "#jqGridPager",
-	    beforeSelectRow:
+	  /*   beforeSelectRow:
             function(rowid, e) {
             var iCol = jQuery.jgrid.getCellIndex(e.target);
-            if (iCol >= 9){return false; }
+            if (iCol >= 8){return false; }
             else{ return true; }
-            },
+            }, */
 	    viewrecords: true, // for viewing noofrecords displaying string at the right side of the table
 	    onSelectRow: function(id){ 
 	    	document.updateform.id.value  =id;

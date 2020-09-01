@@ -182,21 +182,20 @@ public class SamithiAction extends SwitchValidatorAction {
 		Warehouse warehouse = (Warehouse) obj;
 		JSONObject jsonObject = new JSONObject();
 		JSONArray rows = new JSONArray();
-		if ((getIsMultiBranch().equalsIgnoreCase("1")
-				&& (getIsParentBranch().equals("1") || StringUtil.isEmpty(branchIdValue)))) {
-
-			if (StringUtil.isEmpty(branchIdValue)) {
-				rows.add(!StringUtil.isEmpty(getBranchesMap().get(getParentBranchMap().get(warehouse.getBranchId())))
-						? getBranchesMap().get(getParentBranchMap().get(warehouse.getBranchId()))
-						: getBranchesMap().get(warehouse.getBranchId()));
-			}
-			rows.add(getBranchesMap().get(warehouse.getBranchId()));
-
-		} else {
-			if (StringUtil.isEmpty(branchIdValue)) {
-				rows.add(branchesMap.get(warehouse.getBranchId()));
-			}
-		}
+		/*
+		 * if ((getIsMultiBranch().equalsIgnoreCase("1") &&
+		 * (getIsParentBranch().equals("1") || StringUtil.isEmpty(branchIdValue)))) {
+		 * 
+		 * if (StringUtil.isEmpty(branchIdValue)) {
+		 * rows.add(!StringUtil.isEmpty(getBranchesMap().get(getParentBranchMap().get(
+		 * warehouse.getBranchId()))) ?
+		 * getBranchesMap().get(getParentBranchMap().get(warehouse.getBranchId())) :
+		 * getBranchesMap().get(warehouse.getBranchId())); }
+		 * rows.add(getBranchesMap().get(warehouse.getBranchId()));
+		 * 
+		 * } else { if (StringUtil.isEmpty(branchIdValue)) {
+		 * rows.add(branchesMap.get(warehouse.getBranchId())); } }
+		 */
 		if (getCurrentTenantId().equalsIgnoreCase("welspun")) {
 			rows.add(
 					"<font color=\"#0000FF\" style=\"cursor:pointer;\">" + warehouse.getCapacityInTonnes() + "</font>");

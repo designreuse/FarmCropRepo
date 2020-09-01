@@ -724,20 +724,7 @@ var isGramPanchayatEnable = '<s:property value="gramPanchayatEnable"/>';
 					</div>
                                                 </div>
                                                 
-                                                
-                                       <div class="col-md-4">
-                                                   	<div class="form-group dateOfFormation">
-						<label for="txt"> <s:property
-									value="%{getLocaleProperty('dateOfFormation')}" />
-						</label>
-						<div class="">
-							<s:textfield data-date-format="dd/mm/yyyy"
-									data-date-viewmode="years"
-									cssClass="date-picker form-control" id="fromCalendar"
-									name="formationDate" size="23" readonly="true" />
-						</div>
-					</div>
-                                                </div>               
+                               
                                                 
                                                 
                    			 </div>	

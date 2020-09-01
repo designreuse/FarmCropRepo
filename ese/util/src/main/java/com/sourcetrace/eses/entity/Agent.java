@@ -66,6 +66,8 @@ public class Agent extends Profile {
 	
 	private List<String> surveyCodes;
 	private List<String> availSurveyCodes;
+	
+	private String availableWarehouse;
 
 	/**
 * Transient variable
@@ -708,6 +710,14 @@ private String command;
 
 	public void setCommand(String command) {
 		this.command = command;
+	}
+
+	public String getAvailableWarehouse() {
+		return availableWarehouse;
+	}
+
+	public void setAvailableWarehouse(String availableWarehouse) {
+		this.availableWarehouse = availableWarehouse;
 	}
 	
 	

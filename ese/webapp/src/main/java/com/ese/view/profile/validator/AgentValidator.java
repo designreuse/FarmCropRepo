@@ -155,14 +155,56 @@ public class AgentValidator implements IValidator {
         		errorCodes.put("profileId", "unique.agentId");
         	}
         }
+        if (!StringUtil.isEmpty(aAgent.getProfileId())) {
+            if (!ValidationUtil.isPatternMaches(aAgent.getProfileId(),ValidationUtil.ALPHANUMERIC_PATTERN)) {
+                errorCodes.put("pattern.profileId", "pattern.profileId");
+            }
+        } else {
+            errorCodes.put("empty.profileId", "empty.agentId");
+        }
+
+        if (!StringUtil.isEmpty(aAgent.getPersonalInfo().getFirstName())) {
+            if (!ValidationUtil.isPatternMaches(aAgent.getPersonalInfo().getFirstName(),ValidationUtil.ALPHANUMERIC_PATTERN)) {
+                errorCodes.put("pattern.firstName", "pattern.firstName");
+            }
+        } else {
+            errorCodes.put("empty.firstName", "empty.firstName");
+        }
+        if (!StringUtil.isEmpty(aAgent.getPersonalInfo().getFirstName())) {
+            if (!ValidationUtil.isPatternMaches(aAgent.getPersonalInfo().getFirstName(),
+                    ValidationUtil.ALPHANUMERIC_PATTERN)) {
+                errorCodes.put("pattern.lastName", "pattern.lastName");
+            }
+        }
+        if (!StringUtil.isEmpty(aAgent.getPersonalInfo().getIdentityNumber())) {
+            if (!ValidationUtil.isPatternMaches(aAgent.getPersonalInfo().getIdentityNumber(),
+                    ValidationUtil.ALPHANUMERIC_PATTERN)) {
+                errorCodes.put("pattern.identityNumber", "pattern.identityNumber");
+            }
+        }
+        if (!StringUtil.isEmpty(aAgent.getContactInfo().getMobileNumber())) {
+            if (!ValidationUtil.isPatternMaches(aAgent.getContactInfo().getMobileNumber(),
+                    ValidationUtil.NUMBER_PATTERN)) {
+                errorCodes.put("pattern.mobile", "pattern.mobile");
+            }
+        } else {
+            errorCodes.put("empty.mobile", "empty.mobileNumber");
+        }
+        if (!StringUtil.isEmpty(aAgent.getContactInfo().getEmail())) {
+            if (!ValidationUtil.isPatternMaches(aAgent.getContactInfo().getEmail(),
+                    ValidationUtil.EMAIL_PATTERN)) {
+                errorCodes.put("pattern.email", "pattern.email");
+            }
+        }
+        if (!StringUtil.isEmpty(aAgent.getContactInfo().getPhoneNumber())) {
+            if (!ValidationUtil.isPatternMaches(aAgent.getContactInfo().getPhoneNumber(),
+                    ValidationUtil.NUMBER_PATTERN)) {
+                errorCodes.put("pattern.phoneNumber", "pattern.phoneNumber");
+            }
+        }
         
-        if(StringUtil.isEmpty(aAgent.getAgentType().getCode()) || aAgent.getAgentType().getCode().equalsIgnoreCase("02") || aAgent.getAgentType().getCode().equalsIgnoreCase("01")){
-	        if (ObjectUtil.isListEmpty(aAgent.getWareHouses())) {
-	            if (!ObjectUtil.isEmpty(aAgent.getAgentType()) && aAgent.getAgentType().getId() != 1) {
-	                errorCodes.put("cooperative", "empty.samithi");
-	            }
-	
-	        }
+        if (StringUtil.isEmpty(aAgent.getAvailableWarehouse())) {
+        	errorCodes.put("cooperative", "empty.samithi");
         }
         values = personalValidator.getInvalidValues(aAgent.getPersonalInfo(), "firstName");
         for (InvalidValue value : values) {
@@ -191,40 +233,8 @@ public class AgentValidator implements IValidator {
                 errorCodes.put(value.getPropertyName(), value.getMessage());
             }
         }
-        
-        if(tenantId.equalsIgnoreCase("chetna") || tenantId.equalsIgnoreCase(ESESystem.LIVELIHOOD_TENANT_ID)){
-        	 if (!ObjectUtil.isEmpty(aAgent.getAgentType()) && aAgent.getAgentType().getCode()==null) {
-                 errorCodes.put("agentType", "empty.mobileUserType");
-             }
-        	 if(!StringUtil.isEmpty(aAgent.getAgentType().getCode()) && aAgent.getAgentType().getCode().equalsIgnoreCase("03")){
-        		 if(ObjectUtil.isListEmpty(aAgent.getWareHouses())){
-        			 errorCodes.put("selectedWarehouses", "empty.shgs");
-        		 }
-	        	 if (ObjectUtil.isEmpty(aAgent.getProcurementCenter())) {
-	                 errorCodes.put("selectedProcurementCenter", "empty.procurementCenter");
-	             }
-        	 
-        	 }else if (!StringUtil.isEmpty(aAgent.getAgentType().getCode()) && aAgent.getAgentType().getCode().equalsIgnoreCase("04")){
-        		 if (ObjectUtil.isEmpty(aAgent.getProcurementCenter())) {
-                     errorCodes.put("selectedGinningCenter", "empty.ginningCenter");
-                 }
-        	 }else if(!StringUtil.isEmpty(aAgent.getAgentType().getCode()) && aAgent.getAgentType().getCode().equalsIgnoreCase("05")){
-        		 if (ObjectUtil.isEmpty(aAgent.getProcurementCenter())) {
-                     errorCodes.put("selectedSpinner", "empty.spinner");
-                 }
-        	 }
-        	 
-        }
-         if(tenantId.equals(ESESystem.PRATIBHA_TENANT_ID)){
-        	 if (!ObjectUtil.isEmpty(aAgent.getAgentType()) && aAgent.getAgentType().getCode()==null) {
-                 errorCodes.put("agentType", "empty.mobileUserType");
-             }
-        	 if(aAgent.getAgentType().getCode()!=null && !aAgent.getAgentType().getCode().equalsIgnoreCase("06")){
-        	 if (ObjectUtil.isEmpty(aAgent.getProcurementCenter())) {
-                 errorCodes.put("warehouseName", "empty.warehouse");
-             }
-         }  
-         }
+
+
         values = agentValidator.getInvalidValues(aAgent, "status");
         for (InvalidValue value : values) {
             errorCodes.put(value.getPropertyName(), value.getMessage());
@@ -270,15 +280,7 @@ public class AgentValidator implements IValidator {
             errorCodes.put("txnMode", "empty.txnMode");
         }
 
-/*        if (values == null || values.length == 0) {
-            if (!StringUtil.isEmpty(aAgent.getProfileId())) {
-                Agent eAgent = agentDAO.findAgentByAgentId(aAgent.getProfileId());
-                if (eAgent != null && eAgent.getId() != aAgent.getId()) {
-                    errorCodes.put("profileId", "unique.agentId");
-                }
-                
-            }
-        }*/
+
         if (aAgent.getStatus() == 1) {
 
             if (StringUtil.isEmpty(aAgent.getPassword())
@@ -291,51 +293,18 @@ public class AgentValidator implements IValidator {
         }
         
         
-        if (!StringUtil.isEmpty(aAgent.getProfileId())) {
-            if (!ValidationUtil.isPatternMaches(aAgent.getProfileId(),ValidationUtil.ALPHANUMERIC_PATTERN)) {
-                errorCodes.put("pattern.profileId", "pattern.profileId");
-            }
-        } else {
-            errorCodes.put("empty.profileId", "empty.profileId");
-        }
-
-        if (!StringUtil.isEmpty(aAgent.getPersonalInfo().getFirstName())) {
-            if (!ValidationUtil.isPatternMaches(aAgent.getPersonalInfo().getFirstName(),ValidationUtil.ALPHANUMERIC_PATTERN)) {
-                errorCodes.put("pattern.firstName", "pattern.firstName");
-            }
-        } else {
-            errorCodes.put("empty.firstName", "empty.firstName");
-        }
-        if (!StringUtil.isEmpty(aAgent.getPersonalInfo().getFirstName())) {
-            if (!ValidationUtil.isPatternMaches(aAgent.getPersonalInfo().getFirstName(),
-                    ValidationUtil.ALPHANUMERIC_PATTERN)) {
-                errorCodes.put("pattern.lastName", "pattern.lastName");
-            }
-        }
-        if (!StringUtil.isEmpty(aAgent.getPersonalInfo().getIdentityNumber())) {
-            if (!ValidationUtil.isPatternMaches(aAgent.getPersonalInfo().getIdentityNumber(),
-                    ValidationUtil.ALPHANUMERIC_PATTERN)) {
-                errorCodes.put("pattern.identityNumber", "pattern.identityNumber");
-            }
-        }
-        if (!StringUtil.isEmpty(aAgent.getContactInfo().getMobileNumber())) {
-            if (!ValidationUtil.isPatternMaches(aAgent.getContactInfo().getMobileNumber(),
-                    ValidationUtil.NUMBER_PATTERN)) {
-                errorCodes.put("pattern.mobile", "pattern.mobile");
-            }
-        }
-        if (!StringUtil.isEmpty(aAgent.getContactInfo().getEmail())) {
-            if (!ValidationUtil.isPatternMaches(aAgent.getContactInfo().getEmail(),
-                    ValidationUtil.EMAIL_PATTERN)) {
-                errorCodes.put("pattern.email", "pattern.email");
-            }
-        }
-        if (!StringUtil.isEmpty(aAgent.getContactInfo().getPhoneNumber())) {
-            if (!ValidationUtil.isPatternMaches(aAgent.getContactInfo().getPhoneNumber(),
-                    ValidationUtil.NUMBER_PATTERN)) {
-                errorCodes.put("pattern.phoneNumber", "pattern.phoneNumber");
-            }
-        }
+		/*
+		 * if(StringUtil.isEmpty(aAgent.getAgentType().getCode()) ||
+		 * aAgent.getAgentType().getCode().equalsIgnoreCase("02") ||
+		 * aAgent.getAgentType().getCode().equalsIgnoreCase("01")){ if
+		 * (ObjectUtil.isListEmpty(aAgent.getWareHouses())) { if
+		 * (!ObjectUtil.isEmpty(aAgent.getAgentType()) && aAgent.getAgentType().getId()
+		 * != 1) { errorCodes.put("cooperative", "empty.samithi"); }
+		 * 
+		 * } }
+		 */
+        
+       
         
         if (aAgent.isTrainingExists()) {
             if (ObjectUtil.isEmpty(aAgent.getSelectedtrainings())||aAgent.getSelectedtrainings().length()<=0) {

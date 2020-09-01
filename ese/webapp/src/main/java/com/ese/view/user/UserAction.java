@@ -985,7 +985,7 @@ public class UserAction extends SwitchValidatorAction {
 		return super.execute();
 	}
 
-	public void populateImage() {
+	public void getUserAvatar() {
 
 		try {
 
@@ -999,7 +999,7 @@ public class UserAction extends SwitchValidatorAction {
 			}
 
 			if (ObjectUtil.isEmpty(imageData) || imageData.length == 0) {
-				String logoPath = request.getSession().getServletContext().getRealPath("/img/avatar-small.jpg");
+				String logoPath = request.getSession().getServletContext().getRealPath("/assets/images/Man-Avatar.png");
 				File pic = new File(logoPath);
 				long length = pic.length();
 				imageData = new byte[(int) length];

@@ -67,28 +67,24 @@
 
 <div class="col-lg-8">
                         <div class="authentication-bg">
-                           <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                                            <ol class="carousel-indicators">
-                                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                                                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                                                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                                            </ol>
+                           <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
+                                      
                                             <div class="carousel-inner" role="listbox">
                                                 <div class="carousel-item active">
-                                                    <img class="d-block img-fluid" src="assets/images/authentication-bg.jpg" alt="First slide">
+                                                    <img class="d-block img-fluid" src="assets/images/slider-1.jpg" alt="First slide">
                                                 </div>
                                                 <div class="carousel-item">
-                                                    <img class="d-block img-fluid" src="assets/images/authentication-bg.jpg" alt="Second slide">
+                                                    <img class="d-block img-fluid" src="assets/images/slider-2.jpg" alt="Second slide">
                                                 </div>
                                                 <div class="carousel-item">
-                                                    <img class="d-block img-fluid" src="assets/images/authentication-bg.jpg" alt="Third slide">
+                                                    <img class="d-block img-fluid" src="assets/images/slider-3.jpg" alt="Third slide">
                                                 </div>
                                             </div>
-                                            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                        <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
                                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                                 <span class="sr-only">Previous</span>
                                             </a>
-                                            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                            <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
                                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                                 <span class="sr-only">Next</span>
                                             </a>
