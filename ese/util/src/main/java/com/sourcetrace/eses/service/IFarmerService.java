@@ -2692,5 +2692,7 @@ public List<Object[]> listLoanLedgerByDate(String date,String branchId);
 
 	public Object[] findFarmersCountFromLotTraceByLotNo(String selectedLotNo);
 
+	public List<Object[]> fetchFarmerAndFarmCount();
+
 
 }
