@@ -1032,6 +1032,8 @@ public class VillageAction extends SwitchValidatorAction {
 			e.printStackTrace();
 		}
 	}
+	
+	
 
 	@SuppressWarnings("unchecked")
 	public void populateStateList() {
@@ -1234,6 +1236,65 @@ public class VillageAction extends SwitchValidatorAction {
 		sendAjaxResponse(gramPanchayatArray);
 	}
 
+	public void populateCountryListData() {
+		List<Country> countryList = locationService.listCountries();
+		
+		JSONArray rows = new JSONArray();
+		countryList.stream().forEach(country -> {
+			List<String> data = new ArrayList<String>();
+			data.add('"'+country.getCode()+'"');
+			data.add('"'+country.getName()+'"');
+			data.add('"'+"<button type='button' class='btn btn-info' onclick='openCountryEditWindow("+country.getId()+")' >Info</button>"+'"');
+			rows.add(data);
+		});
+		printAjaxResponse(rows, "text/html");
+	}
+	
+	public void populateStateListData() {
+		List<Country> countryList = locationService.listCountries();
+		
+		JSONArray rows = new JSONArray();
+		countryList.stream().forEach(country -> {
+			
+			country.getStates().stream().forEach(state -> {
+				List<String> data = new ArrayList<String>();
+				data.add('"'+state.getCode()+'"');
+				data.add('"'+state.getName()+'"');
+				data.add('"'+country.getName()+'"');
+				data.add('"'+"<button type='button' class='btn btn-info' onclick='openStateEditWindow("+state.getId()+")' >Info</button>"+'"');
+				rows.add(data);
+			});
+			
+			
+		});
+		printAjaxResponse(rows, "text/html");
+	}
+	
+	public void populateDistrictListData() {
+		List<Country> countryList = locationService.listCountries();
+		
+		JSONArray rows = new JSONArray();
+		countryList.stream().forEach(country -> {
+			
+			country.getStates().stream().forEach(state -> {
+				
+				state.getLocalities().stream().forEach(locality -> {
+					List<String> data = new ArrayList<String>();
+					data.add('"'+locality.getCode()+'"');
+					data.add('"'+locality.getName()+'"');
+					data.add('"'+state.getName()+'"');
+					data.add('"'+country.getName()+'"');
+					data.add('"'+"<button type='button' class='btn btn-info' onclick='openLocalityEditWindow("+locality.getId()+")' >Info</button>"+'"');
+					rows.add(data);
+				});
+				
+			});
+			
+			
+		});
+		printAjaxResponse(rows, "text/html");
+	}
+	
 	/**
 	 * Gets the selected gram panchayat.
 	 * 

@@ -203,8 +203,11 @@
 			</result>
 			<result name="input">/jsp/switch/general/procurementProductEnroll.jsp
 			</result>
-			<result name="list">/jsp/switch/general/procurementProductList.jsp
+			<!-- <result name="list">/jsp/switch/general/procurementProductList.jsp
+			</result> -->
+			<result name="list">/jsp/switch/general/cropVarietyGrade.jsp
 			</result>
+			
 			<result name="detail">/jsp/switch/general/procurementProductDetail.jsp
 			</result>
 			<result type="redirectAction" name="redirect">procurementProductEnroll_list

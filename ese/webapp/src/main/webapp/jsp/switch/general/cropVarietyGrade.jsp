@@ -8,27 +8,29 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 
-		loadCountryTable();
-		loadStateTable();
-		loadLocalityTable();
+		loadCropTable();
+		loadVarietyTable();
+		loadGradeTable();
 		
 	});
 
-	function loadCountryTable() {
+	function loadCropTable() {
 
 		$.ajax({
-					url : "village_populateCountryListData.action",
+					url : "procurementProductEnroll_populateProcurementProductList.action",
 					async : false,
 					type : 'post',
 					success : function(result) {
 
 						var data = JSON.parse(result);
-						$('#countryTable').DataTable({
+						$('#cropTable').DataTable({
 							"data" : data,
 							"columns" : [ {
 								title : "Code"
 							}, {
 								title : "Name"
+							}, {
+								title : "Unit"
 							}, {
 								title : "Action"
 							} ]
@@ -39,71 +41,73 @@
 
 	}
 	
-	function loadStateTable() {
+	function loadVarietyTable() {
 
 		$.ajax({
-			url : "village_populateStateListData.action",
-			async : false,
-			type : 'post',
-			success : function(result) {
+					url : "procurementProductEnroll_populateProcurementVarietyList.action",
+					async : false,
+					type : 'post',
+					success : function(result) {
 
-				var data = JSON.parse(result);
-				$('#stateTable').DataTable({
-					"data" : data,
-					"columns" : [ {
-						title : "Code"
-					}, {
-						title : "State Name"
-					}, {
-						title : "Contry Name"
-					}, {
-						title : "Action"
-					} ]
+						var data = JSON.parse(result);
+						$('#varietyTable').DataTable({
+							"data" : data,
+							"columns" : [ {
+								title : "Code"
+							}, {
+								title : "Variety Name"
+							}, {
+								title : "Product Name"
+							},{
+								title : " DaysToGrow"
+							}, {
+								title : "Action"
+							} ]
+						});
+
+					}
 				});
-
-			}
-		});
 
 	}
 	
-	function loadLocalityTable() {
+	function loadGradeTable() {
 
 		$.ajax({
-			url : "village_populateDistrictListData.action",
-			async : false,
-			type : 'post',
-			success : function(result) {
+					url : "procurementProductEnroll_populateProcurementGradeList.action",
+					async : false,
+					type : 'post',
+					success : function(result) {
 
-				var data = JSON.parse(result);
-				$('#localityTable').DataTable({
-					"data" : data,
-					"columns" : [ {
-						title : "Code"
-					}, {
-						title : "Locality Name"
-					}, {
-						title : "State Name"
-					}, {
-						title : "Contry Name"
-					}, {
-						title : "Action"
-					} ]
+						var data = JSON.parse(result);
+						$('#gradeTable').DataTable({
+							"data" : data,
+							"columns" : [ {
+								title : "Code"
+							}, {
+								title : "Grade Name"
+							}, {
+								title : "Variety Name"
+							},{
+								title : "Price"
+							}, {
+								title : "Action"
+							} ]
+						});
+
+					}
 				});
-
-			}
-		});
 
 	}
 	
-	function openCountryEditWindow(id) {
+	function openCropEditWindow(id) {
 		alert(id);
 	}
 	
-	function openStateEditWindow(id){
+	function openVarietyEditWindow(id){
 		alert(id);
 	}
 	
-	function openLocalityEditWindow(id){
+	function openGradeEditWindow(id){
 		alert(id);
 	}
 	
@@ -115,7 +119,7 @@
 	<ul class="nav nav-pills nav-justified" role="tablist">
 		<li class="nav-item waves-effect waves-light"><a
 			class="nav-link active  border py-10 d-flex flex-grow-1 rounded flex-column align-items-center"
-			data-toggle="pill" href="#country-tabs"> <span
+			data-toggle="pill" href="#crop-tabs"> <span
 				class="nav-icon py-2 w-auto"> <span
 					class="svg-icon svg-icon-3x"> <svg
 							xmlns="http://www.w3.org/2000/svg"
@@ -134,12 +138,12 @@
 																	</svg> <!--end::Svg Icon-->
 				</span>
 			</span> <span
-				class="nav-text font-size-lg py-2 font-weight-bold text-center">Country
+				class="nav-text font-size-lg py-2 font-weight-bold text-center">Crop
 					Details</span>
 		</a></li>
 		<li class="nav-item waves-effect waves-light"><a
 			class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center"
-			data-toggle="pill" href="#state-tabs"> <span
+			data-toggle="pill" href="#variety-tabs"> <span
 				class="nav-icon py-2 w-auto"> <span
 					class="svg-icon svg-icon-3x"> <!--begin::Svg Icon | path:/metronic/theme/html/demo3/dist/assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
 						<svg xmlns="http://www.w3.org/2000/svg"
@@ -157,12 +161,12 @@
 																	</svg> <!--end::Svg Icon-->
 				</span>
 			</span> <span
-				class="nav-text font-size-lg py-2 font-weight-bolder text-center">State
+				class="nav-text font-size-lg py-2 font-weight-bolder text-center">Variety
 					Details</span>
 		</a></li>
 		<li class="nav-item waves-effect waves-light"><a
 			class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center"
-			data-toggle="pill" href="#locality-tabs"> <span
+			data-toggle="pill" href="#grade-tabs"> <span
 				class="nav-icon py-2 w-auto"> <span
 					class="svg-icon svg-icon-3x"> <!--begin::Svg Icon | path:/metronic/theme/html/demo3/dist/assets/media/svg/icons/Media/Movie-Lane2.svg-->
 						<svg xmlns="http://www.w3.org/2000/svg"
@@ -181,7 +185,7 @@
 																	</svg> <!--end::Svg Icon-->
 				</span>
 			</span> <span
-				class="nav-text font-size-lg py-2 font-weight-bolder text-center">Locality
+				class="nav-text font-size-lg py-2 font-weight-bolder text-center">Grade
 					Details</span>
 		</a></li>
 
@@ -189,16 +193,16 @@
 
 	<div class="tab-content p-3 text-muted">
 
-		<div class="tab-pane active" id="country-tabs" role="tabpanel">
-			<table id="countryTable" class="display" width="100%"></table>
+		<div class="tab-pane active" id="crop-tabs" role="tabpanel">
+			<table id="cropTable" class="display" width="100%"></table>
 		</div>
 
-		<div class="tab-pane" id="state-tabs" role="tabpanel">
-			<table id="stateTable" class="display" width="100%"></table>	
+		<div class="tab-pane" id="variety-tabs" role="tabpanel">
+			<table id="varietyTable" class="display" width="100%"></table>	
 		</div>
 
-		<div class="tab-pane" id="locality-tabs" role="tabpanel">
-			<table id="localityTable" class="display" width="100%"></table>	
+		<div class="tab-pane" id="grade-tabs" role="tabpanel">
+			<table id="gradeTable" class="display" width="100%"></table>	
 		</div>
 
 	</div>

@@ -568,6 +568,75 @@ public class ProcurementProductEnrollAction extends SwitchValidatorAction {
 		}
 	}
 
+	
+	public void populateProcurementProductList(){
+		List<ProcurementProduct> products = getProcurementProductList();
+		
+		JSONArray rows = new JSONArray();
+		products.stream().forEach(p -> {
+			List<String> data = new ArrayList<String>();
+			data.add('"'+p.getCode()+'"');
+			data.add('"'+p.getName()+'"');
+			data.add('"'+p.getUnit()+'"');
+			
+			data.add('"'+"<button type='button' class='btn btn-info' onclick='openCropEditWindow("+p.getId()+")' >Info</button>"+'"');
+			rows.add(data);
+		});
+		printAjaxResponse(rows, "text/html");
+		
+	}
+	
+	public void populateProcurementVarietyList(){
+		List<ProcurementProduct> products = getProcurementProductList();
+		
+		JSONArray rows = new JSONArray();
+		products.stream().forEach(p -> {
+			
+			p.getProcurementVarieties().stream().forEach(v -> {
+				List<String> data = new ArrayList<String>();
+				data.add('"'+v.getCode()+'"');
+				data.add('"'+v.getName()+'"');
+				data.add('"'+p.getName()+'"');
+				data.add('"'+v.getNoDaysToGrow()+'"');
+				
+				data.add('"'+"<button type='button' class='btn btn-info' onclick='openVarietyEditWindow("+v.getId()+")' >Info</button>"+'"');
+				rows.add(data);
+			});
+			
+			
+		});
+		printAjaxResponse(rows, "text/html");
+		
+	}
+	
+	public void populateProcurementGradeList(){
+		List<ProcurementProduct> products = getProcurementProductList();
+		
+		JSONArray rows = new JSONArray();
+		products.stream().forEach(p -> {
+			
+			p.getProcurementVarieties().stream().forEach(v -> {
+				
+				v.getProcurementGrades().stream().forEach(g -> {
+					List<String> data = new ArrayList<String>();
+					data.add('"'+g.getCode()+'"');
+					data.add('"'+g.getName()+'"');
+					data.add('"'+v.getName()+'"');
+					data.add('"'+g.getPrice().toString()+'"');
+					
+					data.add('"'+"<button type='button' class='btn btn-info' onclick='openGradeEditWindow("+g.getId()+")' >Info</button>"+'"');
+					rows.add(data);
+				});
+				
+				
+			});
+			
+			
+		});
+		printAjaxResponse(rows, "text/html");
+		
+	}
+	
 	public List<FarmCatalogue> getSubUomList() {
 		return subUomList;
 	}
