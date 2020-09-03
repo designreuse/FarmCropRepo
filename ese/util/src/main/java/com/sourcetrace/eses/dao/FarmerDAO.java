@@ -14219,4 +14219,64 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 		return list;
 	}
 
+	@Override
+	public Object[] populateDashboardCardDetails() {
+		String query = " select "
+				+ " (select count(f.id) from farmer f where  f.status = 1 and f.status_code = 0) as farmerCount,"
+				+ " (select count(fa.id) from farm fa inner join farmer f on f.id = fa.farmer_id where fa.status = 1 and f.status = 1 and f.status_code = 0) as farmCount,"
+				+ " (select count(p.id) from prof p where p.status = 1) as mobileUserCount,"
+				+ " sum(fdi.total_land_holding)  as totalArea"
+				+ " from farmer f"
+				+ " inner join farm fa on f.id = fa.farmer_id"
+				+ " inner join farm_detailed_info fdi on fdi.id = fa.farm_detailed_info_id"
+				+ " where fa.status = 1 and f.status = 1 and f.status_code = 0 ";
+		Session session = getSessionFactory().openSession();
+		SQLQuery sqlQuery = session.createSQLQuery(query);
+		List list = sqlQuery.list();
+		session.flush();
+		session.close();
+		return (Object[]) list.get(0);
+	}
+
+	@Override
+	public List<Object[]> fetchFarmerAndFarmCountByGroup() {
+		String query = " select " + 
+				"  temp.groupName as groupName, " + 
+				"  sum(temp.farmerCount) as farmerCount, " + 
+				"  sum(temp.farmCount) as farmCount " + 
+				"  from " + 
+				"  (" + 
+				"    select " + 
+				"      w.name as groupName, " + 
+				"      count(f.id) as farmerCount, " + 
+				"      (" + 
+				"        SELECT " + 
+				"          count(fa.id) " + 
+				"        FROM " + 
+				"          farm fa " + 
+				"        where " + 
+				"          fa.FARMER_ID = f.id" + 
+				"      ) as farmCount, " + 
+				"      w.id as groupId " + 
+				"    from " + 
+				"      farmer f " + 
+				"      inner join warehouse w on w.id = f.SAMITHI_ID " + 
+				"    where " + 
+				"      f.status = 1 " + 
+				"      and f.status_code = 0 and w.TYPEZ = 1 " + 
+				"    group by " + 
+				"      f.id, " + 
+				"      f.SAMITHI_ID" + 
+				"  ) temp " + 
+				" group by " + 
+				"  groupId ";
+		Session session = getSessionFactory().openSession();
+		SQLQuery sqlQuery = session.createSQLQuery(query);
+		List list = sqlQuery.list();
+		session.flush();
+		session.close();
+		return list;
+	}
+
+	
 }
