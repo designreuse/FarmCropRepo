@@ -2791,6 +2791,8 @@ public interface IProductDistributionService {
 
 	public List<String> listLotNoFromFarmerTraceabilityData();
 
+	public List<ProcurementProduct> listProcurementProductDesc();
+
 	
 	
 

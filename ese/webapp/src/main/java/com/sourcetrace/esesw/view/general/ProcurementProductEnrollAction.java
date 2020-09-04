@@ -504,6 +504,11 @@ public class ProcurementProductEnrollAction extends SwitchValidatorAction {
 
 		return productDistributionService.listProcurementProduct();
 	}
+	
+	public List<ProcurementProduct> getProcurementProductListDesc() {
+
+		return productDistributionService.listProcurementProductDesc();
+	}
 
 	/*
 	 * public List<ProcurementVariety> getProcurementVarietyList() { return
@@ -570,7 +575,7 @@ public class ProcurementProductEnrollAction extends SwitchValidatorAction {
 
 	
 	public void populateProcurementProductList(){
-		List<ProcurementProduct> products = getProcurementProductList();
+		List<ProcurementProduct> products = getProcurementProductListDesc();
 		
 		JSONArray rows = new JSONArray();
 		products.stream().forEach(p -> {
@@ -579,7 +584,7 @@ public class ProcurementProductEnrollAction extends SwitchValidatorAction {
 			data.add('"'+p.getName()+'"');
 			data.add('"'+p.getUnit()+'"');
 			
-			data.add('"'+"<button type='button' class='btn btn-info' onclick='openCropEditWindow("+p.getId()+")' >Info</button>"+'"');
+			data.add('"'+"<button type='button' class='btn btn-primary btn-unreg' data-toggle='modal' data-target='#slide' onclick='openCropEditWindow("+p.getId()+",this)'  >Update</button>"+'"');
 			rows.add(data);
 		});
 		printAjaxResponse(rows, "text/html");
@@ -635,6 +640,27 @@ public class ProcurementProductEnrollAction extends SwitchValidatorAction {
 		});
 		printAjaxResponse(rows, "text/html");
 		
+	}
+	
+	public void processCropUpdate() {
+		ProcurementProduct crop = productDistributionService.findProcurementProductById(Long.parseLong(id));
+		crop.setName(cropName);
+		crop.setUnit(unit);
+		productDistributionService.editProcurementProduct(crop);
+		getJsonObject().put("msg", getText("msg.cropUpdated"));
+		getJsonObject().put("title", getText("title.success"));	
+		sendAjaxResponse(getJsonObject());
+	}
+	
+	public void processCreateCrop() {
+		ProcurementProduct crop = new ProcurementProduct();
+		crop.setName(cropName);
+		crop.setUnit(unit);
+		crop.setCode(idGenerator.getProductEnrollIdSeq());
+		productDistributionService.addProcurementProduct(crop);
+		getJsonObject().put("msg", getText("msg.cropUpdated"));
+		getJsonObject().put("title", getText("title.success"));	
+		sendAjaxResponse(getJsonObject());
 	}
 	
 	public List<FarmCatalogue> getSubUomList() {

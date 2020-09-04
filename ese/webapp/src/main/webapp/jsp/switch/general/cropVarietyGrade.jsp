@@ -11,12 +11,19 @@
 		loadCropTable();
 		loadVarietyTable();
 		loadGradeTable();
-		
+		hideTables();
+
 	});
+
+	function hideTables() {
+		$("#cropUpdateTable").hide();
+		$("#cropCreateTable").hide();
+	}
 
 	function loadCropTable() {
 
-		$.ajax({
+		$
+				.ajax({
 					url : "procurementProductEnroll_populateProcurementProductList.action",
 					async : false,
 					type : 'post',
@@ -40,10 +47,11 @@
 				});
 
 	}
-	
+
 	function loadVarietyTable() {
 
-		$.ajax({
+		$
+				.ajax({
 					url : "procurementProductEnroll_populateProcurementVarietyList.action",
 					async : false,
 					type : 'post',
@@ -58,7 +66,7 @@
 								title : "Variety Name"
 							}, {
 								title : "Product Name"
-							},{
+							}, {
 								title : " DaysToGrow"
 							}, {
 								title : "Action"
@@ -69,10 +77,11 @@
 				});
 
 	}
-	
+
 	function loadGradeTable() {
 
-		$.ajax({
+		$
+				.ajax({
 					url : "procurementProductEnroll_populateProcurementGradeList.action",
 					async : false,
 					type : 'post',
@@ -87,7 +96,7 @@
 								title : "Grade Name"
 							}, {
 								title : "Variety Name"
-							},{
+							}, {
 								title : "Price"
 							}, {
 								title : "Action"
@@ -98,18 +107,93 @@
 				});
 
 	}
-	
-	function openCropEditWindow(id) {
-		alert(id);
+
+	function openCropEditWindow(id, obj) {
+		//$("#cropSlideHead").text("Update Crop");
+		var existingCropName = $(obj).closest('td').prev('td').prev('td')
+				.text();
+		var existingUnit = $(obj).closest('td').prev('td').text();
+
+		$("#cropId").val(id);
+		$("#cropName").val(existingCropName);
+		$("#cropUnit").val(existingUnit);
+
+		$("#cropUpdateTable").show();
+		$('#slide').modal({
+			show : true,
+			closeOnEscape : true
+		});
 	}
 	
-	function openVarietyEditWindow(id){
+	function openCropCreateWindow(){
+		
+		$("#cropId").val("");
+		$("#cropName_create").val("");
+		$("#cropUnit_create").val("");
+
+		hideTables();
+		$("#cropCreateTable").show();
+		$('#slide').modal({
+			show : true,
+			closeOnEscape : true
+		});
+
+	}
+
+	function openVarietyEditWindow(id) {
 		alert(id);
+	}
+
+	function openGradeEditWindow(id) {
+		alert(id);
+	}
+
+	function processCropUpdate() {
+
+		var data = {
+			"id" : $("#cropId").val(),
+			"cropName" : $("#cropName").val(),
+			"unit" : $("#cropUnit").val()
+		};
+
+		$.ajax({
+			url : "procurementProductEnroll_processCropUpdate.action",
+			async : false,
+			type : 'post',
+			data : data,
+			success : function(result) {
+
+				$("#cropTable").DataTable().destroy();
+				loadCropTable();
+				$("#model-close-btn").click();
+				hideTables();
+			}
+		});
 	}
 	
-	function openGradeEditWindow(id){
-		alert(id);
+	function processCreateCrop() {
+
+		var data = {
+			"id" : 0,
+			"cropName" : $("#cropName_create").val(),
+			"unit" : $("#cropUnit_create").val()
+		};
+
+		$.ajax({
+			url : "procurementProductEnroll_processCreateCrop.action",
+			async : false,
+			type : 'post',
+			data : data,
+			success : function(result) {
+
+				$("#cropTable").DataTable().destroy();
+				loadCropTable();
+				$("#model-close-btn").click();
+				hideTables();
+			}
+		});
 	}
+	
 	
 </script>
 
@@ -194,18 +278,112 @@
 	<div class="tab-content p-3 text-muted">
 
 		<div class="tab-pane active" id="crop-tabs" role="tabpanel">
+			<sec:authorize ifAllGranted="profile.procurementProduct.create">
+				<button type="BUTTON" id="add" data-toggle='modal' data-target='#slide' onclick='openCropCreateWindow();'
+					class="btn btn-success mb-2 float-right">
+					Add Crop <i class="ri-menu-add-line align-middle ml-2"></i>
+				</button>
+			</sec:authorize>
 			<table id="cropTable" class="display" width="100%"></table>
 		</div>
 
 		<div class="tab-pane" id="variety-tabs" role="tabpanel">
-			<table id="varietyTable" class="display" width="100%"></table>	
+			<table id="varietyTable" class="display" width="100%"></table>
 		</div>
 
 		<div class="tab-pane" id="grade-tabs" role="tabpanel">
-			<table id="gradeTable" class="display" width="100%"></table>	
+			<table id="gradeTable" class="display" width="100%"></table>
 		</div>
 
 	</div>
+
+
+
+
+	<div id="slide" class="modal fade bs-example-modal-center"
+		role="dialog">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" id="model-close-btn" class="close"
+						data-dismiss="modal">&times;</button>
+					<h4 id="cropSlideHead"></h4>
+				</div>
+
+				<div class="modal-body">
+
+					<!-- Crop update table start -->
+					<table id="cropUpdateTable"
+						class="table table-bordered aspect-detail">
+						<s:hidden id="cropId" />
+						<tr class="odd">
+							<td><s:text name="Crop Name" /><sup style="color: red;">*</sup></td>
+							<td><s:textfield id="cropName" name="device.name"
+									maxlength="20" cssClass="form-control" /></td>
+						</tr>
+
+						<tr class="odd">
+							<td><s:text name="Unit" /><sup style="color: red;">*</sup></td>
+							<td><s:textfield id="cropUnit" maxlength="20"
+									cssClass="form-control" /></td>
+						</tr>
+
+						<tr class="odd">
+							<td colspan="2">
+								<button type="button" Class="btnSrch btn btn-success"
+									onclick="processCropUpdate();">
+									<s:text name="save" />
+								</button>
+								<button type="button" Class="btnClr btn btn-warning" id="cancel"
+									data-dismiss="modal">
+									<s:text name="Cancel" />
+								</button>
+							</td>
+						</tr>
+
+					</table>
+					<!-- Crop update table end -->
+					
+					<!-- Crop create table start -->
+					<table id="cropCreateTable"
+						class="table table-bordered aspect-detail">
+						<s:hidden id="cropId" />
+						<tr class="odd">
+							<td><s:text name="Crop Name" /><sup style="color: red;">*</sup></td>
+							<td><s:textfield id="cropName_create" name="device.name"
+									maxlength="20" cssClass="form-control" /></td>
+						</tr>
+
+						<tr class="odd">
+							<td><s:text name="Unit" /><sup style="color: red;">*</sup></td>
+							<td><s:textfield id="cropUnit_create" maxlength="20"
+									cssClass="form-control" /></td>
+						</tr>
+
+						<tr class="odd">
+							<td colspan="2">
+								<button type="button" Class="btnSrch btn btn-success"
+									onclick="processCreateCrop();">
+									<s:text name="save" />
+								</button>
+								<button type="button" Class="btnClr btn btn-warning" id="cancel"
+									data-dismiss="modal">
+									<s:text name="Cancel" />
+								</button>
+							</td>
+						</tr>
+
+					</table>
+					<!-- Crop create table end -->
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
 
 </body>
 </html>

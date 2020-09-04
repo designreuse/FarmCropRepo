@@ -922,6 +922,11 @@ public class ProductDistributionDAO extends ESEDAO implements IProductDistributi
 
 		return list("FROM ProcurementProduct pp ORDER BY pp.name");
 	}
+	
+	public List<ProcurementProduct> listProcurementProductDesc() {
+
+		return list("FROM ProcurementProduct pp ORDER BY pp.id DESC");
+	}
 
 	/*
 	 * (non-Javadoc)

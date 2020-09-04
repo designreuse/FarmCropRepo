@@ -2115,6 +2115,11 @@ public class ProductDistributionService implements IProductDistributionService {
 
 		return productDistributionDAO.listProcurementProduct();
 	}
+	
+	public List<ProcurementProduct> listProcurementProductDesc() {
+
+		return productDistributionDAO.listProcurementProductDesc();
+	}
 
 	/*
 	 * (non-Javadoc)
