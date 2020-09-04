@@ -628,8 +628,7 @@ public class ProcurementProductEnrollAction extends SwitchValidatorAction {
 					data.add('"'+g.getName()+'"');
 					data.add('"'+v.getName()+'"');
 					data.add('"'+g.getPrice().toString()+'"');
-					
-					data.add('"'+"<button type='button' class='btn btn-info' onclick='openGradeEditWindow("+g.getId()+")' >Info</button>"+'"');
+					data.add('"'+"<button type='button' class='btn btn-primary btn-unreg' data-toggle='modal' data-target='#slide' onclick='openGradeEditWindow("+g.getId()+",this)'  >Update</button>"+'"');
 					rows.add(data);
 				});
 				
@@ -672,6 +671,21 @@ public class ProcurementProductEnrollAction extends SwitchValidatorAction {
 		});
 
 		return crops;
+
+	}
+	
+	public Map<String, String> getVarietyList() {
+		Map<String, String> varietyList = new LinkedHashMap<>();
+		List<ProcurementProduct> products = getProcurementProductListDesc();
+
+		products.stream().forEach(p -> {
+
+			p.getProcurementVarieties().stream().forEach(v -> {
+				varietyList.put(String.valueOf(v.getId()), v.getCode() + " - " + v.getName());
+			});
+
+		});
+		return varietyList;
 
 	}
 	

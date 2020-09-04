@@ -20,6 +20,8 @@
 		$("#cropCreateTable").hide();
 		$("#varietyCreateTable").hide();
 		$("#varietyUpdateTable").hide();
+		$("#gradeCreateTable").hide();
+		$("#gradeUpdateTable").hide();
 	}
 
 	function loadCropTable() {
@@ -230,6 +232,10 @@
 					loadVarietyTable();
 					$("#model-close-btn").click();
 					hideTables();
+					
+					$('#procurementProductId_create option').prop('selected', function() {
+				        return this.defaultSelected;
+				    });
 				}
 			});
 	}
@@ -271,18 +277,107 @@
 					loadVarietyTable();
 					$("#model-close-btn").click();
 					hideTables();
+					
+					 $('#procurementProductId_update option').prop('selected', function() {
+					        return this.defaultSelected;
+					    });
 				}
 			});
 	}
 	
 	/* variety related functionalities end */
 	
+	/*  Grade related functionalities start*/
 	
-	function openGradeEditWindow(id) {
-		alert(id);
+	function openGradeCreateWindow(){
+		hideTables();
+		$("#gradeCreateTable").show();
+		
+		$("#gradeName_create").val("");
+		$("#price_create").val("");
+
+		$('#slide').modal({
+			show : true,
+			closeOnEscape : true
+		});
+	}
+	
+	function processCreateGrade(){
+		var data = {
+				"procurementVarietyId" : $("#procurementVarietyId_create").val(),
+				"gradeName" : $("#gradeName_create").val(),
+				"gradePrice" : $("#price_create").val()
+			};
+
+			$.ajax({
+				url : "procurementGrade_processCreateGrade.action",
+				async : false,
+				type : 'post',
+				data : data,
+				success : function(result) {
+
+					$("#gradeTable").DataTable().destroy();
+					loadGradeTable();
+					$("#model-close-btn").click();
+					hideTables();
+					
+					 $('#procurementVarietyId_create option').prop('selected', function() {
+					        return this.defaultSelected;
+					    });
+					
+				}
+			});
+	}
+	
+	function openGradeEditWindow(id,obj) {
+		hideTables();
+		var existingGradeName = $(obj).closest('td').prev('td').prev('td').prev('td')
+				.text();
+		var existingPrice = $(obj).closest('td').prev('td').text();
+
+		$("#gradeId").val(id);
+		$("#gradeName_update").val(existingGradeName);
+		$("#price_update").val(existingPrice);
+		
+		$("#gradeUpdateTable").show();
+		$('#slide').modal({
+			show : true,
+			closeOnEscape : true
+		});
+	}
+	
+	function processUpdateGrade(){
+		
+		
+		var data = {
+				"id" : $("#gradeId").val(),
+				"procurementVarietyId" : $("#procurementVarietyId_update").val(),
+				"gradeName" : $("#gradeName_update").val(),
+				"gradePrice" : $("#price_update").val()
+			};
+
+			$.ajax({
+				url : "procurementGrade_processUpdateGrade.action",
+				async : false,
+				type : 'post',
+				data : data,
+				success : function(result) {
+
+					$("#gradeTable").DataTable().destroy();
+					loadGradeTable();
+					$("#model-close-btn").click();
+					hideTables();
+					
+					 $('#procurementVarietyId_update option').prop('selected', function() {
+					        return this.defaultSelected;
+					    });
+					
+					
+				}
+			});
 	}
 
-	
+	/*  Grade related functionalities end*/
 	
 	
 </script>
@@ -388,6 +483,12 @@
 		</div>
 
 		<div class="tab-pane" id="grade-tabs" role="tabpanel">
+			<sec:authorize ifAllGranted="profile.procurementProduct.create">
+				<button type="BUTTON" id="add" data-toggle='modal' data-target='#slide' onclick='openGradeCreateWindow();'
+					class="btn btn-success mb-2 float-right">
+					Add Grade <i class="ri-menu-add-line align-middle ml-2"></i>
+				</button>
+			</sec:authorize>
 			<table id="gradeTable" class="display" width="100%"></table>
 		</div>
 
@@ -558,6 +659,101 @@
 					</table>
 					<!-- Variety update table end -->
 
+
+					<!-- Grade Create table start -->
+					
+					<!-- Variety create table start -->
+					
+					<table id="gradeCreateTable"
+						class="table table-bordered aspect-detail">
+						
+						<tr class="odd">
+							<td><s:text name="Grade Name" /><sup style="color: red;">*</sup></td>
+							<td><s:textfield id="gradeName_create" 
+									maxlength="20" cssClass="form-control" /></td>
+						</tr>
+
+						<tr class="odd">
+							<td><s:text name="Price" /><sup style="color: red;">*</sup></td>
+							<td><s:textfield id="price_create" maxlength="20"
+									cssClass="form-control" /></td>
+						</tr>
+						
+						
+						<tr class="odd">
+							<td><s:text name="Variety" /><sup style="color: red;">*</sup></td>
+							<td><s:select cssClass="form-control " id="procurementVarietyId_create"
+										 list="varietyList" headerKey="-1"
+										headerValue="%{getText('txt.select')}"
+										 /></td>
+							
+						</tr>
+						
+
+						<tr class="odd">
+							<td colspan="2">
+								<button type="button" Class="btnSrch btn btn-success"
+									onclick="processCreateGrade();">
+									<s:text name="save" />
+								</button>
+								<button type="button" Class="btnClr btn btn-warning" id="cancel"
+									data-dismiss="modal">
+									<s:text name="Cancel" />
+								</button>
+							</td>
+						</tr>
+
+					</table>
+					
+					
+					<!-- Grade Create table end -->
+
+					<!-- Grade Update table start -->
+					
+					
+					<table id="gradeUpdateTable"
+						class="table table-bordered aspect-detail">
+						
+						<s:hidden id="gradeId" />
+						<tr class="odd">
+							<td><s:text name="Grade Name" /><sup style="color: red;">*</sup></td>
+							<td><s:textfield id="gradeName_update" 
+									maxlength="20" cssClass="form-control" /></td>
+						</tr>
+
+						<tr class="odd">
+							<td><s:text name="Price" /><sup style="color: red;">*</sup></td>
+							<td><s:textfield id="price_update" maxlength="20"
+									cssClass="form-control" /></td>
+						</tr>
+						
+						
+						<tr class="odd">
+							<td><s:text name="Variety" /><sup style="color: red;">*</sup></td>
+							<td><s:select cssClass="form-control " id="procurementVarietyId_update"
+										 list="varietyList" headerKey="-1"
+										headerValue="%{getText('txt.select')}"
+										 /></td>
+							
+						</tr>
+						
+
+						<tr class="odd">
+							<td colspan="2">
+								<button type="button" Class="btnSrch btn btn-success"
+									onclick="processUpdateGrade();">
+									<s:text name="save" />
+								</button>
+								<button type="button" Class="btnClr btn btn-warning" id="cancel"
+									data-dismiss="modal">
+									<s:text name="Cancel" />
+								</button>
+							</td>
+						</tr>
+
+					</table>
+					
+					<!-- Grade Update table end -->
 
 				</div>
 			</div>
