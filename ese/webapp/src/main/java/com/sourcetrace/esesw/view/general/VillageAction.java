@@ -32,6 +32,7 @@ import com.sourcetrace.esesw.entity.profile.Country;
 import com.sourcetrace.esesw.entity.profile.GramPanchayat;
 import com.sourcetrace.esesw.entity.profile.Locality;
 import com.sourcetrace.esesw.entity.profile.Municipality;
+import com.sourcetrace.esesw.entity.profile.ProcurementProduct;
 import com.sourcetrace.esesw.entity.profile.State;
 import com.sourcetrace.esesw.entity.profile.Village;
 import com.sourcetrace.esesw.view.SwitchValidatorAction;
@@ -1363,6 +1364,71 @@ public class VillageAction extends SwitchValidatorAction {
 		printAjaxResponse(rows, "text/html");
 	}
 	
+	
+	public Map<String, String> getCountryList() {
+		Map<String, String> result = new LinkedHashMap<>();
+		List<Country> countryList = locationService.listCountries();
+		countryList.stream().forEach(country -> {
+			result.put(String.valueOf(country.getId()), country.getCode() + " - " + country.getName());
+		});
+
+		return result;
+	}
+	
+
+	public Map<String, String> getStateList() {
+		Map<String, String> result = new LinkedHashMap<>();
+		
+		List<Country> countryList = locationService.listCountries();
+		
+		countryList.stream().forEach(country -> {
+			country.getStates().stream().forEach(state -> {
+				result.put(String.valueOf(state.getId()), state.getCode() + " - " + state.getName());
+			});
+			
+		});
+
+		return result;
+	}
+	
+	public Map<String, String> getLocalityList() {
+		Map<String, String> result = new LinkedHashMap<>();
+		
+		List<Country> countryList = locationService.listCountries();
+		
+		countryList.stream().forEach(country -> {
+			country.getStates().stream().forEach(state -> {
+				state.getLocalities().stream().forEach(locality -> {
+					result.put(String.valueOf(locality.getId()), locality.getCode() + " - " + locality.getName());
+				});
+				
+			});
+			
+		});
+
+		return result;
+	}
+	
+	public Map<String, String> getCityList() {
+		Map<String, String> result = new LinkedHashMap<>();
+		
+		List<Country> countryList = locationService.listCountries();
+		
+		countryList.stream().forEach(country -> {
+			country.getStates().stream().forEach(state -> {
+				state.getLocalities().stream().forEach(locality -> {
+					locality.getMunicipalities().stream().forEach(city -> {
+						result.put(String.valueOf(city.getId()), city.getCode() + " - " + city.getName());
+					});
+					
+				});
+				
+			});
+			
+		});
+
+		return result;
+	}
 	
 	/**
 	 * Gets the selected gram panchayat.

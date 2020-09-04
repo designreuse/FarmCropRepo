@@ -161,6 +161,8 @@
 	function hideTables(){
 		$("#countryCreateTable").hide();
 		$("#countryUpdateTable").hide();
+		$("#stateCreateTable").hide();
+		$("#stateUpdateTable").hide();
 	}
 	
 	/* country related functionalities start */
@@ -242,11 +244,100 @@
 			});
 	}
 	/* country related functionalities end */
+	
+	
+	/* state related functionalities start  */
 
-	function openStateEditWindow(id) {
-		alert(id);
+	function openStateCreateWindow(){
+		hideTables();
+		$("#stateCreateTable").show();
+
+		$("#stateName_create").val("");
+		$('#selectedCountry_create option').prop('selected', function() {
+	        return this.defaultSelected;
+	    });
+
+		$('#slide').modal({
+			show : true,
+			closeOnEscape : true
+		});
+	}
+	
+	function processCreateState(){
+		var data = {
+				"selectedCountry" : $("#selectedCountry_create").val(),
+				"stateName" : $("#stateName_create").val()
+			};
+
+			$.ajax({
+				url : "state_processCreateState.action",
+				async : false,
+				type : 'post',
+				data : data,
+				success : function(result) {
+
+					$("#stateTable").DataTable().destroy();
+					loadStateTable();
+					$("#model-close-btn").click();
+					hideTables();
+					
+					$('#selectedCountry_create option').prop('selected', function() {
+				        return this.defaultSelected;
+				    });
+				}
+			});
+	}
+	
+	function openStateEditWindow(id,obj) {
+		hideTables();
+		var existingStateName = $(obj).closest('td').prev('td').prev('td').text();
+
+		$("#stateId").val(id);
+		$("#stateName_update").val(existingStateName);
+		$('#selectedCountry_update option').prop('selected', function() {
+	        return this.defaultSelected;
+	    });
+		
+		$("#stateUpdateTable").show();
+		$('#slide').modal({
+			show : true,
+			closeOnEscape : true
+		});
 	}
 
+    function processUpdateState(){
+    	var data = {
+				"id" : $("#stateId").val(),
+				"selectedCountry" : $("#selectedCountry_update").val(),
+				"stateName" :  $("#stateName_update").val()
+			};
+		
+		
+
+			$.ajax({
+				url : "state_processUpdateState.action",
+				async : false,
+				type : 'post',
+				data : data,
+				success : function(result) {
+
+					$("#stateTable").DataTable().destroy();
+					loadStateTable();
+					$("#model-close-btn").click();
+					hideTables();
+					$('#selectedCountry_update option').prop('selected', function() {
+				        return this.defaultSelected;
+				    });
+					
+					
+					
+					
+				}
+			});
+    }
+	
+	/*  state related functionalities end */
+	
 	function openLocalityEditWindow(id) {
 		alert(id);
 	}
@@ -401,6 +492,13 @@
 		</div>
 
 		<div class="tab-pane" id="state-tabs" role="tabpanel">
+			<sec:authorize ifAllGranted="profile.procurementProduct.create">
+				<button type="BUTTON" id="add" data-toggle='modal'
+					data-target='#slide' onclick='openStateCreateWindow();'
+					class="btn btn-success mb-2 float-right">
+					Add State <i class="ri-menu-add-line align-middle ml-2"></i>
+				</button>
+			</sec:authorize>
 			<table id="stateTable" class="display" width="100%"></table>
 		</div>
 
@@ -458,8 +556,8 @@
 					</table>
 
 					<!-- Country create table end -->
-					
-					
+
+
 					<!-- Country update table start -->
 
 					<table id="countryUpdateTable"
@@ -488,6 +586,84 @@
 					</table>
 
 					<!-- Country update table end -->
+					
+					<!-- State create table start -->
+
+					<table id="stateCreateTable"
+						class="table table-bordered aspect-detail">
+
+						<tr class="odd">
+							<td><s:text name="State Name" /><sup style="color: red;">*</sup></td>
+							<td><s:textfield id="stateName_create" maxlength="20"
+									cssClass="form-control" /></td>
+						</tr>
+						
+						<tr class="odd">
+							<td><s:text name="Country" /><sup style="color: red;">*</sup></td>
+							<td><s:select cssClass="form-control " id="selectedCountry_create"
+										 list="countryList" headerKey="-1"
+										headerValue="%{getText('txt.select')}"
+										 /></td>
+							
+						</tr>
+
+
+						<tr class="odd">
+							<td colspan="2">
+								<button type="button" Class="btnSrch btn btn-success"
+									onclick="processCreateState();">
+									<s:text name="save" />
+								</button>
+								<button type="button" Class="btnClr btn btn-warning" id="cancel"
+									data-dismiss="modal">
+									<s:text name="Cancel" />
+								</button>
+							</td>
+						</tr>
+
+					</table>
+
+					<!-- State create table end -->
+					
+					<!-- State update table start -->
+
+					<table id="stateUpdateTable"
+						class="table table-bordered aspect-detail">
+						
+					<s:hidden id="stateId" />
+					
+						<tr class="odd">
+							<td><s:text name="State Name" /><sup style="color: red;">*</sup></td>
+							<td><s:textfield id="stateName_update" maxlength="20"
+									cssClass="form-control" /></td>
+						</tr>
+						
+						<tr class="odd">
+							<td><s:text name="Country" /><sup style="color: red;">*</sup></td>
+							<td><s:select cssClass="form-control " id="selectedCountry_update"
+										 list="countryList" headerKey="-1"
+										headerValue="%{getText('txt.select')}"
+										 /></td>
+							
+						</tr>
+
+
+						<tr class="odd">
+							<td colspan="2">
+								<button type="button" Class="btnSrch btn btn-success"
+									onclick="processUpdateState();">
+									<s:text name="save" />
+								</button>
+								<button type="button" Class="btnClr btn btn-warning" id="cancel"
+									data-dismiss="modal">
+									<s:text name="Cancel" />
+								</button>
+							</td>
+						</tr>
+
+					</table>
+
+					<!-- State update table end -->
 
 				</div>
 			</div>
