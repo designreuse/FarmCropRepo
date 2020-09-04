@@ -662,7 +662,7 @@
 
 					<!-- Grade Create table start -->
 					
-					<!-- Variety create table start -->
+				
 					
 					<table id="gradeCreateTable"
 						class="table table-bordered aspect-detail">

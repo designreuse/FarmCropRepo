@@ -11,6 +11,9 @@
 		loadCountryTable();
 		loadStateTable();
 		loadLocalityTable();
+		loadCityTable();
+		loadVillageTable();
+		hideTables();
 		
 	});
 
@@ -95,18 +98,166 @@
 
 	}
 	
-	function openCountryEditWindow(id) {
-		alert(id);
+	function loadCityTable(){
+		$.ajax({
+			url : "village_populateCityListData.action",
+			async : false,
+			type : 'post',
+			success : function(result) {
+
+				var data = JSON.parse(result);
+				$('#cityTable').DataTable({
+					"data" : data,
+					"columns" : [ {
+						title : "Code"
+					}, {
+						title : "City Name"
+					}, {
+						title : "Locality Name"
+					}, {
+						title : "State Name"
+					}, {
+						title : "Contry Name"
+					}, {
+						title : "Action"
+					} ]
+				});
+
+			}
+		});
 	}
 	
-	function openStateEditWindow(id){
-		alert(id);
+	function loadVillageTable(){
+		$.ajax({
+			url : "village_populateVillageListData.action",
+			async : false,
+			type : 'post',
+			success : function(result) {
+
+				var data = JSON.parse(result);
+				$('#villageTable').DataTable({
+					"data" : data,
+					"columns" : [ {
+						title : "Code"
+					}, {
+						title : "Village Name"
+					}, {
+						title : "City Name"
+					}, {
+						title : "Locality Name"
+					}, {
+						title : "State Name"
+					}, {
+						title : "Contry Name"
+					}, {
+						title : "Action"
+					} ]
+				});
+
+			}
+		});
 	}
 	
-	function openLocalityEditWindow(id){
-		alert(id);
+	function hideTables(){
+		$("#countryCreateTable").hide();
+		$("#countryUpdateTable").hide();
 	}
 	
+	/* country related functionalities start */
+	
+
+	function openCountryCreateWindow() {
+		hideTables();
+		$("#countryCreateTable").show();
+
+		$("#countryName_create").val("");
+
+		$('#slide').modal({
+			show : true,
+			closeOnEscape : true
+		});
+	}
+	
+	function processCreateCountry(){
+		var data = {
+				"countryName" : $("#countryName_create").val()
+			};
+
+			$.ajax({
+				url : "country_processCreateCountry.action",
+				async : false,
+				type : 'post',
+				data : data,
+				success : function(result) {
+
+					$("#countryTable").DataTable().destroy();
+					loadCountryTable();
+					$("#model-close-btn").click();
+					hideTables();
+				}
+			});
+	}
+
+	function openCountryEditWindow(id,obj) {
+		hideTables();
+		var existingCountryName = $(obj).closest('td').prev('td').text();
+
+		$("#countryId").val(id);
+		$("#countryName_update").val(existingCountryName);
+		
+		
+		$("#countryUpdateTable").show();
+		$('#slide').modal({
+			show : true,
+			closeOnEscape : true
+		});
+	}
+	
+	
+	function processUpdateCountry(){
+		
+		var data = {
+				"id" : $("#countryId").val(),
+				"countryName" : $("#countryName_update").val()
+			};
+		
+		
+
+			$.ajax({
+				url : "country_processUpdateCountry.action",
+				async : false,
+				type : 'post',
+				data : data,
+				success : function(result) {
+
+					$("#countryTable").DataTable().destroy();
+					loadCountryTable();
+					$("#model-close-btn").click();
+					hideTables();
+					
+					
+					
+					
+				}
+			});
+	}
+	/* country related functionalities end */
+
+	function openStateEditWindow(id) {
+		alert(id);
+	}
+
+	function openLocalityEditWindow(id) {
+		alert(id);
+	}
+
+	function openCityEditWindow(id) {
+		alert(id);
+	}
+
+	function openVillageEditWindow(id) {
+		alert(id);
+	}
 </script>
 
 <body>
@@ -185,23 +336,164 @@
 					Details</span>
 		</a></li>
 
+		<li class="nav-item waves-effect waves-light"><a
+			class="nav-link   border py-10 d-flex flex-grow-1 rounded flex-column align-items-center"
+			data-toggle="pill" href="#city-tabs"> <span
+				class="nav-icon py-2 w-auto"> <span
+					class="svg-icon svg-icon-3x"> <svg
+							xmlns="http://www.w3.org/2000/svg"
+							xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+							height="24px" viewBox="0 0 24 24" version="1.1">
+																		<g stroke="none" stroke-width="1" fill="none"
+								fill-rule="evenodd">
+																			<rect x="0" y="0" width="24" height="24"></rect>
+																			<path
+								d="M5,3 L6,3 C6.55228475,3 7,3.44771525 7,4 L7,20 C7,20.5522847 6.55228475,21 6,21 L5,21 C4.44771525,21 4,20.5522847 4,20 L4,4 C4,3.44771525 4.44771525,3 5,3 Z M10,3 L11,3 C11.5522847,3 12,3.44771525 12,4 L12,20 C12,20.5522847 11.5522847,21 11,21 L10,21 C9.44771525,21 9,20.5522847 9,20 L9,4 C9,3.44771525 9.44771525,3 10,3 Z"
+								fill="#000000"></path>
+																			<rect fill="#000000" opacity="0.3"
+								transform="translate(17.825568, 11.945519) rotate(-19.000000) translate(-17.825568, -11.945519)"
+								x="16.3255682" y="2.94551858" width="3" height="18" rx="1"></rect>
+																		</g>
+																	</svg> <!--end::Svg Icon-->
+				</span>
+			</span> <span
+				class="nav-text font-size-lg py-2 font-weight-bold text-center">City
+					Details</span>
+		</a></li>
+
+		<li class="nav-item waves-effect waves-light"><a
+			class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center"
+			data-toggle="pill" href="#village-tabs"> <span
+				class="nav-icon py-2 w-auto"> <span
+					class="svg-icon svg-icon-3x"> <!--begin::Svg Icon | path:/metronic/theme/html/demo3/dist/assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
+						<svg xmlns="http://www.w3.org/2000/svg"
+							xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+							height="24px" viewBox="0 0 24 24" version="1.1">
+																		<g stroke="none" stroke-width="1" fill="none"
+								fill-rule="evenodd">
+																			<rect x="0" y="0" width="24" height="24"></rect>
+																			<rect fill="#000000" x="4" y="4" width="7" height="7"
+								rx="1.5"></rect>
+																			<path
+								d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z"
+								fill="#000000" opacity="0.3"></path>
+																		</g>
+																	</svg> <!--end::Svg Icon-->
+				</span>
+			</span> <span
+				class="nav-text font-size-lg py-2 font-weight-bolder text-center">Village
+					Details</span>
+		</a></li>
+
 	</ul>
 
 	<div class="tab-content p-3 text-muted">
 
 		<div class="tab-pane active" id="country-tabs" role="tabpanel">
+			<sec:authorize ifAllGranted="profile.procurementProduct.create">
+				<button type="BUTTON" id="add" data-toggle='modal'
+					data-target='#slide' onclick='openCountryCreateWindow();'
+					class="btn btn-success mb-2 float-right">
+					Add Country <i class="ri-menu-add-line align-middle ml-2"></i>
+				</button>
+			</sec:authorize>
 			<table id="countryTable" class="display" width="100%"></table>
 		</div>
 
 		<div class="tab-pane" id="state-tabs" role="tabpanel">
-			<table id="stateTable" class="display" width="100%"></table>	
+			<table id="stateTable" class="display" width="100%"></table>
 		</div>
 
 		<div class="tab-pane" id="locality-tabs" role="tabpanel">
-			<table id="localityTable" class="display" width="100%"></table>	
+			<table id="localityTable" class="display" width="100%"></table>
+		</div>
+
+		<div class="tab-pane" id="city-tabs" role="tabpanel">
+			<table id="cityTable" class="display" width="100%"></table>
+		</div>
+
+		<div class="tab-pane" id="village-tabs" role="tabpanel">
+			<table id="villageTable" class="display" width="100%"></table>
 		</div>
 
 	</div>
+
+	<div id="slide" class="modal fade bs-example-modal-center"
+		role="dialog">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" id="model-close-btn" class="close"
+						data-dismiss="modal">&times;</button>
+					<h4 id="cropSlideHead"></h4>
+				</div>
+
+				<div class="modal-body">
+
+					<!-- Country create table start -->
+
+					<table id="countryCreateTable"
+						class="table table-bordered aspect-detail">
+
+						<tr class="odd">
+							<td><s:text name="Country Name" /><sup style="color: red;">*</sup></td>
+							<td><s:textfield id="countryName_create" maxlength="20"
+									cssClass="form-control" /></td>
+						</tr>
+
+
+						<tr class="odd">
+							<td colspan="2">
+								<button type="button" Class="btnSrch btn btn-success"
+									onclick="processCreateCountry();">
+									<s:text name="save" />
+								</button>
+								<button type="button" Class="btnClr btn btn-warning" id="cancel"
+									data-dismiss="modal">
+									<s:text name="Cancel" />
+								</button>
+							</td>
+						</tr>
+
+					</table>
+
+					<!-- Country create table end -->
+					
+					
+					<!-- Country update table start -->
+
+					<table id="countryUpdateTable"
+						class="table table-bordered aspect-detail">
+						<s:hidden id="countryId" />
+						<tr class="odd">
+							<td><s:text name="Country Name" /><sup style="color: red;">*</sup></td>
+							<td><s:textfield id="countryName_update" maxlength="20"
+									cssClass="form-control" /></td>
+						</tr>
+
+
+						<tr class="odd">
+							<td colspan="2">
+								<button type="button" Class="btnSrch btn btn-success"
+									onclick="processUpdateCountry();">
+									<s:text name="save" />
+								</button>
+								<button type="button" Class="btnClr btn btn-warning" id="cancel"
+									data-dismiss="modal">
+									<s:text name="Cancel" />
+								</button>
+							</td>
+						</tr>
+
+					</table>
+
+					<!-- Country update table end -->
+
+				</div>
+			</div>
+		</div>
+	</div>
+
 
 </body>
 </html>
