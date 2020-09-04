@@ -603,8 +603,8 @@ public class ProcurementProductEnrollAction extends SwitchValidatorAction {
 				data.add('"'+v.getName()+'"');
 				data.add('"'+p.getName()+'"');
 				data.add('"'+v.getNoDaysToGrow()+'"');
+				data.add('"'+"<button type='button' class='btn btn-primary btn-unreg' data-toggle='modal' data-target='#slide' onclick='openVarietyEditWindow("+v.getId()+",this)'  >Update</button>"+'"');
 				
-				data.add('"'+"<button type='button' class='btn btn-info' onclick='openVarietyEditWindow("+v.getId()+")' >Info</button>"+'"');
 				rows.add(data);
 			});
 			
@@ -661,6 +661,18 @@ public class ProcurementProductEnrollAction extends SwitchValidatorAction {
 		getJsonObject().put("msg", getText("msg.cropUpdated"));
 		getJsonObject().put("title", getText("title.success"));	
 		sendAjaxResponse(getJsonObject());
+	}
+	
+	public Map<String, String> getCropsList() {
+		Map<String, String> crops = new LinkedHashMap<>();
+		List<ProcurementProduct> products = getProcurementProductListDesc();
+
+		products.stream().forEach(product -> {
+			crops.put(String.valueOf(product.getId()), product.getCode() + " - " + product.getName());
+		});
+
+		return crops;
+
 	}
 	
 	public List<FarmCatalogue> getSubUomList() {

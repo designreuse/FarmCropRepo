@@ -18,6 +18,8 @@
 	function hideTables() {
 		$("#cropUpdateTable").hide();
 		$("#cropCreateTable").hide();
+		$("#varietyCreateTable").hide();
+		$("#varietyUpdateTable").hide();
 	}
 
 	function loadCropTable() {
@@ -108,67 +110,20 @@
 
 	}
 
-	function openCropEditWindow(id, obj) {
-		//$("#cropSlideHead").text("Update Crop");
-		var existingCropName = $(obj).closest('td').prev('td').prev('td')
-				.text();
-		var existingUnit = $(obj).closest('td').prev('td').text();
-
-		$("#cropId").val(id);
-		$("#cropName").val(existingCropName);
-		$("#cropUnit").val(existingUnit);
-
-		$("#cropUpdateTable").show();
-		$('#slide').modal({
-			show : true,
-			closeOnEscape : true
-		});
-	}
+	/* crop related functionalities start */
 	
 	function openCropCreateWindow(){
-		
-		$("#cropId").val("");
+		hideTables();
 		$("#cropName_create").val("");
 		$("#cropUnit_create").val("");
 
-		hideTables();
+		
 		$("#cropCreateTable").show();
 		$('#slide').modal({
 			show : true,
 			closeOnEscape : true
 		});
 
-	}
-
-	function openVarietyEditWindow(id) {
-		alert(id);
-	}
-
-	function openGradeEditWindow(id) {
-		alert(id);
-	}
-
-	function processCropUpdate() {
-
-		var data = {
-			"id" : $("#cropId").val(),
-			"cropName" : $("#cropName").val(),
-			"unit" : $("#cropUnit").val()
-		};
-
-		$.ajax({
-			url : "procurementProductEnroll_processCropUpdate.action",
-			async : false,
-			type : 'post',
-			data : data,
-			success : function(result) {
-
-				$("#cropTable").DataTable().destroy();
-				loadCropTable();
-				$("#model-close-btn").click();
-				hideTables();
-			}
-		});
 	}
 	
 	function processCreateCrop() {
@@ -193,6 +148,141 @@
 			}
 		});
 	}
+	
+	function openCropEditWindow(id, obj) {
+		//$("#cropSlideHead").text("Update Crop");
+		hideTables();
+		var existingCropName = $(obj).closest('td').prev('td').prev('td')
+				.text();
+		var existingUnit = $(obj).closest('td').prev('td').text();
+
+		$("#cropId").val(id);
+		$("#cropName").val(existingCropName);
+		$("#cropUnit").val(existingUnit);
+		
+		$("#cropUpdateTable").show();
+		$('#slide').modal({
+			show : true,
+			closeOnEscape : true
+		});
+	}
+	
+	
+	
+	function processCropUpdate() {
+
+		var data = {
+			"id" : $("#cropId").val(),
+			"cropName" : $("#cropName").val(),
+			"unit" : $("#cropUnit").val()
+		};
+
+		$.ajax({
+			url : "procurementProductEnroll_processCropUpdate.action",
+			async : false,
+			type : 'post',
+			data : data,
+			success : function(result) {
+
+				$("#cropTable").DataTable().destroy();
+				loadCropTable();
+				$("#model-close-btn").click();
+				hideTables();
+			}
+		});
+	}
+	
+	
+	/* crop related functionalities end */
+	
+	
+	/* variety related functionalities start */
+	
+	
+	function openVarietyCreateWindow(){
+		hideTables();
+		$("#varietyCreateTable").show();
+		
+		$("#varietyName_create").val("");
+		$("#daysToGrow_create").val("");
+
+		$('#slide').modal({
+			show : true,
+			closeOnEscape : true
+		});
+	}
+
+	function processCreateVariety(){
+		var data = {
+				"procurementProductId" : $("#procurementProductId_create").val(),
+				"varietyName" : $("#varietyName_create").val(),
+				"noDaysToGrow" : $("#daysToGrow_create").val()
+			};
+
+			$.ajax({
+				url : "procurementVariety_processCreateVariety.action",
+				async : false,
+				type : 'post',
+				data : data,
+				success : function(result) {
+
+					$("#varietyTable").DataTable().destroy();
+					loadVarietyTable();
+					$("#model-close-btn").click();
+					hideTables();
+				}
+			});
+	}
+	
+	function openVarietyEditWindow(id,obj) {
+		
+		hideTables();
+		var existingVarietyName = $(obj).closest('td').prev('td').prev('td').prev('td')
+				.text();
+		var existingDaysToGrow = $(obj).closest('td').prev('td').text();
+
+		$("#varietyId").val(id);
+		$("#varietyName_update").val(existingVarietyName);
+		$("#daysToGrow_update").val(existingDaysToGrow);
+		
+		$("#varietyUpdateTable").show();
+		$('#slide').modal({
+			show : true,
+			closeOnEscape : true
+		});
+	}
+	
+	function processUpdateVariety(){
+		var data = {
+				"id" : $("#varietyId").val(),
+				"procurementProductId" : $("#procurementProductId_update").val(),
+				"varietyName" : $("#varietyName_update").val(),
+				"noDaysToGrow" : $("#daysToGrow_update").val()
+			};
+
+			$.ajax({
+				url : "procurementVariety_processUpdateVariety.action",
+				async : false,
+				type : 'post',
+				data : data,
+				success : function(result) {
+
+					$("#varietyTable").DataTable().destroy();
+					loadVarietyTable();
+					$("#model-close-btn").click();
+					hideTables();
+				}
+			});
+	}
+	
+	/* variety related functionalities end */
+	
+	
+	function openGradeEditWindow(id) {
+		alert(id);
+	}
+
+	
 	
 	
 </script>
@@ -288,6 +378,12 @@
 		</div>
 
 		<div class="tab-pane" id="variety-tabs" role="tabpanel">
+			<sec:authorize ifAllGranted="profile.procurementProduct.create">
+				<button type="BUTTON" id="add" data-toggle='modal' data-target='#slide' onclick='openVarietyCreateWindow();'
+					class="btn btn-success mb-2 float-right">
+					Add Variety <i class="ri-menu-add-line align-middle ml-2"></i>
+				</button>
+			</sec:authorize>
 			<table id="varietyTable" class="display" width="100%"></table>
 		</div>
 
@@ -375,6 +471,92 @@
 
 					</table>
 					<!-- Crop create table end -->
+					
+					<!-- Variety create table start -->
+					<table id="varietyCreateTable"
+						class="table table-bordered aspect-detail">
+						
+						<tr class="odd">
+							<td><s:text name="Variety Name" /><sup style="color: red;">*</sup></td>
+							<td><s:textfield id="varietyName_create" 
+									maxlength="20" cssClass="form-control" /></td>
+						</tr>
+
+						<tr class="odd">
+							<td><s:text name="No. days to grow" /><sup style="color: red;">*</sup></td>
+							<td><s:textfield id="daysToGrow_create" maxlength="20"
+									cssClass="form-control" /></td>
+						</tr>
+						
+						
+						<tr class="odd">
+							<td><s:text name="Crop" /><sup style="color: red;">*</sup></td>
+							<td><s:select cssClass="form-control " id="procurementProductId_create"
+										 list="cropsList" headerKey="-1"
+										headerValue="%{getText('txt.select')}"
+										 /></td>
+							
+						</tr>
+						
+
+						<tr class="odd">
+							<td colspan="2">
+								<button type="button" Class="btnSrch btn btn-success"
+									onclick="processCreateVariety();">
+									<s:text name="save" />
+								</button>
+								<button type="button" Class="btnClr btn btn-warning" id="cancel"
+									data-dismiss="modal">
+									<s:text name="Cancel" />
+								</button>
+							</td>
+						</tr>
+
+					</table>
+					<!-- Variety create table end -->
+					
+					<!-- Variety update table start -->
+					<table id="varietyUpdateTable"
+						class="table table-bordered aspect-detail">
+						<s:hidden id="varietyId" />
+						<tr class="odd">
+							<td><s:text name="Variety Name" /><sup style="color: red;">*</sup></td>
+							<td><s:textfield id="varietyName_update" 
+									maxlength="20" cssClass="form-control" /></td>
+						</tr>
+
+						<tr class="odd">
+							<td><s:text name="No. days to grow" /><sup style="color: red;">*</sup></td>
+							<td><s:textfield id="daysToGrow_update" maxlength="20"
+									cssClass="form-control" /></td>
+						</tr>
+						
+						
+						<tr class="odd">
+							<td><s:text name="Crop" /><sup style="color: red;">*</sup></td>
+							<td><s:select cssClass="form-control " id="procurementProductId_update"
+										 list="cropsList" headerKey="-1"
+										headerValue="%{getText('txt.select')}"
+										 /></td>
+							
+						</tr>
+						
+
+						<tr class="odd">
+							<td colspan="2">
+								<button type="button" Class="btnSrch btn btn-success"
+									onclick="processUpdateVariety();">
+									<s:text name="save" />
+								</button>
+								<button type="button" Class="btnClr btn btn-warning" id="cancel"
+									data-dismiss="modal">
+									<s:text name="Cancel" />
+								</button>
+							</td>
+						</tr>
+
+					</table>
+					<!-- Variety update table end -->
 
 
 				</div>

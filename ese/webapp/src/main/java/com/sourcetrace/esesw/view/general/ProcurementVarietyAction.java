@@ -3,6 +3,7 @@ package com.sourcetrace.esesw.view.general;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -23,6 +24,7 @@ import com.sourcetrace.eses.util.CurrencyUtil;
 import com.sourcetrace.eses.util.ObjectUtil;
 import com.sourcetrace.eses.util.StringUtil;
 import com.sourcetrace.esesw.entity.profile.FarmCrops;
+import com.sourcetrace.esesw.entity.profile.Farmer;
 import com.sourcetrace.esesw.entity.profile.ProcurementGrade;
 import com.sourcetrace.esesw.entity.profile.ProcurementProduct;
 import com.sourcetrace.esesw.entity.profile.ProcurementVariety;
@@ -55,6 +57,7 @@ public class ProcurementVarietyAction extends SwitchValidatorAction {
     private String varietyName;
     private String  crop;
 
+   
 
 	@Autowired
     private IUniqueIDGenerator idGenerator;
@@ -503,6 +506,32 @@ public class ProcurementVarietyAction extends SwitchValidatorAction {
         return toDoubleValue;
     }
 
+    public void processCreateVariety() {
+    	ProcurementVariety variety = new ProcurementVariety();
+    	variety.setName(varietyName);
+    	variety.setNoDaysToGrow(noDaysToGrow);
+    	variety.setProcurementProduct(productDistributionService
+                .findProcurementProductById(Long.valueOf(getProcurementProductId())));
+    	variety.setCode(idGenerator.getProcurementVarietyIdSeq()); 
+        productDistributionService.addProcurementVariety(variety);
+        getJsonObject().put("msg", getText("msg.cropUpdated"));
+		getJsonObject().put("title", getText("title.success"));	
+		sendAjaxResponse(getJsonObject());
+    }
+    
+    public void processUpdateVariety() {
+    	ProcurementVariety variety = productDistributionService
+                .findProcurementVariertyById(Long.valueOf(id));
+    	variety.setName(varietyName);
+    	variety.setNoDaysToGrow(noDaysToGrow);
+    	variety.setProcurementProduct(productDistributionService
+                .findProcurementProductById(Long.valueOf(getProcurementProductId())));
+    	productDistributionService.editProcurementVariety(variety);
+    	getJsonObject().put("msg", getText("msg.cropUpdated"));
+		getJsonObject().put("title", getText("title.success"));	
+		sendAjaxResponse(getJsonObject());
+    }
+    
     public ProcurementGrade getProcurementGrade() {
     
         return procurementGrade;
@@ -554,6 +583,9 @@ public class ProcurementVarietyAction extends SwitchValidatorAction {
 		public void setVarietyName(String varietyName) {
 			this.varietyName = varietyName;
 		}
+
+		
+
 		
 		
 		
