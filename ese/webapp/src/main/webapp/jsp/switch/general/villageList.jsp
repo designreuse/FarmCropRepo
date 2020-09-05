@@ -167,6 +167,8 @@
 		$("#localityUpdateTable").hide();
 		$("#cityCreateTable").hide();
 		$("#cityUpdateTable").hide();
+		$("#villageCreateTable").hide();
+		$("#villageUpdateTable").hide();
 	}
 
 	/* country related functionalities start */
@@ -516,9 +518,99 @@
 	
 	/* City related functionalities end */
 	
-	function openVillageEditWindow(id) {
-		alert(id);
+	/* Village related functionalities start  */
+	
+	function openVillageCreateWindow(){
+		hideTables();
+		$("#villageCreateTable").show();
+
+		$("#villageName_create").val("");
+
+		$('#selectedCity_create option').prop('selected', function() {
+			return this.defaultSelected;
+		});
+
+		$('#slide').modal({
+			show : true,
+			closeOnEscape : true
+		});
 	}
+	
+	function processCreateVillage(){
+		var data = {
+				"selectedCity" : $("#selectedCity_create").val(),
+				"villageName" : $("#villageName_create").val()
+			};
+
+			$.ajax({
+				url : "village_processCreateVillage.action",
+				async : false,
+				type : 'post',
+				data : data,
+				success : function(result) {
+
+					$("#villageTable").DataTable().destroy();
+					loadVillageTable();
+					$("#model-close-btn").click();
+					hideTables();
+
+					$('#selectedCity_create option').prop('selected', function() {
+						return this.defaultSelected;
+					});
+
+				}
+			});
+	}
+	
+	function openVillageEditWindow(id,obj) {
+		hideTables();
+		var existingVillageName = $(obj).closest('td').prev('td').prev('td')
+				.prev('td').prev('td').prev('td').text();
+
+		$("#villageId").val(id);
+		$("#villageName_update").val(existingVillageName);
+
+		$('#selectedCity_update option').prop('selected', function() {
+			return this.defaultSelected;
+		});
+
+		$("#villageUpdateTable").show();
+		$('#slide').modal({
+			show : true,
+			closeOnEscape : true
+		});
+	}
+	
+	function processUpdateVillage(){
+		var data = {
+				"id" : $("#villageId").val(),
+				"selectedCity" : $("#selectedCity_update").val(),
+				"villageName" : $("#villageName_update").val()
+			};
+
+			$.ajax({
+				url : "village_processUpdateVillage.action",
+				async : false,
+				type : 'post',
+				data : data,
+				success : function(result) {
+
+					$("#villageTable").DataTable().destroy();
+					loadVillageTable();
+					$("#model-close-btn").click();
+					hideTables();
+
+					$('#selectedCity_update option').prop('selected', function() {
+						return this.defaultSelected;
+					});
+
+				}
+			});
+	}
+	
+	/* Village related functionalities end */
+	
+
 </script>
 
 <body>
@@ -695,6 +787,13 @@
 		</div>
 
 		<div class="tab-pane" id="village-tabs" role="tabpanel">
+			<sec:authorize ifAllGranted="profile.procurementProduct.create">
+				<button type="BUTTON" id="add" data-toggle='modal'
+					data-target='#slide' onclick='openVillageCreateWindow();'
+					class="btn btn-success mb-2 float-right">
+					Add Village <i class="ri-menu-add-line align-middle ml-2"></i>
+				</button>
+			</sec:authorize>
 			<table id="villageTable" class="display" width="100%"></table>
 		</div>
 
@@ -991,6 +1090,83 @@
 					</table>
 
 					<!-- City update table end -->
+
+
+					<!--  -->
+					<!--  -->
+
+					<!-- Village create table start -->
+
+					<table id="villageCreateTable"
+						class="table table-bordered aspect-detail">
+
+						<tr class="odd">
+							<td><s:text name="Village Name" /><sup style="color: red;">*</sup></td>
+							<td><s:textfield id="villageName_create" maxlength="20"
+									cssClass="form-control" /></td>
+						</tr>
+
+						<tr class="odd">
+							<td><s:text name="City" /><sup style="color: red;">*</sup></td>
+							<td><s:select cssClass="form-control "
+									id="selectedCity_create" list="cityList" headerKey="-1"
+									headerValue="%{getText('txt.select')}" /></td>
+						</tr>
+
+						<tr class="odd">
+							<td colspan="2">
+								<button type="button" Class="btnSrch btn btn-success"
+									onclick="processCreateVillage();">
+									<s:text name="save" />
+								</button>
+								<button type="button" Class="btnClr btn btn-warning" id="cancel"
+									data-dismiss="modal">
+									<s:text name="Cancel" />
+								</button>
+							</td>
+						</tr>
+
+					</table>
+
+					<!-- Village create table end -->
+
+
+					<!-- Village update table start -->
+
+					<table id="villageUpdateTable"
+						class="table table-bordered aspect-detail">
+
+						<s:hidden id="villageId" />
+
+						<tr class="odd">
+							<td><s:text name="Village Name" /><sup style="color: red;">*</sup></td>
+							<td><s:textfield id="villageName_update" maxlength="20"
+									cssClass="form-control" /></td>
+						</tr>
+
+						<tr class="odd">
+							<td><s:text name="City" /><sup style="color: red;">*</sup></td>
+							<td><s:select cssClass="form-control "
+									id="selectedCity_update" list="cityList" headerKey="-1"
+									headerValue="%{getText('txt.select')}" /></td>
+						</tr>
+
+						<tr class="odd">
+							<td colspan="2">
+								<button type="button" Class="btnSrch btn btn-success"
+									onclick="processUpdateVillage();">
+									<s:text name="save" />
+								</button>
+								<button type="button" Class="btnClr btn btn-warning" id="cancel"
+									data-dismiss="modal">
+									<s:text name="Cancel" />
+								</button>
+							</td>
+						</tr>
+
+					</table>
+
+					<!-- Village update table end -->
 
 				</div>
 			</div>

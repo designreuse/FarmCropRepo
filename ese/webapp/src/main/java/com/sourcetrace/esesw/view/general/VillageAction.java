@@ -60,6 +60,7 @@ public class VillageAction extends SwitchValidatorAction {
 	List<GramPanchayat> gramPanchayats = new ArrayList<GramPanchayat>();
 	private String name;
 	private String code;
+	private String villageName;
 
 	private IUniqueIDGenerator idGenerator;
 	private IPreferencesService preferncesService;
@@ -1488,4 +1489,38 @@ public class VillageAction extends SwitchValidatorAction {
 		this.code = code;
 	}
 
+	public String getVillageName() {
+		return villageName;
+	}
+
+	public void setVillageName(String villageName) {
+		this.villageName = villageName;
+	}
+
+	public void processCreateVillage() {
+		Municipality city = locationService.findMunicipalityById(Long.valueOf(getSelectedCity()));
+		Village village = new Village();
+		village.setCity(city);
+		village.setBranchId(getBranchId());
+		village.setCode(idGenerator.getVillageIdSeq());
+		village.setName(getVillageName());
+		locationService.addVillage(village);
+		getJsonObject().put("msg", getText("msg.cropUpdated"));
+		getJsonObject().put("title", getText("title.success"));	
+		sendAjaxResponse(getJsonObject());
+	}
+	
+	public void processUpdateVillage() {
+		Village village = locationService.findVillageById(Long.parseLong(id));
+		Municipality city = locationService.findMunicipalityById(Long.valueOf(getSelectedCity()));
+		
+		village.setCity(city);
+		village.setBranchId(getBranchId());
+		village.setName(getVillageName());
+		locationService.editVillage(village);
+		getJsonObject().put("msg", getText("msg.cropUpdated"));
+		getJsonObject().put("title", getText("title.success"));	
+		sendAjaxResponse(getJsonObject());
+	}
+	
 }
