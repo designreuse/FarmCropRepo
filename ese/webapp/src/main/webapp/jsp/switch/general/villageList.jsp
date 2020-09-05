@@ -165,6 +165,8 @@
 		$("#stateUpdateTable").hide();
 		$("#localityCreateTable").hide();
 		$("#localityUpdateTable").hide();
+		$("#cityCreateTable").hide();
+		$("#cityUpdateTable").hide();
 	}
 
 	/* country related functionalities start */
@@ -373,14 +375,14 @@
 		});
 	}
 
-	function openLocalityEditWindow(id,obj) {
+	function openLocalityEditWindow(id, obj) {
 		hideTables();
-		var existingLocalityName = $(obj).closest('td').prev('td').prev('td').prev('td')
-				.text();
+		var existingLocalityName = $(obj).closest('td').prev('td').prev('td')
+				.prev('td').text();
 
 		$("#localityId").val(id);
 		$("#localityName_update").val(existingLocalityName);
-		
+
 		$('#selectedState_update option').prop('selected', function() {
 			return this.defaultSelected;
 		});
@@ -391,40 +393,129 @@
 			closeOnEscape : true
 		});
 	}
-	
-	function processUpdateLocality(){
+
+	function processUpdateLocality() {
 		var data = {
-				"id" : $("#localityId").val(),
-				"selectedState" : $("#selectedState_update").val(),
-				"localityName" : $("#localityName_update").val()
+			"id" : $("#localityId").val(),
+			"selectedState" : $("#selectedState_update").val(),
+			"localityName" : $("#localityName_update").val()
+		};
+
+		$.ajax({
+			url : "locality_processUpdateLocality.action",
+			async : false,
+			type : 'post',
+			data : data,
+			success : function(result) {
+
+				$("#localityTable").DataTable().destroy();
+				loadLocalityTable();
+				$("#model-close-btn").click();
+				hideTables();
+
+				$('#selectedState_create option').prop('selected', function() {
+					return this.defaultSelected;
+				});
+
+			}
+		});
+	}
+
+	/* locality related functionalities end */
+
+	/* City related functionalities start */
+	
+	function openCityCreateWindow(){
+		hideTables();
+		$("#cityCreateTable").show();
+
+		$("#cityName_create").val("");
+
+		$('#selectedLocality_create option').prop('selected', function() {
+			return this.defaultSelected;
+		});
+
+		$('#slide').modal({
+			show : true,
+			closeOnEscape : true
+		});
+	}
+	
+	
+	function processCreateCity(){
+		var data = {
+				"selectedDistrict" : $("#selectedLocality_create").val(),
+				"cityName" : $("#cityName_create").val()
 			};
 
 			$.ajax({
-				url : "locality_processUpdateLocality.action",
+				url : "municipality_processCreateCity.action",
 				async : false,
 				type : 'post',
 				data : data,
 				success : function(result) {
 
-					$("#localityTable").DataTable().destroy();
-					loadLocalityTable();
+					$("#cityTable").DataTable().destroy();
+					loadCityTable();
 					$("#model-close-btn").click();
 					hideTables();
 
-					$('#selectedState_create option').prop('selected', function() {
+					$('#selectedLocality_create option').prop('selected', function() {
 						return this.defaultSelected;
 					});
 
 				}
 			});
 	}
+	
+	function openCityEditWindow(id,obj) {
+		hideTables();
+		var existingCityName = $(obj).closest('td').prev('td').prev('td')
+				.prev('td').prev('td').text();
 
-	/* locality related functionalities end */
+		$("#cityId").val(id);
+		$("#cityName_update").val(existingCityName);
 
-	function openCityEditWindow(id) {
-		alert(id);
+		$('#selectedLocality_update option').prop('selected', function() {
+			return this.defaultSelected;
+		});
+
+		$("#cityUpdateTable").show();
+		$('#slide').modal({
+			show : true,
+			closeOnEscape : true
+		});
 	}
 
+	function processUpdateCity(){
+		var data = {
+				"id" : $("#cityId").val(),
+				"selectedDistrict" : $("#selectedLocality_update").val(),
+				"cityName" : $("#cityName_update").val()
+			};
+
+			$.ajax({
+				url : "municipality_processUpdateCity.action",
+				async : false,
+				type : 'post',
+				data : data,
+				success : function(result) {
+
+					$("#cityTable").DataTable().destroy();
+					loadCityTable();
+					$("#model-close-btn").click();
+					hideTables();
+
+					$('#selectedLocality_update option').prop('selected', function() {
+						return this.defaultSelected;
+					});
+
+				}
+			});
+	}
+	
+	/* City related functionalities end */
+	
 	function openVillageEditWindow(id) {
 		alert(id);
 	}
@@ -593,6 +684,13 @@
 		</div>
 
 		<div class="tab-pane" id="city-tabs" role="tabpanel">
+			<sec:authorize ifAllGranted="profile.procurementProduct.create">
+				<button type="BUTTON" id="add" data-toggle='modal'
+					data-target='#slide' onclick='openCityCreateWindow();'
+					class="btn btn-success mb-2 float-right">
+					Add City <i class="ri-menu-add-line align-middle ml-2"></i>
+				</button>
+			</sec:authorize>
 			<table id="cityTable" class="display" width="100%"></table>
 		</div>
 
@@ -789,7 +887,7 @@
 					<table id="localityUpdateTable"
 						class="table table-bordered aspect-detail">
 
-					<s:hidden id="localityId" />
+						<s:hidden id="localityId" />
 
 						<tr class="odd">
 							<td><s:text name="Locality Name" /><sup style="color: red;">*</sup></td>
@@ -820,6 +918,79 @@
 					</table>
 
 					<!-- Locality update table end -->
+
+					<!-- City create table start -->
+
+					<table id="cityCreateTable"
+						class="table table-bordered aspect-detail">
+
+						<tr class="odd">
+							<td><s:text name="City Name" /><sup style="color: red;">*</sup></td>
+							<td><s:textfield id="cityName_create" maxlength="20"
+									cssClass="form-control" /></td>
+						</tr>
+
+						<tr class="odd">
+							<td><s:text name="Locality" /><sup style="color: red;">*</sup></td>
+							<td><s:select cssClass="form-control "
+									id="selectedLocality_create" list="localityList" headerKey="-1"
+									headerValue="%{getText('txt.select')}" /></td>
+						</tr>
+
+						<tr class="odd">
+							<td colspan="2">
+								<button type="button" Class="btnSrch btn btn-success"
+									onclick="processCreateCity();">
+									<s:text name="save" />
+								</button>
+								<button type="button" Class="btnClr btn btn-warning" id="cancel"
+									data-dismiss="modal">
+									<s:text name="Cancel" />
+								</button>
+							</td>
+						</tr>
+
+					</table>
+
+					<!-- City create table end -->
+
+
+					<!-- City update table start -->
+
+					<table id="cityUpdateTable"
+						class="table table-bordered aspect-detail">
+
+						<s:hidden id="cityId" />
+
+						<tr class="odd">
+							<td><s:text name="City Name" /><sup style="color: red;">*</sup></td>
+							<td><s:textfield id="cityName_update" maxlength="20"
+									cssClass="form-control" /></td>
+						</tr>
+
+						<tr class="odd">
+							<td><s:text name="Locality" /><sup style="color: red;">*</sup></td>
+							<td><s:select cssClass="form-control "
+									id="selectedLocality_update" list="localityList" headerKey="-1"
+									headerValue="%{getText('txt.select')}" /></td>
+						</tr>
+
+						<tr class="odd">
+							<td colspan="2">
+								<button type="button" Class="btnSrch btn btn-success"
+									onclick="processUpdateCity();">
+									<s:text name="save" />
+								</button>
+								<button type="button" Class="btnClr btn btn-warning" id="cancel"
+									data-dismiss="modal">
+									<s:text name="Cancel" />
+								</button>
+							</td>
+						</tr>
+
+					</table>
+
+					<!-- City update table end -->
 
 				</div>
 			</div>

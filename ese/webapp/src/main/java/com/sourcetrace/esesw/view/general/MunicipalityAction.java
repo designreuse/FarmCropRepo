@@ -66,6 +66,7 @@ public class MunicipalityAction extends SwitchValidatorAction {
 	List<Locality> localities = new ArrayList<Locality>();
 	List<State> stats = new ArrayList<State>();
 	private String code;
+	private String cityName;
 
 	private IUniqueIDGenerator idGenerator;
 
@@ -1065,4 +1066,56 @@ public class MunicipalityAction extends SwitchValidatorAction {
 		this.code = code;
 	}
 
+	public String getCityName() {
+		return cityName;
+	}
+
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
+
+	public void processCreateCity() {
+		
+		Municipality municipality = new Municipality();
+		
+		Locality locality = locationService.findLocalityById(Long.valueOf(getSelectedDistrict()));
+
+		ESESystem preferences = preferncesService.findPrefernceById("1");
+		String codeGenType = preferences.getPreferences().get(ESESystem.CODE_TYPE);
+		if (codeGenType.equals("1")) {
+			String municipalityCodeSeq = idGenerator.getMunicipalityHHIdSeq(locality.getCode());
+			BigInteger codeSeq = new BigInteger(municipalityCodeSeq);
+			String maxCode = codeSeq.subtract(new BigInteger("1")).toString();
+			if (Integer.valueOf(maxCode.substring(1, 2)) >= 9) {
+				addActionError(getLocaleProperty("error.municipalityExceed"));
+				
+			} else {
+				municipality.setCode(municipalityCodeSeq);
+
+			}
+		} else if (!getCurrentTenantId().equalsIgnoreCase("awi")) {
+			municipality.setCode(idGenerator.getMandalIdSeq());
+		}
+
+		municipality.setLocality(locality);
+		municipality.setBranchId(getBranchId());
+		municipality.setName(getCityName());
+		locationService.addMunicipality(municipality);
+		getJsonObject().put("msg", getText("msg.cropUpdated"));
+		getJsonObject().put("title", getText("title.success"));	
+		sendAjaxResponse(getJsonObject());
+	}
+	
+	public void processUpdateCity() {
+		Municipality municipality = locationService.findMunicipalityById(Long.valueOf(id));
+		Locality locality = locationService.findLocalityById(Long.valueOf(getSelectedDistrict()));
+		municipality.setLocality(locality);
+		municipality.setName(getCityName());
+		locationService.editMunicipality(municipality);
+		getJsonObject().put("msg", getText("msg.cropUpdated"));
+		getJsonObject().put("title", getText("title.success"));	
+		sendAjaxResponse(getJsonObject());
+	}
+	
+	
 }
