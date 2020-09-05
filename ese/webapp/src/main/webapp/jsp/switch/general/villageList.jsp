@@ -28,6 +28,7 @@
 				var data = JSON.parse(result);
 				$('#countryTable').DataTable({
 					"data" : data,
+					"order": [],
 					"columns" : [ {
 						title : "Code"
 					}, {
@@ -53,6 +54,7 @@
 				var data = JSON.parse(result);
 				$('#stateTable').DataTable({
 					"data" : data,
+					"order": [],
 					"columns" : [ {
 						title : "Code"
 					}, {
@@ -80,6 +82,7 @@
 				var data = JSON.parse(result);
 				$('#localityTable').DataTable({
 					"data" : data,
+					"order": [],
 					"columns" : [ {
 						title : "Code"
 					}, {
@@ -108,6 +111,7 @@
 				var data = JSON.parse(result);
 				$('#cityTable').DataTable({
 					"data" : data,
+					"order": [],
 					"columns" : [ {
 						title : "Code"
 					}, {
@@ -137,6 +141,7 @@
 				var data = JSON.parse(result);
 				$('#villageTable').DataTable({
 					"data" : data,
+					"order": [],
 					"columns" : [ {
 						title : "Code"
 					}, {

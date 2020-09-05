@@ -29,6 +29,7 @@ import com.sourcetrace.eses.service.IUniqueIDGenerator;
 import com.sourcetrace.eses.util.DateUtil;
 import com.sourcetrace.eses.util.ObjectUtil;
 import com.sourcetrace.eses.util.StringUtil;
+import com.sourcetrace.esesw.entity.profile.ProcurementProduct;
 import com.sourcetrace.esesw.entity.txn.ESETxnStatus;
 import com.sourcetrace.esesw.view.SwitchValidatorAction;
 
@@ -708,7 +709,51 @@ public class CatalogueAction extends SwitchValidatorAction {
 	public void setSurvey(String surveyEdit) {
 		this.survey = surveyEdit;
 	}
+
+	public void populateCatalogueValueList() {
+		List<Object[]> catalogueList = catalogueService.fetchCatalogueValues();
+
+		JSONArray rows = new JSONArray();
+		catalogueList.stream().forEach(cat -> {
+			List<String> data = new ArrayList<String>();
+			data.add('"' + String.valueOf(cat[1]) + '"');
+			data.add('"' + String.valueOf(cat[2]) + '"');
+			data.add('"' + String.valueOf(cat[5]) + '"');
+			data.add('"' + String.valueOf(cat[4]) + '"');
+
+			data.add('"'
+					+ "<button type='button' class='btn btn-primary btn-unreg' data-toggle='modal' data-target='#slide' onclick='openCatalogueEditWindow("
+					+ String.valueOf(cat[0]) + ",this)'  >Update</button>" + '"');
+			rows.add(data);
+		});
+		printAjaxResponse(rows, "text/html");
+	}
 	
+	public void processCreateCatalogueValue() {
+		FarmCatalogue farmCatalogue = new FarmCatalogue();
+		farmCatalogue.setCode(idGenerator.getCatalogueIdSeq());
+		farmCatalogue.setRevisionNo(DateUtil.getRevisionNumber());
+		farmCatalogue.setBranchId(getBranchId());
+		farmCatalogue.setDispName(getCatalogueName());
+		farmCatalogue.setName(getCatalogueName());
+		farmCatalogue.setTypez(Integer.valueOf(getTypez()));
+		catalogueService.addCatalogue(farmCatalogue);
+		getJsonObject().put("msg", getText("msg.cropUpdated"));
+		getJsonObject().put("title", getText("title.success"));	
+		sendAjaxResponse(getJsonObject());
+	}
 	
+	public void processUpdateCatalogueValue() {
+		FarmCatalogue farmCatalogue = catalogueService.findCatalogueById(Long.valueOf(id));
+		farmCatalogue.setRevisionNo(DateUtil.getRevisionNumber());
+		farmCatalogue.setBranchId(getBranchId());
+		farmCatalogue.setDispName(getCatalogueName());
+		farmCatalogue.setName(getCatalogueName());
+		farmCatalogue.setTypez(Integer.valueOf(getTypez()));
+		catalogueService.editCatalogue(farmCatalogue);
+		getJsonObject().put("msg", getText("msg.cropUpdated"));
+		getJsonObject().put("title", getText("title.success"));	
+		sendAjaxResponse(getJsonObject());
+	}
 	
 }

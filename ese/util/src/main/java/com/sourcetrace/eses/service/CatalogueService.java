@@ -281,5 +281,10 @@ public class CatalogueService implements ICatalogueService {
 	public List<Object[]> listCataloguesByCodes(List<String> codes, String lan) {
 		return catalogueDAO.listCataloguesByCodes(codes,lan);
 	}
+
+	@Override
+	public List<Object[]> fetchCatalogueValues() {
+		return catalogueDAO.fetchCatalogueValues();
+	}
 	
 }

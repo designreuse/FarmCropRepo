@@ -36,6 +36,7 @@
 						var data = JSON.parse(result);
 						$('#cropTable').DataTable({
 							"data" : data,
+							"order": [],
 							"columns" : [ {
 								title : "Code"
 							}, {
@@ -64,6 +65,7 @@
 						var data = JSON.parse(result);
 						$('#varietyTable').DataTable({
 							"data" : data,
+							"order": [],
 							"columns" : [ {
 								title : "Code"
 							}, {
@@ -94,6 +96,7 @@
 						var data = JSON.parse(result);
 						$('#gradeTable').DataTable({
 							"data" : data,
+							"order": [],
 							"columns" : [ {
 								title : "Code"
 							}, {

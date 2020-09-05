@@ -94,6 +94,8 @@ public interface  ICatalogueService {
 	public List<Object> listFieldsByViewNameAndDBName(String dbName, String viewName);
 
 	public List<Object[]> listCataloguesByCodes(List<String> codes, String lan);
+
+	public List<Object[]> fetchCatalogueValues();
 	
 	
 }
