@@ -14,34 +14,34 @@
 		loadCityTable();
 		loadVillageTable();
 		hideTables();
-		
+
 	});
 
 	function loadCountryTable() {
 
 		$.ajax({
-					url : "village_populateCountryListData.action",
-					async : false,
-					type : 'post',
-					success : function(result) {
+			url : "village_populateCountryListData.action",
+			async : false,
+			type : 'post',
+			success : function(result) {
 
-						var data = JSON.parse(result);
-						$('#countryTable').DataTable({
-							"data" : data,
-							"columns" : [ {
-								title : "Code"
-							}, {
-								title : "Name"
-							}, {
-								title : "Action"
-							} ]
-						});
-
-					}
+				var data = JSON.parse(result);
+				$('#countryTable').DataTable({
+					"data" : data,
+					"columns" : [ {
+						title : "Code"
+					}, {
+						title : "Name"
+					}, {
+						title : "Action"
+					} ]
 				});
 
+			}
+		});
+
 	}
-	
+
 	function loadStateTable() {
 
 		$.ajax({
@@ -68,7 +68,7 @@
 		});
 
 	}
-	
+
 	function loadLocalityTable() {
 
 		$.ajax({
@@ -97,8 +97,8 @@
 		});
 
 	}
-	
-	function loadCityTable(){
+
+	function loadCityTable() {
 		$.ajax({
 			url : "village_populateCityListData.action",
 			async : false,
@@ -126,8 +126,8 @@
 			}
 		});
 	}
-	
-	function loadVillageTable(){
+
+	function loadVillageTable() {
 		$.ajax({
 			url : "village_populateVillageListData.action",
 			async : false,
@@ -157,16 +157,17 @@
 			}
 		});
 	}
-	
-	function hideTables(){
+
+	function hideTables() {
 		$("#countryCreateTable").hide();
 		$("#countryUpdateTable").hide();
 		$("#stateCreateTable").hide();
 		$("#stateUpdateTable").hide();
+		$("#localityCreateTable").hide();
+		$("#localityUpdateTable").hide();
 	}
-	
+
 	/* country related functionalities start */
-	
 
 	function openCountryCreateWindow() {
 		hideTables();
@@ -179,125 +180,119 @@
 			closeOnEscape : true
 		});
 	}
-	
-	function processCreateCountry(){
+
+	function processCreateCountry() {
 		var data = {
-				"countryName" : $("#countryName_create").val()
-			};
+			"countryName" : $("#countryName_create").val()
+		};
 
-			$.ajax({
-				url : "country_processCreateCountry.action",
-				async : false,
-				type : 'post',
-				data : data,
-				success : function(result) {
+		$.ajax({
+			url : "country_processCreateCountry.action",
+			async : false,
+			type : 'post',
+			data : data,
+			success : function(result) {
 
-					$("#countryTable").DataTable().destroy();
-					loadCountryTable();
-					$("#model-close-btn").click();
-					hideTables();
-				}
-			});
+				$("#countryTable").DataTable().destroy();
+				loadCountryTable();
+				$("#model-close-btn").click();
+				hideTables();
+			}
+		});
 	}
 
-	function openCountryEditWindow(id,obj) {
+	function openCountryEditWindow(id, obj) {
 		hideTables();
 		var existingCountryName = $(obj).closest('td').prev('td').text();
 
 		$("#countryId").val(id);
 		$("#countryName_update").val(existingCountryName);
-		
-		
+
 		$("#countryUpdateTable").show();
 		$('#slide').modal({
 			show : true,
 			closeOnEscape : true
 		});
 	}
-	
-	
-	function processUpdateCountry(){
-		
+
+	function processUpdateCountry() {
+
 		var data = {
-				"id" : $("#countryId").val(),
-				"countryName" : $("#countryName_update").val()
-			};
-		
-		
+			"id" : $("#countryId").val(),
+			"countryName" : $("#countryName_update").val()
+		};
 
-			$.ajax({
-				url : "country_processUpdateCountry.action",
-				async : false,
-				type : 'post',
-				data : data,
-				success : function(result) {
+		$.ajax({
+			url : "country_processUpdateCountry.action",
+			async : false,
+			type : 'post',
+			data : data,
+			success : function(result) {
 
-					$("#countryTable").DataTable().destroy();
-					loadCountryTable();
-					$("#model-close-btn").click();
-					hideTables();
-					
-					
-					
-					
-				}
-			});
+				$("#countryTable").DataTable().destroy();
+				loadCountryTable();
+				$("#model-close-btn").click();
+				hideTables();
+
+			}
+		});
 	}
 	/* country related functionalities end */
-	
-	
+
 	/* state related functionalities start  */
 
-	function openStateCreateWindow(){
+	function openStateCreateWindow() {
 		hideTables();
 		$("#stateCreateTable").show();
 
 		$("#stateName_create").val("");
 		$('#selectedCountry_create option').prop('selected', function() {
-	        return this.defaultSelected;
-	    });
+			return this.defaultSelected;
+		});
 
 		$('#slide').modal({
 			show : true,
 			closeOnEscape : true
 		});
 	}
-	
-	function processCreateState(){
+
+	function processCreateState() {
 		var data = {
-				"selectedCountry" : $("#selectedCountry_create").val(),
-				"stateName" : $("#stateName_create").val()
-			};
+			"selectedCountry" : $("#selectedCountry_create").val(),
+			"stateName" : $("#stateName_create").val()
+		};
 
-			$.ajax({
-				url : "state_processCreateState.action",
-				async : false,
-				type : 'post',
-				data : data,
-				success : function(result) {
+		$.ajax({
+			url : "state_processCreateState.action",
+			async : false,
+			type : 'post',
+			data : data,
+			success : function(result) {
 
-					$("#stateTable").DataTable().destroy();
-					loadStateTable();
-					$("#model-close-btn").click();
-					hideTables();
-					
-					$('#selectedCountry_create option').prop('selected', function() {
-				        return this.defaultSelected;
-				    });
-				}
-			});
+				$("#stateTable").DataTable().destroy();
+				loadStateTable();
+				$("#model-close-btn").click();
+				hideTables();
+
+				$('#selectedCountry_create option').prop('selected',
+						function() {
+							return this.defaultSelected;
+						});
+			}
+		});
 	}
-	
-	function openStateEditWindow(id,obj) {
+
+	function openStateEditWindow(id, obj) {
 		hideTables();
-		var existingStateName = $(obj).closest('td').prev('td').prev('td').text();
+		var existingStateName = $(obj).closest('td').prev('td').prev('td')
+				.text();
 
 		$("#stateId").val(id);
 		$("#stateName_update").val(existingStateName);
 		$('#selectedCountry_update option').prop('selected', function() {
-	        return this.defaultSelected;
-	    });
-		
+			return this.defaultSelected;
+		});
+
 		$("#stateUpdateTable").show();
 		$('#slide').modal({
 			show : true,
@@ -305,42 +300,126 @@
 		});
 	}
 
-    function processUpdateState(){
-    	var data = {
-				"id" : $("#stateId").val(),
-				"selectedCountry" : $("#selectedCountry_update").val(),
-				"stateName" :  $("#stateName_update").val()
+	function processUpdateState() {
+		var data = {
+			"id" : $("#stateId").val(),
+			"selectedCountry" : $("#selectedCountry_update").val(),
+			"stateName" : $("#stateName_update").val()
+		};
+
+		$.ajax({
+			url : "state_processUpdateState.action",
+			async : false,
+			type : 'post',
+			data : data,
+			success : function(result) {
+
+				$("#stateTable").DataTable().destroy();
+				loadStateTable();
+				$("#model-close-btn").click();
+				hideTables();
+				$('#selectedCountry_update option').prop('selected',
+						function() {
+							return this.defaultSelected;
+						});
+
+			}
+		});
+	}
+
+	/*  state related functionalities end */
+
+	/* locality related functionalities start */
+
+	function openLocalityCreateWindow() {
+		hideTables();
+		$("#localityCreateTable").show();
+
+		$("#localityName_create").val("");
+
+		$('#selectedState_create option').prop('selected', function() {
+			return this.defaultSelected;
+		});
+
+		$('#slide').modal({
+			show : true,
+			closeOnEscape : true
+		});
+	}
+
+	function processCreateLocality() {
+		var data = {
+			"selectedState" : $("#selectedState_create").val(),
+			"localityName" : $("#localityName_create").val()
+		};
+
+		$.ajax({
+			url : "locality_processCreateLocality.action",
+			async : false,
+			type : 'post',
+			data : data,
+			success : function(result) {
+
+				$("#localityTable").DataTable().destroy();
+				loadLocalityTable();
+				$("#model-close-btn").click();
+				hideTables();
+
+				$('#selectedState_create option').prop('selected', function() {
+					return this.defaultSelected;
+				});
+
+			}
+		});
+	}
+
+	function openLocalityEditWindow(id,obj) {
+		hideTables();
+		var existingLocalityName = $(obj).closest('td').prev('td').prev('td').prev('td')
+				.text();
+
+		$("#localityId").val(id);
+		$("#localityName_update").val(existingLocalityName);
+		
+		$('#selectedState_update option').prop('selected', function() {
+			return this.defaultSelected;
+		});
+
+		$("#localityUpdateTable").show();
+		$('#slide').modal({
+			show : true,
+			closeOnEscape : true
+		});
+	}
+	
+	function processUpdateLocality(){
+		var data = {
+				"id" : $("#localityId").val(),
+				"selectedState" : $("#selectedState_update").val(),
+				"localityName" : $("#localityName_update").val()
 			};
-		
-		
 
 			$.ajax({
-				url : "state_processUpdateState.action",
+				url : "locality_processUpdateLocality.action",
 				async : false,
 				type : 'post',
 				data : data,
 				success : function(result) {
 
-					$("#stateTable").DataTable().destroy();
-					loadStateTable();
+					$("#localityTable").DataTable().destroy();
+					loadLocalityTable();
 					$("#model-close-btn").click();
 					hideTables();
-					$('#selectedCountry_update option').prop('selected', function() {
-				        return this.defaultSelected;
-				    });
-					
-					
-					
-					
+
+					$('#selectedState_create option').prop('selected', function() {
+						return this.defaultSelected;
+					});
+
 				}
 			});
-    }
-	
-	/*  state related functionalities end */
-	
-	function openLocalityEditWindow(id) {
-		alert(id);
 	}
+
+	/* locality related functionalities end */
 
 	function openCityEditWindow(id) {
 		alert(id);
@@ -503,6 +582,13 @@
 		</div>
 
 		<div class="tab-pane" id="locality-tabs" role="tabpanel">
+			<sec:authorize ifAllGranted="profile.procurementProduct.create">
+				<button type="BUTTON" id="add" data-toggle='modal'
+					data-target='#slide' onclick='openLocalityCreateWindow();'
+					class="btn btn-success mb-2 float-right">
+					Add Locality <i class="ri-menu-add-line align-middle ml-2"></i>
+				</button>
+			</sec:authorize>
 			<table id="localityTable" class="display" width="100%"></table>
 		</div>
 
@@ -586,7 +672,7 @@
 					</table>
 
 					<!-- Country update table end -->
-					
+
 					<!-- State create table start -->
 
 					<table id="stateCreateTable"
@@ -597,14 +683,13 @@
 							<td><s:textfield id="stateName_create" maxlength="20"
 									cssClass="form-control" /></td>
 						</tr>
-						
+
 						<tr class="odd">
 							<td><s:text name="Country" /><sup style="color: red;">*</sup></td>
-							<td><s:select cssClass="form-control " id="selectedCountry_create"
-										 list="countryList" headerKey="-1"
-										headerValue="%{getText('txt.select')}"
-										 /></td>
-							
+							<td><s:select cssClass="form-control "
+									id="selectedCountry_create" list="countryList" headerKey="-1"
+									headerValue="%{getText('txt.select')}" /></td>
+
 						</tr>
 
 
@@ -624,27 +709,26 @@
 					</table>
 
 					<!-- State create table end -->
-					
+
 					<!-- State update table start -->
 
 					<table id="stateUpdateTable"
 						class="table table-bordered aspect-detail">
-						
-					<s:hidden id="stateId" />
-					
+
+						<s:hidden id="stateId" />
+
 						<tr class="odd">
 							<td><s:text name="State Name" /><sup style="color: red;">*</sup></td>
 							<td><s:textfield id="stateName_update" maxlength="20"
 									cssClass="form-control" /></td>
 						</tr>
-						
+
 						<tr class="odd">
 							<td><s:text name="Country" /><sup style="color: red;">*</sup></td>
-							<td><s:select cssClass="form-control " id="selectedCountry_update"
-										 list="countryList" headerKey="-1"
-										headerValue="%{getText('txt.select')}"
-										 /></td>
-							
+							<td><s:select cssClass="form-control "
+									id="selectedCountry_update" list="countryList" headerKey="-1"
+									headerValue="%{getText('txt.select')}" /></td>
+
 						</tr>
 
 
@@ -664,6 +748,78 @@
 					</table>
 
 					<!-- State update table end -->
+
+					<!-- Locality create table start -->
+
+					<table id="localityCreateTable"
+						class="table table-bordered aspect-detail">
+
+						<tr class="odd">
+							<td><s:text name="Locality Name" /><sup style="color: red;">*</sup></td>
+							<td><s:textfield id="localityName_create" maxlength="20"
+									cssClass="form-control" /></td>
+						</tr>
+
+						<tr class="odd">
+							<td><s:text name="State" /><sup style="color: red;">*</sup></td>
+							<td><s:select cssClass="form-control "
+									id="selectedState_create" list="stateList" headerKey="-1"
+									headerValue="%{getText('txt.select')}" /></td>
+						</tr>
+
+						<tr class="odd">
+							<td colspan="2">
+								<button type="button" Class="btnSrch btn btn-success"
+									onclick="processCreateLocality();">
+									<s:text name="save" />
+								</button>
+								<button type="button" Class="btnClr btn btn-warning" id="cancel"
+									data-dismiss="modal">
+									<s:text name="Cancel" />
+								</button>
+							</td>
+						</tr>
+
+					</table>
+
+					<!-- Locality create table end -->
+
+					<!-- Locality update table start -->
+
+					<table id="localityUpdateTable"
+						class="table table-bordered aspect-detail">
+
+					<s:hidden id="localityId" />
+
+						<tr class="odd">
+							<td><s:text name="Locality Name" /><sup style="color: red;">*</sup></td>
+							<td><s:textfield id="localityName_update" maxlength="20"
+									cssClass="form-control" /></td>
+						</tr>
+
+						<tr class="odd">
+							<td><s:text name="State" /><sup style="color: red;">*</sup></td>
+							<td><s:select cssClass="form-control "
+									id="selectedState_update" list="stateList" headerKey="-1"
+									headerValue="%{getText('txt.select')}" /></td>
+						</tr>
+
+						<tr class="odd">
+							<td colspan="2">
+								<button type="button" Class="btnSrch btn btn-success"
+									onclick="processUpdateLocality();">
+									<s:text name="save" />
+								</button>
+								<button type="button" Class="btnClr btn btn-warning" id="cancel"
+									data-dismiss="modal">
+									<s:text name="Cancel" />
+								</button>
+							</td>
+						</tr>
+
+					</table>
+
+					<!-- Locality update table end -->
 
 				</div>
 			</div>
