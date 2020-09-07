@@ -130,8 +130,8 @@
 
 	}
 
-	function processCreateCrop() {
-
+	function processCreateCrop(obj) {
+		$(obj).prop('disabled', true);
 		var cropName = $("#cropName_create").val();
 		var unit = $("#cropUnit_create").val();
 
@@ -152,13 +152,17 @@
 					$("#cropTable").DataTable().destroy();
 					loadCropTable();
 					$("#model-close-btn").click();
+					$(obj).prop('disabled', false);
 					hideTables();
+					
 				}
 			});
 		} else if (isEmpty(cropName)) {
 			alert("Crop name is empty");
+			$(obj).prop('disabled', false);
 		} else if (isEmpty(unit)) {
 			alert("Unit is empty");
+			$(obj).prop('disabled', false);
 		}
 
 	}
@@ -181,8 +185,8 @@
 		});
 	}
 
-	function processCropUpdate() {
-
+	function processCropUpdate(obj) {
+	$(obj).prop('disabled', true);
 		var cropName = $("#cropName_update").val();
 		var unit = $("#cropUnit_update").val();
 
@@ -204,12 +208,15 @@
 					loadCropTable();
 					$("#model-close-btn").click();
 					hideTables();
+					$(obj).prop('disabled', false);
 				}
 			});
 		} else if (isEmpty(cropName)) {
 			alert("Crop name is empty");
+			$(obj).prop('disabled', false);
 		} else if (isEmpty(unit)) {
 			alert("Unit is empty");
+			$(obj).prop('disabled', false);
 		}
 
 	}
@@ -231,7 +238,8 @@
 		});
 	}
 
-	function processCreateVariety() {
+	function processCreateVariety(obj) {
+		$(obj).prop('disabled', true);
 
 		var productId = $("#procurementProductId_create").val();
 		var varietyName = $("#varietyName_create").val();
@@ -261,14 +269,18 @@
 							function() {
 								return this.defaultSelected;
 							});
+					$(obj).prop('disabled', false);
 				}
 			});
 		} else if ((isEmpty(productId) || productId == '-1')) {
 			alert("Crop is empty");
+			$(obj).prop('disabled', false);
 		} else if (isEmpty(varietyName)) {
 			alert("Variety name is empty");
+			$(obj).prop('disabled', false);
 		} else if (isEmpty(noDaysToGrow)) {
 			alert("NoDaysToGrow is empty");
+			$(obj).prop('disabled', false);
 		}
 
 	}
@@ -291,8 +303,8 @@
 		});
 	}
 
-	function processUpdateVariety() {
-
+	function processUpdateVariety(obj) {
+		$(obj).prop('disabled', true);
 		var productId = $("#procurementProductId_update").val();
 		var varietyName = $("#varietyName_update").val();
 		var noDaysToGrow = $("#daysToGrow_update").val();
@@ -322,14 +334,18 @@
 							function() {
 								return this.defaultSelected;
 							});
+					$(obj).prop('disabled', false);
 				}
 			});
 		} else if ((isEmpty(productId) || productId == '-1')) {
 			alert("Crop is empty");
+			$(obj).prop('disabled', false);
 		} else if (isEmpty(varietyName)) {
 			alert("Variety name is empty");
+			$(obj).prop('disabled', false);
 		} else if (isEmpty(noDaysToGrow)) {
 			alert("NoDaysToGrow is empty");
+			$(obj).prop('disabled', false);
 		}
 
 	}
@@ -351,8 +367,8 @@
 		});
 	}
 
-	function processCreateGrade() {
-		
+	function processCreateGrade(obj) {
+		$(obj).prop('disabled', true);
 		var variety = $("#procurementVarietyId_create").val();
 		var gradeName = $("#gradeName_create").val();
 		var gradePrice = $("#price_create").val();
@@ -380,15 +396,18 @@
 								function() {
 									return this.defaultSelected;
 								});
-
+						$(obj).prop('disabled', false);
 					}
 				});
 		}else if(isEmpty(gradeName)){
 			alert("Grade name is empty");
+			$(obj).prop('disabled', false);
 		}else if(isEmpty(gradePrice)){
 			alert("Price is empty");
+			$(obj).prop('disabled', false);
 		}else if(isEmpty(variety) || variety == '-1'){
 			alert("Variety is empty");
+			$(obj).prop('disabled', false);
 		}
 		
 		
@@ -411,8 +430,8 @@
 		});
 	}
 
-	function processUpdateGrade() {
-
+	function processUpdateGrade(obj) {
+		$(obj).prop('disabled', true);
 		var variety = $("#procurementVarietyId_update").val();
 		var gradeName = $("#gradeName_update").val();
 		var gradePrice = $("#price_update").val();
@@ -441,15 +460,19 @@
 								function() {
 									return this.defaultSelected;
 								});
+						$(obj).prop('disabled', false);
 
 					}
 				});
 		}else if(isEmpty(gradeName)){
 			alert("Grade name is empty");
+			$(obj).prop('disabled', false);
 		}else if(isEmpty(gradePrice)){
 			alert("Price is empty");
+			$(obj).prop('disabled', false);
 		}else if(isEmpty(variety) || variety == '-1'){
 			alert("Variety is empty");
+			$(obj).prop('disabled', false);
 		}
 		
 		
@@ -607,7 +630,7 @@
 						<tr class="odd">
 							<td colspan="2">
 								<button type="button" Class="btnSrch btn btn-success"
-									onclick="processCropUpdate();">
+									onclick="processCropUpdate(this);">
 									<s:text name="save" />
 								</button>
 								<button type="button" Class="btnClr btn btn-warning" id="cancel"
@@ -639,7 +662,7 @@
 						<tr class="odd">
 							<td colspan="2">
 								<button type="button" Class="btnSrch btn btn-success"
-									onclick="processCreateCrop();">
+									onclick="processCreateCrop(this);">
 									<s:text name="save" />
 								</button>
 								<button type="button" Class="btnClr btn btn-warning" id="cancel"
@@ -682,7 +705,7 @@
 						<tr class="odd">
 							<td colspan="2">
 								<button type="button" Class="btnSrch btn btn-success"
-									onclick="processCreateVariety();">
+									onclick="processCreateVariety(this);">
 									<s:text name="save" />
 								</button>
 								<button type="button" Class="btnClr btn btn-warning" id="cancel"
@@ -725,7 +748,7 @@
 						<tr class="odd">
 							<td colspan="2">
 								<button type="button" Class="btnSrch btn btn-success"
-									onclick="processUpdateVariety();">
+									onclick="processUpdateVariety(this);">
 									<s:text name="save" />
 								</button>
 								<button type="button" Class="btnClr btn btn-warning" id="cancel"
@@ -771,7 +794,7 @@
 						<tr class="odd">
 							<td colspan="2">
 								<button type="button" Class="btnSrch btn btn-success"
-									onclick="processCreateGrade();">
+									onclick="processCreateGrade(this);">
 									<s:text name="save" />
 								</button>
 								<button type="button" Class="btnClr btn btn-warning" id="cancel"
@@ -818,7 +841,7 @@
 						<tr class="odd">
 							<td colspan="2">
 								<button type="button" Class="btnSrch btn btn-success"
-									onclick="processUpdateGrade();">
+									onclick="processUpdateGrade(this);">
 									<s:text name="save" />
 								</button>
 								<button type="button" Class="btnClr btn btn-warning" id="cancel"
