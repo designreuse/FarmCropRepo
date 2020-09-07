@@ -3,6 +3,35 @@
 <html>
 <head>
 <META name="decorator" content="swithlayout">
+  <!-- JAVASCRIPT -->
+        <script src="assets/libs/jquery/jquery.min.js"></script>
+        <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/libs/metismenu/metisMenu.min.js"></script>
+        <script src="assets/libs/simplebar/simplebar.min.js"></script>
+        <script src="assets/libs/node-waves/waves.min.js"></script>
+		<script src="assets/js/app.js"></script>
+        <!-- Required datatable js -->
+        <script src="assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+        <script src="assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+        <!-- Buttons examples -->
+        <script src="assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+        <script src="assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+        <script src="assets/libs/jszip/jszip.min.js"></script>
+        <script src="assets/libs/pdfmake/build/pdfmake.min.js"></script>
+        <script src="assets/libs/pdfmake/build/vfs_fonts.js"></script>
+        <script src="assets/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+        <script src="assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+        <script src="assets/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+
+        <script src="assets/libs/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+        <script src="assets/libs/datatables.net-select/js/dataTables.select.min.js"></script>
+        
+        <!-- Responsive examples -->
+        <script src="assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+        <script src="assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+
+        <!-- Datatable init js -->
+        <script src="assets/js/pages/datatables.init.js"></script>
 </head>
 
 <script type="text/javascript">
@@ -622,7 +651,7 @@
 
 	<!-- Nav tabs -->
 	<ul class="nav nav-pills nav-justified" role="tablist">
-		<li class="nav-item waves-effect waves-light"><a
+		<li class="nav-item waves-effect waves-light" style="padding:10px"><a
 			class="nav-link active  border py-10 d-flex flex-grow-1 rounded flex-column align-items-center"
 			data-toggle="pill" href="#country-tabs"> <span
 				class="nav-icon py-2 w-auto"> <span
@@ -646,7 +675,7 @@
 				class="nav-text font-size-lg py-2 font-weight-bold text-center">Country
 					Details</span>
 		</a></li>
-		<li class="nav-item waves-effect waves-light"><a
+		<li class="nav-item waves-effect waves-light" style="padding:10px"><a
 			class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center"
 			data-toggle="pill" href="#state-tabs"> <span
 				class="nav-icon py-2 w-auto"> <span
@@ -669,7 +698,7 @@
 				class="nav-text font-size-lg py-2 font-weight-bolder text-center">State
 					Details</span>
 		</a></li>
-		<li class="nav-item waves-effect waves-light"><a
+		<li class="nav-item waves-effect waves-light" style="padding:10px"><a
 			class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center"
 			data-toggle="pill" href="#locality-tabs"> <span
 				class="nav-icon py-2 w-auto"> <span
@@ -694,7 +723,7 @@
 					Details</span>
 		</a></li>
 
-		<li class="nav-item waves-effect waves-light"><a
+		<li class="nav-item waves-effect waves-light" style="padding:10px"><a
 			class="nav-link   border py-10 d-flex flex-grow-1 rounded flex-column align-items-center"
 			data-toggle="pill" href="#city-tabs"> <span
 				class="nav-icon py-2 w-auto"> <span
@@ -719,7 +748,7 @@
 					Details</span>
 		</a></li>
 
-		<li class="nav-item waves-effect waves-light"><a
+		<li class="nav-item waves-effect waves-light" style="padding:10px"><a
 			class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center"
 			data-toggle="pill" href="#village-tabs"> <span
 				class="nav-icon py-2 w-auto"> <span
@@ -805,13 +834,14 @@
 	</div>
 
 	<div id="slide" class="modal fade bs-example-modal-center"
-		role="dialog">
+		role="dialog" >
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" id="model-close-btn" class="close"
-						data-dismiss="modal">&times;</button>
-					<h4 id="cropSlideHead"></h4>
+				<h5 id="cropSlideHead" class="modal-title mt-0">Add Crop Information</h5>
+					<button type="button"  class="close"
+						data-dismiss="modal" aria-label="Close">  <span aria-hidden="true">&times;</span></button>
+					
 				</div>
 
 				<div class="modal-body">
@@ -1179,5 +1209,9 @@
 	</div>
 
 
+	
+	
+
+	
 </body>
 </html>

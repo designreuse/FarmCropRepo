@@ -1474,50 +1474,34 @@ private String[] selGroupArry;
 			agentService.createESECard(agent.getProfileId(), idGenerator.createAgentCardIdSequence(), new Date(),
 					ESECard.FARMER_CARD);
 			
-			try {
-				if (!ObjectUtil.isEmpty(agent)) {
-					if (!ObjectUtil.isEmpty(agent.getContactInfo())
-							&& !StringUtil.isEmpty(agent.getContactInfo().getEmail())) {
-						StringBuffer msg = new StringBuffer();
-						String password = StringUtil.getRandomNumber();
-
-						BranchMaster dm = clientService.findBranchMasterByBranchId(agent.getBranchId());
-						ESESystem preference = preferncesService.findPrefernceById(ESESystem.SYSTEM_ESE);
-						if (!ObjectUtil.isEmpty(preference)) {
-							apkUrl = preference.getPreferences().get(ESESystem.APK_URL);
-							cc = preference.getPreferences().get(ESESystem.CC_EMAIL);
-						}
-						msg.append("\n\tUser Name\t:\t");
-						msg.append(agent.getProfileId());
-						msg.append("\n");
-						msg.append("\tPassword\t:\t");
-						msg.append(password);
-						msg.append("\n");
-						if (dm != null) {
-							msg.append("\tOrganisation\t:\t");
-							msg.append(dm.getName());
-							msg.append("\n");
-						}
-						msg.append("\n\tFirst Name\t:\t");
-						msg.append(agent.getPersonalInfo().getFirstName());
-						msg.append("\n");
-						msg.append("\n\tLast Name\t:\t");
-						msg.append(agent.getPersonalInfo().getLastName());
-						msg.append("\n");
-						msg.append("\n\tPlease Download the following file for Mobile Application\t:\t");
-						msg.append(apkUrl);
-						msg.append("\n");
-						
-						MailUtil.sendWithCC(agent.getContactInfo().getEmail(), "SourceTrace Web Console Sign in Details",
-								agent.getPersonalInfo().getName(), msg.toString(),cc);
-						result = getText("successMsg");
-					} else {
-						result = getText("notExist.email");
-					}
-				} 
-			} catch (Exception e) {
-				result = "";
-			}
+			/*
+			 * try { if (!ObjectUtil.isEmpty(agent)) { if
+			 * (!ObjectUtil.isEmpty(agent.getContactInfo()) &&
+			 * !StringUtil.isEmpty(agent.getContactInfo().getEmail())) { StringBuffer msg =
+			 * new StringBuffer(); String password = StringUtil.getRandomNumber();
+			 * 
+			 * BranchMaster dm =
+			 * clientService.findBranchMasterByBranchId(agent.getBranchId()); ESESystem
+			 * preference = preferncesService.findPrefernceById(ESESystem.SYSTEM_ESE); if
+			 * (!ObjectUtil.isEmpty(preference)) { apkUrl =
+			 * preference.getPreferences().get(ESESystem.APK_URL); cc =
+			 * preference.getPreferences().get(ESESystem.CC_EMAIL); }
+			 * msg.append("\n\tUser Name\t:\t"); msg.append(agent.getProfileId());
+			 * msg.append("\n"); msg.append("\tPassword\t:\t"); msg.append(password);
+			 * msg.append("\n"); if (dm != null) { msg.append("\tOrganisation\t:\t");
+			 * msg.append(dm.getName()); msg.append("\n"); }
+			 * msg.append("\n\tFirst Name\t:\t");
+			 * msg.append(agent.getPersonalInfo().getFirstName()); msg.append("\n");
+			 * msg.append("\n\tLast Name\t:\t");
+			 * msg.append(agent.getPersonalInfo().getLastName()); msg.append("\n"); msg.
+			 * append("\n\tPlease Download the following file for Mobile Application\t:\t");
+			 * msg.append(apkUrl); msg.append("\n");
+			 * 
+			 * MailUtil.sendWithCC(agent.getContactInfo().getEmail(),
+			 * "SourceTrace Web Console Sign in Details", agent.getPersonalInfo().getName(),
+			 * msg.toString(),cc); result = getText("successMsg"); } else { result =
+			 * getText("notExist.email"); } } } catch (Exception e) { result = ""; }
+			 */
 			return REDIRECT;
 		}
 	}

@@ -740,50 +740,33 @@ public class UserAction extends SwitchValidatorAction {
 			 */
 			// To send mail after user registration
 			
-			try {
-				if (!ObjectUtil.isEmpty(user)) {
-					if (!ObjectUtil.isEmpty(user.getContactInfo())
-							&& !StringUtil.isEmpty(user.getContactInfo().getEmail())) {
-						StringBuffer msg = new StringBuffer();
-						String password = StringUtil.getRandomNumber();
-
-						BranchMaster dm = clientService.findBranchMasterByBranchId(user.getBranchId());
-						ESESystem preference = preferncesService.findPrefernceById(ESESystem.SYSTEM_ESE);
-						if (!ObjectUtil.isEmpty(preference)) {
-							webUrl = preference.getPreferences().get(ESESystem.WEB_URL);
-							cc = preference.getPreferences().get(ESESystem.CC_EMAIL);
-						}
-						msg.append("\n\tUser Name\t:\t");
-						msg.append(user.getUsername());
-						msg.append("\n");
-						msg.append("\tPassword\t:\t");
-						msg.append(password);
-						msg.append("\n");
-						if (dm != null) {
-							msg.append("\tOrganisation\t:\t");
-							msg.append(dm.getName());
-							msg.append("\n");
-						}
-						msg.append("\n\tFirst Name\t:\t");
-						msg.append(user.getPersonalInfo().getFirstName());
-						msg.append("\n");
-						msg.append("\n\tLast Name\t:\t");
-						msg.append(user.getPersonalInfo().getLastName());
-						msg.append("\n");
-						msg.append("\n\tWeb Console\t:\t");
-						msg.append(webUrl);
-						msg.append("\n");
-						
-						MailUtil.sendWithCC(user.getContactInfo().getEmail(), "SourceTrace Web Console Sign in Details",
-								user.getPersonalInfo().getName(), msg.toString(),cc);
-						result = getText("successMsg");
-					} else {
-						result = getText("notExist.email");
-					}
-				} 
-			} catch (Exception e) {
-				result = "";
-			}
+			/*
+			 * try { if (!ObjectUtil.isEmpty(user)) { if
+			 * (!ObjectUtil.isEmpty(user.getContactInfo()) &&
+			 * !StringUtil.isEmpty(user.getContactInfo().getEmail())) { StringBuffer msg =
+			 * new StringBuffer(); String password = StringUtil.getRandomNumber();
+			 * 
+			 * BranchMaster dm =
+			 * clientService.findBranchMasterByBranchId(user.getBranchId()); ESESystem
+			 * preference = preferncesService.findPrefernceById(ESESystem.SYSTEM_ESE); if
+			 * (!ObjectUtil.isEmpty(preference)) { webUrl =
+			 * preference.getPreferences().get(ESESystem.WEB_URL); cc =
+			 * preference.getPreferences().get(ESESystem.CC_EMAIL); }
+			 * msg.append("\n\tUser Name\t:\t"); msg.append(user.getUsername());
+			 * msg.append("\n"); msg.append("\tPassword\t:\t"); msg.append(password);
+			 * msg.append("\n"); if (dm != null) { msg.append("\tOrganisation\t:\t");
+			 * msg.append(dm.getName()); msg.append("\n"); }
+			 * msg.append("\n\tFirst Name\t:\t");
+			 * msg.append(user.getPersonalInfo().getFirstName()); msg.append("\n");
+			 * msg.append("\n\tLast Name\t:\t");
+			 * msg.append(user.getPersonalInfo().getLastName()); msg.append("\n");
+			 * msg.append("\n\tWeb Console\t:\t"); msg.append(webUrl); msg.append("\n");
+			 * 
+			 * MailUtil.sendWithCC(user.getContactInfo().getEmail(),
+			 * "SourceTrace Web Console Sign in Details", user.getPersonalInfo().getName(),
+			 * msg.toString(),cc); result = getText("successMsg"); } else { result =
+			 * getText("notExist.email"); } } } catch (Exception e) { result = ""; }
+			 */
 			 
 			return REDIRECT;
 		}

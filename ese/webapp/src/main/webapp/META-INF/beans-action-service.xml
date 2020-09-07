@@ -38,8 +38,8 @@
 		<property name="protocol" value="smtps" />
 		<property name="host" value="smtp.gmail.com" />
 		<property name="port" value="465" />
-		<property name="username" value="eseserver@sourcetrace.com" />
-		<property name="password" value="eseserver123" />
+		<property name="username" value="" />
+		<property name="password" value="" />
 		<property name="javaMailProperties">
 			<props>
 				<prop key="mail.smtps.auth">true</prop>

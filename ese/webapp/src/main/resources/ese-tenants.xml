@@ -25,13 +25,13 @@
 			<param name="tenantId">pratibha</param>
 		</action>
 		
-		<action name="agro_Farmapp" method="login" class="authAction">
+		<action name="thefarmcorp_Farmapp" method="login" class="authAction">
 			<result name="input">/jsp/login.jsp</result>
 			<result name="emptyTenant">/jsp/404.jsp</result>
 			<result name="pageExpired">/jsp/expired.jsp</result>
 			<result name="redirect" type="redirectAction">dashboard_list</result>
 			<result name="red_url" type="redirectAction">${url}</result>
-			<param name="tenantId">agro</param>
+			<param name="tenantId">thefarmcorp</param>
 		</action>
 		
 		<action name="kpf_Farmapp" method="login" class="authAction">

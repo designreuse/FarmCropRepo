@@ -255,7 +255,7 @@ public class FarmerInspectionReportAction extends BaseReportAction {
 				out.close();
 			} else {
 
-				File file = new File(request.getRealPath("/") + "/img/no-image.png");
+				File file = new File(request.getRealPath("/") + "/img/no-img.png");
 				OutputStream out = response.getOutputStream();
 				out.write(FileUtil.getBinaryFileContent(file));
 				out.flush();

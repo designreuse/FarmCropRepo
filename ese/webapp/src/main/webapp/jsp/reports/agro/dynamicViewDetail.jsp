@@ -1280,7 +1280,7 @@
 													src="data:image/png;base64,<s:property value="farmerImageByteString"/>">
 											</s:if>
 											<s:else>
-												<img align="middle" border="0" src="img/no-image.png">
+												<img align="middle" border="0" src="img/no-img.png">
 											</s:else>
 										</div>
 
@@ -2121,7 +2121,7 @@
 											src="data:image/png;base64,<s:property value="farmImageByteString"/>">
 									</s:if>
 									<s:else>
-										<img align="middle" border="0" src="img/no-image.png">
+										<img align="middle" border="0" src="img/no-img.png">
 									</s:else>
 								</div>
 								<div class="clear"></div>
@@ -3276,7 +3276,7 @@
 													src="data:image/png;base64,<s:property value="farmerImageByteString"/>">
 											</s:if>
 											<s:else>
-												<img align="middle" border="0" src="img/no-image.png">
+												<img align="middle" border="0" src="img/no-img.png">
 											</s:else>
 										</div>
 									<%-- 	<div>
@@ -3303,7 +3303,7 @@
 														src="data:image/png;base64,<s:property value="fingerPrintImageByteString"/>">
 												</s:if>
 												<s:else>
-													<img align="middle" border="0" src="img/no-image.png">
+													<img align="middle" border="0" src="img/no-img.png">
 												</s:else>
 											</div>
 											<div class="clear"></div>

@@ -101,7 +101,7 @@ public class OfflineTxnScheduler {
 				providers.add(new JSONProvider());
 
 				WebClient client = WebClient.create(LOCALHOST, providers);
-				client.path("processTxnRequestScheduler").accept(format).type(format);
+				client.path("mobileRequestCollectionScheduler").accept(format).type(format);
 				// String jsonObj = .substring(1,
 				// txnLog.getRequestLog().length() -
 				// 1);

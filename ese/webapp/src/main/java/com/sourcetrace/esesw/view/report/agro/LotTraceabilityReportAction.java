@@ -303,10 +303,10 @@ public class LotTraceabilityReportAction extends BaseReportAction {
 						if (!StringUtil.isEmpty(image)) {
 							jsonObject.put("image", "data:image/png;base64, " + Base64Util.encoder(image));
 						} else {
-							jsonObject.put("image", "img/no-image.png");
+							jsonObject.put("image", "img/no-img.png");
 						}
 					} else {
-						jsonObject.put("image", "img/no-image.png");
+						jsonObject.put("image", "img/no-img.png");
 					}
 					
 					if (getCurrentTenantId().equalsIgnoreCase(ESESystem.PRATIBHA_TENANT_ID) && cropId!=0) {

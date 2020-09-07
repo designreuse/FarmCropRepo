@@ -2281,7 +2281,7 @@ if('<s:property value="getBranchId()"/>'=='Individual'){
 
 				<!-- Nav tabs -->
 				<ul class="nav nav-pills nav-justified" role="tablist">
-					<li class="nav-item waves-effect waves-light"><a
+					<li class="nav-item waves-effect waves-light" style="padding:10px;"><a
 			class="nav-link active  border py-10 d-flex flex-grow-1 rounded flex-column align-items-center"
 			data-toggle="pill"
 			href="#farmer-tabs">
@@ -2306,7 +2306,7 @@ if('<s:property value="getBranchId()"/>'=='Individual'){
 				class="nav-text font-size-lg py-2 font-weight-bold text-center">Farmer
 					Details</span>
 		</a></li>
-					<li class="nav-item waves-effect waves-light"><a
+					<li class="nav-item waves-effect waves-light" style="padding:10px;"><a
 			class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center"
 			data-toggle="pill"
 			href="#farm-tabs">
@@ -2330,7 +2330,7 @@ if('<s:property value="getBranchId()"/>'=='Individual'){
 				class="nav-text font-size-lg py-2 font-weight-bolder text-center">Farm
 					Details</span>
 		</a></li>
-					<li class="nav-item waves-effect waves-light"><a
+					<li class="nav-item waves-effect waves-light" style="padding:10px;"><a
 			class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center"
 			data-toggle="pill"
 			href="#sowing-tabs">

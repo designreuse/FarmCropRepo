@@ -322,7 +322,7 @@ public class AuthAction extends SwitchAction {
 			}
 
 			if (ObjectUtil.isEmpty(imageData) || imageData.length == 0) {
-				String logoPath = request.getSession().getServletContext().getRealPath("/img/no-image.png");
+				String logoPath = request.getSession().getServletContext().getRealPath("/img/no-img.png");
 				File pic = new File(logoPath);
 				long length = pic.length();
 				imageData = new byte[(int) length];

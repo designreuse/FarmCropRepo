@@ -150,7 +150,7 @@
                     fileid: id
                 }, function (data, status) {
                     if (status === '<s:text name="success"/>') {
-                        $('#image').attr("src", 'img/no-image.png');
+                        $('#image').attr("src", 'img/no-img.png');
                         $('#farmImageFileName').hide();
                         $("#farmImage").css({
                             "display": "block",
@@ -165,7 +165,7 @@
                 });
             } else if (id == undefined) {
 
-                $('#image').attr("src", 'img/no-image.png');
+                $('#image').attr("src", 'img/no-img.png');
                 $('#farmImageFileName').hide();
                 $("#farmImage").css({
                     "display": "block",
@@ -337,7 +337,7 @@
 											src="data:image/png;base64,<s:property value="farmImageByteString"/>">
 									</s:if> <s:else>
 										<img width="50" height="50" id="remImgs" border="0"
-											src="img/no-image.png">
+											src="img/no-img.png">
 									</s:else> <s:hidden name="farm.farmImageExist" id="farmImageExist" />
 								</td>
 							</tr>

@@ -792,7 +792,7 @@
 									    	}
 									    	else
 											{
-												$("#farmerImage").attr('src',"img/no-image.png");
+												$("#farmerImage").attr('src',"img/no-img.png");
 											}
 									}
 								});
@@ -1014,7 +1014,7 @@
 											    	}
 											    	else
 													{
-														$("#farmerImage").attr('src',"img/no-image.png");
+														$("#farmerImage").attr('src',"img/no-img.png");
 													}
 											}
 										});

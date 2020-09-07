@@ -15,15 +15,15 @@ import com.sourcetrace.eses.txn.schema.Response;
 
 @Path("/")
 @Produces({"application/json","application/xml"})
-@WebService(serviceName = "ESETxnProcessorService", name = "ESETxnService", targetNamespace = "http://www.sourcetrace.com")
+@WebService(serviceName = "TheFarmCorpMobileTxnService", name = "TheFarmCorpMobileService", targetNamespace = "http://thefarmcorp.com")
 @Component
 public interface ITxnSchedulerService {
 	
 	@WebMethod
-	@Path("/processTxnRequestScheduler")
+	@Path("/mobileRequestCollectionScheduler")
 	
 	@Consumes({"application/json","application/xml"})
 	@POST
-    public Response processTxnRequestScheduler(Request request) throws Exception;
+    public Response mobileRequestCollectionScheduler(Request request) throws Exception;
 
 }

@@ -13,7 +13,7 @@
 
 
 	<task:scheduled-tasks scheduler="stsScheduler" >
-      <task:scheduled ref="offlineDistributionSchedulerTask" method="process" fixed-delay="120000" initial-delay="1000" />
+      <!-- <task:scheduled ref="offlineDistributionSchedulerTask" method="process" fixed-delay="120000" initial-delay="1000" />
       <task:scheduled ref="offlineProductReturnSchedulerTask" method="process" fixed-delay="120000" initial-delay="120000" />
       <task:scheduled ref="offlineProcurementSchedulerTask" method="process" fixed-delay="120000" initial-delay="120000" />
       <task:scheduled ref="offlineTrainingStatusSchedulerTask" method="process" fixed-delay="120000" initial-delay="120000" />
@@ -27,7 +27,7 @@
       <task:scheduled ref="offlineGinningProcessSchedulerTask" method="process" fixed-delay="120000" initial-delay="0"/>
       <task:scheduled ref="offlineBaleGenerationSchedulerTask" method="process" fixed-delay="120000" initial-delay="0"/>
       <task:scheduled ref="offlineTransferSpinningSchedulerTask" method="process" fixed-delay="120000" initial-delay="0"/>
-      <task:scheduled ref="offlineFarmCropCalendarSchedulerTask" method="process" fixed-delay="120000" initial-delay="0"/>
+      <task:scheduled ref="offlineFarmCropCalendarSchedulerTask" method="process" fixed-delay="120000" initial-delay="0"/> -->
        <task:scheduled ref="offlineTxnScheduler" method="process" fixed-delay="1200000" initial-delay="0"/>
     </task:scheduled-tasks> 
  

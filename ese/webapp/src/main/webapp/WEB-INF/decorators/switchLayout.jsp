@@ -48,6 +48,9 @@
 
 <link href="assets/libs/select2/css/select2.min.css" rel="stylesheet" type="text/css" /> 
 
+ <link href="assets/libs/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css" rel="stylesheet">
+ 
+
 <script src="assets/libs/twitter-bootstrap-wizard/bootstrap/js/bootstrap.min.js"></script>
 
   
@@ -281,6 +284,10 @@ margin-top: -35px;
          <script src="assets/libs/select2/js/select2.min.js"></script>
          
           <script src="assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+          
+          <script src="assets/libs/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+          
+           <script src="assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
      
         <script src="assets/libs/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
 

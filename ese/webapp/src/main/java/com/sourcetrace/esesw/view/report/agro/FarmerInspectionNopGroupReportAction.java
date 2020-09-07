@@ -223,7 +223,7 @@ public class FarmerInspectionNopGroupReportAction extends BaseReportAction  {
             } else {
 
                 File file = new File(request.getRealPath("/")
-                        + "/img/no-image.png");
+                        + "/img/no-img.png");
                 OutputStream out = response.getOutputStream();
                 out.write(FileUtil.getBinaryFileContent(file));
                 out.flush();

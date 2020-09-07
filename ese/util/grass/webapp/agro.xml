@@ -69,7 +69,7 @@
 		<token name="log.path">
 			<value form="simple" id="global" type="pre-install" use="mandatory">/var/log/ese/web-agro.log</value>
 			<value form="simple" id="single" type="pre-install" use="mandatory">/var/log/ese/web-agro-single.log</value>
-			<value form="simple" id="multi" type="pre-install" use="mandatory">/var/log/ese/web-agro-multi.log</value>
+			<value form="simple" id="multi" type="pre-install" use="mandatory">/var/log/ese/web-the-farm-corp.log</value>
 		</token>
 		
 		<token name="email.protocol">
@@ -82,16 +82,16 @@
 			<value form="simple" id="global" type="pre-install" use="mandatory">465</value>
 		</token>
 		<token name="email.user">
-			<value form="simple" id="global" type="pre-install" use="mandatory">eseserver@sourcetrace.com</value>
+			<value form="simple" id="global" type="pre-install" use="mandatory"></value>
 		</token>
 		<token name="email.password">
-			<value form="simple" id="global" type="pre-install" use="mandatory">eseserver123</value>
+			<value form="simple" id="global" type="pre-install" use="mandatory"></value>
 		</token>
 		<token name="email.smtps.auth">
 			<value form="simple" id="global" type="pre-install" use="mandatory">true</value>
 		</token>
 		<token name="email.from">
-			<value form="simple" id="global" type="pre-install" use="mandatory"><![CDATA[ESE Server<eseserver@sourcetrace.com>]]></value>
+			<value form="simple" id="global" type="pre-install" use="mandatory"><![CDATA[Server<>]]></value>
 		</token>
 		<token name="service.dailyClosing">
 			<value form="simple" id="global" type="pre-install" use="mandatory"><![CDATA[<property name="dailyClosingService" ref="dailyClosingService" />]]></value>

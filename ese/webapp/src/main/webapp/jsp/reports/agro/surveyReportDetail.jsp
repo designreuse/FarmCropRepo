@@ -241,7 +241,7 @@
                 <img border="0" style="width:150px;height:133px;" src="data:image/png;base64,<s:property value="photoByteString"/>">
               </s:if>
               <s:elseif test="image.length==0">
-                <img style="width:150px;height:133px;" border="0" src="assets/client/demo/images/no-image.png">
+                <img style="width:150px;height:133px;" border="0" src="assets/client/demo/images/no-img.png">
               </s:elseif>
             </td>
           </tr>
@@ -436,7 +436,7 @@
                   <img border="0" style="width:150px;height:133px;" src="data:image/png;base64,<s:property value="photoByteString"/>">
                 </s:if>
                 <s:elseif test="image.length==0">
-                  <img style="width:150px;height:133px;" border="0" src="assets/client/demo/images/no-image.png">
+                  <img style="width:150px;height:133px;" border="0" src="assets/client/demo/images/no-img.png">
                 </s:elseif>
               </td>
             </tr>
