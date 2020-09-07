@@ -6099,4 +6099,14 @@ public class ProductDistributionDAO extends ESEDAO implements IProductDistributi
 		return list("SELECT Distinct lt.lotNo from LotTraceabilityData lt order by cast(lt.lotNo as integer) asc");
 	}
 
+	@Override
+	public List<ProcurementProduct> listProcurementVarietyDesc() {
+		return list("FROM ProcurementProduct pp join fetch pp.procurementVarieties v ORDER BY v.id DESC");
+	}
+
+	@Override
+	public List<ProcurementProduct> listProcurementGradeDesc() {
+		return list("FROM ProcurementProduct pp join fetch pp.procurementVarieties v join fetch v.procurementGrades g ORDER BY g.id DESC");
+	}
+
 }

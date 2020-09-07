@@ -2445,6 +2445,10 @@ public interface IProductDistributionDAO extends IESEDAO {
 
 	public List<ProcurementProduct> listProcurementProductDesc();
 
+	public List<ProcurementProduct> listProcurementVarietyDesc();
+
+	public List<ProcurementProduct> listProcurementGradeDesc();
+
 	
 }
 

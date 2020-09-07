@@ -2793,6 +2793,10 @@ public interface IProductDistributionService {
 
 	public List<ProcurementProduct> listProcurementProductDesc();
 
+	public List<ProcurementProduct> listProcurementVarietyDesc();
+
+	public List<ProcurementProduct> listProcurementGradeDesc();
+
 	
 	
 

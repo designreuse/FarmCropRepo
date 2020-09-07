@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -33,6 +34,7 @@ import com.sourcetrace.eses.service.IProductDistributionService;
 import com.sourcetrace.eses.service.IUniqueIDGenerator;
 import com.sourcetrace.eses.util.ObjectUtil;
 import com.sourcetrace.eses.util.StringUtil;
+import com.sourcetrace.esesw.entity.profile.ProcurementGrade;
 import com.sourcetrace.esesw.entity.profile.ProcurementProduct;
 import com.sourcetrace.esesw.entity.profile.ProcurementVariety;
 import com.sourcetrace.esesw.view.SwitchValidatorAction;
@@ -52,8 +54,8 @@ public class ProcurementProductEnrollAction extends SwitchValidatorAction {
 	private String cropCategory;
 	private String mspRate;
 	private String mspPercentage;
-    private String selectedVariety;
-    
+	private String selectedVariety;
+
 	public String getMspPercentage() {
 		return mspPercentage;
 	}
@@ -79,7 +81,7 @@ public class ProcurementProductEnrollAction extends SwitchValidatorAction {
 	private List<ProcurementVariety> procurementVarietyList = new ArrayList<>();
 	private List<FarmCatalogue> subUomList = new ArrayList<FarmCatalogue>();
 	private Map<String, String> cropCatList = new HashMap<String, String>();
-	
+
 	/**
 	 * @see com.sourcetrace.esesw.view.SwitchAction#data()
 	 */
@@ -133,11 +135,11 @@ public class ProcurementProductEnrollAction extends SwitchValidatorAction {
 		if (!StringUtil.isEmpty(searchRecord.get("mspRate"))) {
 			filter.setMspRate(Double.valueOf(searchRecord.get("mspRate").trim()));
 		}
-		
+
 		if (!StringUtil.isEmpty(searchRecord.get("mspPercentage"))) {
 			filter.setMspPercentage(Double.valueOf(searchRecord.get("mspPercentage").trim()));
 		}
-		
+
 		Map data = reportService.listWithEntityFiltering(getDir(), getSort(), getStartIndex(), getResults(), filter,
 				getPage());
 
@@ -169,18 +171,18 @@ public class ProcurementProductEnrollAction extends SwitchValidatorAction {
 			}
 		}
 		rows.add("<font color=\"#0000FF\" style=\"cursor:pointer;\">" + product.getCode() + "</font>");
-		
+
 		String name = getLanguagePref(getLoggedInUserLanguage(), product.getCode().trim().toString());
-		if(!StringUtil.isEmpty(name) && name != null){
+		if (!StringUtil.isEmpty(name) && name != null) {
 			rows.add(name);
-		}else{
+		} else {
 			rows.add(product.getName());
 		}
-		
-		
+
 		rows.add(product.getUnit());
-		if (getCurrentTenantId().equalsIgnoreCase(ESESystem.KPF_TENANT_ID)||getCurrentTenantId().equalsIgnoreCase(ESESystem.SIMFED_TENANT_ID)) {
-		rows.add(!StringUtil.isEmpty(product.getCropCategory()) ? getText("cs" + product.getCropCategory()) : "");
+		if (getCurrentTenantId().equalsIgnoreCase(ESESystem.KPF_TENANT_ID)
+				|| getCurrentTenantId().equalsIgnoreCase(ESESystem.SIMFED_TENANT_ID)) {
+			rows.add(!StringUtil.isEmpty(product.getCropCategory()) ? getText("cs" + product.getCropCategory()) : "");
 		}
 		if (getCurrentTenantId().equalsIgnoreCase(ESESystem.CHETNA_TENANT_ID)) {
 			rows.add(String.valueOf(product.getMspRate()));
@@ -214,8 +216,7 @@ public class ProcurementProductEnrollAction extends SwitchValidatorAction {
 	 * Creates the.
 	 * 
 	 * @return the string
-	 * @throws Exception
-	 *             the exception
+	 * @throws Exception the exception
 	 */
 	@SuppressWarnings("unchecked")
 	public void create() throws Exception {
@@ -260,15 +261,14 @@ public class ProcurementProductEnrollAction extends SwitchValidatorAction {
 	 * Update.
 	 * 
 	 * @return the string
-	 * @throws Exception
-	 *             the exception
+	 * @throws Exception the exception
 	 */
 	@SuppressWarnings("unchecked")
 	public void update() throws Exception {
 		if (!StringUtil.isEmpty(id)) {
 			ProcurementProduct temp = productDistributionService.findProcurementProductById(Long.valueOf(id));
-			if(!StringUtil.isEmpty(cropName)){
-				
+			if (!StringUtil.isEmpty(cropName)) {
+
 				temp.setName(cropName);
 				FarmCatalogue farmCatalogue = catalogueService.findCatalogueByCode(unit);
 				if (!ObjectUtil.isEmpty(farmCatalogue)) {
@@ -286,12 +286,12 @@ public class ProcurementProductEnrollAction extends SwitchValidatorAction {
 				}
 				productDistributionService.editProcurementProduct(temp);
 				getJsonObject().put("msg", getText("msg.cropUpdated"));
-				getJsonObject().put("title", getText("title.success"));	
-			}else{
+				getJsonObject().put("title", getText("title.success"));
+			} else {
 				getJsonObject().put("msg", getText("Please Enter Crop Name"));
-    			getJsonObject().put("title",getText("Error"));
+				getJsonObject().put("title", getText("Error"));
 			}
-			
+
 			sendAjaxResponse(getJsonObject());
 
 		}
@@ -302,36 +302,32 @@ public class ProcurementProductEnrollAction extends SwitchValidatorAction {
 			 * Detail.
 			 * 
 			 * @return the string
-			 * @throws Exception
-			 *             the exception
+			 * @throws Exception the exception
 			 *//*
-			 * public String detail() throws Exception {
-			 * 
-			 * String view = ""; if (id != null && !id.equals("") &&
-			 * !id.equals("null")) { procurementProduct =
-			 * productDistributionService.findProcurementProductById(Long.
-			 * valueOf(id)); if (procurementProduct == null) {
-			 * addActionError(NO_RECORD); return REDIRECT; }
-			 * setCurrentPage(getCurrentPage());
-			 * 
-			 * if(!StringUtil.isEmpty(procurementProduct.getCropCategory())&&
-			 * Integer.valueOf(procurementProduct.getCropCategory())>-1){ String
-			 * cropCategories=getText("cropCategories"); String[]
-			 * cropCategory=cropCategories.split(",");
-			 * procurementProduct.setCropCategory((cropCategory[Integer.valueOf(
-			 * procurementProduct.getCropCategory())])); }else{
-			 * procurementProduct.setCropCategory(""); }
-			 * if(!StringUtil.isEmpty(procurementProduct.getCropType())&&
-			 * Integer.valueOf(procurementProduct.getCropType())>-1){ String
-			 * cropTypes=getText("cropTypes"); String[]
-			 * cropTyp=cropTypes.split(",");
-			 * procurementProduct.setCropType((cropTyp[Integer.valueOf(
-			 * procurementProduct.getCropType())])); }else{
-			 * procurementProduct.setCropType(""); } command = UPDATE; view =
-			 * DETAIL; request.setAttribute(HEADING, getText(DETAIL)); } else {
-			 * request.setAttribute(HEADING, getText(LIST)); return LIST; }
-			 * return view; }
-			 */
+				 * public String detail() throws Exception {
+				 * 
+				 * String view = ""; if (id != null && !id.equals("") && !id.equals("null")) {
+				 * procurementProduct =
+				 * productDistributionService.findProcurementProductById(Long. valueOf(id)); if
+				 * (procurementProduct == null) { addActionError(NO_RECORD); return REDIRECT; }
+				 * setCurrentPage(getCurrentPage());
+				 * 
+				 * if(!StringUtil.isEmpty(procurementProduct.getCropCategory())&&
+				 * Integer.valueOf(procurementProduct.getCropCategory())>-1){ String
+				 * cropCategories=getText("cropCategories"); String[]
+				 * cropCategory=cropCategories.split(",");
+				 * procurementProduct.setCropCategory((cropCategory[Integer.valueOf(
+				 * procurementProduct.getCropCategory())])); }else{
+				 * procurementProduct.setCropCategory(""); }
+				 * if(!StringUtil.isEmpty(procurementProduct.getCropType())&&
+				 * Integer.valueOf(procurementProduct.getCropType())>-1){ String
+				 * cropTypes=getText("cropTypes"); String[] cropTyp=cropTypes.split(",");
+				 * procurementProduct.setCropType((cropTyp[Integer.valueOf(
+				 * procurementProduct.getCropType())])); }else{
+				 * procurementProduct.setCropType(""); } command = UPDATE; view = DETAIL;
+				 * request.setAttribute(HEADING, getText(DETAIL)); } else {
+				 * request.setAttribute(HEADING, getText(LIST)); return LIST; } return view; }
+				 */
 
 	@SuppressWarnings("unchecked")
 	public void populateDelete() throws Exception {
@@ -384,8 +380,7 @@ public class ProcurementProductEnrollAction extends SwitchValidatorAction {
 	/**
 	 * Sets the product distribution service.
 	 * 
-	 * @param productDistributionService
-	 *            the new product distribution service
+	 * @param productDistributionService the new product distribution service
 	 */
 	public void setProductDistributionService(IProductDistributionService productDistributionService) {
 
@@ -405,8 +400,7 @@ public class ProcurementProductEnrollAction extends SwitchValidatorAction {
 	/**
 	 * Sets the procurement product.
 	 * 
-	 * @param procurementProduct
-	 *            the new procurement product
+	 * @param procurementProduct the new procurement product
 	 */
 	public void setProcurementProduct(ProcurementProduct procurementProduct) {
 
@@ -426,8 +420,7 @@ public class ProcurementProductEnrollAction extends SwitchValidatorAction {
 	/**
 	 * Sets the id.
 	 * 
-	 * @param id
-	 *            the new id
+	 * @param id the new id
 	 */
 	public void setId(String id) {
 
@@ -470,7 +463,7 @@ public class ProcurementProductEnrollAction extends SwitchValidatorAction {
 
 		return cropCatList;
 	}
-	
+
 	public void setCropCategoryList(Map<Integer, String> cropCategoryList) {
 		this.cropCategoryList = cropCategoryList;
 	}
@@ -504,7 +497,7 @@ public class ProcurementProductEnrollAction extends SwitchValidatorAction {
 
 		return productDistributionService.listProcurementProduct();
 	}
-	
+
 	public List<ProcurementProduct> getProcurementProductListDesc() {
 
 		return productDistributionService.listProcurementProductDesc();
@@ -573,84 +566,95 @@ public class ProcurementProductEnrollAction extends SwitchValidatorAction {
 		}
 	}
 
-	
-	public void populateProcurementProductList(){
+	public void populateProcurementProductList() {
 		List<ProcurementProduct> products = getProcurementProductListDesc();
-		
+
 		JSONArray rows = new JSONArray();
 		products.stream().forEach(p -> {
 			List<String> data = new ArrayList<String>();
-			data.add('"'+p.getCode()+'"');
-			data.add('"'+p.getName()+'"');
-			data.add('"'+p.getUnit()+'"');
-			
-			data.add('"'+"<button type='button' class='btn btn-primary btn-unreg' data-toggle='modal' data-target='#slide' onclick='openCropEditWindow("+p.getId()+",this)'  >Update</button>"+'"');
+			data.add('"' + p.getCode() + '"');
+			data.add('"' + p.getName() + '"');
+			data.add('"' + p.getUnit() + '"');
+
+			data.add('"'
+					+ "<button type='button' class='btn btn-primary btn-unreg' data-toggle='modal' data-target='#slide' onclick='openCropEditWindow("
+					+ p.getId() + ",this)'  >Update</button>" + '"');
 			rows.add(data);
 		});
 		printAjaxResponse(rows, "text/html");
-		
+
 	}
-	
-	public void populateProcurementVarietyList(){
-		List<ProcurementProduct> products = getProcurementProductList();
-		
+
+	public void populateProcurementVarietyList() {
+		List<ProcurementProduct> products = getProcurementProductListVarietyDesc();
+
 		JSONArray rows = new JSONArray();
+
 		products.stream().forEach(p -> {
-			
-			p.getProcurementVarieties().stream().forEach(v -> {
+
+			p.getProcurementVarieties().stream().sorted(Comparator.comparingLong(ProcurementVariety::getId).reversed()).forEach(v -> {
 				List<String> data = new ArrayList<String>();
-				data.add('"'+v.getCode()+'"');
-				data.add('"'+v.getName()+'"');
-				data.add('"'+p.getName()+'"');
-				data.add('"'+v.getNoDaysToGrow()+'"');
-				data.add('"'+"<button type='button' class='btn btn-primary btn-unreg' data-toggle='modal' data-target='#slide' onclick='openVarietyEditWindow("+v.getId()+",this)'  >Update</button>"+'"');
-				
+				data.add('"' + v.getCode() + '"');
+				data.add('"' + v.getName() + '"');
+				data.add('"' + p.getName() + '"');
+				data.add('"' + v.getNoDaysToGrow() + '"');
+				data.add('"'
+						+ "<button type='button' class='btn btn-primary btn-unreg' data-toggle='modal' data-target='#slide' onclick='openVarietyEditWindow("
+						+ v.getId() + ",this)'  >Update</button>" + '"');
+
 				rows.add(data);
 			});
-			
-			
+
 		});
 		printAjaxResponse(rows, "text/html");
-		
+
 	}
-	
-	public void populateProcurementGradeList(){
-		List<ProcurementProduct> products = getProcurementProductList();
-		
+
+	private List<ProcurementProduct> getProcurementProductListVarietyDesc() {
+		return productDistributionService.listProcurementVarietyDesc();
+	}
+
+	public void populateProcurementGradeList() {
+		List<ProcurementProduct> products = getProcurementProductListGradeDesc();
+
 		JSONArray rows = new JSONArray();
 		products.stream().forEach(p -> {
-			
+
 			p.getProcurementVarieties().stream().forEach(v -> {
-				
-				v.getProcurementGrades().stream().forEach(g -> {
+
+				v.getProcurementGrades().stream().sorted(Comparator.comparingLong(ProcurementGrade::getId).reversed()).forEach(g -> {
 					List<String> data = new ArrayList<String>();
-					data.add('"'+g.getCode()+'"');
-					data.add('"'+g.getName()+'"');
-					data.add('"'+v.getName()+'"');
-					data.add('"'+g.getPrice().toString()+'"');
-					data.add('"'+"<button type='button' class='btn btn-primary btn-unreg' data-toggle='modal' data-target='#slide' onclick='openGradeEditWindow("+g.getId()+",this)'  >Update</button>"+'"');
+					data.add('"' + g.getCode() + '"');
+					data.add('"' + g.getName() + '"');
+					data.add('"' + v.getName() + '"');
+					data.add('"' + g.getPrice().toString() + '"');
+					data.add('"'
+							+ "<button type='button' class='btn btn-primary btn-unreg' data-toggle='modal' data-target='#slide' onclick='openGradeEditWindow("
+							+ g.getId() + ",this)'  >Update</button>" + '"');
 					rows.add(data);
 				});
-				
-				
+
 			});
-			
-			
+
 		});
 		printAjaxResponse(rows, "text/html");
-		
+
 	}
-	
+
+	private List<ProcurementProduct> getProcurementProductListGradeDesc() {
+		return productDistributionService.listProcurementGradeDesc();
+	}
+
 	public void processCropUpdate() {
 		ProcurementProduct crop = productDistributionService.findProcurementProductById(Long.parseLong(id));
 		crop.setName(cropName);
 		crop.setUnit(unit);
 		productDistributionService.editProcurementProduct(crop);
 		getJsonObject().put("msg", getText("msg.cropUpdated"));
-		getJsonObject().put("title", getText("title.success"));	
+		getJsonObject().put("title", getText("title.success"));
 		sendAjaxResponse(getJsonObject());
 	}
-	
+
 	public void processCreateCrop() {
 		ProcurementProduct crop = new ProcurementProduct();
 		crop.setName(cropName);
@@ -658,10 +662,10 @@ public class ProcurementProductEnrollAction extends SwitchValidatorAction {
 		crop.setCode(idGenerator.getProductEnrollIdSeq());
 		productDistributionService.addProcurementProduct(crop);
 		getJsonObject().put("msg", getText("msg.cropUpdated"));
-		getJsonObject().put("title", getText("title.success"));	
+		getJsonObject().put("title", getText("title.success"));
 		sendAjaxResponse(getJsonObject());
 	}
-	
+
 	public Map<String, String> getCropsList() {
 		Map<String, String> crops = new LinkedHashMap<>();
 		List<ProcurementProduct> products = getProcurementProductListDesc();
@@ -673,7 +677,7 @@ public class ProcurementProductEnrollAction extends SwitchValidatorAction {
 		return crops;
 
 	}
-	
+
 	public Map<String, String> getVarietyList() {
 		Map<String, String> varietyList = new LinkedHashMap<>();
 		List<ProcurementProduct> products = getProcurementProductListDesc();
@@ -688,7 +692,7 @@ public class ProcurementProductEnrollAction extends SwitchValidatorAction {
 		return varietyList;
 
 	}
-	
+
 	public List<FarmCatalogue> getSubUomList() {
 		return subUomList;
 	}
@@ -724,7 +728,5 @@ public class ProcurementProductEnrollAction extends SwitchValidatorAction {
 	public void setSelectedVariety(String selectedVariety) {
 		this.selectedVariety = selectedVariety;
 	}
-   
-	
 
 }
