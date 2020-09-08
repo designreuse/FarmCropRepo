@@ -236,6 +236,7 @@ public class RoleAction extends SwitchValidatorAction {
 		if (role == null) {
 			command = CREATE;
 			request.setAttribute(HEADING, getText(CREATE));
+			getBranchId();
 			return INPUT;
 		} else {
 			String bId = StringUtil.isEmpty(getBranchId())
