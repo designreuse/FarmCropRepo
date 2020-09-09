@@ -17,9 +17,11 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ese.view.ESEAction;
@@ -52,6 +54,7 @@ public class RoleMenuAction extends ESEAction {
 	private List<Long> selected = new ArrayList<Long>();
 	private List<Menu> availableMenu;
 	private List<Menu> selectedMenu;
+	private List<Menu> allSubMenu = new ArrayList<Menu>();
 	private List<Role> roles = new ArrayList<Role>();
 	// private List<Menu> parentMenus;
 	private Map<Long, String> parentMenus = new LinkedHashMap<Long, String>();
@@ -59,6 +62,10 @@ public class RoleMenuAction extends ESEAction {
 
 	private String branchId_F;
 	private String subBranchId_F;
+	
+	private String selectedRoleId;
+	private String selectedParentMenuId;
+	
 	@Autowired
 	private IUserService userService;
 
@@ -432,6 +439,8 @@ public class RoleMenuAction extends ESEAction {
                    Map<String,Menu> menusMap = new HashMap<>();
                 Map<String, List<Menu>> menus = roleService.getAvailableSelectedSubMenus(getSelectedRole(),
                         getSelectedParentMenu());
+                
+                
                 availableMenu = menus.get(IRoleService.AVAILABLE);
                 for (Menu aMenu : availableMenu) {
                     menusMap.put(aMenu.getLabel(), aMenu);
@@ -450,6 +459,11 @@ public class RoleMenuAction extends ESEAction {
                     
                 }
                 selectedMenu = menus.get(IRoleService.SELECTED);
+                
+                allSubMenu = new ArrayList<Menu>();
+                allSubMenu.addAll(menus.get(IRoleService.AVAILABLE));
+                allSubMenu.addAll(menus.get(IRoleService.SELECTED));
+                
                 Object[] roleInfo = roleService.findRoleInfo(selectedRole);
                 if (!ObjectUtil.isEmpty(roleInfo[2])) {
                     branchId_F = roleInfo[2].toString();
@@ -563,5 +577,42 @@ public class RoleMenuAction extends ESEAction {
 			return clientService.listChildBranchIds(getBranchId()).stream().filter(branch -> !ObjectUtil.isEmpty(branch))
 					.collect(Collectors.toMap(BranchMaster::getBranchId, BranchMaster::getName));
 		}
+
+	public List<Menu> getAllSubMenu() {
+		return allSubMenu;
+	}
+
+	public void setAllSubMenu(List<Menu> allSubMenu) {
+		this.allSubMenu = allSubMenu;
+	}
+	
+	public void populateAvailableSubMenusByRole() {
+		Map<String, List<Menu>> menus = roleService.getAvailableSelectedSubMenus(Long.valueOf(getSelectedRoleId()),
+				Long.valueOf(getSelectedParentMenuId()));
+		List<Menu> existingMenusForRole = menus.get(IRoleService.SELECTED);
+		List<String> existingMenuIds = existingMenusForRole.stream().map(m -> String.valueOf(m.getId()))
+				.collect(Collectors.toList());
+
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("existingMenuIds", existingMenuIds);
+		sendAjaxResponse(jsonObject);
+
+	}
+
+	public String getSelectedRoleId() {
+		return selectedRoleId;
+	}
+
+	public void setSelectedRoleId(String selectedRoleId) {
+		this.selectedRoleId = selectedRoleId;
+	}
+
+	public String getSelectedParentMenuId() {
+		return selectedParentMenuId;
+	}
+
+	public void setSelectedParentMenuId(String selectedParentMenuId) {
+		this.selectedParentMenuId = selectedParentMenuId;
+	}
 	
 }
