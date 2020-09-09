@@ -37,7 +37,7 @@ public class TxnSchedulerService implements ITxnSchedulerService {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Response processTxnRequestScheduler(Request request) throws Exception {
+	public Response mobileRequestCollectionScheduler(Request request) throws Exception {
 
 		Response response = new Response();
 		ESETxn eseTxn = new ESETxn();

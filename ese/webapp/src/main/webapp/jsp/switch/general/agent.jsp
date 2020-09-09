@@ -1,48 +1,16 @@
 <%@ include file="/jsp/common/form-assets.jsp"%>
 <%@ include file="/jsp/common/detail-assets.jsp"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-
+<%@ taglib prefix="sb" uri="/struts-bootstrap-tags"%>
 
 <head>
 <META name="decorator" content="swithlayout">
-<s:head />
-<style type="text/css">
-.alignTopLeft {
-	float: left;
-	width: 6em;
-}
-
-#serviceLocationDiv select {
-	width: 260px !important;
-}
-
-#serviceLocationDiv input {
-	width: 100px;
-	height: 24px;
-	/*background:#204190;border:1px solid #224395 !important;*/
-	color: #fff;
-	font-size: 12px;
-	text-align: left;
-	padding-left: 18px;
-}
-
-#serviceLocationDiv td {
-	border: none !important;
-}
-
-#serviceLocationDiv>table TD>label {
-	font-weight: bold !important;
-}
-
-.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th,
-	.table>thead>tr>td, .table>thead>tr>th {
-	padding: 3.5px;
-}
-</style>
+<link rel="stylesheet" href="plugins/select2/select2.min.css">
 </head>
 <script>
 var tenant='<s:property value="getCurrentTenantId()"/>';
 var command ='<s:property value="command"/>';
+var selectedGroup='<s:property value="selGroupArry"/>';
 	jQuery(document).ready(function() {		
 		$("#buttonAdd1").on('click', function (event) {  
            //event.preventDefault();
@@ -50,83 +18,24 @@ var command ='<s:property value="command"/>';
             el.prop('disabled', true);
            // setTimeout(function(){el.prop('disabled', false); }, 1000);
       });
-		if(tenant=="chetna" || tenant=='livelihood'){
-			jQuery("#pratibhaWarehouseDiv").hide();
-			if('<s:property value="command"/>'=="create"){
-				jQuery(".groupSelect").hide();
-				jQuery("#serviceLocationDiv").hide();
-				jQuery("#warehouseDiv").hide();
-				jQuery("#ginnerDiv").hide();
-				jQuery("#spinnerDiv").hide();
-				}else{
-					//$('#selectedAgentType').prop('disabled',true);
-					var agentType='<s:property value="selectedAgentType"/>';
-					if(agentType=="1" || agentType=="2"){
-						jQuery(".groupSelect").show();
-						jQuery("#serviceLocationDiv").show();
-						jQuery("#warehouseDiv").hide();
-						jQuery("#ginnerDiv").hide();
-						jQuery("#spinnerDiv").hide();
-					}else if(agentType=="3"){
-						jQuery(".groupSelect").show();
-						jQuery("#serviceLocationDiv").show();
-						jQuery("#warehouseDiv").show();
-						jQuery("#ginnerDiv").hide();
-						jQuery("#spinnerDiv").hide();
-					}else if(agentType=="4"){
-						jQuery(".groupSelect").show();
-						jQuery("#serviceLocationDiv").hide();
-						jQuery("#warehouseDiv").hide();
-						jQuery("#ginnerDiv").show();
-						jQuery("#spinnerDiv").hide();
-					}else if(agentType=="5"){
-						jQuery(".groupSelect").show();
-						jQuery("#serviceLocationDiv").hide();
-						jQuery("#warehouseDiv").hide();
-						jQuery("#ginnerDiv").hide();
-						jQuery("#spinnerDiv").show();
-					}
-					
-				}
-			loadSection(jQuery("#selectedAgentType").val());
-			
-		}else if(tenant=="pratibha"){
-			var ware=$('#warehouseName').val();
-			$('#hiddenWarehouseName').val(ware);
-			jQuery(".groupSelect").show();
-			jQuery("#serviceLocationDiv").show();
-			jQuery("#warehouseDiv").hide();
-			jQuery("#ginnerDiv").hide();
-			jQuery("#spinnerDiv").hide();
-			jQuery("#pratibhaWarehouseDiv").show();
-			 if('<s:property value="command"/>'=="update"){
-				 $('#selectedAgentType').attr("disabled",true);
-				 if(ware!=''){
-					$('#warehouseName').attr("disabled",true);
-				}
+		//alert(selectedGroup);
+		
+		 if('<s:property value="command"/>'=="update"){
+			 
+			 if(!isEmpty(selectedGroup)){
+				    if (selectedGroup != null && selectedGroup.trim() != "") {
+                        var values = selectedGroup.split("\\,");
+
+                        $.each(selectedGroup.split(","), function (i, e) {
+                            $("#availableWarehouse option[value='" + e.trim() + "']")
+                                    .prop("selected", true);
+                        });
+                        $("#availableWarehouse").select2();
+                    }
+                    
 			 }
-			 var agentType='<s:property value="selectedAgentType"/>';
-			 if(agentType=="1" || agentType=="2"){
-				jQuery("#pratibhaWarehouseDiv").show();
-				if(agentType=="1"){
-					jQuery("#lgDiv").hide();
-				}
-				else{
-					jQuery("#lgDiv").show();
-				}
-			}
-			if(agentType=="3"){
-					jQuery("#pratibhaWarehouseDiv").hide();
-					jQuery("#lgDiv").hide();
-					jQuery(".groupSelect").hide();
-					if('<s:property value="command"/>'=="update"){
-						$('#warehouseName').val('')
-						$(".select2").select2();
-					}
-			}
-			
-		}
-		else{
+			 
+		 }
 			jQuery("#pratibhaWarehouseDiv").hide();
 			var ware=$('#warehouseName').val();
 			$('#hiddenWarehouseName').val(ware);
@@ -140,13 +49,8 @@ var command ='<s:property value="command"/>';
 						$('#warehouseName').attr("disabled",true);
 					}
 					 }
-		}
-		/* if(tenant=="pratibha"){
+		
 			
-		}
-		else{
-			
-		} */
 		$(".select2").select2();
 		var creInfo=($('input:radio[name="agent.status"]:checked').val());
 		if(creInfo==0){
@@ -158,110 +62,12 @@ var command ='<s:property value="command"/>';
 			jQuery("#confPasswordDiv").show();
 		}
 		
-		var chkStatus='<s:property value="agent.trainingExists"/>';
-		if(chkStatus=="true"){
-			$(".trainingStatus").show();
-		}else{
-			$(".trainingStatus").hide();
-			
-		}
-		
-		var selectedTrainings ='<s:property value="agent.selectedtrainings" />';
-		
-		if (selectedTrainings!= null && selectedTrainings.trim() != "") {
-            var values = selectedTrainings.split("\\,");
-
-            $.each(selectedTrainings.split(","), function (i, e) {
-               $("#trainingId option[value='" + e.trim() + "']")
-                        .prop("selected", true);
-            });
-            $("#trainingId").select2();
-        }
-		 $("#trainingCheck").click(function(){
-	            if($(this).prop("checked") == true){
-	               $(".trainingStatus").show();
-	            }
-	            else if($(this).prop("checked") == false){
-	            	$(".trainingStatus").hide();
-	            }
-	        });
-		 
 	
 		
 	});
 	
-	function enableFarmerPhotoModal(idArr,type) {
-		try {
-			$("#mbody").empty();
-			var mbody = "";
-			mbody = "";
-			mbody = "<div class='item active'>";
-			mbody += '<img src="fieldStaff_populateImage.action?id='
-					+ idArr + '&type='+type+'"/>';
-			mbody += "</div>";
-			$("#mbody").append(mbody);
-			
-			document.getElementById("enablePhotoModal").click();
-		} catch (e) {
-			alert(e);
-		}
-	}
+
 	
-	function loadSection(val){
-		//alert(val);
-		var agentType= val;
-		//alert(agentType);
-		if(agentType=="1" || agentType=="2"){
-			if(tenant=='pratibha'){
-				var ware=$('#warehouseName').val();
-				if(ware!=''){
-					$('#warehouseName').attr("disabled",true);
-				}
-				else{
-					$('#warehouseName').attr("disabled",false);
-				}
-				jQuery("#pratibhaWarehouseDiv").show();
-				if(agentType=="1"){
-					jQuery("#lgDiv").hide();
-				}
-				else{
-					jQuery("#lgDiv").show();
-				}
-				}
-			jQuery(".groupSelect").show();
-			jQuery("#serviceLocationDiv").show();
-			jQuery("#warehouseDiv").hide();
-			jQuery("#ginnerDiv").hide();
-			jQuery("#spinnerDiv").hide();
-		}else if(agentType=="3"){
-			if(tenant=='pratibha'){
-				$('#warehouseName').val('');
-				$(".select2").select2();
-			jQuery("#pratibhaWarehouseDiv").hide();
-			jQuery("#lgDiv").hide();
-			}
-			else{
-			jQuery(".groupSelect").show();
-			jQuery("#serviceLocationDiv").show();
-			jQuery("#warehouseDiv").show();
-			jQuery("#ginnerDiv").hide();
-			jQuery("#spinnerDiv").hide();
-			}
-		}else if(agentType=="4"){
-			jQuery(".groupSelect").show();
-			jQuery("#serviceLocationDiv").hide();
-			jQuery("#warehouseDiv").hide();
-			jQuery("#ginnerDiv").show();
-			jQuery("#spinnerDiv").hide();
-		}else if(agentType=="5"){
-			jQuery(".groupSelect").show();
-			jQuery("#serviceLocationDiv").hide();
-			jQuery("#warehouseDiv").hide();
-			jQuery("#ginnerDiv").hide();
-			jQuery("#spinnerDiv").show();
-		}
-		
-	}
 </script>
 <body>
 
@@ -288,572 +94,671 @@ var command ='<s:property value="command"/>';
 				<s:hidden key="account.accountType" />
 			</s:if>
 		</s:if>
+			<div class="ferror" id="errorDiv" class=" hide alert alert-danger">
+			<s:actionerror theme="bootstrap" />
+			<s:fielderror theme="bootstrap" />
+		</div>
 
-		<div class="appContentWrapper marginBottom">
-			<div class="error">
-				<sup>*</sup>
-				<s:text name="reqd.field" />
-				<s:actionerror />
-				<s:fielderror />
-			</div>
-			<div class="formContainerWrapper">
-				<h2>
-					<s:text name='%{"info"+type}' />
-				</h2>
-				<div class="flexform">
-					<s:if test='"update".equalsIgnoreCase(command)'>
-						<s:if test='branchId==null'>
-							<div class="flexform-item">
-								<label for="txt"><s:text name="app.branch" /> </label>
-								<div class="form-element">
-									<label><s:property
-											value="%{getBranchName(agent.branchId)}" /></label>
+	<div id="accordion" class="custom-accordion pers_info">
+			<div class="card-header card mb-1 shadow-none">
+				<a href="#persInfo" class="text-dark" data-toggle="collapse"
+					aria-expanded="true" aria-controls="collapseOne">
+					<div class="card-header" id="headingOne">
+						<h6 class="m-0">
+							<div class="wizard-wrapper">
+								<div class="wizard-icon">
+									<span class="svg-icon svg-icon-2x"> <!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/General/User.svg-->
+										<svg xmlns="http://www.w3.org/2000/svg"
+											xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+											height="24px" viewBox="0 0 24 24" version="1.1">
+																		<g stroke="none" stroke-width="1" fill="none"
+												fill-rule="evenodd">
+																			<polygon points="0 0 24 0 24 24 0 24"></polygon>
+																			<path
+												d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z"
+												fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+																			<path
+												d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z"
+												fill="#000000" fill-rule="nonzero"></path>
+																		</g>
+																	</svg> <!--end::Svg Icon-->
+									</span>
+
+								</div>
+								<div class="wizard-label">
+
+									<h3 class="wizard-title">
+										<s:text name='%{"info"+type}' />
+									</h3>
+									<div class="wizard-desc">Setup Agent Basic Information
+										Details</div>
 								</div>
 							</div>
-						</s:if>
-						<div class="flexform-item">
-							<label><s:text name='%{"agentId"+type}' /></label>
-							<div class="form-element">
-								<s:textfield id="agentID" name="agent.profileId" readonly="true"
-									cssClass="form-control " />
-							</div>
-						</div>
-					</s:if>
-					<s:else>
-						<div class="flexform-item">
-							<label><s:text name='%{"agentId"+type}' /><sup
-								style="color: red;">*</sup></label>
-							<div class="form-element">
-								<s:textfield name="agent.profileId" maxlength="12"
-									cssClass="form-control" />
-							</div>
-						</div>
-					</s:else>
-					<div class="flexform-item">
-						<label><s:text name="personalInfo.firstName" /><sup
-							style="color: red;">*</sup></label>
-						<div class="form-element">
-							<s:textfield id="firstName" name="agent.personalInfo.firstName"
-								theme="simple" size="25" cssClass="upercls form-control"
-								maxlength="35" />
-						</div>
+							<i
+								class="mdi mdi-minus float-right accor-plus-icon collapse-icon-custom"></i>
+						</h6>
 					</div>
-					<div class="flexform-item">
-						<label><s:text name="personalInfo.lastName" /></label>
-						<div class="form-element">
-							<s:textfield id="lastName" name="agent.personalInfo.lastName"
-								theme="simple" size="25" cssClass="upercls form-control "
-								maxlength="35" />
-						</div>
-					</div>
-				<s:if test="currentTenantId=='chetna' || currentTenantId=='pratibha' || currentTenantId=='livelihood'">
-					<div class="flexform-item">
-						<label><s:text name="agent.agentType" /><sup
-							style="color: red;">*</sup></label>
-						<div class="form-element">
-							<s:select id="selectedAgentType" headerKey=""
-								headerValue="%{getText('txt.select')}" name="selectedAgentType"
-								list="agentTypes" listKey="id" listValue="name" theme="simple"
-								cssClass="form-control  select2" onChange="loadSection(this.value)"/>
-						</div>
-					</div> 
-				</s:if>
-					<div class="flexform-item">
-						<label><s:text name="personalInfo.identityType" /></label>
-						<div class="form-element">
-							<s:select id="identityType" headerKey=""
-								headerValue="%{getText('txt.select')}"
-								name="agent.personalInfo.identityType" list="identityTypeList"
-								listKey="key" listValue="value" theme="simple"
-								cssClass="form-control  select2" />
-						</div>
-					</div>
+				</a>
 
-					<div class="flexform-item">
-						<label><s:text name="personalInfo.identityNumber" /></label>
-						<div class="form-element">
-							<s:textfield name="agent.personalInfo.identityNumber"
-								theme="simple" size="25" maxlength="16"
-								cssClass="form-control  " />
-						</div>
-					</div>
-					<s:if test="currentTenantId=='ocp'">
-					<div class="flexform-item">
-						<label for="txt"> <s:property
-								value="%{getLocaleProperty('agent.photo')}" /> <s:if
-								test="currentTenantId=='olivado'">
-								<sup id="mandatory" style="color: red;">*</sup>
-							</s:if> <span style="font-size: 8px"> <s:text
-									name="farmer.imageTypes" /> <font color="red"> <s:text
-										name="imgSizeMsg" /></font>
-						</span>
-						</label>
-						<div class="form-element">
-							<s:file name="agentImage" id="agentImage"
-								onchange="checkImgHeightAndWidth(this)" cssClass="form-control" />
-							<s:if test="command =='update'">
-
-								<button type='button' class='btn btn-sm pull-right photo'
-									style='margin-right: 15%'
-									onclick="enableFarmerPhotoModal(<s:property value="agent.id"/>,1)">
-									<i class='fa fa-picture-o' aria-hidden='true'></i>
-								</button>
-							</s:if>
-						</div>
-					</div>
-					</s:if>
-					
-
-					<div class="flexform-item">
-						<label><s:text name="personalInfo.sex" /></label>
-						<div class="form-element">
-							<s:radio list="genderType" listKey="key" listValue="value"
-								name="agent.personalInfo.sex" theme="simple" />
-						</div>
-					</div>
-
-					<div class="flexform-item">
-						<label><s:text name="personalInfo.dateOfBirth" /></label>
-						<div class="form-element">
-							<s:textfield name="dateOfBirth" theme="simple" size="25"
-								maxlength="16" id="calendar" cssClass="form-control " />
-						</div>
-					</div>
-
-				</div>
 			</div>
 
-		 <s:if test='"cooperativeManager".equalsIgnoreCase(type)'>
-				<div class="flexi flexi10 flexi flexi10-flex-full">
-					<label> <s:text name="agent.cooperative" /> <s:if
-							test="type=='cooperativeManager'">
-							<sup style="color: red;">*</sup>
-						</s:if></label>
-					<div class="form-element">
-						<s:select id="cooperative" headerKey=""
-							headerValue="%{getText('txt.select')}" list="cooperativeList"
-							listKey="name" listValue="name" theme="simple"
-							name="selectedCooperative" onchange="listWareHouses(this)"
-							cssClass="form-control " />
+			<div id="persInfo" class="collapse show" aria-labelledby="headingOne"
+				data-parent="#accordion">
+				<div class="card-body">
+
+					<div class="row">
+<s:if test='"update".equalsIgnoreCase(command)'>
+						<div class="col-md-4">
+							<div class="form-group profileId">
+								<label for="txt"><s:text name='Agent Id' />
+								</label>
+								<div class="">
+									<s:textfield id="agentID" name="agent.profileId" readonly="true"
+									cssClass="form-control " />
+								</div>
+							</div>
+						</div></s:if><s:else>
+						<div class="col-md-4">
+							<div class="form-group profileId">
+								<label for="txt"> <s:text name='Agent Id' /><sup
+								style="color: red;">*</sup>
+								</label>
+								<div class="">
+								<s:textfield name="agent.profileId" maxlength="12"
+									cssClass="form-control" />
+								</div>
+							</div>
+						</div></s:else>
+
+
+						<div class="col-md-4">
+							<div class="form-group firstName">
+								<label for="txt"> <s:text name="personalInfo.firstName" /><sup
+							style="color: red;">*</sup>
+								</label>
+								<div class="">
+									<s:textfield id="firstName" name="agent.personalInfo.firstName" cssClass="upercls form-control"
+								maxlength="35" />
+								</div>
+							</div>
+						</div>
+	<div class="col-md-4">
+							<div class="form-group lastName">
+								<label for="txt"><s:text name="personalInfo.lastName" /></label>
+								<div class="">
+									<s:textfield id="lastName" name="agent.personalInfo.lastName" cssClass="upercls form-control "
+								maxlength="35" />
+								</div>
+							</div>
+						</div>
+
 					</div>
 
-				</div>
-			</s:if>
-			<s:if test="type=='fieldStaff'">
+					<div class="row">
+					
+						<div class="col-md-4">
+							<div class="form-group identityType">
+								<label for="txt"><s:text name="personalInfo.identityType" /> </label>
+								<div class="">
+									<s:select id="identityType" headerKey=""
+								headerValue="%{getText('txt.select')}"
+								name="agent.personalInfo.identityType" list="identityTypeList"
+								listKey="key" listValue="value" 
+								cssClass="form-control" />
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group identityNumber">
+								<label for="txt"><s:text name="personalInfo.identityNumber" /> </label>
+								<div class="">
+									<s:textfield name="agent.personalInfo.identityNumber" maxlength="16"
+								cssClass="form-control" />
+								</div>
+							</div>
+						</div>
+						
+						
+						
+ 						<div class="col-md-4">
+							<div class="form-group sex">
+								<label for="txt"> <s:text name="personalInfo.sex" />
+								</label>
+								<div class="">
+									<s:select list="genderType" headerKey="" id="sex"
+								headerValue="%{getText('txt.select')}" listKey="key" listValue="value"
+								name="agent.personalInfo.sex" cssClass="form-control" />
+
+								</div>
+							</div>
+						</div> 
+						
+					</div>
+
+
+					<div class="row">
+
+						<div class="col-md-4">
+							<div class="form-group dateOfBirth">
+								<label for="txt"> <s:text name="personalInfo.dateOfBirth" />
+								</label>
+								<div class="">
+					<s:textfield name="dateOfBirth" maxlength="16" id="calendar" cssClass="form-control " />
+
+								</div>
+
+							</div>
+
+						</div>
+
+					<s:if test="type=='fieldStaff'">
 				<s:hidden name="agent.agentType.id" value="2" />
 			</s:if>
 			<s:else>
 				<s:hidden name="agent.agentType.id" value="1" />
 			</s:else> 
-
-		</div>
-
-		<div class="appContentWrapper marginBottom">
-			<div class="formContainerWrapper">
-				<h2>
-					<s:text name="info.contact" />
-				</h2>
-				<div class="flexform">
-					<div class="flexform-item">
-						<label><s:text name="contactInfo.address" /></label>
-						<div class="form-element">
-							<s:textarea name="agent.contactInfo.address1" theme="simple"
-								size="25" maxlength="150" cssClass="form-control "
-								cssStyle="height:40px" />
-						</div>
 					</div>
-					<s:if test="currentTenantId!='ocp'">
-						<div class="flexform-item">
-							<label><s:text name="contactInfo.phoneNumber" /></label>
-							<div class="form-element">
-								<s:textfield name="agent.contactInfo.phoneNumber" theme="simple"
-									size="25" maxlength="12" cssClass="form-control " />
-							</div>
-						</div>
-					</s:if>
-
-					<div class="flexform-item">
-						<label><s:text name="agentcontactInfo.mobileNumber" /></label>
-						<div class="form-element">
-							<s:textfield name="agent.contactInfo.mobileNumber" theme="simple"
-								size="25" maxlength="15" cssClass="form-control " />
-						</div>
-					</div>
-
-					<div class="flexform-item">
-						<label><s:text name="agentcontactInfo.email" /></label>
-						<div class="form-element">
-							<s:textfield name="agent.contactInfo.email" theme="simple"
-								size="25" maxlength="45" cssClass="form-control " />
-						</div>
-					</div>
-
-				</div>
-			</div>
-		</div>
-
-		<div class="appContentWrapper marginBottom">
-			<div class="formContainerWrapper">
-				<h2>
-					<s:text name="info.credential" />
-				</h2>
-				<div class="flexform">
-					<div class="flexform-item">
-						<label><s:text name="agent.status.name" /><sup
-							style="color: red;">*</sup></label>
-						<div class="form-element">
-							<s:radio list="statuses" id="status" listKey="key"
-								listValue="value" name="agent.status" theme="simple"
-								value="StatusDefaultValue" onchange="listpassword(this)" />
-						</div>
-					</div>
-
-					<%-- <div class="flexform-item">
-						<label><s:text name="accountBalance" /></label>
-						<div class="form-element">
-							<s:textfield name="agent.accountRupee"
-								onkeypress="return isNumber(event)" maxlength="9"
-								cssClass="form-control " style="width:68%" />
-
-							<s:textfield name="agent.accountPaise" type="text"
-								onkeypress="return isNumber(event)" maxlength="2"
-								cssClass="form-control " style="width:30%;margin-left:2%" />
-						</div>
-					</div> --%>
-
-					<div class="flexform-item" id="passwordDiv">
-						<label><s:text name="agent.passwordName" /> <sup
-							style="color: red;">*</sup></label>
-
-						<div class="form-element">
-							<s:password showPassword="true" name="agent.password"
-								id="password" theme="simple" size="15" value="%{agent.password}"
-								cssClass="form-control " maxlength="6" />
-						</div>
-					</div>
-
-					<div class="flexform-item" id="confPasswordDiv">
-						<label><s:text name="agent.confPasswordName" /> <sup
-							style="color: red;">*</sup></label>
-						<div class="form-element">
-							<s:password showPassword="true" name="agent.confirmPassword"
-								id="password1" theme="simple" size="15"
-								value="%{agent.confirmPassword}" cssClass="form-control "
-								maxlength="6" />
-						</div>
-					</div>
-
+					
 
 				</div>
 			</div>
 		</div>
 		
-<%-- 	
-		<div class="appContentWrapper marginBottom">
-			<div class="formContainerWrapper">
-				<h2>
-					<s:property value="%{getLocaleProperty('info.training')}" />
-				</h2>
-				<div class="flexform">
-					<div class="flexform-item">
-						<label><s:text name="trainingExists" /></label>
-						<div class="form-element">
-							<label><s:checkbox name="agent.trainingExists"
-									id="trainingCheck" /></label>
+<div id="accordion" class="custom-accordion contact_info">
+			<div class="card-header card mb-1 shadow-none">
+				<a href="#contactInfo" class="text-dark" data-toggle="collapse"
+					aria-expanded="true" aria-controls="collapseTwo">
+					<div class="card-header" id="headingTwo">
+						<h6 class="m-0">
+							<div class="wizard-wrapper">
+								<div class="wizard-icon">
+									<span class="svg-icon svg-icon-2x"> <!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/General/User.svg-->
+										<svg xmlns="http://www.w3.org/2000/svg"
+											xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+											height="24px" viewBox="0 0 24 24" version="1.1">
+																		<g stroke="none" stroke-width="1" fill="none"
+												fill-rule="evenodd">
+																			<polygon points="0 0 24 0 24 24 0 24"></polygon>
+																			<path
+												d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z"
+												fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+																			<path
+												d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z"
+												fill="#000000" fill-rule="nonzero"></path>
+																		</g>
+																	</svg> <!--end::Svg Icon-->
+									</span>
+
+								</div>
+								<div class="wizard-label">
+
+									<h3 class="wizard-title">
+									<s:text name="info.contact" />
+									</h3>
+									<div class="wizard-desc">Setup Agent Contact Information
+										Details</div>
+								</div>
+							</div>
+							<i
+								class="mdi mdi-minus float-right accor-plus-icon collapse-icon-custom"></i>
+						</h6>
+					</div>
+				</a>
+
+			</div>
+
+			<div id="contactInfo" class="collapse show" aria-labelledby="headingTwo"
+				data-parent="#accordion">
+				<div class="card-body">
+
+					<div class="row">
+
+						<div class="col-md-4">
+							<div class="form-group address">
+								<label for="txt"><s:text name="contactInfo.address" />
+								</label>
+								<div class="">
+									<s:textarea name="agent.contactInfo.address1"
+								size="25" maxlength="150" cssClass="form-control "
+								cssStyle="height:40px" />
+								</div>
+							</div>
 						</div>
+						<div class="col-md-4">
+							<div class="form-group phoneNumber">
+								<label for="txt"> <s:text name="contactInfo.phoneNumber" />
+								</label>
+								<div class="">
+								<s:textfield name="agent.contactInfo.phoneNumber" maxlength="12" cssClass="form-control " />
+								</div>
+							</div>
+						</div>
+
+
+						<div class="col-md-4">
+							<div class="form-group firstName">
+								<label for="txt"> <s:text name="agentcontactInfo.mobileNumber" /><sup
+							style="color: red;">*</sup>
+								</label>
+								<div class="">
+									<s:textfield name="agent.contactInfo.mobileNumber" maxlength="15" cssClass="form-control " />
+								</div>
+							</div>
+						</div>
+
+
 					</div>
 
-					<div class="flexform-item trainingStatus">
-						<label><s:text name="topic" /></label>
-						<div class="form-element">
-							<s:select list="trainingList" name="agent.selectedtrainings"
-								listKey="key" listValue="value" theme="simple" id="trainingId"
-								cssClass="form-control input-sm select2" multiple="true" />
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	 --%>
-
-		<s:if test='"update".equalsIgnoreCase(command) &&  card != null  '>
-			<div class="appContentWrapper marginBottom">
-				<div class="formContainerWrapper">
-					<h2>
-						<s:text name="info.card" />
-					</h2>
-					<div class="flexform">
-						<div class="flexform-item">
-							<label><s:text name="agent.card.id" /></label>
-							<div class="form-element">
-								<label><s:property value="card.cardId" /></label>
-							</div>
-						</div>
-
-						<div class="flexform-item">
-							<label><s:text name="status.card.name" /><sup
-								style="color: red;">*</sup></label>
-							<div class="form-element">
-								<s:select id="cardStat" name="card.status" list="cardStatusList"
-									listKey="key" listValue="value" theme="simple"
-									cssClass="form-control " />
-							</div>
-						</div>
-
-						<div class="flexform-item">
-							<label><s:text name="rewrite.card.name" /><sup
-								style="color: red;">*</sup></label>
-							<div class="form-element">
-								<s:select id="cardWrite" name="card.cardRewritable"
-									list="cardRewriteList" listKey="key" listValue="value"
-									theme="simple" cssClass="form-control " />
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</s:if>
-
-		<s:if
-			test='"update".equalsIgnoreCase(command) &&  account != null  && type=="fieldStaff"'>
-			<div class="appContentWrapper marginBottom">
-				<div class="formContainerWrapper">
-					<h2>
-						<s:text name="info.account" />
-					</h2>
-					<div class="flexform">
-						<div class="flexform-item">
-							<label><s:text name="agent.account.id" /></label>
-							<div class="form-element">
-								<s:property value="account.accountNo" />
-							</div>
-						</div>
-
-						<div class="flexform-item">
-							<label><s:text name="agent.account.type" /></label>
-							<div class="form-element">
-								<s:text name='%{account.accountType}' />
-							</div>
-						</div>
-
-						<div class="flexform-item">
-							<label><s:text name="Agentstatus.account.name" /><sup
-								style="color: red;">*</sup></label>
-							<div class="form-element">
-								<s:select id="accountStat" name="account.status"
-									list="accountStatusList" listKey="key" listValue="value"
-									theme="simple" cssClass="form-control " />
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</s:if>
-	
-		<div class="appContentWrapper marginBottom groupSelect">
-			<div class="formContainerWrapper">
-				<h2>
-					<s:property value="%{getLocaleProperty('info.samithi')}" />
-				</h2>
-			</div>
-			<div class="flexiWrapper" id="lgDiv">
-				<div class="flexi flexi10 flexi flexi10-flex-full"
-					style="width: 100%; padding-top: 10px;">
-
-
-					<s:if test="type =='fieldStaff'">
-	
-						
-						<div id="serviceLocationDiv">
-				<%-- 	<label><s:property
-								value="%{getLocaleProperty('profile.samithi')}" /><sup
-							style="color: red;">*</sup></label> --%>
-							<div id="dynOpt" class="col-xs-4">
-								<s:if test='"update".equalsIgnoreCase(command)'>
-									<div class="col-xs-10">
-										<s:text name="%{getLocaleProperty('availableWarehouse')}"
-											var="availableTitle" />
-
-									</div>
-									<div class="col-xs-10">
-										<s:text name="selectedWarehouse" var="selectedTitle" />
-										<s:text
-											name="%{getLocaleProperty('availableWarehouse.yield')}"
-											var="availableTitle" />
-										<s:set var="availableTitle"
-											value="%{getLocaleProperty('availableWarehouse')}" />
-										<s:set var="selectedTitle"
-											value="%{getLocaleProperty('selectedWarehouse')}" />
-									</div>
-									<div class="col-xs-10">
-										<s:text name="*" var="reqdSymbol">
-											<sup style="color: red;">*</sup>
-										</s:text>
-									</div>
-									<s:text name="RemoveAll" var="rmvall" />
-									<s:text name="Remove" var="rmv" />
-									<s:text name="Add" var="add" />
-									<s:text name="AddAll" var="addall" />
-									<s:optiontransferselect id="optrnsfr" cssClass="form-control "
-										cssStyle="width:500px;height:450px;overflow-x:auto;"
-										doubleCssStyle="width:500px;height:450px;overflow-x:auto;"
-										doubleCssClass="form-control" buttonCssClass="optTrasel"
-										allowSelectAll="false"
-										buttonCssStyle="font-weight:bold!important;"
-										allowUpDownOnLeft="false" labelposition="top"
-										allowUpDownOnRight="false" name="availableName"
-										list="availableWarehouse" leftTitle="%{availableTitle}"
-										rightTitle="%{selectedTitle} %{reqdSymbol}"
-										headerKey="headerKey" doubleName="selectedName"
-										doubleId="select" doubleList="selectedWarehouse"
-										doubleHeaderKey="doubleHeaderKey"
-										addAllToLeftLabel="%{rmvall}" addAllToRightLabel="%{addall}"
-										addToLeftLabel="%{rmv}" addToRightLabel="%{add}" />
-								</s:if>
-								<s:else>
-									<s:set var="availableTitle"
-										value="%{getLocaleProperty('availableWarehouse')}" />
-									<s:set var="selectedTitle"
-										value="%{getLocaleProperty('selectedWarehouse')}" />
-									<s:text name="*" var="reqdSymbol">
-
-									</s:text>
-									<s:text name="RemoveAll" var="rmvall" />
-									<s:text name="Remove" var="rmv" />
-									<s:text name="Add" var="add" />
-									<s:text name="AddAll" var="addall" />
-									<s:optiontransferselect id="optrnsfr" cssClass="form-control "
-										cssStyle="width:500px;height:450px;overflow-x:auto;"
-										doubleCssStyle="width:500px;height:450px;overflow-x:auto;"
-										doubleCssClass="form-control" buttonCssClass="optTrasel"
-										allowSelectAll="false"
-										buttonCssStyle="font-weight:bold!important;"
-										allowUpDownOnLeft="false" labelposition="top"
-										allowUpDownOnRight="false" name="availableName"
-										list="availableWarehouse" leftTitle="%{availableTitle}"
-										rightTitle="%{selectedTitle} %{reqdSymbol}"
-										headerKey="headerKey" doubleName="selectedName"
-										doubleId="select" doubleList="selectedWarehouse"
-										doubleHeaderKey="doubleHeaderKey"
-										addAllToLeftLabel="%{rmvall}" addAllToRightLabel="%{addall}"
-										addToLeftLabel="%{rmv}" addToRightLabel="%{add}" />
-								</s:else>
-							</div>
-						</div>
-						
-					</s:if>
+					<div class="row">
 					
-					
-
-
-				</div>
-			</div>
-
-			<div id="warehouseDiv">
-						<div class="flexform-item" >
-						<label for="txt"><s:property
-								value="%{getLocaleProperty('procurementCenter')}" /><sup
-							style="color: red;">*</sup></label>
-						<div class="form-element">
-							<s:select name="selectedProcurementCenter"
-								list="listProcurementCenter" headerKey=""
-								headerValue="Select" lisykey="key"
-								listValue="value" id="selectedProcurementCenter"
-								cssClass="col-sm-6 form-control select2" />
-						</div>
-					</div>
-						</div>
-						<div id="ginnerDiv">
-						<div class="flexform-item" >
-						<label for="txt"> <s:property
-							value="%{getLocaleProperty('to')}" /><sup style="color: red;">*</sup>
-					</label>
-						<div class="form-element">
-							<s:select name="selectedGinningCenter" list="ginnerCenterList" headerKey=""
-							headerValue="%{getText('txt.select')}" id="selectedGinningCenter"
-							cssClass="select2 form-control" />
-						</div>
-					</div>
-						
-						</div>
-						
-				<div id="spinnerDiv">
-						<div class="flexform-item" >
-						<label for="txt"> <s:property
-							value="%{getLocaleProperty('spinner')}" /><sup style="color: red;">*</sup>
-					</label>
-						<div class="form-element">
-							<s:select name="selectedSpinner" list="spinnerList" headerKey=""
-							headerValue="%{getText('txt.select')}" id="selectedSpinner"
-							cssClass="select2 form-control" />
-						</div>
-					</div>
-						
+						<div class="col-md-4">
+							<div class="form-group identityType">
+								<label for="txt"><s:text name="agentcontactInfo.email" /> </label>
+								<div class="">
+									<s:textfield name="agent.contactInfo.email" maxlength="45" cssClass="form-control " />
+								</div>
+							</div>
 						</div>
 				
-					<div id="pratibhaWarehouseDiv">
-						<div class="flexform-item" >
-						<label for="txt"><s:property
-								value="%{getLocaleProperty('warehouse')}" /><sup
-							style="color: red;">*</sup></label>
-						<div class="form-element">
-							<s:select name="warehouseName"
-								list="warehouseList" headerKey=""
-								headerValue="Select" lisykey="key"
-								listValue="value" id="warehouseName"
-								cssClass="col-sm-6 form-control select2" />
-								<!-- <input type="hidden" name="warehouseName" id="hiddenWarehouseName"/> -->
-						</div>
+						
 					</div>
+
+
+
+				</div>
+			</div>
+		</div>
+	
+	
+		
+		<s:if test='"update".equalsIgnoreCase(command) &&  card != null  '>
+		
+		<div id="accordion" class="custom-accordion card_info">
+			<div class="card-header card mb-1 shadow-none">
+				<a href="#cardInfo" class="text-dark" data-toggle="collapse"
+					aria-expanded="true" aria-controls="collapseFour">
+					<div class="card-header" id="headingFour">
+						<h6 class="m-0">
+							<div class="wizard-wrapper">
+								<div class="wizard-icon">
+									<span class="svg-icon svg-icon-2x"> <!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/General/User.svg-->
+										<svg xmlns="http://www.w3.org/2000/svg"
+											xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+											height="24px" viewBox="0 0 24 24" version="1.1">
+																		<g stroke="none" stroke-width="1" fill="none"
+												fill-rule="evenodd">
+																			<polygon points="0 0 24 0 24 24 0 24"></polygon>
+																			<path
+												d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z"
+												fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+																			<path
+												d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z"
+												fill="#000000" fill-rule="nonzero"></path>
+																		</g>
+																	</svg> <!--end::Svg Icon-->
+									</span>
+
+								</div>
+								<div class="wizard-label">
+
+									<h3 class="wizard-title">
+									<s:text name="info.card" />
+									</h3>
+									<div class="wizard-desc">Setup Agent Card Information </div>
+								</div>
+							</div>
+							<i
+								class="mdi mdi-minus float-right accor-plus-icon collapse-icon-custom"></i>
+						</h6>
+					</div>
+				</a>
+
+			</div>
+
+			<div id="cardInfo" class="collapse show" aria-labelledby="headingFour"
+				data-parent="#accordion">
+				<div class="card-body">
+
+					<div class="row">
+
+						<div class="col-md-4">
+							<p class="form-group ">
+													<s:text name="agent.card.id" />
+												</p>
+												<p class="form-control"
+													name="card.cardId">
+													<s:property value="card.cardId" />
+												</p>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group cardStatus">
+								<label for="txt"> <s:text name="status.card.name" /><sup
+								style="color: red;">*</sup>
+								</label>
+								<div class="">
+									<s:select id="cardStat" name="card.status" list="cardStatusList"
+									listKey="key" listValue="value"	cssClass="form-control " />
+								</div>
+							</div>
 						</div>
 
+
+						<div class="col-md-4">
+							<div class="form-group rewrite">
+								<label for="txt"> <s:text name="rewrite.card.name" /><sup
+								style="color: red;">*</sup>
+								</label>
+								<div class="">
+									<s:select id="cardWrite" name="card.cardRewritable"
+									list="cardRewriteList" listKey="key" listValue="value" cssClass="form-control " />
+								</div>
+							</div>
+						</div>
+
+
+					</div>
+
+
+
+				</div>
+			</div>
 		</div>
+		</s:if>
+		
+				<s:if
+			test='"update".equalsIgnoreCase(command) &&  account != null  && type=="fieldStaff"'>
+		
+		<div id="accordion" class="custom-accordion acc_info">
+			<div class="card-header card mb-1 shadow-none">
+				<a href="#accInfo" class="text-dark" data-toggle="collapse"
+					aria-expanded="true" aria-controls="collapseFive">
+					<div class="card-header" id="headingFive">
+						<h6 class="m-0">
+							<div class="wizard-wrapper">
+								<div class="wizard-icon">
+									<span class="svg-icon svg-icon-2x"> <!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/General/User.svg-->
+										<svg xmlns="http://www.w3.org/2000/svg"
+											xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+											height="24px" viewBox="0 0 24 24" version="1.1">
+																		<g stroke="none" stroke-width="1" fill="none"
+												fill-rule="evenodd">
+																			<polygon points="0 0 24 0 24 24 0 24"></polygon>
+																			<path
+												d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z"
+												fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+																			<path
+												d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z"
+												fill="#000000" fill-rule="nonzero"></path>
+																		</g>
+																	</svg> <!--end::Svg Icon-->
+									</span>
 
-<div class="yui-skin-sam">
-				<s:if test="command =='create'">
-					<span id="button" class=""><span class="first-child">							
-							<button onclick="event.preventDefault();onSubmit();"
-							class="btn btn-success" id="buttonAdd1">
-							<font color="#FFFFFF"> <b><s:text name="save.button" /></b>
-							</font>
-						</button>
-					</span></span>
+								</div>
+								<div class="wizard-label">
+
+									<h3 class="wizard-title">
+									<s:text name="info.account" />
+									</h3>
+									<div class="wizard-desc">Setup Agent Account Information </div>
+								</div>
+							</div>
+							<i
+								class="mdi mdi-minus float-right accor-plus-icon collapse-icon-custom"></i>
+						</h6>
+					</div>
+				</a>
+
+			</div>
+
+			<div id="accInfo" class="collapse show" aria-labelledby="headingFive"
+				data-parent="#accordion">
+				<div class="card-body">
+
+					<div class="row">
+
+						<div class="col-md-4">
+							<p class="form-group accountNo">
+													<s:text name="agent.account.id" />
+												</p>
+												<p class="form-control" name="account.accountNo">
+													<s:property value="account.accountNo" />
+												</p>
+						</div>
+				<div class="col-md-4">
+							<p class="form-group accountType">
+													<s:text name="agent.account.type" />
+												</p>
+												<p class="form-control" name="account.accountType">
+													<s:text name='%{account.accountType}' />
+												</p>
+						</div>
 
 
-					<span id="cancel" class=""><span class="first-child"><button
-								type="button" class="cancel-btn btn btn-sts">
-								<b><FONT color="#FFFFFF"><s:text name="cancel.button" />
-								</font></b>
-							</button></span></span>
+						<div class="col-md-4">
+							<div class="form-group accStatus">
+								<label for="txt"> <s:text name="Agentstatus.account.name" /><sup
+								style="color: red;">*</sup>
+								</label>
+								<div class="">
+									<s:select id="accountStat" name="account.status"
+									list="accountStatusList" listKey="key" listValue="value" cssClass="form-control " />
+								</div>
+							</div>
+						</div>
 
-					<%-- <span class=""><span class="first-child"><a
-			id="cancel.link"
-			href="<%=request.getParameter("type")%>_list.action?type=<%=request.getParameter("type")%>"
-			class="cancel-btn"> <font color="#FFFFFF"> <s:text
-			name="cancel.button" /> </font> </a></span></span> --%>
-				</s:if>
+
+					</div>
+
+
+
+				</div>
+			</div>
+		</div>
+		</s:if>
+		<div id="accordion" class="custom-accordion group_info">
+			<div class="card-header card mb-1 shadow-none">
+				<a href="#groupInfo" class="text-dark" data-toggle="collapse"
+					aria-expanded="true" aria-controls="collapseSix">
+					<div class="card-header" id="headingSix">
+						<h6 class="m-0">
+							<div class="wizard-wrapper">
+								<div class="wizard-icon">
+									<span class="svg-icon svg-icon-2x"> <!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/General/User.svg-->
+										<svg xmlns="http://www.w3.org/2000/svg"
+											xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+											height="24px" viewBox="0 0 24 24" version="1.1">
+																		<g stroke="none" stroke-width="1" fill="none"
+												fill-rule="evenodd">
+																			<polygon points="0 0 24 0 24 24 0 24"></polygon>
+																			<path
+												d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z"
+												fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+																			<path
+												d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z"
+												fill="#000000" fill-rule="nonzero"></path>
+																		</g>
+																	</svg> <!--end::Svg Icon-->
+									</span>
+
+								</div>
+								<div class="wizard-label">
+
+									<h3 class="wizard-title">
+									<s:property value="%{getLocaleProperty('info.samithi')}" />
+									</h3>
+									<div class="wizard-desc">Setup Agent Group Information </div>
+								</div>
+							</div>
+							<i
+								class="mdi mdi-minus float-right accor-plus-icon collapse-icon-custom"></i>
+						</h6>
+					</div>
+				</a>
+
+			</div>
+
+			<div id="groupInfo" class="collapse show" aria-labelledby="headingSix"
+				data-parent="#accordion">
+				<div class="card-body">
+
+					<div class="row">
+
+						<div class="col-md-12">
+						<div class="form-group">
+						
+						<label for="txt">  <s:text name="%{getLocaleProperty('availableWarehouse')}"
+											/><sup
+								style="color: red;">*</sup></label>
+    
+								<div class="">
+									 
+      <s:select  id="availableWarehouse" name="agent.availableWarehouse" list="groupList" listKey="key" listValue="value" 
+      class="select2 form-control form-control-lg select2-multiple" multiple="true"  />
+                                                         
+								</div>
+						
+						
+                                                       
+                                                        
+              
+                                                    </div>
+						</div>
+			
+	
+
+
+					</div>
+
+
+
+				</div>
+			</div>
+		</div>	
+		
+		
+<div id="accordion" class="custom-accordion credential_info">
+			<div class="card-header card mb-1 shadow-none">
+				<a href="#credentialInfo" class="text-dark" data-toggle="collapse"
+					aria-expanded="true" aria-controls="collapseThree">
+					<div class="card-header" id="headingThree">
+						<h6 class="m-0">
+							<div class="wizard-wrapper">
+								<div class="wizard-icon">
+									<span class="svg-icon svg-icon-2x"> <!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/General/User.svg-->
+										<svg xmlns="http://www.w3.org/2000/svg"
+											xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+											height="24px" viewBox="0 0 24 24" version="1.1">
+																		<g stroke="none" stroke-width="1" fill="none"
+												fill-rule="evenodd">
+																			<polygon points="0 0 24 0 24 24 0 24"></polygon>
+																			<path
+												d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z"
+												fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+																			<path
+												d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z"
+												fill="#000000" fill-rule="nonzero"></path>
+																		</g>
+																	</svg> <!--end::Svg Icon-->
+									</span>
+
+								</div>
+								<div class="wizard-label">
+
+									<h3 class="wizard-title">
+									<s:text name="info.credential" />
+									</h3>
+									<div class="wizard-desc">Setup Agent Credential Information </div>
+								</div>
+							</div>
+							<i
+								class="mdi mdi-minus float-right accor-plus-icon collapse-icon-custom"></i>
+						</h6>
+					</div>
+				</a>
+
+			</div>
+
+			<div id="credentialInfo" class="collapse show" aria-labelledby="headingThree"
+				data-parent="#accordion">
+				<div class="card-body">
+
+					<div class="row">
+
+						<div class="col-md-4">
+							<div class="form-group status">
+								<label for="txt"><s:text name="agent.status.name" /><sup
+							style="color: red;">*</sup>
+								</label>
+								<div class="">
+									<s:select list="statuses" id="agentStatus" listKey="key"
+								listValue="value" name="agent.status" cssClass="form-control"
+								value="StatusDefaultValue" onchange="listpassword(this)" maxlength="12" />
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4" id="passwordDiv">
+							<div class="form-group password">
+								<label for="txt"> <s:text name="agent.passwordName" /> <sup
+							style="color: red;">*</sup>
+								</label>
+								<div class="">
+								<s:password showPassword="true" name="agent.password"
+								id="password" value="%{agent.password}"
+								cssClass="form-control " maxlength="12" />
+								</div>
+							</div>
+						</div>
+
+
+						<div class="col-md-4" id="confPasswordDiv">
+							<div class="form-group confPassword">
+								<label for="txt"> <s:text name="agent.confPasswordName" /> <sup
+							style="color: red;">*</sup>
+								</label>
+								<div class="">
+									<s:password showPassword="true" name="agent.confirmPassword"
+								id="password1" value="%{agent.confirmPassword}" cssClass="form-control "
+								maxlength="10" />
+								</div>
+							</div>
+						</div>
+
+
+					</div>
+
+
+
+				</div>
+			</div>
+		</div>
+<div class="button-items float-right">
+				
+						<s:if test="command =='create'">
+				<button type="submit" id="buttonAdd1"
+					onclick="event.preventDefault();onSubmit();"
+					class="btn btn-success waves-effect waves-light">
+					<i class="ri-check-line align-middle mr-2"></i> Save
+				</button>
+				
+					<button type="button" onclick="onCancel();"
+				class="btn btn-danger waves-effect waves-light">
+				<i class="ri-close-line align-middle mr-2"></i> Cancel
+			</button>
+			</s:if>
 				<s:else>
-					<span id="button1233" class=""><span class="first-child">
-							<button type="button" onclick="onUpdateClick()"
-								class="save-btn btn btn-success">
-								<font color="#FFFFFF"> <b><s:text
-											name="update.button" /></b>
-								</font>
-							</button>
-					</span></span>
+				
+	<button type="submit" id="button1233"
+					onclick="event.preventDefault();onUpdateClick();"
+					class="btn btn-primary waves-effect waves-light">
+					<i class="ri-error-warning-line align-middle mr-2"></i> Update
+				</button>
+
+					<button type="button" onclick="onCancel();"
+				class="btn btn-danger waves-effect waves-light">
+				<i class="ri-close-line align-middle mr-2"></i> Cancel
+			</button>
 
 
-					<span id="cancel" class=""><span class="first-child"><button
-								type="button" class="cancel-btn btn btn-sts">
-								<b><FONT color="#FFFFFF"><s:text name="cancel.button" />
-								</font></b>
-							</button></span></span>
-
-
-					<%-- <script>
-			//listServiceLocation(document.getElementById("servicePoint"));
-			//listWareHouses(document.getElementById("servicePoint"));
-		</script> --%>
 				</s:else>
 			</div>
 
@@ -1001,24 +906,7 @@ function onSubmit(){
 	//$("#buttonAdd1").attr("disabled", true);
 	
 	try{
-		if(document.getElementById('select') != null ){
-			document.getElementById('select').multiple = true; //to enable all option to be selected
-		    for (var x = 0; x < document.getElementById('select').options.length; x++)//count the option amount in selection box
-		    {
-		        document.getElementById('select').options[x].selected = true;		       
-		    }//select all option when u click save button
-		}
-		if(document.getElementById('optrnsfr') != null ){
-			document.getElementById('optrnsfr').multiple = true; //to enable all option to be selected
-		    for (var x = 0; x < document.getElementById('optrnsfr').options.length; x++)//count the option amount in selection box
-		    {
-		        document.getElementById('optrnsfr').options[x].selected = true;		       
-		    }//select all option when u click save button
-		}
 
-			$('#warehouseName').attr("disabled",false);
-		
-		
 		capitalizeName();		
 	    document.form.submit();	   	 
 	}catch(e){
@@ -1099,4 +987,5 @@ $(function () {
 		    return true;
 	}
 </script>
+
 </body>

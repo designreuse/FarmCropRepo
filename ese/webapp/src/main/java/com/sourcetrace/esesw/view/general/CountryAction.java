@@ -54,6 +54,7 @@ public class CountryAction extends SwitchValidatorAction {
 
 	private Country country;
 	private String id;
+	private String countryName;
 	 DecimalFormat formatter = new DecimalFormat("0.00");
 
 	/**
@@ -389,6 +390,33 @@ public class CountryAction extends SwitchValidatorAction {
 
 	}
 
+	public String getCountryName() {
+		return countryName;
+	}
 
+	public void setCountryName(String countryName) {
+		this.countryName = countryName;
+	}
+
+
+	public void processCreateCountry() {
+		Country country = new Country();
+		country.setCode(idGenerator.getCountryIdSeq());
+		country.setBranchId(getBranchId());
+		country.setName(getCountryName());
+		locationService.addCountry(country);
+		getJsonObject().put("msg", getText("msg.cropUpdated"));
+		getJsonObject().put("title", getText("title.success"));	
+		sendAjaxResponse(getJsonObject());
+	}
+	
+	public void processUpdateCountry() {
+		Country country = locationService.findCountryById(Long.valueOf(id));
+		country.setName(getCountryName());
+		locationService.editCountry(country);
+		getJsonObject().put("msg", getText("msg.cropUpdated"));
+		getJsonObject().put("title", getText("title.success"));	
+		sendAjaxResponse(getJsonObject());
+	}
 
 }

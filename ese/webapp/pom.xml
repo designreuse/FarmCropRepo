@@ -42,7 +42,7 @@
 	
 	
 	<build>
-		<finalName>agroweb</finalName>
+		<finalName>theFarmCorp</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

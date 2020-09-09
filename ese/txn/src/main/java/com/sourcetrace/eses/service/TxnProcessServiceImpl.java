@@ -47,7 +47,7 @@ import com.sourcetrace.eses.util.log.TransactionLog;
 @Component
 @Path("/")
 @Produces({ "application/json", "application/xml" })
-@WebService(targetNamespace = "http://service.eses.sourcetrace.com/", endpointInterface = "com.sourcetrace.eses.service.ITxnProcessService", portName = "tservport", serviceName = "TxnProcessServiceImpl")
+@WebService(targetNamespace = "http://farmer.thefarmcorp.com/", endpointInterface = "com.sourcetrace.eses.service.ITxnProcessService", portName = "tservport", serviceName = "TxnProcessServiceImpl")
 public class TxnProcessServiceImpl implements ITxnProcessService {
 
 	private static final Logger LOGGER = Logger.getLogger(TxnProcessServiceImpl.class.getName());
@@ -97,7 +97,7 @@ public class TxnProcessServiceImpl implements ITxnProcessService {
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@POST
-	@Path("/processTxnRequest")
+	@Path("/mobileRequestCollection")
 	@Consumes({ "application/json", "application/xml" })
 	@WebMethod
 	@CrossOrigin(origins = "*")

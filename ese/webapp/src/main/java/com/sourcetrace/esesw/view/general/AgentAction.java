@@ -17,6 +17,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -125,7 +126,7 @@ public class AgentAction extends SwitchValidatorAction {
 	private String selectedAgentType;
 	private Set<ServiceLocation> selectedLocation;
 	private List<Agent> agents;
-	private List<String> availableWarehouse = new ArrayList<String>();
+	private String availableWarehouse;
 	private List<String> selectedWarehouse = new ArrayList<String>();
 	List<Locality> localities = new ArrayList<Locality>();
 	List<State> stats = new ArrayList<State>();
@@ -161,7 +162,7 @@ public class AgentAction extends SwitchValidatorAction {
 	private String selectedtrainings;
 	private String warehouseName;
 	private File agentImage;
-
+private String[] selGroupArry;
 	@Autowired
 	private ITrainingService trainingService;
 	/**
@@ -1098,9 +1099,9 @@ public class AgentAction extends SwitchValidatorAction {
 			try {
 				if (!StringUtil.isEmpty(dateOfBirth)) {
 					agent.getPersonalInfo().setDateOfBirth(df.parse(dateOfBirth));
-				} else {
-					agent.getPersonalInfo().setDateOfBirth(null);
-				}
+				} /*
+					 * else { agent.getPersonalInfo().setDateOfBirth(null); }
+					 */
 				// To set the values for selected country,state and district
 				/*
 				 * Country country = new Country();
@@ -1202,7 +1203,7 @@ public class AgentAction extends SwitchValidatorAction {
 					
 				}
 
-				availableWarehouse = getAvailableName();
+			//	availableWarehouse = getAvailableName();
 				selectedWarehouse = getSelectedName();
 
 			} catch (ParseException e) {
@@ -1334,26 +1335,12 @@ public class AgentAction extends SwitchValidatorAction {
 		JSONObject jsonObject = new JSONObject();
 		JSONArray rows = new JSONArray();
 
-		if ((getIsMultiBranch().equalsIgnoreCase("1")
-				&& (getIsParentBranch().equals("1") || StringUtil.isEmpty(branchIdValue)))) {
 
-			if (StringUtil.isEmpty(branchIdValue)) {
-				rows.add(!StringUtil.isEmpty(getBranchesMap().get(getParentBranchMap().get(agent.getBranchId())))
-						? getBranchesMap().get(getParentBranchMap().get(agent.getBranchId()))
-						: getBranchesMap().get(agent.getBranchId()));
-			}
-			rows.add(getBranchesMap().get(agent.getBranchId()));
-
-		} else {
-			if (StringUtil.isEmpty(branchIdValue)) {
-				rows.add(branchesMap.get(agent.getBranchId()));
-			}
-		}
 		rows.add("<font color=\"#0000FF\" style=\"cursor:pointer;\">" + agent.getProfileId() + "</font>");
 		rows.add(agent.getPersonalInfo().getFirstName());
 		rows.add(agent.getPersonalInfo().getLastName());
 		rows.add(agent.getContactInfo().getMobileNumber() == null ? "" : agent.getContactInfo().getMobileNumber());
-		if(getCurrentTenantId().equalsIgnoreCase(ESESystem.PRATIBHA_TENANT_ID)){
+	
 			if(agent.getCreateTime() != null){
 			String txnTime = agent.getCreateTime().toString();
 			String res = txnTime.substring(0, 19);
@@ -1372,9 +1359,9 @@ public class AgentAction extends SwitchValidatorAction {
          else{
        	  rows.add("NA");
          }
-		rows.add(agent.getAgentType().getName());
+	//	rows.add(agent.getAgentType().getName());
 		rows.add(agent.getProcurementCenter()!=null && !ObjectUtil.isEmpty(agent.getProcurementCenter())&& agent.getProcurementCenter().getName()!=null && !StringUtil.isEmpty(agent.getProcurementCenter().getName())?agent.getProcurementCenter().getName():"");
-		}
+
 		rows.add(getText("bodStatus" + agent.getBodStatus()));
 		/*
 		 * if (!ObjectUtil.isListEmpty(agent.getWareHouses()) &&
@@ -1415,20 +1402,7 @@ public class AgentAction extends SwitchValidatorAction {
 				}
 			}
 
-			// agent.setProfileId(idGenerator.createAgentId());
-			/*
-			 * Municipality city =
-			 * locationService.findMunicipalityByName(agent.getContactInfo()
-			 * .getCity().getName()); agent.getContactInfo().setCity(city);
-			 */
-			//agent.getAgentType().setId(agent.getAgentType().getId());
-			if(getCurrentTenantId().equalsIgnoreCase("chetna") || getCurrentTenantId().equalsIgnoreCase(ESESystem.PRATIBHA_TENANT_ID)|| getCurrentTenantId().equalsIgnoreCase(ESESystem.LIVELIHOOD_TENANT_ID)){
-				agent.setProfileType(!ObjectUtil.isEmpty(agent.getAgentType()) && !StringUtil.isEmpty(agent.getAgentType().getCode()) ? agent.getAgentType().getCode() :"01");
-			}
-			else{
-				agent.setProfileType("01");
-			}
-			
+			agent.setProfileType("01");			
 			
 			agent.getPersonalInfo().setIdentityType(agent.getPersonalInfo().getIdentityType());
 			ServicePoint servicePoint = servicePointService.findServicePointByCode(getText("defaultServicePointCode"));
@@ -1442,70 +1416,19 @@ public class AgentAction extends SwitchValidatorAction {
 				}
 			} else {
 				Set<Warehouse> wareHouses = new HashSet<Warehouse>();
+				String[] strArray = agent.getAvailableWarehouse().split(",");
 				
-				if(getCurrentTenantId().equalsIgnoreCase("chetna")|| getCurrentTenantId().equalsIgnoreCase(ESESystem.LIVELIHOOD_TENANT_ID)){
-					if(!ObjectUtil.isEmpty(agent.getAgentType()) &&  !StringUtil.isEmpty(agent.getAgentType().getCode())
-							&& agent.getAgentType().getCode().equalsIgnoreCase("02")){
-						
-						for (String warehouseName : getSelectedName()) {
-							Warehouse warehouse = locationService.findSamithiByName(warehouseName);
+					for (String warehouseName : strArray) {
+						if(!StringUtil.isEmpty(warehouseName)) {
+							Warehouse warehouse = locationService.findSamithiById(Long.valueOf(warehouseName.trim()));
 							if (!ObjectUtil.isEmpty(warehouse))
 								wareHouses.add(warehouse);
 						}
-						agent.setWareHouses(wareHouses);
 						
-						agent.setProcurementCenter(null);
-					}else if(!ObjectUtil.isEmpty(agent.getAgentType()) &&  !StringUtil.isEmpty(agent.getAgentType().getCode())
-							&& agent.getAgentType().getCode().equalsIgnoreCase("03")){
-						
-						for (String warehouseName : getSelectedName()) {
-							Warehouse warehouse = locationService.findSamithiByName(warehouseName);
-							if (!ObjectUtil.isEmpty(warehouse))
-								wareHouses.add(warehouse);
-						}
-						agent.setWareHouses(wareHouses);
-						Warehouse warehouse = locationService.findProcurementWarehouseById(Long.valueOf(selectedProcurementCenter));
-						agent.setProcurementCenter(warehouse);
-						
-						
-					}else if(!ObjectUtil.isEmpty(agent.getAgentType()) && !StringUtil.isEmpty(agent.getAgentType().getCode()) 
-							&& agent.getAgentType().getCode().equalsIgnoreCase("04")){
-						Warehouse warehouse = locationService.findProcurementWarehouseById(Long.valueOf(selectedGinningCenter));
-						agent.setProcurementCenter(warehouse);
-					
-						
-					}else if(!ObjectUtil.isEmpty(agent.getAgentType()) && !StringUtil.isEmpty(agent.getAgentType().getCode()) 
-							&& agent.getAgentType().getCode().equalsIgnoreCase("05")){
-						Warehouse warehouse = locationService.findProcurementWarehouseById(Long.valueOf(selectedSpinner));
-						agent.setProcurementCenter(warehouse);
-					
-					}
-				}else if(getCurrentTenantId().equalsIgnoreCase(ESESystem.PRATIBHA_TENANT_ID)){
-					for (String warehouseName : getSelectedName()) {
-						Warehouse warehouse = locationService.findSamithiByName(warehouseName);
-						if (!ObjectUtil.isEmpty(warehouse))
-							wareHouses.add(warehouse);
-					}
-					agent.setWareHouses(wareHouses);
-					if(!StringUtil.isEmpty(warehouseName)){
-						Warehouse warehouse=null;
-						if(warehouseName.contains(","))
-						 warehouse = locationService.findProcurementWarehouseById(Long.valueOf(warehouseName.split(",")[0].trim()));
-						else
-							 warehouse = locationService.findProcurementWarehouseById(Long.valueOf(warehouseName));
-						agent.setProcurementCenter(warehouse);
-					}
-					
-				}
-				else{
-					for (String warehouseName : getSelectedName()) {
-						Warehouse warehouse = locationService.findSamithiByName(warehouseName);
-						if (!ObjectUtil.isEmpty(warehouse))
-							wareHouses.add(warehouse);
 					}
 					agent.setWareHouses(wareHouses);
 					agent.setProcurementCenter(null);
-				}
+			
 				
 				
 				
@@ -1535,18 +1458,7 @@ public class AgentAction extends SwitchValidatorAction {
 			if(this.getAgentImage()!=null){
 			agent.getPersonalInfo().setImage(FileUtil.getBinaryFileContent(this.getAgentImage()));
 			}
-		/*	
-			String []idArr=agent.getSelectedtrainings().split(",");
-			FarmerTraining farmerTraining;
-			Set<FarmerTraining>farmerTrainings=new HashSet<FarmerTraining>();
-			if(agent.isTrainingExists()){
-			for(String id:idArr){
-				farmerTraining=trainingService.findFarmerTrainingById(Long.valueOf(id.trim()));
-				farmerTrainings.add(farmerTraining);
-				}	
-			}
-			agent.setTrainingTemplates(farmerTrainings);
-			*/
+
 			agentService.createAgent(agent);
 
 			/*if (!StringUtil.isEmpty(agent.getAccountBalance())) {
@@ -1562,50 +1474,34 @@ public class AgentAction extends SwitchValidatorAction {
 			agentService.createESECard(agent.getProfileId(), idGenerator.createAgentCardIdSequence(), new Date(),
 					ESECard.FARMER_CARD);
 			
-			try {
-				if (!ObjectUtil.isEmpty(agent)) {
-					if (!ObjectUtil.isEmpty(agent.getContactInfo())
-							&& !StringUtil.isEmpty(agent.getContactInfo().getEmail())) {
-						StringBuffer msg = new StringBuffer();
-						String password = StringUtil.getRandomNumber();
-
-						BranchMaster dm = clientService.findBranchMasterByBranchId(agent.getBranchId());
-						ESESystem preference = preferncesService.findPrefernceById(ESESystem.SYSTEM_ESE);
-						if (!ObjectUtil.isEmpty(preference)) {
-							apkUrl = preference.getPreferences().get(ESESystem.APK_URL);
-							cc = preference.getPreferences().get(ESESystem.CC_EMAIL);
-						}
-						msg.append("\n\tUser Name\t:\t");
-						msg.append(agent.getProfileId());
-						msg.append("\n");
-						msg.append("\tPassword\t:\t");
-						msg.append(password);
-						msg.append("\n");
-						if (dm != null) {
-							msg.append("\tOrganisation\t:\t");
-							msg.append(dm.getName());
-							msg.append("\n");
-						}
-						msg.append("\n\tFirst Name\t:\t");
-						msg.append(agent.getPersonalInfo().getFirstName());
-						msg.append("\n");
-						msg.append("\n\tLast Name\t:\t");
-						msg.append(agent.getPersonalInfo().getLastName());
-						msg.append("\n");
-						msg.append("\n\tPlease Download the following file for Mobile Application\t:\t");
-						msg.append(apkUrl);
-						msg.append("\n");
-						
-						MailUtil.sendWithCC(agent.getContactInfo().getEmail(), "SourceTrace Web Console Sign in Details",
-								agent.getPersonalInfo().getName(), msg.toString(),cc);
-						result = getText("successMsg");
-					} else {
-						result = getText("notExist.email");
-					}
-				} 
-			} catch (Exception e) {
-				result = "";
-			}
+			/*
+			 * try { if (!ObjectUtil.isEmpty(agent)) { if
+			 * (!ObjectUtil.isEmpty(agent.getContactInfo()) &&
+			 * !StringUtil.isEmpty(agent.getContactInfo().getEmail())) { StringBuffer msg =
+			 * new StringBuffer(); String password = StringUtil.getRandomNumber();
+			 * 
+			 * BranchMaster dm =
+			 * clientService.findBranchMasterByBranchId(agent.getBranchId()); ESESystem
+			 * preference = preferncesService.findPrefernceById(ESESystem.SYSTEM_ESE); if
+			 * (!ObjectUtil.isEmpty(preference)) { apkUrl =
+			 * preference.getPreferences().get(ESESystem.APK_URL); cc =
+			 * preference.getPreferences().get(ESESystem.CC_EMAIL); }
+			 * msg.append("\n\tUser Name\t:\t"); msg.append(agent.getProfileId());
+			 * msg.append("\n"); msg.append("\tPassword\t:\t"); msg.append(password);
+			 * msg.append("\n"); if (dm != null) { msg.append("\tOrganisation\t:\t");
+			 * msg.append(dm.getName()); msg.append("\n"); }
+			 * msg.append("\n\tFirst Name\t:\t");
+			 * msg.append(agent.getPersonalInfo().getFirstName()); msg.append("\n");
+			 * msg.append("\n\tLast Name\t:\t");
+			 * msg.append(agent.getPersonalInfo().getLastName()); msg.append("\n"); msg.
+			 * append("\n\tPlease Download the following file for Mobile Application\t:\t");
+			 * msg.append(apkUrl); msg.append("\n");
+			 * 
+			 * MailUtil.sendWithCC(agent.getContactInfo().getEmail(),
+			 * "SourceTrace Web Console Sign in Details", agent.getPersonalInfo().getName(),
+			 * msg.toString(),cc); result = getText("successMsg"); } else { result =
+			 * getText("notExist.email"); } } } catch (Exception e) { result = ""; }
+			 */
 			return REDIRECT;
 		}
 	}
@@ -1654,36 +1550,9 @@ public class AgentAction extends SwitchValidatorAction {
 					&& agent.getImageInfo().getPhoto().getImage() != null) {
 				agentImageByteString = Base64Util.encoder(agent.getImageInfo().getPhoto().getImage());
 			}
-			if(getCurrentTenantId().equalsIgnoreCase("chetna") || getCurrentTenantId().equalsIgnoreCase(ESESystem.PRATIBHA_TENANT_ID)|| getCurrentTenantId().equalsIgnoreCase(ESESystem.LIVELIHOOD_TENANT_ID)){
-				if(!ObjectUtil.isEmpty(agent.getAgentType())){
-					setSelectedAgentType(agent.getAgentType().getName());
-				}
-				if(!ObjectUtil.isEmpty(agent.getProcurementCenter())){
-					setSelectedProcurementCenter(agent.getProcurementCenter().getName());
-					//agent.setProcurementCenter(agent.getProcurementCenter());
-				}
-				if(agent.getAgentType().getCode().equalsIgnoreCase("03")){
-					setSelectedProcurementCenter(!ObjectUtil.isEmpty(agent)&& !ObjectUtil.isEmpty(agent.getProcurementCenter()) ? agent.getProcurementCenter().getName() : "");
-				}else if(agent.getAgentType().getCode().equalsIgnoreCase("04")){
-					setSelectedGinningCenter(!ObjectUtil.isEmpty(agent)&& !ObjectUtil.isEmpty(agent.getProcurementCenter()) ? agent.getProcurementCenter().getName() : "");
-				}else if(agent.getAgentType().getCode().equalsIgnoreCase("05")){
-					setSelectedSpinner(!ObjectUtil.isEmpty(agent)&& !ObjectUtil.isEmpty(agent.getProcurementCenter()) ? agent.getProcurementCenter().getName() : "");
-				}
-			}
-			if(getCurrentTenantId().equals(ESESystem.PRATIBHA_TENANT_ID) && !ObjectUtil.isEmpty(agent.getProcurementCenter())){
-				setWarehouseName(agent.getProcurementCenter().getName());
-			}
-	/*		if(agent.isTrainingExists()){
-				String trainings="";
-				Set<FarmerTraining>farmerTrainings=agent.getTrainingTemplates();
-				for(FarmerTraining farmerTraining:farmerTrainings){
-					trainings=trainings.concat(!ObjectUtil.isEmpty(farmerTraining.getTrainingTopic())?String.valueOf(farmerTraining.getTrainingTopic().getName()).concat(","):"");
-				}
-				
-					setSelectedtrainings(StringUtil.removeLastComma(trainings.trim()));
-				selectedtrainings=StringUtil.removeLastComma(trainings.trim());
-				}*/
-
+	
+		
+	
 			if (!ObjectUtil.isListEmpty(agent.getWareHouses())) {
 				String sl = "";
 				for (Warehouse temp : agent.getWareHouses()) {
@@ -1763,25 +1632,8 @@ public class AgentAction extends SwitchValidatorAction {
 			if (!StringUtil.isEmpty(agent.getPersonalInfo().getDateOfBirth())) {
 				dateOfBirth = df.format(agent.getPersonalInfo().getDateOfBirth());
 			}
-			if(getCurrentTenantId().equalsIgnoreCase("chetna") || getCurrentTenantId().equalsIgnoreCase(ESESystem.PRATIBHA_TENANT_ID)|| getCurrentTenantId().equalsIgnoreCase(ESESystem.LIVELIHOOD_TENANT_ID)){
-				if(!ObjectUtil.isEmpty(agent.getAgentType())){
-					setSelectedAgentType(String.valueOf(agent.getAgentType().getId()));
-				}
-				if(agent.getAgentType().getCode().equalsIgnoreCase("03")){
-					setSelectedProcurementCenter(!ObjectUtil.isEmpty(agent)&& !ObjectUtil.isEmpty(agent.getProcurementCenter()) ? String.valueOf(agent.getProcurementCenter().getId()) : "");
-				}else if(agent.getAgentType().getCode().equalsIgnoreCase("04")){
-					setSelectedGinningCenter(!ObjectUtil.isEmpty(agent)&& !ObjectUtil.isEmpty(agent.getProcurementCenter()) ? String.valueOf(agent.getProcurementCenter().getId()) : "");
-				}else if(agent.getAgentType().getCode().equalsIgnoreCase("05")){
-					setSelectedSpinner(!ObjectUtil.isEmpty(agent)&& !ObjectUtil.isEmpty(agent.getProcurementCenter()) ? String.valueOf(agent.getProcurementCenter().getId()) : "");
-				}
-				
-			}
-			if(getCurrentTenantId().equals(ESESystem.PRATIBHA_TENANT_ID)){
-				setWarehouseName(!ObjectUtil.isEmpty(agent) && !ObjectUtil.isEmpty(agent.getProcurementCenter()) ?String.valueOf(agent.getProcurementCenter().getId()):"");
-			}
-			// account =
-			// accountService.findAccountByProfileIdAndProfileType(agent.getProfileId(),
-			// ESEAccount.AGENT_ACCOUNT);
+			
+			
 			if (!StringUtil.isEmpty(account)) {
 				String[] agentAcc = String.valueOf(account.getCashBalance()).split("\\.");
 				agent.setAccountRupee(String.valueOf(agentAcc[0]));
@@ -1793,41 +1645,24 @@ public class AgentAction extends SwitchValidatorAction {
 			// Load warehouse details
 			for (Warehouse warehouse : agent.getWareHouses()) {
 				if (ObjectUtil.isEmpty(warehouse.getRefCooperative())) {
-					if(getCurrentTenantId().equalsIgnoreCase("chetna")|| getCurrentTenantId().equalsIgnoreCase(ESESystem.LIVELIHOOD_TENANT_ID)){
-						if(!ObjectUtil.isEmpty(agent.getAgentType()) &&  !StringUtil.isEmpty(agent.getAgentType().getCode())
-								&& agent.getAgentType().getCode().equalsIgnoreCase("01")|| agent.getAgentType().getCode().equalsIgnoreCase("02")
-								){
-							setSelectedCooperative(warehouse.getName());
-							populateSamithiByAgentId(id);
-							}else if(!ObjectUtil.isEmpty(agent.getAgentType()) &&  !StringUtil.isEmpty(agent.getAgentType().getCode())
-									&& agent.getAgentType().getCode().equalsIgnoreCase("03")){
-								setSelectedCooperative(warehouse.getName());
-								populateSamithiByAgentId(id);
-								//Warehouse procurementCenter = agentService.listSelectedWarehouseById(agent.getId());
-								agent.setProcurementCenter(agent.getProcurementCenter());
-							}else if(!ObjectUtil.isEmpty(agent.getAgentType()) &&  !StringUtil.isEmpty(agent.getAgentType().getCode())
-									&& agent.getAgentType().getCode().equalsIgnoreCase("04")){
-								
-								//Warehouse procurementCenter = agentService.listSelectedWarehouseById(agent.getId());
-								agent.setProcurementCenter(agent.getProcurementCenter());
-							}else if(!ObjectUtil.isEmpty(agent.getAgentType()) &&  !StringUtil.isEmpty(agent.getAgentType().getCode())
-									&& agent.getAgentType().getCode().equalsIgnoreCase("05")){
-								
-								//Warehouse procurementCenter = agentService.listSelectedWarehouseById(agent.getId());
-								agent.setProcurementCenter(agent.getProcurementCenter());
-							}
-					}else{
-						setSelectedCooperative(warehouse.getName());
-						populateSamithiByAgentId(id);
-					}
+				
+					selectedWarehouse.add(String.valueOf(warehouse.getId()));
 					
-					
+					 
 				} else {
 					setSelectedCooperative(warehouse.getRefCooperative().getName());
-					populateSamithiByAgentId(id);
+					//populateSamithiByAgentId(id);
 					// loadSamithiByCooperative(id, agent.getCooperative());
 				}
 			}
+			
+			// Get String Array 
+	        selGroupArry = GetStringArray(selectedWarehouse); 
+	  
+	        // Print Array elements 
+	        System.out.print("String Array[]: "
+	                         + Arrays.toString(selGroupArry)); 
+	        
 			if (agent.getPersonalInfo().getImage() != null) {
 				setAgentImageByteString(Base64Util.encoder(agent.getPersonalInfo().getImage()));
 			}
@@ -1845,16 +1680,6 @@ public class AgentAction extends SwitchValidatorAction {
 			} else {
 				agent.setPassword(null);
 			}
-			/*if(agent.isTrainingExists()){
-				String trainings="";
-				Set<FarmerTraining>farmerTrainings=agent.getTrainingTemplates();
-				for(FarmerTraining farmerTraining:farmerTrainings){
-					trainings=trainings.concat(String.valueOf(farmerTraining.getId())).concat(",");
-				}
-					agent.setSelectedtrainings(StringUtil.removeLastComma(trainings.trim()));
-				agent.setSelectedtrainings(StringUtil.removeLastComma(trainings.trim()));
-				}
-			*/
 			
 			id = null;
 			command = UPDATE;
@@ -2019,13 +1844,15 @@ public class AgentAction extends SwitchValidatorAction {
 
 					
 					}else{						
-						for (String warehouseName : getSelectedName()) {
-							Warehouse warehouse = locationService.findSamithiByName(warehouseName);
-							if (!ObjectUtil.isEmpty(warehouse)) {
-								if (!temp.getWareHouses().contains(warehouse))
-									changed = true;
-								wareHouses.add(warehouse);
+						String[] strArray = agent.getAvailableWarehouse().split(",");
+						
+						for (String warehouseName : strArray) {
+							if(!StringUtil.isEmpty(warehouseName)) {
+								Warehouse warehouse = locationService.findSamithiById(Long.valueOf(warehouseName.trim()));
+								if (!ObjectUtil.isEmpty(warehouse))
+									wareHouses.add(warehouse);
 							}
+							
 						}
 						if (temp.getWareHouses().size() != wareHouses.size() || changed) {
 							temp.setRevisionNumber(DateUtil.getRevisionNumber());
@@ -2359,65 +2186,7 @@ public class AgentAction extends SwitchValidatorAction {
 		return WAREHOUSE_MAPPING;
 	}
 
-	/**
-	 * Load samithi by cooperative.
-	 * 
-	 * @param agentId
-	 *            the agent id
-	 * @param warehouse
-	 *            the warehouse
-	 */
-	private void loadSamithiByCooperative(String agentId, Warehouse warehouse) {
 
-		if (!ObjectUtil.isEmpty(warehouse)) {
-			if (!StringUtil.isEmpty(agentId)) {
-				selectedWarehouse = agentService.listSelectedSamithiByAgentId(Long.valueOf(agentId), warehouse.getId());
-				availableWarehouse = agentService.listAvailableSamithiByAgentId(Long.valueOf(agentId),
-						warehouse.getId());
-
-			} else
-				availableWarehouse = agentService.listSamithiByCooperativeId(warehouse.getId());
-		}
-	}
-
-	private void populateSamithiByAgentId(String agentId) {
-
-		if (!StringUtil.isEmpty(agentId)) {
-			selectedWarehouse = agentService.listSelectedSamithiById(Long.valueOf(agentId));
-			availableWarehouse = agentService.listAvailableSamithi();
-
-			Iterator itr = selectedWarehouse.iterator();
-			while (itr.hasNext()) {
-				availableWarehouse.remove(itr.next());
-			}
-			setAvailableWarehouse(availableWarehouse);
-			System.out.println(selectedWarehouse + "" + availableWarehouse);
-		}
-	}
-
-	/**
-	 * Load warehouse by service point.
-	 * 
-	 * @param agentId
-	 *            the agent id
-	 * @param servicePoint
-	 *            the service point
-	 */
-	private void loadWarehouseByServicePoint(String agentId, ServicePoint servicePoint) {
-
-		if (!ObjectUtil.isEmpty(servicePoint)) {
-			availableWarehouse = agentService.listWarehouseNameByServicePointId(servicePoint.getId());
-			selectedWarehouse = agentService.listWarehouseNameByAgentIdAndServicePointId(Long.valueOf(agentId),
-					servicePoint.getId());
-		}
-	}
-
-	/**
-	 * Sets the agent image byte string.
-	 * 
-	 * @param agentImageByteString
-	 *            the new agent image byte string
-	 */
 	public void setAgentImageByteString(String agentImageByteString) {
 
 		this.agentImageByteString = agentImageByteString;
@@ -2499,39 +2268,8 @@ public class AgentAction extends SwitchValidatorAction {
 		return qrid;
 	}
 
-	/**
-	 * Gets the available warehouse.
-	 * 
-	 * @return the available warehouse
-	 */
-	public List<String> getAvailableWarehouse() {
 
-		List<Warehouse> samithiList = locationService.listOfSamithi();
-		availableWarehouse = new ArrayList<String>();
-		if (!ObjectUtil.isListEmpty(samithiList)) {
-			for (Warehouse samithi : samithiList) {
-				availableWarehouse.add(samithi.getName());
-			}
-		}
-		Iterator itr = selectedWarehouse.iterator();
-		while (itr.hasNext()) {
-			availableWarehouse.remove(itr.next());
-		}
-
-		return availableWarehouse;
-	}
-
-	/**
-	 * Sets the available warehouse.
-	 * 
-	 * @param availableWarehouse
-	 *            the new available warehouse
-	 */
-	public void setAvailableWarehouse(List<String> availableWarehouse) {
-
-		this.availableWarehouse = availableWarehouse;
-	}
-
+	
 	/**
 	 * Gets the selected warehouse.
 	 * 
@@ -2804,18 +2542,7 @@ public class AgentAction extends SwitchValidatorAction {
 		return returnValueList;
 	}
 
-	public List<Warehouse> getSamithiList() {
-
-		List<Warehouse> returnValueList = locationService.listOfSamithi();
-		Iterator itr = selectedWarehouse.iterator();
-		while (itr.hasNext()) {
-			availableWarehouse.remove(itr.next());
-			// returnValueList.remove(itr.next());
-		}
-		setAvailableWarehouse(availableWarehouse);
-		return returnValueList;
-	}
-
+	
 	/**
 	 * Prepare.
 	 * 
@@ -3073,4 +2800,45 @@ public class AgentAction extends SwitchValidatorAction {
 
 	}
 	
+	public Map<Long, String> getGroupList(){
+		List<Warehouse> samithiList = locationService.listOfSamithi();
+		Map<Long,String> warehouses=new LinkedHashMap<Long, String>();
+		if(!ObjectUtil.isListEmpty(samithiList)){
+			samithiList.stream().forEach( w->{
+			warehouses.put(w.getId(), w.getName());
+		});
+		}
+		return warehouses;
+	}
+
+	public String getAvailableWarehouse() {
+		return availableWarehouse;
+	}
+
+	public void setAvailableWarehouse(String availableWarehouse) {
+		this.availableWarehouse = availableWarehouse;
+	}
+
+	public String[] getSelGroupArry() {
+		return selGroupArry;
+	}
+
+	public void setSelGroupArry(String[] selGroupArry) {
+		this.selGroupArry = selGroupArry;
+	}
+	public static String[] GetStringArray(List<String> arr) 
+    { 
+  
+        // declaration and initialise String Array 
+        String str[] = new String[arr.size()]; 
+  
+        // ArrayList to Array Conversion 
+        for (int j = 0; j < arr.size(); j++) { 
+  
+            // Assign each value to String array 
+            str[j] = arr.get(j); 
+        } 
+  
+        return str; 
+    } 
 }

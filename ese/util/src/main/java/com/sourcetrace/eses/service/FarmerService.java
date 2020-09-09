@@ -7966,4 +7966,19 @@ boolean updatedS=false;
 		// TODO Auto-generated method stub
 		return farmerDAO.findFarmersCountFromLotTraceByLotNo(selectedLotNo);
 	}
+
+	@Override
+	public List<Object[]> fetchFarmerAndFarmCount() {
+		return farmerDAO.fetchFarmerAndFarmCount();
+	}
+
+	@Override
+	public Object[] populateDashboardCardDetails() {
+		return farmerDAO.populateDashboardCardDetails();
+	}
+
+	@Override
+	public List<Object[]> fetchFarmerAndFarmCountByGroup() {
+		return farmerDAO.fetchFarmerAndFarmCountByGroup();
+	}
 }

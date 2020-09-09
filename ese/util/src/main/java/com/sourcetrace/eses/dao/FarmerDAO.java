@@ -178,6 +178,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	ILocationDAO locationDAO;
 	@Autowired
 	private IFarmerService farmerService;
+
 	@Autowired
 	public FarmerDAO(SessionFactory sessionFactory) {
 		this.setSessionFactory(sessionFactory);
@@ -186,15 +187,15 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	public Farmer findFarmerByFarmerId(String farmerId) {
 
 		Object[] values = { farmerId, ESETxnStatus.SUCCESS.ordinal() };
-		Farmer farmer = (Farmer) find("FROM Farmer fr left join fetch fr.farms WHERE  fr.farmerId = ? AND fr.statusCode = ?", values);
+		Farmer farmer = (Farmer) find(
+				"FROM Farmer fr left join fetch fr.farms WHERE  fr.farmerId = ? AND fr.statusCode = ?", values);
 		return farmer;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.sourcetrace.eses.order.dao.service.IFarmerDAO#findFarmerById(java
+	 * @see com.sourcetrace.eses.order.dao.service.IFarmerDAO#findFarmerById(java
 	 * .lang.Long)
 	 */
 	public Farmer findFarmerById(Long id) {
@@ -205,8 +206,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.sourcetrace.eses.order.dao.service.IFarmerDAO#findFarmById(java.lang
+	 * @see com.sourcetrace.eses.order.dao.service.IFarmerDAO#findFarmById(java.lang
 	 * .Long)
 	 */
 	public Farm findFarmById(Long id) {
@@ -217,8 +217,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.sourcetrace.eses.order.dao.service.IFarmerDAO#findFarmByFarmCode(
+	 * @see com.sourcetrace.eses.order.dao.service.IFarmerDAO#findFarmByFarmCode(
 	 * java.lang.String)
 	 */
 	public Farm findFarmByFarmCode(String farmCode) {
@@ -229,8 +228,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.sourcetrace.eses.order.dao.service.IFarmerDAO#findFarmByFarmName(
+	 * @see com.sourcetrace.eses.order.dao.service.IFarmerDAO#findFarmByFarmName(
 	 * java.lang.String)
 	 */
 	public Farm findFarmByFarmName(String farmName) {
@@ -259,8 +257,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.sourcetrace.eses.order.dao.service.IFarmerDAO#findFarmByCode(java
+	 * @see com.sourcetrace.eses.order.dao.service.IFarmerDAO#findFarmByCode(java
 	 * .lang.String)
 	 */
 	public Farm findFarmByCode(String code) {
@@ -271,8 +268,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.sourcetrace.eses.order.dao.service.IFarmerDAO#listFarmByFarmerId(
+	 * @see com.sourcetrace.eses.order.dao.service.IFarmerDAO#listFarmByFarmerId(
 	 * long)
 	 */
 	public List<Farm> listFarmByFarmerId(long farmerId) {
@@ -283,8 +279,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.sourcetrace.eses.order.dao.service.IFarmerDAO#isCityMappingexist(
+	 * @see com.sourcetrace.eses.order.dao.service.IFarmerDAO#isCityMappingexist(
 	 * long)
 	 */
 	public boolean isCityMappingexist(long id) {
@@ -314,8 +309,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.sourcetrace.eses.order.dao.service.IFarmerDAO#isVillageMappingExist
+	 * @see com.sourcetrace.eses.order.dao.service.IFarmerDAO#isVillageMappingExist
 	 * (long)
 	 */
 	public boolean isVillageMappingExist(long id) {
@@ -332,8 +326,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.sourcetrace.eses.order.dao.service.IFarmerDAO#findFarmerByFarmerName
+	 * @see com.sourcetrace.eses.order.dao.service.IFarmerDAO#findFarmerByFarmerName
 	 * (java.lang.String)
 	 */
 	public Farmer findFarmerByFarmerName(String selectedFarmer) {
@@ -393,8 +386,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.sourcetrace.eses.order.dao.service.IFarmerDAO#findFarmPhotoById(java
+	 * @see com.sourcetrace.eses.order.dao.service.IFarmerDAO#findFarmPhotoById(java
 	 * .lang.Long)
 	 */
 	public byte[] findFarmPhotoById(Long id) {
@@ -416,8 +408,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.sourcetrace.eses.order.dao.service.IFarmerDAO#findSeasonById(java
+	 * @see com.sourcetrace.eses.order.dao.service.IFarmerDAO#findSeasonById(java
 	 * .lang.Long)
 	 */
 	public Season findSeasonById(Long id) {
@@ -428,8 +419,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.sourcetrace.eses.order.dao.service.IFarmerDAO#listFarmerByCityId(
+	 * @see com.sourcetrace.eses.order.dao.service.IFarmerDAO#listFarmerByCityId(
 	 * long)
 	 */
 	public List<Farmer> listFarmerByCityId(long id) {
@@ -441,8 +431,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.sourcetrace.eses.order.dao.service.IFarmerDAO#listFarmerByVillageId
+	 * @see com.sourcetrace.eses.order.dao.service.IFarmerDAO#listFarmerByVillageId
 	 * (long)
 	 */
 	public List<Farmer> listFarmerByVillageId(long id) {
@@ -625,8 +614,8 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	 * (non-Javadoc)
 	 * 
 	 * @seecom.sourcetrace.eses.order.dao.service.IFarmerDAO#
-	 * listActiveContractFarmersBySeasonProcurementProductVillage
-	 * (java.lang.String, java.lang.String, java.lang.String)
+	 * listActiveContractFarmersBySeasonProcurementProductVillage (java.lang.String,
+	 * java.lang.String, java.lang.String)
 	 */
 	public List<Farmer> listActiveContractFarmersBySeasonProcurementProductVillage(String seasoncode,
 			String productCode, String selectedVillage) {
@@ -686,8 +675,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.sourcetrace.eses.order.dao.service.IFarmerDAO#findSeasonBySeasonCode
+	 * @see com.sourcetrace.eses.order.dao.service.IFarmerDAO#findSeasonBySeasonCode
 	 * (java.lang.String)
 	 */
 	public Long findSeasonBySeasonCode(String seasonCode) {
@@ -709,8 +697,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.sourcetrace.eses.order.dao.service.IFarmerDAO#updateFarmerModifyTime
+	 * @see com.sourcetrace.eses.order.dao.service.IFarmerDAO#updateFarmerModifyTime
 	 * (long, java.util.Date)
 	 */
 	public void updateFarmerModifyTime(long id, Date tempDate) {
@@ -763,8 +750,8 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	 * (non-Javadoc)
 	 * 
 	 * @seecom.sourcetrace.eses.order.dao.service.IFarmerDAO#
-	 * listActiveContractFarmersByVillageCodeSeasonCodeSamithiId
-	 * (java.lang.String, java.lang.String, long)
+	 * listActiveContractFarmersByVillageCodeSeasonCodeSamithiId (java.lang.String,
+	 * java.lang.String, long)
 	 */
 	public List<Farmer> listActiveContractFarmersByVillageCodeSeasonCodeSamithiId(String villageCode, String seasonCode,
 			long samithiId) {
@@ -849,8 +836,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.sourcetrace.eses.order.dao.service.IFarmerDAO#findHeadOfFamilyById
+	 * @see com.sourcetrace.eses.order.dao.service.IFarmerDAO#findHeadOfFamilyById
 	 * (long)
 	 */
 	public FarmerFamily findHeadOfFamilyById(long id) {
@@ -864,8 +850,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.sourcetrace.eses.order.dao.service.IFarmerDAO#findFarmerFamilyById
+	 * @see com.sourcetrace.eses.order.dao.service.IFarmerDAO#findFarmerFamilyById
 	 * (long)
 	 */
 	public FarmerFamily findFarmerFamilyById(long id) {
@@ -877,8 +862,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.sourcetrace.eses.order.dao.service.IFarmerDAO#findFarmerFamilyByName
+	 * @see com.sourcetrace.eses.order.dao.service.IFarmerDAO#findFarmerFamilyByName
 	 * (java.lang.String, long)
 	 */
 	public FarmerFamily findFarmerFamilyByName(String name, long farmerId) {
@@ -933,8 +917,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.sourcetrace.eses.order.dao.service.IFarmerDAO#findHarvestSeasonById
+	 * @see com.sourcetrace.eses.order.dao.service.IFarmerDAO#findHarvestSeasonById
 	 * (java.lang.Long)
 	 */
 	public HarvestSeason findHarvestSeasonById(Long id) {
@@ -945,8 +928,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.sourcetrace.eses.order.dao.service.IFarmerDAO#findHarvestDataById
+	 * @see com.sourcetrace.eses.order.dao.service.IFarmerDAO#findHarvestDataById
 	 * (java.lang.Long)
 	 */
 	public HarvestData findHarvestDataById(Long id) {
@@ -957,8 +939,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.sourcetrace.eses.order.dao.service.IFarmerDAO#findFarmInventoryById
+	 * @see com.sourcetrace.eses.order.dao.service.IFarmerDAO#findFarmInventoryById
 	 * (java.lang.String)
 	 */
 	public FarmInventory findFarmInventoryById(String id) {
@@ -970,8 +951,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.sourcetrace.eses.order.dao.service.IFarmerDAO#findFarmInventoryItem
+	 * @see com.sourcetrace.eses.order.dao.service.IFarmerDAO#findFarmInventoryItem
 	 * (long, int)
 	 */
 	public FarmInventory findFarmInventoryItem(long farmId, int inventoryItem) {
@@ -996,8 +976,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.sourcetrace.eses.order.dao.service.IFarmerDAO#isFarmMappedFarmCrops
+	 * @see com.sourcetrace.eses.order.dao.service.IFarmerDAO#isFarmMappedFarmCrops
 	 * (long)
 	 */
 	public boolean isFarmMappedFarmCrops(long id) {
@@ -1042,8 +1021,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.sourcetrace.eses.order.dao.service.IFarmerDAO#listOfCertifiedFarmers
+	 * @see com.sourcetrace.eses.order.dao.service.IFarmerDAO#listOfCertifiedFarmers
 	 * ()
 	 */
 	public List<Farmer> listOfCertifiedFarmers() {
@@ -1197,8 +1175,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.sourcetrace.eses.order.dao.service.IFarmerDAO#updateFarm(com.ese.
+	 * @see com.sourcetrace.eses.order.dao.service.IFarmerDAO#updateFarm(com.ese.
 	 * entity.profile.Farm)
 	 */
 	public void updateFarm(Farm farm) {
@@ -1216,8 +1193,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.sourcetrace.eses.order.dao.service.IFarmerDAO#updateFarmer(com.ese.
+	 * @see com.sourcetrace.eses.order.dao.service.IFarmerDAO#updateFarmer(com.ese.
 	 * entity.profile.Farmer)
 	 */
 	public void updateFarmer(Farmer farmer) {
@@ -1235,8 +1211,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.sourcetrace.eses.order.dao.service.IFarmerDAO#findFarmByfarmId(java.
+	 * @see com.sourcetrace.eses.order.dao.service.IFarmerDAO#findFarmByfarmId(java.
 	 * lang.String)
 	 */
 	public Farm findFarmByfarmId(String farmId) {
@@ -1296,8 +1271,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.sourcetrace.eses.order.dao.service.IFarmerDAO#listOfFarmersCount()
+	 * @see com.sourcetrace.eses.order.dao.service.IFarmerDAO#listOfFarmersCount()
 	 */
 	public long listOfFarmersCount() {
 
@@ -1320,8 +1294,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.sourcetrace.eses.order.dao.service.IFarmerDAO#deleteelemetbyId(java.
+	 * @see com.sourcetrace.eses.order.dao.service.IFarmerDAO#deleteelemetbyId(java.
 	 * lang.Long)
 	 */
 	public void deleteelemetbyId(Long fileid) {
@@ -1682,12 +1655,11 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	}
 
 	/*
-	 * public List<Warehouse> listSamithiName() { // TODO Auto-generated method
-	 * stub Session sessions = getSessionFactory().openSession(); String
-	 * queryString =
+	 * public List<Warehouse> listSamithiName() { // TODO Auto-generated method stub
+	 * Session sessions = getSessionFactory().openSession(); String queryString =
 	 * "select w.name from farmer f inner join  warehouse w on  w.id=f.SAMITHI_ID "
-	 * ; Query query = sessions.createSQLQuery(queryString); List<Warehouse>
-	 * array = query.list(); sessions.flush(); sessions.close(); return array; }
+	 * ; Query query = sessions.createSQLQuery(queryString); List<Warehouse> array =
+	 * query.list(); sessions.flush(); sessions.close(); return array; }
 	 */
 
 	public List<Warehouse> listSamithiName() {
@@ -1707,8 +1679,8 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	 * public boolean isVillageMappingExist(long id) { Object[] values = {id,
 	 * ESETxnStatus.SUCCESS.ordinal()}; List<Farmer> farmerList =
 	 * list("FROM Farmer farmer WHERE farmer.village.id = ? AND farmer.statusCode = ?"
-	 * , values); if (!ObjectUtil.isListEmpty(farmerList)) { return true; }
-	 * return false; }
+	 * , values); if (!ObjectUtil.isListEmpty(farmerList)) { return true; } return
+	 * false; }
 	 */
 
 	@Override
@@ -1939,8 +1911,8 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 		 * 
 		 * query.setParameter("statusCode", ESETxnStatus.SUCCESS.ordinal());
 		 * 
-		 * Integer val = ((Long) query.uniqueResult()).intValue();
-		 * session.flush(); session.close(); return val;
+		 * Integer val = ((Long) query.uniqueResult()).intValue(); session.flush();
+		 * session.close(); return val;
 		 */
 
 		Session session = getSessionFactory().openSession();
@@ -1965,9 +1937,8 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	public Farmer findFarmerByFarmerId(String farmerId, String tenantId) {
 
 		/*
-		 * Object[] values = {farmerId, ESETxnStatus.SUCCESS.ordinal()}; Farmer
-		 * farmer = (Farmer)
-		 * find("FROM Farmer fr WH\ERE  fr.farmerId = ? AND fr.statusCode = ?",
+		 * Object[] values = {farmerId, ESETxnStatus.SUCCESS.ordinal()}; Farmer farmer =
+		 * (Farmer) find("FROM Farmer fr WH\ERE  fr.farmerId = ? AND fr.statusCode = ?",
 		 * values); return farmer;
 		 */
 
@@ -2008,8 +1979,8 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 		query.setParameter("farmerId", farmerId);
 
 		/*
-		 * List<ESEAccount> eseAccountList = query.list(); ESEAccount eseAccount
-		 * = (ESEAccount) eseAccountList.get(0);
+		 * List<ESEAccount> eseAccountList = query.list(); ESEAccount eseAccount =
+		 * (ESEAccount) eseAccountList.get(0);
 		 */
 
 		List<ESEAccount> eseAccountList = query.list();
@@ -2038,8 +2009,8 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 
 		/*
 		 * List<InterestCalcConsolidated> intCalConsolidatedList = query.list();
-		 * InterestCalcConsolidated intCalConsolidated =
-		 * (InterestCalcConsolidated) intCalConsolidatedList.get(0);
+		 * InterestCalcConsolidated intCalConsolidated = (InterestCalcConsolidated)
+		 * intCalConsolidatedList.get(0);
 		 */
 
 		List<InterestCalcConsolidated> intCalConsolidatedList = query.list();
@@ -2830,9 +2801,9 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 				criteria.add(Restrictions.eq("f.branchId", farm.getFarmer().getBranchId()));
 			}
 			/*
-			 * querying with left join ics conversion takes time so when
-			 * filtering used join when no ics filter used takes seperate list
-			 * for farm and organic status map and set to the object
+			 * querying with left join ics conversion takes time so when filtering used join
+			 * when no ics filter used takes seperate list for farm and organic status map
+			 * and set to the object
 			 */
 			if (!ObjectUtil.isEmpty(farm.getFarmICSConversion())) {
 				if (selectedOrganicStatus.equalsIgnoreCase("3")) {
@@ -2858,11 +2829,11 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 				/*
 				 * String queryString =
 				 * "select fi.farm.id,COALESCE(fi.organicStatus,'0') from  FarmIcsConversion fi  where fi.farm is not null and isActive=1"
-				 * ; Session ses = getSessionFactory().openSession(); Query
-				 * query = ses.createQuery(queryString); List<Long> results =
-				 * ((List<Object[]>) query.list()).stream().map(result ->(Long)
-				 * result[0]).collect(Collectors.toList());
-				 * //criteria.add(Restrictions.in("id", results));
+				 * ; Session ses = getSessionFactory().openSession(); Query query =
+				 * ses.createQuery(queryString); List<Long> results = ((List<Object[]>)
+				 * query.list()).stream().map(result ->(Long)
+				 * result[0]).collect(Collectors.toList()); //criteria.add(Restrictions.in("id",
+				 * results));
 				 */ }
 		}
 		if (!selectedFarmer.equalsIgnoreCase("") && !StringUtil.isEmpty(selectedFarmer)) {
@@ -2884,7 +2855,8 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 			a = Arrays.copyOf(a, a.length + 1);
 
 			a[a.length - 1] = iscList.containsKey(Long.valueOf(a[6].toString()))
-					? iscList.get(Long.valueOf(a[6].toString())) : "0";
+					? iscList.get(Long.valueOf(a[6].toString()))
+					: "0";
 			return a;
 
 		}).collect(Collectors.toList());
@@ -3155,7 +3127,8 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	public Integer findFarmsCountByBranch(String branchId) {
 
 		Session session = getSessionFactory().getCurrentSession();
-		Query query = session.createQuery("select f.farms.size from Farmer f  where f.farmer.branchId=:branchId and f.status=1");
+		Query query = session
+				.createQuery("select f.farms.size from Farmer f  where f.farmer.branchId=:branchId and f.status=1");
 
 		query.setParameter("branchId", branchId);
 
@@ -3182,7 +3155,8 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	public Integer findFarmsCount() {
 
 		Session session = getSessionFactory().getCurrentSession();
-		Long count = ((Long) session.createQuery("select COALESCE(SUM(f.farms.size),0) from Farmer f WHERE f.status=1").uniqueResult());
+		Long count = ((Long) session.createQuery("select COALESCE(SUM(f.farms.size),0) from Farmer f WHERE f.status=1")
+				.uniqueResult());
 		return count == null ? 0 : count.intValue();
 	}
 
@@ -3225,9 +3199,8 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	public String findFarmTotalLandAreaCount() {
 
 		Session session = getSessionFactory().getCurrentSession();
-		return ((String) session
-				.createQuery(
-						"select COALESCE(sum(fm.farmDetailedInfo.totalLandHolding),'0') from Farmer f join f.farms fm where fm.status=1 and f.statusCode = 0")
+		return ((String) session.createQuery(
+				"select COALESCE(sum(fm.farmDetailedInfo.totalLandHolding),'0') from Farmer f join f.farms fm where fm.status=1 and f.statusCode = 0")
 				.uniqueResult());
 	}
 
@@ -3490,9 +3463,8 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	public List<Object[]> listFarmCropsFieldsByFarmerId(Long farmId) {
 
 		Session session = getSessionFactory().getCurrentSession();
-		Query query = session
-				.createQuery(
-						"SELECT f.id,COALESCE(f.procurementVariety.code,''),COALESCE(f.procurementVariety.procurementProduct.code,''),COALESCE(f.seedSource,''),COALESCE(f.seedQtyCost,''),COALESCE(f.estimatedYield,''),COALESCE(f.cropSeason.code,''),COALESCE(f.cropCategory,''),COALESCE(f.farm.farmCode,''),COALESCE(f.farm.farmer.farmerId,''),COALESCE(f.riskAssesment,''),COALESCE(f.seedTreatmentDetails,''),COALESCE(f.otherSeedTreatmentDetails,''),COALESCE(f.stapleLength,''),COALESCE(f.seedQtyUsed,''),COALESCE(f.type,''),COALESCE(f.cropCategoryList,''),COALESCE(f.cultiArea,''),COALESCE(f.sowingDate,''),COALESCE(f.estimatedHarvestDate,''),COALESCE(f.interType,''),COALESCE(f.interAcre,''),COALESCE(f.totalCropHarv,''),COALESCE(f.grossIncome,'') from FarmCrops f where f.farm.id = :farmerId  and  f.status=1 ")
+		Query query = session.createQuery(
+				"SELECT f.id,COALESCE(f.procurementVariety.code,''),COALESCE(f.procurementVariety.procurementProduct.code,''),COALESCE(f.seedSource,''),COALESCE(f.seedQtyCost,''),COALESCE(f.estimatedYield,''),COALESCE(f.cropSeason.code,''),COALESCE(f.cropCategory,''),COALESCE(f.farm.farmCode,''),COALESCE(f.farm.farmer.farmerId,''),COALESCE(f.riskAssesment,''),COALESCE(f.seedTreatmentDetails,''),COALESCE(f.otherSeedTreatmentDetails,''),COALESCE(f.stapleLength,''),COALESCE(f.seedQtyUsed,''),COALESCE(f.type,''),COALESCE(f.cropCategoryList,''),COALESCE(f.cultiArea,''),COALESCE(f.sowingDate,''),COALESCE(f.estimatedHarvestDate,''),COALESCE(f.interType,''),COALESCE(f.interAcre,''),COALESCE(f.totalCropHarv,''),COALESCE(f.grossIncome,'') from FarmCrops f where f.farm.id = :farmerId  and  f.status=1 ")
 				.setParameter("farmerId", farmId);
 		List result = query.list();
 
@@ -3658,9 +3630,8 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	public String findFarmTotalLandAreaCount(String BranchId) {
 
 		Session session = getSessionFactory().getCurrentSession();
-		return ((String) session
-				.createQuery(
-						"select COALESCE(sum(fdi.farmDetailedInfo.totalLandHolding),'0') from Farm  fdi where fdi.farmer.branchId =:branch  and  fdi.status=1  ")
+		return ((String) session.createQuery(
+				"select COALESCE(sum(fdi.farmDetailedInfo.totalLandHolding),'0') from Farm  fdi where fdi.farmer.branchId =:branch  and  fdi.status=1  ")
 				.setParameter("branch", BranchId).uniqueResult());
 	}
 
@@ -3678,9 +3649,12 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	@Override
 	public List<Object[]> findFarmerCountWithPhotos(String branchId) {
 		if (!StringUtil.isEmpty(branchId)) {
-			return list("SELECT  f.createdDate From Farmer f WHERE f.imageInfo is not null and f.status=1 and f.statusCode=0 and f.branchId=?", branchId);
+			return list(
+					"SELECT  f.createdDate From Farmer f WHERE f.imageInfo is not null and f.status=1 and f.statusCode=0 and f.branchId=?",
+					branchId);
 		} else {
-			return list("SELECT  f.createdDate From Farmer f WHERE f.imageInfo is not null and f.status=1 and f.statusCode=0");
+			return list(
+					"SELECT  f.createdDate From Farmer f WHERE f.imageInfo is not null and f.status=1 and f.statusCode=0");
 		}
 	}
 
@@ -3691,7 +3665,8 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 					"SELECT  f.farmer.createdDate From Farm f WHERE f.photo is not null and f.farmer.branchId=?  and  f.status=1  and f.farmer.status=1 and f.farmer.statusCode=0",
 					branchId);
 		} else {
-			return list("SELECT  f.farmer.createdDate From Farm f WHERE f.photo is not null  and  f.status=1  and f.farmer.status=1 and f.farmer.statusCode=0");
+			return list(
+					"SELECT  f.farmer.createdDate From Farm f WHERE f.photo is not null  and  f.status=1  and f.farmer.status=1 and f.farmer.statusCode=0");
 		}
 	}
 
@@ -3721,8 +3696,8 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	public List<Object> findFarmerCountByICconversion(String selectedBranch, Integer selectedYear,
 			String selectedSeason, String selectedGender, String selectedState) {
 		/*
-		 * Object[] values = { selectedBranch, selectedYear, (selectedYear - 1)
-		 * }; Object[] yearValues = { selectedYear, (selectedYear - 1) }; if
+		 * Object[] values = { selectedBranch, selectedYear, (selectedYear - 1) };
+		 * Object[] yearValues = { selectedYear, (selectedYear - 1) }; if
 		 * (StringUtil.isEmpty(selectedBranch)) { return list(
 		 * "select fc.icsType,count(f.id) FROM FarmIcsConversion fc INNER JOIN fc.farm fm INNER JOIN fm.farmer f WHERE Year(f.createdDate)=? OR Year(f.createdDate)=? GROUP BY fc.icsType"
 		 * , yearValues); } else { return list(
@@ -3823,15 +3798,13 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	public Integer findTotalFarmCount(String selectedBranch, Integer selectedYear) {
 		Session session = getSessionFactory().getCurrentSession();
 		if (StringUtil.isEmpty(selectedBranch)) {
-			return ((Long) session
-					.createQuery(
-							"select count(*) FROM Farm f WHERE Year(f.farmer.createdDate)=:year OR Year(f.farmer.createdDate)=:prevYear  and  f.status=1 ")
+			return ((Long) session.createQuery(
+					"select count(*) FROM Farm f WHERE Year(f.farmer.createdDate)=:year OR Year(f.farmer.createdDate)=:prevYear  and  f.status=1 ")
 					.setParameter("year", selectedYear).setParameter("prevYear", (selectedYear - 1)).uniqueResult())
 							.intValue();
 		} else {
-			return ((Long) session
-					.createQuery(
-							"select count(*) FROM Farm f WHERE f.farmer.branchId =:branch AND (Year(f.farmer.createdDate)=:year OR Year(f.farmer.createdDate)=:prevYear)  and  f.status=1  ")
+			return ((Long) session.createQuery(
+					"select count(*) FROM Farm f WHERE f.farmer.branchId =:branch AND (Year(f.farmer.createdDate)=:year OR Year(f.farmer.createdDate)=:prevYear)  and  f.status=1  ")
 					.setParameter("branch", selectedBranch).setParameter("year", selectedYear)
 					.setParameter("prevYear", (selectedYear - 1)).uniqueResult()).intValue();
 		}
@@ -3839,20 +3812,20 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 
 	/*
 	 * @Override public List<CropHarvest> findCropHarvestByYearAndBranch(String
-	 * selectedBranch, Integer selectedYear) { Object[] values = {
-	 * selectedBranch, selectedYear,(selectedYear-1)}; Object[] yearValues =
-	 * {selectedYear,(selectedYear-1)}; if (StringUtil.isEmpty(selectedBranch))
-	 * { return
+	 * selectedBranch, Integer selectedYear) { Object[] values = { selectedBranch,
+	 * selectedYear,(selectedYear-1)}; Object[] yearValues =
+	 * {selectedYear,(selectedYear-1)}; if (StringUtil.isEmpty(selectedBranch)) {
+	 * return
 	 * list("From CropHarvest ch WHERE (Year(ch.harvestDate)=? OR Year(ch.harvestDate)=?)"
 	 * , yearValues); } else { return
 	 * list("From CropHarvest ch WHERE ch.branchId=? AND (Year(ch.harvestDate)=? OR Year(ch.harvestDate)=?)"
 	 * , values); } }
 	 * 
 	 * @Override public List<CropSupply> findCropSupplyByYearAndBranch(String
-	 * selectedBranch, Integer selectedYear) { Object[] values = {
-	 * selectedBranch, selectedYear,(selectedYear-1) }; Object[] yearValues = {
-	 * selectedYear,(selectedYear-1) }; if (StringUtil.isEmpty(selectedBranch))
-	 * { return
+	 * selectedBranch, Integer selectedYear) { Object[] values = { selectedBranch,
+	 * selectedYear,(selectedYear-1) }; Object[] yearValues = {
+	 * selectedYear,(selectedYear-1) }; if (StringUtil.isEmpty(selectedBranch)) {
+	 * return
 	 * list("From CropSupply cs WHERE Year(cs.dateOfSale)=? OR Year(cs.dateOfSale)=?"
 	 * , yearValues); } else { return
 	 * list("From CropSupply cs WHERE cs.branchId=? AND (Year(cs.dateOfSale)=? OR Year(cs.dateOfSale)=?)"
@@ -4029,17 +4002,14 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 		// TODO Auto-generated method stub
 		/*
 		 * Session session = getSessionFactory().getCurrentSession(); if
-		 * (StringUtil.isEmpty(selectedBranch)) { return ((Long) session
-		 * .createQuery(
+		 * (StringUtil.isEmpty(selectedBranch)) { return ((Long) session .createQuery(
 		 * "select count(*) FROM FarmCrops fc INNER JOIN fc.farm fa INNER JOIN fa.farmer f  WHERE f.status=1 AND fc.stapleLength in:stapleLen AND (Year(f.createdDate)=:prevYear OR Year(f.createdDate)=:year)"
 		 * ) .setParameter("year", selectedYear).setParameterList("stapleLen",
 		 * selectedStapleLen) .setParameter("prevYear", (selectedYear -
-		 * 1)).uniqueResult()).intValue(); } else { return ((Long) session
-		 * .createQuery(
+		 * 1)).uniqueResult()).intValue(); } else { return ((Long) session .createQuery(
 		 * "select count(*) FROM FarmCrops fc INNER JOIN fc.farm fa  INNER JOIN fa.farmer f WHERE f.status=1 AND fc.stapleLength in:stapleLen AND f.branchId =:branch AND (Year(f.createdDate)=:prevYear OR Year(f.createdDate)=:year)"
-		 * ) .setParameterList("stapleLen",
-		 * selectedStapleLen).setParameter("branch", selectedBranch)
-		 * .setParameter("year", selectedYear).setParameter("prevYear",
+		 * ) .setParameterList("stapleLen", selectedStapleLen).setParameter("branch",
+		 * selectedBranch) .setParameter("year", selectedYear).setParameter("prevYear",
 		 * (selectedYear - 1)).uniqueResult()) .intValue(); }
 		 */
 		Session session = getSessionFactory().getCurrentSession();
@@ -4078,7 +4048,8 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	public List<String> findFarmerIdsByfarmCode(List<String> farmCodes) {
 		List<String> list = null;
 		Session session = getSessionFactory().getCurrentSession();
-		Query query = session.createQuery("SELECT f.farmer.farmerId from Farm f where f.farmCode in :fCode and f.farmer.status=1 and f.farmer.statusCode=0");
+		Query query = session.createQuery(
+				"SELECT f.farmer.farmerId from Farm f where f.farmCode in :fCode and f.farmer.status=1 and f.farmer.statusCode=0");
 		query.setParameterList("fCode", farmCodes);
 		if (!ObjectUtil.isEmpty(query) && query.list().size() > 0) {
 			list = query.list();
@@ -4170,8 +4141,8 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 		 * 
 		 * query.setParameterList("staple", selectedStapleLen);
 		 * 
-		 * query.setParameter("pveYear", selectedYear - 1);
-		 * query.setParameter("year", selectedYear);
+		 * query.setParameter("pveYear", selectedYear - 1); query.setParameter("year",
+		 * selectedYear);
 		 * 
 		 * return query.list();
 		 */
@@ -4207,8 +4178,8 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	@Override
 	public List<String> findTotalFarmCodeByBranch(String selectedBranch, int selectedYear, String selectedSeason) {
 		/*
-		 * Object[] values = { selectedBranch, selectedYear, (selectedYear - 1)
-		 * }; Object[] yearValues = { selectedYear, (selectedYear - 1) }; if
+		 * Object[] values = { selectedBranch, selectedYear, (selectedYear - 1) };
+		 * Object[] yearValues = { selectedYear, (selectedYear - 1) }; if
 		 * (StringUtil.isEmpty(selectedBranch)) { return list(
 		 * "SELECT fc.farm.farmCode FROM FarmCrops fc INNER JOIN fc.farm.farmer f WHERE (Year(f.createdDate)=? OR Year(f.createdDate)=?)"
 		 * , yearValues);
@@ -4230,8 +4201,8 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 			params.put("year", selectedSeason);
 
 			/*
-			 * hqlQuery += "  OR Year(f.createdDate)=:prevYear)";
-			 * params.put("prevYear", (selectedYear - 1));
+			 * hqlQuery += "  OR Year(f.createdDate)=:prevYear)"; params.put("prevYear",
+			 * (selectedYear - 1));
 			 */
 		}
 
@@ -4274,8 +4245,8 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	@Override
 	public String findTotalLandAcre(String selectedBranch, int selectedYear, String selectedSeason) {
 		/*
-		 * Object[] values = { selectedBranch, selectedYear, (selectedYear - 1)
-		 * }; Object[] yearValues = { selectedYear, (selectedYear - 1) }; if
+		 * Object[] values = { selectedBranch, selectedYear, (selectedYear - 1) };
+		 * Object[] yearValues = { selectedYear, (selectedYear - 1) }; if
 		 * (StringUtil.isEmpty(selectedBranch)) { return (String) find(
 		 * "SELECT SUM(fdf.proposedPlantingArea) as Proposed FROM Farm fa  INNER JOIN fa.farmDetailedInfo fdf INNER JOIN fa.farmer f WHERE (Year(f.createdDate)=? OR Year(f.createdDate)=?)"
 		 * , yearValues);
@@ -4297,8 +4268,8 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 			params.put("year", selectedSeason);
 
 			/*
-			 * hqlQuery += "  OR Year(f.createdDate)=:prevYear)";
-			 * params.put("prevYear", (selectedYear - 1));
+			 * hqlQuery += "  OR Year(f.createdDate)=:prevYear)"; params.put("prevYear",
+			 * (selectedYear - 1));
 			 */
 		}
 
@@ -4316,8 +4287,8 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 
 	public List<String> findFarmCodesByCultivation(String selectedBranch, String selectedSeason, String selectedYear) {
 		/*
-		 * Object[] values = { selectedBranch, selectedYear, (selectedYear - 1)
-		 * }; Object[] yearValues = { selectedYear, (selectedYear - 1) }; if
+		 * Object[] values = { selectedBranch, selectedYear, (selectedYear - 1) };
+		 * Object[] yearValues = { selectedYear, (selectedYear - 1) }; if
 		 * (StringUtil.isEmpty(selectedBranch)) { return list(
 		 * "SELECT cu.farmId FROM Cultivation cu  WHERE (Year(cu.expenseDate)=? OR Year(cu.expenseDate)=?)"
 		 * , yearValues);
@@ -4336,12 +4307,12 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 			params.put("branch", selectedBranch);
 		}
 		/*
-		 * if (!StringUtil.isEmpty(sDate) && !StringUtil.isEmpty(eDate)) {
-		 * hqlQuery += "  AND (Year(cu.expenseDate)=:year";
+		 * if (!StringUtil.isEmpty(sDate) && !StringUtil.isEmpty(eDate)) { hqlQuery +=
+		 * "  AND (Year(cu.expenseDate)=:year";
 		 * params.put("year",Integer.valueOf(sDate));
 		 * 
-		 * hqlQuery += "  OR Year(cu.expenseDate)=:prevYear)";
-		 * params.put("prevYear", Integer.valueOf(eDate));
+		 * hqlQuery += "  OR Year(cu.expenseDate)=:prevYear)"; params.put("prevYear",
+		 * Integer.valueOf(eDate));
 		 * 
 		 * }
 		 */
@@ -4479,25 +4450,22 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 		return query.list();
 
 	}
-	
-	
-	
-	
+
 	@Override
-	public List<Object> findFarmerDetailsByStateAndCropbyFarmerStatus(String selectedBranch, Long selectedState, String selectedCrop,
-			String selectedCooperative, String selectedGender,String selectedStatus) {
+	public List<Object> findFarmerDetailsByStateAndCropbyFarmerStatus(String selectedBranch, Long selectedState,
+			String selectedCrop, String selectedCooperative, String selectedGender, String selectedStatus) {
 
 		Session session = getSessionFactory().getCurrentSession();
 		Map<String, Object> params = new HashMap<String, Object>();
 		String hqlQuery = "SELECT SUM(fc.estimatedYield) as Total,cast(SUM(fc.cultiArea) as int) FROM FarmCrops fc INNER JOIN fc.farm fa INNER JOIN fa.farmer f WHERE  fa.status=1 and fc.status=1 and f.statusCode = 0";
-		
+
 		if (!StringUtil.isEmpty(selectedStatus)) {
 			hqlQuery += " AND f.status =:status ";
-			params.put("status",Integer.valueOf(selectedStatus));
-		}else{
+			params.put("status", Integer.valueOf(selectedStatus));
+		} else {
 			hqlQuery += " AND f.status =1 ";
 		}
-		
+
 		if (!StringUtil.isEmpty(selectedBranch)) {
 			hqlQuery += " AND f.branchId =:branch ";
 			params.put("branch", selectedBranch);
@@ -4530,58 +4498,58 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	@Override
 	public Integer findFarmerCountByStateAndCrop(String selectedBranch, int selectedState, String selectedCrop,
 			String selectedCooperative, String selectedGender) {
-		
-	Session session = getSessionFactory().getCurrentSession();
-	Map<String, Object> params = new HashMap<String, Object>();
-	String hqlQuery = null;
-	if (!StringUtil.isEmpty(selectedCrop)) {
-		hqlQuery = "select count(*) FROM FarmCrops fc INNER JOIN fc.farm fa INNER JOIN fa.farmer f WHERE f.status=1 AND fa.status=1 AND f.statusCode=0 AND fc.procurementVariety.procurementProduct.code=:selectedCrop and fc.status=1";
-		params.put("selectedCrop", selectedCrop);
-	} else {
-		// hqlQuery = "select count(*) FROM Farmer f WHERE f.status=1";
 
-		hqlQuery = "select count(*) from Farmer f where f.status='1' and status_code=:statusCode";
+		Session session = getSessionFactory().getCurrentSession();
+		Map<String, Object> params = new HashMap<String, Object>();
+		String hqlQuery = null;
+		if (!StringUtil.isEmpty(selectedCrop)) {
+			hqlQuery = "select count(*) FROM FarmCrops fc INNER JOIN fc.farm fa INNER JOIN fa.farmer f WHERE f.status=1 AND fa.status=1 AND f.statusCode=0 AND fc.procurementVariety.procurementProduct.code=:selectedCrop and fc.status=1";
+			params.put("selectedCrop", selectedCrop);
+		} else {
+			// hqlQuery = "select count(*) FROM Farmer f WHERE f.status=1";
 
-		hqlQuery = "select count(*) from Farmer f where status=1 and status_code=:statusCode";
+			hqlQuery = "select count(*) from Farmer f where f.status='1' and status_code=:statusCode";
 
-		params.put("statusCode", Integer.valueOf(ESETxnStatus.SUCCESS.ordinal()));
+			hqlQuery = "select count(*) from Farmer f where status=1 and status_code=:statusCode";
 
+			params.put("statusCode", Integer.valueOf(ESETxnStatus.SUCCESS.ordinal()));
+
+		}
+
+		if (!StringUtil.isEmpty(selectedBranch)) {
+			hqlQuery += " AND f.branchId =:branch ";
+			params.put("branch", selectedBranch);
+		}
+		if (!StringUtil.isEmpty(selectedState) && selectedState != 0) {
+			hqlQuery += " AND f.village.city.locality.state.id =:selectedState";
+			params.put("selectedState", Long.valueOf(selectedState));
+		}
+
+		if (!StringUtil.isEmpty(selectedCooperative)) {
+			hqlQuery += " AND f.fpo=:selectedCooperative";
+			params.put("selectedCooperative", selectedCooperative);
+		}
+
+		if (!StringUtil.isEmpty(selectedGender)) {
+			hqlQuery += " AND f.gender=:selectedGender";
+			params.put("selectedGender", selectedGender);
+		}
+		Query query = session.createQuery(hqlQuery);
+		for (String str : query.getNamedParameters()) {
+			query.setParameter(str, params.get(str));
+		}
+
+		int val = 0;
+		Object obj = query.uniqueResult();
+		if (obj != null && ObjectUtil.isInteger(obj)) {
+			val = Integer.valueOf(obj.toString());
+		}
+		return val;
 	}
 
-	if (!StringUtil.isEmpty(selectedBranch)) {
-		hqlQuery += " AND f.branchId =:branch ";
-		params.put("branch", selectedBranch);
-	}
-	if (!StringUtil.isEmpty(selectedState) && selectedState != 0) {
-		hqlQuery += " AND f.village.city.locality.state.id =:selectedState";
-		params.put("selectedState", Long.valueOf(selectedState));
-	}
-
-	if (!StringUtil.isEmpty(selectedCooperative)) {
-		hqlQuery += " AND f.fpo=:selectedCooperative";
-		params.put("selectedCooperative", selectedCooperative);
-	}
-
-	if (!StringUtil.isEmpty(selectedGender)) {
-		hqlQuery += " AND f.gender=:selectedGender";
-		params.put("selectedGender", selectedGender);
-	}
-	Query query = session.createQuery(hqlQuery);
-	for (String str : query.getNamedParameters()) {
-		query.setParameter(str, params.get(str));
-	}
-
-	int val = 0;
-	Object obj = query.uniqueResult();
-	if (obj != null && ObjectUtil.isInteger(obj)) {
-		val = Integer.valueOf(obj.toString());
-	}
-	return val;
-	}
-	
 	@Override
-	public Integer findFarmerCountByStateAndCropbyFarmerStatus(String selectedBranch, int selectedState, String selectedCrop,
-			String selectedCooperative, String selectedGender,String selectedStatus) {
+	public Integer findFarmerCountByStateAndCropbyFarmerStatus(String selectedBranch, int selectedState,
+			String selectedCrop, String selectedCooperative, String selectedGender, String selectedStatus) {
 		Session session = getSessionFactory().getCurrentSession();
 		Map<String, Object> params = new HashMap<String, Object>();
 		String hqlQuery = null;
@@ -4595,13 +4563,13 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 
 		}
 
-		if (!StringUtil.isEmpty(selectedStatus )) {
+		if (!StringUtil.isEmpty(selectedStatus)) {
 			hqlQuery += " AND f.status =:status ";
 			params.put("status", Integer.valueOf(selectedStatus));
-		}else{
+		} else {
 			hqlQuery += " AND f.status =1 ";
 		}
-		
+
 		if (!StringUtil.isEmpty(selectedBranch)) {
 			hqlQuery += " AND f.branchId =:branch ";
 			params.put("branch", selectedBranch);
@@ -4699,19 +4667,19 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 				+ "cu.CURRENT_SEASON_CODE,sum(cu.TOTAL_GAP),sum(cu.TOTAL_HARVEST) FROM cultivation cu  inner join "
 				+ "farm fa on fa.FARM_CODE=cu.FARM_ID inner join farmer f on f.id= fa.farmer_id WHERE cu.ID IS NOT NULL "
 				+ "AND fa.status=1 AND f.status=1 AND f.status_code=0";
-		
+
 		if (!StringUtil.isEmpty(selectedBranch)) {
 			sqlString += " AND cu.BRANCH_ID =:branch ";
 			params.put("branch", selectedBranch);
 		}
 
 		/*
-		 * if (!StringUtil.isEmpty(sDate) && !StringUtil.isEmpty(eDate)) {
-		 * hqlQuery += "  AND (Year(cu.expenseDate)=:year";
+		 * if (!StringUtil.isEmpty(sDate) && !StringUtil.isEmpty(eDate)) { hqlQuery +=
+		 * "  AND (Year(cu.expenseDate)=:year";
 		 * params.put("year",Integer.valueOf(sDate));
 		 * 
-		 * hqlQuery += "  OR Year(cu.expenseDate)=:prevYear)";
-		 * params.put("prevYear", Integer.valueOf(eDate)); }
+		 * hqlQuery += "  OR Year(cu.expenseDate)=:prevYear)"; params.put("prevYear",
+		 * Integer.valueOf(eDate)); }
 		 */
 
 		if (!StringUtil.isEmpty(selectedSeason) && selectedSeason != null) {
@@ -4742,9 +4710,9 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 			String selectedState) {
 
 		/*
-		 * Object[] values = { selectedBranch, selectedYear, (selectedYear - 1)
-		 * }; Object[] yearValues = { selectedYear, (selectedYear - 1) }; Double
-		 * result = 0.0;
+		 * Object[] values = { selectedBranch, selectedYear, (selectedYear - 1) };
+		 * Object[] yearValues = { selectedYear, (selectedYear - 1) }; Double result =
+		 * 0.0;
 		 * 
 		 * if (StringUtil.isEmpty(selectedBranch)) {
 		 * 
@@ -4878,14 +4846,12 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	public Integer findFarmerCountByState(String selectedBranch, Integer selectedState) {
 		Session session = getSessionFactory().getCurrentSession();
 		if (StringUtil.isEmpty(selectedBranch)) {
-			return ((Long) session
-					.createQuery(
-							"select count(*) FROM Farmer f WHERE f.status=1 AND f.village.city.locality.state.id =:selectedState")
+			return ((Long) session.createQuery(
+					"select count(*) FROM Farmer f WHERE f.status=1 AND f.village.city.locality.state.id =:selectedState")
 					.setParameter("selectedState", Long.valueOf(selectedState)).uniqueResult()).intValue();
 		} else {
-			return ((Long) session
-					.createQuery(
-							"select count(*) FROM Farmer f WHERE f.status=1 AND f.branchId =:branch AND f.village.city.locality.state.id =:selectedState")
+			return ((Long) session.createQuery(
+					"select count(*) FROM Farmer f WHERE f.status=1 AND f.branchId =:branch AND f.village.city.locality.state.id =:selectedState")
 					.setParameter("branch", selectedBranch).setParameter("selectedState", Long.valueOf(selectedState))
 					.uniqueResult()).intValue();
 		}
@@ -5258,9 +5224,8 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	@Override
 	public List<Object[]> listCropsByFarmIdBasedOnCategory(Long farmId) {
 		Session session = getSessionFactory().getCurrentSession();
-		Query query = session
-				.createQuery(
-						"SELECT f.id,COALESCE(f.procurementVariety.code,''),COALESCE(f.procurementVariety.procurementProduct.code,''),COALESCE(f.seedSource,''),COALESCE(f.seedQtyCost,''),COALESCE(f.estimatedYield,''),COALESCE(f.cropSeason.code,''),COALESCE(f.cropCategory,''),COALESCE(f.farm.farmCode,''),COALESCE(f.farm.farmer.farmerId,''),COALESCE(f.riskAssesment,''),COALESCE(f.seedTreatmentDetails,''),COALESCE(f.otherSeedTreatmentDetails,''),COALESCE(f.stapleLength,''),COALESCE(f.seedQtyUsed,''),COALESCE(f.type,''),COALESCE(f.cropCategoryList,''),COALESCE(f.cultiArea,''),COALESCE(f.sowingDate,''),COALESCE(f.estimatedHarvestDate,'') from FarmCrops f where f.farm.id = :farmerId AND f.cropCategory =:cat and f.status=1")
+		Query query = session.createQuery(
+				"SELECT f.id,COALESCE(f.procurementVariety.code,''),COALESCE(f.procurementVariety.procurementProduct.code,''),COALESCE(f.seedSource,''),COALESCE(f.seedQtyCost,''),COALESCE(f.estimatedYield,''),COALESCE(f.cropSeason.code,''),COALESCE(f.cropCategory,''),COALESCE(f.farm.farmCode,''),COALESCE(f.farm.farmer.farmerId,''),COALESCE(f.riskAssesment,''),COALESCE(f.seedTreatmentDetails,''),COALESCE(f.otherSeedTreatmentDetails,''),COALESCE(f.stapleLength,''),COALESCE(f.seedQtyUsed,''),COALESCE(f.type,''),COALESCE(f.cropCategoryList,''),COALESCE(f.cultiArea,''),COALESCE(f.sowingDate,''),COALESCE(f.estimatedHarvestDate,'') from FarmCrops f where f.farm.id = :farmerId AND f.cropCategory =:cat and f.status=1")
 				.setParameter("farmerId", farmId).setParameter("cat", 0);
 		List result = query.list();
 
@@ -5349,8 +5314,8 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	public String findTotalLandByPostHarvest(String selectedBranch, int selectedYear, String selectedSeason) {
 		// TODO Auto-generated method stub
 		/*
-		 * Object[] values = { selectedBranch, selectedYear, (selectedYear - 1)
-		 * }; Object[] yearValues = { selectedYear, (selectedYear - 1) }; if
+		 * Object[] values = { selectedBranch, selectedYear, (selectedYear - 1) };
+		 * Object[] yearValues = { selectedYear, (selectedYear - 1) }; if
 		 * (StringUtil.isEmpty(selectedBranch)) { return (String) find(
 		 * "SELECT SUM(fc.postHarvestProd) as Proposed FROM FarmCrops fc  INNER JOIN fc.farm fa INNER JOIN fa.farmer f WHERE (Year(f.createdDate)=? OR Year(f.createdDate)=?)"
 		 * , yearValues);
@@ -5433,9 +5398,8 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	public List<Object[]> findCocCostByFarmAndFarmer(String farmerId, String farmCode) {
 		// TODO Auto-generated method stub
 		Object[] values = { farmerId, farmCode };
-		return list(
-				"SELECT c.totalCoc as TotalCoc,c.interCropIncome as InterIncome,c.agriIncome as agriIncome,"
-						+ "c.otherSourcesIncome as otherSourcesIncome,c.cottonQty as CottonQty,c.unitSalePrice as UnitSalePrice,c.saleCottonIncome as SaleCottonIncome,c.id FROM  Cultivation c where c.farmerId=? and c.farmId=? and c.txnType='1'",
+		return list("SELECT c.totalCoc as TotalCoc,c.interCropIncome as InterIncome,c.agriIncome as agriIncome,"
+				+ "c.otherSourcesIncome as otherSourcesIncome,c.cottonQty as CottonQty,c.unitSalePrice as UnitSalePrice,c.saleCottonIncome as SaleCottonIncome,c.id FROM  Cultivation c where c.farmerId=? and c.farmId=? and c.txnType='1'",
 				values);
 	}
 
@@ -5778,9 +5742,8 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	@Override
 	public List<Object[]> listFarmCropsFieldsByFarmerId(List<Long> farmIds) {
 		Session session = getSessionFactory().getCurrentSession();
-		Query query = session
-				.createQuery(
-						"SELECT f.id,COALESCE(f.procurementVariety.code,''),COALESCE(f.procurementVariety.procurementProduct.code,''),COALESCE(f.seedSource,''),COALESCE(f.seedQtyCost,''),COALESCE(f.estimatedYield,''),COALESCE(f.cropSeason.code,''),COALESCE(f.cropCategory,''),COALESCE(f.farm.farmCode,''),COALESCE(f.farm.farmer.farmerId,''),COALESCE(f.riskAssesment,''),COALESCE(f.seedTreatmentDetails,''),COALESCE(f.otherSeedTreatmentDetails,''),COALESCE(f.stapleLength,''),COALESCE(f.seedQtyUsed,''),COALESCE(f.type,''),COALESCE(f.cropCategoryList,''),COALESCE(f.cultiArea,''),COALESCE(f.sowingDate,''),COALESCE(f.estimatedHarvestDate,''),COALESCE(f.interType,''),COALESCE(f.interAcre,''),COALESCE(f.totalCropHarv,''),COALESCE(f.grossIncome,''),f.farm.id from FarmCrops f where f.farm.id in (:farmerId) and f.status=1 ")
+		Query query = session.createQuery(
+				"SELECT f.id,COALESCE(f.procurementVariety.code,''),COALESCE(f.procurementVariety.procurementProduct.code,''),COALESCE(f.seedSource,''),COALESCE(f.seedQtyCost,''),COALESCE(f.estimatedYield,''),COALESCE(f.cropSeason.code,''),COALESCE(f.cropCategory,''),COALESCE(f.farm.farmCode,''),COALESCE(f.farm.farmer.farmerId,''),COALESCE(f.riskAssesment,''),COALESCE(f.seedTreatmentDetails,''),COALESCE(f.otherSeedTreatmentDetails,''),COALESCE(f.stapleLength,''),COALESCE(f.seedQtyUsed,''),COALESCE(f.type,''),COALESCE(f.cropCategoryList,''),COALESCE(f.cultiArea,''),COALESCE(f.sowingDate,''),COALESCE(f.estimatedHarvestDate,''),COALESCE(f.interType,''),COALESCE(f.interAcre,''),COALESCE(f.totalCropHarv,''),COALESCE(f.grossIncome,''),f.farm.id from FarmCrops f where f.farm.id in (:farmerId) and f.status=1 ")
 				.setParameterList("farmerId", farmIds);
 		List result = query.list();
 
@@ -5798,12 +5761,11 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 			params.put("branch", selectedBranch);
 		}
 		/*
-		 * if (!StringUtil.isEmpty(selectedYear) && selectedYear != 0) {
-		 * hqlQuery += "  AND (Year(f.createdDate)=:year"; params.put("year",
-		 * selectedYear);
+		 * if (!StringUtil.isEmpty(selectedYear) && selectedYear != 0) { hqlQuery +=
+		 * "  AND (Year(f.createdDate)=:year"; params.put("year", selectedYear);
 		 * 
-		 * hqlQuery += "  OR Year(f.createdDate)=:prevYear)";
-		 * params.put("prevYear", (selectedYear - 1)); }
+		 * hqlQuery += "  OR Year(f.createdDate)=:prevYear)"; params.put("prevYear",
+		 * (selectedYear - 1)); }
 		 */
 
 		if (!StringUtil.isEmpty(selectedSeason) && selectedSeason != null) {
@@ -5839,12 +5801,11 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 			params.put("branch", selectedBranch);
 		}
 		/*
-		 * if (!StringUtil.isEmpty(selectedYear) && selectedYear != 0) {
-		 * hqlQuery += "  AND (Year(f.createdDate)=:year"; params.put("year",
-		 * selectedYear);
+		 * if (!StringUtil.isEmpty(selectedYear) && selectedYear != 0) { hqlQuery +=
+		 * "  AND (Year(f.createdDate)=:year"; params.put("year", selectedYear);
 		 * 
-		 * hqlQuery += "  OR Year(f.createdDate)=:prevYear)";
-		 * params.put("prevYear", (selectedYear - 1)); }
+		 * hqlQuery += "  OR Year(f.createdDate)=:prevYear)"; params.put("prevYear",
+		 * (selectedYear - 1)); }
 		 */
 
 		if (!StringUtil.isEmpty(selectedGender)) {
@@ -5895,12 +5856,11 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 			params.put("branch", selectedBranch);
 		}
 		/*
-		 * if (!StringUtil.isEmpty(selectedYear) && selectedYear != 0) {
-		 * hqlQuery += "  AND (Year(f.createdDate)=:year"; params.put("year",
-		 * selectedYear);
+		 * if (!StringUtil.isEmpty(selectedYear) && selectedYear != 0) { hqlQuery +=
+		 * "  AND (Year(f.createdDate)=:year"; params.put("year", selectedYear);
 		 * 
-		 * hqlQuery += "  OR Year(f.createdDate)=:prevYear)";
-		 * params.put("prevYear", (selectedYear - 1)); }
+		 * hqlQuery += "  OR Year(f.createdDate)=:prevYear)"; params.put("prevYear",
+		 * (selectedYear - 1)); }
 		 */
 
 		if (!StringUtil.isEmpty(selectedSeason) && selectedSeason != null) {
@@ -5994,21 +5954,15 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 			String currentSeason) {/*
 									 * // TODO Auto-generated method stub
 									 * 
-									 * Session session =
-									 * getSessionFactory().openSession(); Query
-									 * query = session
+									 * Session session = getSessionFactory().openSession(); Query query = session
 									 * .createQuery("select count(*) from Farmer where status=1 and seasonCode=:seasonCode and statusCode=0"
 									 * );
 									 * 
-									 * query.setParameter("status",
-									 * ESETxnStatus.SUCCESS.ordinal());
-									 * query.setParameter("seasonCode",
-									 * currentSeason);
+									 * query.setParameter("status", ESETxnStatus.SUCCESS.ordinal());
+									 * query.setParameter("seasonCode", currentSeason);
 									 * 
-									 * Integer val = ((Long)
-									 * query.uniqueResult()).intValue();
-									 * session.flush(); session.close(); return
-									 * val;
+									 * Integer val = ((Long) query.uniqueResult()).intValue(); session.flush();
+									 * session.close(); return val;
 									 */
 
 		Session session = getSessionFactory().openSession();
@@ -6030,8 +5984,8 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 			String selectedFieldStaff) {
 		// TODO Auto-generated method stub
 		/*
-		 * Object[] obj=null; Session session =
-		 * getSessionFactory().getCurrentSession(); Query query = session.
+		 * Object[] obj=null; Session session = getSessionFactory().getCurrentSession();
+		 * Query query = session.
 		 * createQuery("select sum(dd.quantity),sum(d.totalAmount),sum(d.paymentAmount) from DistributionDetail dd inner join dd.distribution d"
 		 * ); if (!ObjectUtil.isEmpty(query) && query.list().size() > 0) { obj =
 		 * (Object[]) query.list().get(0); } return obj;
@@ -6128,8 +6082,8 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 			String selectedFieldStaff, Date startDate, Date endDate, String branch) {
 		// TODO Auto-generated method stub
 		/*
-		 * Object[] obj=null; Session session =
-		 * getSessionFactory().getCurrentSession(); Query query = session.
+		 * Object[] obj=null; Session session = getSessionFactory().getCurrentSession();
+		 * Query query = session.
 		 * createQuery("select sum(dd.quantity),sum(d.totalAmount),sum(d.paymentAmount) from DistributionDetail dd inner join dd.distribution d"
 		 * ); if (!ObjectUtil.isEmpty(query) && query.list().size() > 0) { obj =
 		 * (Object[]) query.list().get(0); } return obj;
@@ -6945,8 +6899,8 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 			params.put("selectedSeason", selectedSeason);
 
 			/*
-			 * hqlQuery += "  OR Year(f.createdDate)=:prevYear)";
-			 * params.put("prevYear", (selectedYear - 1));
+			 * hqlQuery += "  OR Year(f.createdDate)=:prevYear)"; params.put("prevYear",
+			 * (selectedYear - 1));
 			 */
 		}
 		// hqlQuery += groupBy;
@@ -6974,8 +6928,8 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 			params.put("selectedSeason", selectedSeason);
 
 			/*
-			 * hqlQuery += "  OR Year(f.createdDate)=:prevYear)";
-			 * params.put("prevYear", (selectedYear - 1));
+			 * hqlQuery += "  OR Year(f.createdDate)=:prevYear)"; params.put("prevYear",
+			 * (selectedYear - 1));
 			 */
 		}
 
@@ -7706,16 +7660,17 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 
 	@Override
 	public List<FarmerDynamicFieldsValue> processFormula(FarmerDynamicData farmerDynamicData,
-			Map<String, List<FarmerDynamicFieldsValue>> fdMap, LinkedHashMap<String, DynamicFieldConfig> fieldConfigMap) {
+			Map<String, List<FarmerDynamicFieldsValue>> fdMap,
+			LinkedHashMap<String, DynamicFieldConfig> fieldConfigMap) {
 
 		List<FarmerDynamicFieldsValue> resultSet = new ArrayList<>();
-		
+
 		LinkedList<DynamicFieldConfig> fmap = fieldConfigMap.values().stream()
 				.filter(p -> (Arrays.asList("0", "2").contains(p.getIsMobileAvail()) && p.getFormula() != null
-						&& !StringUtil.isEmpty(p.getFormula())) || (p.getIsMobileAvail().equals("5"))).sorted(Comparator.comparing(DynamicFieldConfig::getfOrder))
+						&& !StringUtil.isEmpty(p.getFormula())) || (p.getIsMobileAvail().equals("5")))
+				.sorted(Comparator.comparing(DynamicFieldConfig::getfOrder))
 				.collect(Collectors.toCollection(LinkedList::new));
-		
-          
+
 		List<DynamicConstants> consts = listDynamicConstants();
 		Map<String, String> cts = consts.stream().collect(Collectors.toMap(u -> u.getCode(), u -> u.getFieldName()));
 		if (fmap != null && !ObjectUtil.isListEmpty(fmap)) {
@@ -7791,9 +7746,9 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 							}
 
 						});
-						farmerDynamicData.setTotalScore(
-								farmerDynamicData.getTotalScore() + (farmerDynamicFieldsValue.getPercentage() == null
-										? 0 : farmerDynamicFieldsValue.getPercentage()));
+						farmerDynamicData.setTotalScore(farmerDynamicData.getTotalScore()
+								+ (farmerDynamicFieldsValue.getPercentage() == null ? 0
+										: farmerDynamicFieldsValue.getPercentage()));
 					}
 				} else {
 					String ans = "";
@@ -7818,7 +7773,8 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 							formula = formula.replaceAll("\\{" + g + "\\}",
 									fdMap.containsKey(g) ? String.toString() : "0");
 						} else {
-							formula = formula.replaceAll("\\{" + g + "\\}", fdMap.containsKey(g) ?'"'+fdMap.get(g).get(0).getFieldValue()+'"' : "0");
+							formula = formula.replaceAll("\\{" + g + "\\}",
+									fdMap.containsKey(g) ? '"' + fdMap.get(g).get(0).getFieldValue() + '"' : "0");
 						}
 
 					});
@@ -7845,7 +7801,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 						ans = String.valueOf(engine.eval(formula));
 						if (ans.equals("NaN") || ans.contains("Infinity")) {
 							ans = "0";
-						} 
+						}
 					} catch (ScriptException e) {
 						ans = "0";
 					}
@@ -7864,11 +7820,13 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 				farmerDynamicFieldsValue.setFarmerDynamicData(farmerDynamicData);
 				farmerDynamicFieldsValue
 						.setIsMobileAvail(fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()) != null
-								? fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()).getIsMobileAvail() : "0");
+								? fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()).getIsMobileAvail()
+								: "0");
 
 				farmerDynamicFieldsValue
 						.setAccessType(fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()) != null
-								? fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()).getAccessType() : 0);
+								? fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()).getAccessType()
+								: 0);
 
 				farmerDynamicFieldsValue.setListMethod(
 						fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()) != null && fieldConfigMap
@@ -7877,7 +7835,8 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 										: "");
 				farmerDynamicFieldsValue.setParentId(fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()) != null
 						&& fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()).getReferenceId() != null
-								? fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()).getReferenceId() : 0);
+								? fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()).getReferenceId()
+								: 0);
 				fdMap.put(farmerDynamicFieldsValue.getFieldName(), new ArrayList<FarmerDynamicFieldsValue>() {
 					{
 						add(farmerDynamicFieldsValue);
@@ -8301,8 +8260,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 		}
 
 		/*
-		 * if (!StringUtil.isEmpty(selectedCrop) && selectedCrop != null) {
-		 * hqlQuery +=
+		 * if (!StringUtil.isEmpty(selectedCrop) && selectedCrop != null) { hqlQuery +=
 		 * " AND fc.procurementVariety.procurementProduct.id=:selectedCrop";
 		 * params.put("selectedCrop", Long.valueOf(selectedCrop)); }
 		 */
@@ -8662,8 +8620,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 		}
 
 		/*
-		 * if (!StringUtil.isEmpty(sDate) && !StringUtil.isEmpty(eDate)) {
-		 * hqlQuery +=
+		 * if (!StringUtil.isEmpty(sDate) && !StringUtil.isEmpty(eDate)) { hqlQuery +=
 		 * " AND cul.expenseDate BETWEEN :startDate AND :endDate cul.expenseDate=:startDate"
 		 * ;
 		 * 
@@ -9103,32 +9060,33 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	}
 
 	public List<Object[]> farmersByCountry(String selectedBranch) {
-		
+
 		HttpSession httpSession = ReflectUtil.getCurrentHttpSession();
 		HttpServletRequest request = ReflectUtil.getCurrentHttpRequest();
-		String tenantId = !StringUtil.isEmpty(ISecurityFilter.DEFAULT_TENANT_ID) ? ISecurityFilter.DEFAULT_TENANT_ID : "";
+		String tenantId = !StringUtil.isEmpty(ISecurityFilter.DEFAULT_TENANT_ID) ? ISecurityFilter.DEFAULT_TENANT_ID
+				: "";
 		if (!ObjectUtil.isEmpty(request)) {
 			tenantId = !StringUtil.isEmpty((String) request.getSession().getAttribute(ISecurityFilter.TENANT_ID))
-					? (String) request.getSession().getAttribute(ISecurityFilter.TENANT_ID) : "";
+					? (String) request.getSession().getAttribute(ISecurityFilter.TENANT_ID)
+					: "";
 		}
 		Session session = getSessionFactory().getCurrentSession();
 		Query query;
 		if (!StringUtil.isEmpty(selectedBranch)) {
 			String hqlString = "SELECT count(f.id),ctry.name,ctry.code,ctry.branchId from Farmer f inner join f.village v  inner join v.city c inner join c.locality ld inner join ld.state s inner join s.country ctry where f.branchId = :branch and f.statusCode = 0 and f.status=1";
-			if(!StringUtil.isEmpty(tenantId) && tenantId.equalsIgnoreCase(ESESystem.WELSPUN_TENANT_ID))
-			hqlString += " AND f.status=1";
+			if (!StringUtil.isEmpty(tenantId) && tenantId.equalsIgnoreCase(ESESystem.WELSPUN_TENANT_ID))
+				hqlString += " AND f.status=1";
 			hqlString += " group by ctry.code";
 			hqlString += " ORDER BY COUNT(f.id) DESC";
 			query = session.createQuery(hqlString);
 			query.setParameter("branch", selectedBranch);
-			
-			
+
 		} else {
 			String hqlString = "SELECT count(f.id),ctry.name,ctry.code,ctry.branchId from Farmer f inner join f.village v  inner join v.city c inner join c.locality ld inner join ld.state s inner join s.country ctry where f.statusCode = 0 and f.status=1 ";
-			if(!StringUtil.isEmpty(tenantId) && tenantId.equalsIgnoreCase(ESESystem.WELSPUN_TENANT_ID))
+			if (!StringUtil.isEmpty(tenantId) && tenantId.equalsIgnoreCase(ESESystem.WELSPUN_TENANT_ID))
 				hqlString += " AND f.status=1";
-				hqlString += " group by ctry.code";
-				hqlString += " ORDER BY COUNT(f.id) DESC";
+			hqlString += " group by ctry.code";
+			hqlString += " ORDER BY COUNT(f.id) DESC";
 			query = session.createQuery(hqlString);
 		}
 		List<Object[]> result = query.list();
@@ -9265,10 +9223,12 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 			String gramPanchayatEnable) {
 		HttpSession httpSession = ReflectUtil.getCurrentHttpSession();
 		HttpServletRequest request = ReflectUtil.getCurrentHttpRequest();
-		String tenantId = !StringUtil.isEmpty(ISecurityFilter.DEFAULT_TENANT_ID) ? ISecurityFilter.DEFAULT_TENANT_ID : "";
+		String tenantId = !StringUtil.isEmpty(ISecurityFilter.DEFAULT_TENANT_ID) ? ISecurityFilter.DEFAULT_TENANT_ID
+				: "";
 		if (!ObjectUtil.isEmpty(request)) {
 			tenantId = !StringUtil.isEmpty((String) request.getSession().getAttribute(ISecurityFilter.TENANT_ID))
-					? (String) request.getSession().getAttribute(ISecurityFilter.TENANT_ID) : "";
+					? (String) request.getSession().getAttribute(ISecurityFilter.TENANT_ID)
+					: "";
 		}
 		String locationLevel = String.valueOf(locationLevel1.charAt(0));
 		String flag = "enable";
@@ -9320,10 +9280,10 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 					hqlString = "select count(fa.id),sum(fdi.totalLandHolding) as TOTAL_LAND_HOLDING,ctry.name from Farm fa inner join fa.farmer f inner join fa.farmDetailedInfo fdi inner join f.village v inner join v.gramPanchayat gp inner join gp.city c inner join c.locality ld inner join ld.state s inner join s.country ctry where f.branchId = :branch and f.statusCode = 0 and f.status=1 and fa.status=1 GROUP BY ctry.name ORDER BY TOTAL_LAND_HOLDING desc";
 				} else {
 					hqlString = "select count(fa.id),sum(fdi.totalLandHolding) as TOTAL_LAND_HOLDING,ctry.name from Farm fa inner join fa.farmer f inner join fa.farmDetailedInfo fdi inner join f.village v  inner join v.city c inner join c.locality ld inner join ld.state s inner join s.country ctry where f.branchId = :branch and f.statusCode = 0 and f.status=1 and fa.status=1";
-					if(!StringUtil.isEmpty(tenantId) && tenantId.equalsIgnoreCase(ESESystem.WELSPUN_TENANT_ID))
+					if (!StringUtil.isEmpty(tenantId) && tenantId.equalsIgnoreCase(ESESystem.WELSPUN_TENANT_ID))
 						hqlString += " AND f.status=1";
-						hqlString += " GROUP BY ctry.name ORDER BY TOTAL_LAND_HOLDING desc";
-					
+					hqlString += " GROUP BY ctry.name ORDER BY TOTAL_LAND_HOLDING desc";
+
 				}
 				flag = "disable";
 				break;
@@ -9352,10 +9312,12 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	public List<Object[]> populateFarmerLocationCropChart(String codeForCropChart) {
 		HttpSession httpSession = ReflectUtil.getCurrentHttpSession();
 		HttpServletRequest request = ReflectUtil.getCurrentHttpRequest();
-		String tenantId = !StringUtil.isEmpty(ISecurityFilter.DEFAULT_TENANT_ID) ? ISecurityFilter.DEFAULT_TENANT_ID : "";
+		String tenantId = !StringUtil.isEmpty(ISecurityFilter.DEFAULT_TENANT_ID) ? ISecurityFilter.DEFAULT_TENANT_ID
+				: "";
 		if (!ObjectUtil.isEmpty(request)) {
 			tenantId = !StringUtil.isEmpty((String) request.getSession().getAttribute(ISecurityFilter.TENANT_ID))
-					? (String) request.getSession().getAttribute(ISecurityFilter.TENANT_ID) : "";
+					? (String) request.getSession().getAttribute(ISecurityFilter.TENANT_ID)
+					: "";
 		}
 		char code = 0;
 		if (!StringUtil.isEmpty(codeForCropChart)) {
@@ -9389,9 +9351,9 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 				hqlString = "SELECT count(fa.id),sum(famcrps.cultiArea) as CULTIVATION_AREA,pp.name,pp.code  from Farmer f inner join f.village v  inner join v.city c inner join c.locality ld inner join ld.state s inner join s.country ctry inner join f.farms fa inner join fa.farmDetailedInfo fdi inner join fa.farmCrops famcrps inner join famcrps.procurementVariety pv inner join pv.procurementProduct pp where f.branchId = :branchId and f.statusCode = 0 and fa.status=1 and f.status=1 group by pp.code ORDER BY CULTIVATION_AREA desc";
 			} else {
 				hqlString = "SELECT count(fa.id),sum(famcrps.cultiArea) as CULTIVATION_AREA,pp.name,pp.code  from Farmer f inner join f.village v  inner join v.city c inner join c.locality ld inner join ld.state s inner join s.country ctry inner join f.farms fa inner join fa.farmDetailedInfo fdi inner join fa.farmCrops famcrps inner join famcrps.procurementVariety pv inner join pv.procurementProduct pp where f.statusCode = 0 and fa.status=1 and f.status=1";
-				if(!StringUtil.isEmpty(tenantId) && tenantId.equalsIgnoreCase(ESESystem.WELSPUN_TENANT_ID))
+				if (!StringUtil.isEmpty(tenantId) && tenantId.equalsIgnoreCase(ESESystem.WELSPUN_TENANT_ID))
 					hqlString += " AND f.status=1";
-					hqlString += " group by pp.code ORDER BY CULTIVATION_AREA desc";
+				hqlString += " group by pp.code ORDER BY CULTIVATION_AREA desc";
 			}
 			break;
 		}
@@ -9922,7 +9884,14 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 		Session session = getSessionFactory().openSession();
 		String qry = "SELECT DISTINCT fd.CREATED_USER, IFNULL( CONCAT( pi.FIRST_NAME, ' ', pi.LAST_NAME ), CONCAT( epi.FIRST_NAME, ' ', epi.LAST_NAME ) ) FROM  `farmer_dynamic_data` fd LEFT JOIN prof ap ON ap.PROF_ID = fd.CREATED_USER   AND ap.BRANCH_ID = fd.BRANCH_ID   LEFT JOIN pers_info pi ON pi.id = ap.PERS_INFO_ID  LEFT JOIN ese_user es ON es.USER_NAME = fd.CREATED_USER AND es.BRANCH_ID = fd.BRANCH_ID   LEFT JOIN pers_info epi ON epi.id = es.PERS_INFO_ID where    fd.txn_type =:txnType GROUP BY fd.CREATED_USER";
 		if (branchId != null && !StringUtil.isEmpty(branchId)) {
-			//qry = "SELECT DISTINCT fd.CREATED_USER, IFNULL( CONCAT( pi.FIRST_NAME, ' ', pi.LAST_NAME ), CONCAT( epi.FIRST_NAME, ' ', epi.LAST_NAME ) ) FROM  `farmer_dynamic_data` fd LEFT JOIN prof ap ON ap.PROF_ID = fd.CREATED_USER   AND ap.BRANCH_ID = fd.BRANCH_ID   LEFT JOIN pers_info pi ON pi.id = ap.PERS_INFO_ID  LEFT JOIN ese_user es ON es.USER_NAME = fd.CREATED_USER AND es.BRANCH_ID = fd.BRANCH_ID   LEFT JOIN pers_info epi ON epi.id = es.PERS_INFO_ID where    fd.txn_type =:txnType  AND fd.branch_id =:branchId GROUP BY fd.CREATED_USER";
+			// qry = "SELECT DISTINCT fd.CREATED_USER, IFNULL( CONCAT( pi.FIRST_NAME, ' ',
+			// pi.LAST_NAME ), CONCAT( epi.FIRST_NAME, ' ', epi.LAST_NAME ) ) FROM
+			// `farmer_dynamic_data` fd LEFT JOIN prof ap ON ap.PROF_ID = fd.CREATED_USER
+			// AND ap.BRANCH_ID = fd.BRANCH_ID LEFT JOIN pers_info pi ON pi.id =
+			// ap.PERS_INFO_ID LEFT JOIN ese_user es ON es.USER_NAME = fd.CREATED_USER AND
+			// es.BRANCH_ID = fd.BRANCH_ID LEFT JOIN pers_info epi ON epi.id =
+			// es.PERS_INFO_ID where fd.txn_type =:txnType AND fd.branch_id =:branchId GROUP
+			// BY fd.CREATED_USER";
 			qry = "SELECT DISTINCT fd.CREATED_USER, IFNULL( CONCAT( pi.FIRST_NAME, ' ', pi.LAST_NAME ), CONCAT( epi.FIRST_NAME, ' ', epi.LAST_NAME ) ) FROM  `farmer_dynamic_data` fd LEFT JOIN prof ap ON ap.PROF_ID = fd.CREATED_USER   AND ap.BRANCH_ID = fd.BRANCH_ID   LEFT JOIN pers_info pi ON pi.id = ap.PERS_INFO_ID  LEFT JOIN ese_user es ON es.USER_NAME = fd.CREATED_USER AND es.BRANCH_ID = fd.BRANCH_ID   LEFT JOIN pers_info epi ON epi.id = es.PERS_INFO_ID where    fd.txn_type =:txnType  AND FIND_IN_SET(fd.branch_id,(:branchId))GROUP BY fd.CREATED_USER";
 		}
 		SQLQuery query = session.createSQLQuery(qry);
@@ -10408,16 +10377,18 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 			ScriptEngineManager mgr = new ScriptEngineManager();
 			ScriptEngine engine = mgr.getEngineByName("JavaScript");
 			fmap.stream().forEach(u -> {
-				if(u.getReferenceId()!=null && u.getReferenceId()>0){
+				if (u.getReferenceId() != null && u.getReferenceId() > 0) {
 					u.setFormula(u.getFormula().replace("##REFID##", String.valueOf(farmerDynamicData.getId())));
 					Query query = session.createSQLQuery(u.getFormula());
 					List<Object[]> result = (List<Object[]>) query.list();
-					if(result!=null ){
-						result.stream().forEach(ff ->{
+					if (result != null) {
+						result.stream().forEach(ff -> {
 							FarmerDynamicFieldsValue farmerDynamicFieldsValue = new FarmerDynamicFieldsValue();
 							farmerDynamicFieldsValue.setFieldName(u.getCode());
-							farmerDynamicFieldsValue.setFieldValue(!ObjectUtil.isEmpty(ff[0].toString())?ff[0].toString():"");
-							farmerDynamicFieldsValue.setTypez(!ObjectUtil.isEmpty(ff[1].toString())?Integer.parseInt(ff[1].toString()):0);
+							farmerDynamicFieldsValue
+									.setFieldValue(!ObjectUtil.isEmpty(ff[0].toString()) ? ff[0].toString() : "");
+							farmerDynamicFieldsValue.setTypez(
+									!ObjectUtil.isEmpty(ff[1].toString()) ? Integer.parseInt(ff[1].toString()) : 0);
 							farmerDynamicFieldsValue.setComponentType(u.getComponentType());
 							farmerDynamicFieldsValue.setTxnType(farmerDynamicData.getTxnType());
 							farmerDynamicFieldsValue.setReferenceId(farmerDynamicData.getReferenceId());
@@ -10426,60 +10397,72 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 							farmerDynamicFieldsValue.setTxnUniqueId(farmerDynamicData.getTxnUniqueId());
 							farmerDynamicFieldsValue.setIsMobileAvail(u.getIsMobileAvail());
 							farmerDynamicFieldsValue.setValidationType(u.getValidation());
-							farmerDynamicFieldsValue
-									.setIsMobileAvail(fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()) != null
-											? fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()).getIsMobileAvail() : "0");
+							farmerDynamicFieldsValue.setIsMobileAvail(
+									fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()) != null ? fieldConfigMap
+											.get(farmerDynamicFieldsValue.getFieldName()).getIsMobileAvail() : "0");
+
+							farmerDynamicFieldsValue.setAccessType(
+									fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()) != null ? fieldConfigMap
+											.get(farmerDynamicFieldsValue.getFieldName()).getAccessType() : 0);
 
 							farmerDynamicFieldsValue
-									.setAccessType(fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()) != null
-											? fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()).getAccessType() : 0);
-
-							farmerDynamicFieldsValue.setListMethod(
-									fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()) != null && fieldConfigMap
-											.get(farmerDynamicFieldsValue.getFieldName()).getCatalogueType() != null
-													? fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()).getCatalogueType()
-													: "");
-							farmerDynamicFieldsValue.setParentId(fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()) != null
-									&& fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()).getReferenceId() != null
-											? fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()).getReferenceId() : 0);
+									.setListMethod(fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()) != null
+											&& fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName())
+													.getCatalogueType() != null
+															? fieldConfigMap
+																	.get(farmerDynamicFieldsValue.getFieldName())
+																	.getCatalogueType()
+															: "");
+							farmerDynamicFieldsValue
+									.setParentId(fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()) != null
+											&& fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName())
+													.getReferenceId() != null
+															? fieldConfigMap
+																	.get(farmerDynamicFieldsValue.getFieldName())
+																	.getReferenceId()
+															: 0);
 							farmerDynamicFieldsValue.setFarmerDynamicData(farmerDynamicData);
 							session.saveOrUpdate(farmerDynamicFieldsValue);
 						});
 					}
-					
-				}else{
-				FarmerDynamicFieldsValue farmerDynamicFieldsValue = new FarmerDynamicFieldsValue();
-				u.setFormula(u.getFormula().replace("##REFID##", String.valueOf(farmerDynamicData.getId())));
-				Query query = session.createSQLQuery(u.getFormula());
-				String result = (String) query.uniqueResult();
-				farmerDynamicFieldsValue.setFieldName(u.getCode());
-				farmerDynamicFieldsValue.setFieldValue(result);
-				farmerDynamicFieldsValue.setComponentType(u.getComponentType());
-				farmerDynamicFieldsValue.setTxnType(farmerDynamicData.getTxnType());
-				farmerDynamicFieldsValue.setReferenceId(farmerDynamicData.getReferenceId());
-				farmerDynamicFieldsValue.setCreatedDate(farmerDynamicData.getCreatedDate());
-				farmerDynamicFieldsValue.setCreatedUser(farmerDynamicData.getCreatedUser());
-				farmerDynamicFieldsValue.setTxnUniqueId(farmerDynamicData.getTxnUniqueId());
-				farmerDynamicFieldsValue.setIsMobileAvail(u.getIsMobileAvail());
-				farmerDynamicFieldsValue.setValidationType(u.getValidation());
-				farmerDynamicFieldsValue
-						.setIsMobileAvail(fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()) != null
-								? fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()).getIsMobileAvail() : "0");
 
-				farmerDynamicFieldsValue
-						.setAccessType(fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()) != null
-								? fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()).getAccessType() : 0);
+				} else {
+					FarmerDynamicFieldsValue farmerDynamicFieldsValue = new FarmerDynamicFieldsValue();
+					u.setFormula(u.getFormula().replace("##REFID##", String.valueOf(farmerDynamicData.getId())));
+					Query query = session.createSQLQuery(u.getFormula());
+					String result = (String) query.uniqueResult();
+					farmerDynamicFieldsValue.setFieldName(u.getCode());
+					farmerDynamicFieldsValue.setFieldValue(result);
+					farmerDynamicFieldsValue.setComponentType(u.getComponentType());
+					farmerDynamicFieldsValue.setTxnType(farmerDynamicData.getTxnType());
+					farmerDynamicFieldsValue.setReferenceId(farmerDynamicData.getReferenceId());
+					farmerDynamicFieldsValue.setCreatedDate(farmerDynamicData.getCreatedDate());
+					farmerDynamicFieldsValue.setCreatedUser(farmerDynamicData.getCreatedUser());
+					farmerDynamicFieldsValue.setTxnUniqueId(farmerDynamicData.getTxnUniqueId());
+					farmerDynamicFieldsValue.setIsMobileAvail(u.getIsMobileAvail());
+					farmerDynamicFieldsValue.setValidationType(u.getValidation());
+					farmerDynamicFieldsValue
+							.setIsMobileAvail(fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()) != null
+									? fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()).getIsMobileAvail()
+									: "0");
 
-				farmerDynamicFieldsValue.setListMethod(
-						fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()) != null && fieldConfigMap
-								.get(farmerDynamicFieldsValue.getFieldName()).getCatalogueType() != null
-										? fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()).getCatalogueType()
-										: "");
-				farmerDynamicFieldsValue.setParentId(fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()) != null
-						&& fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()).getReferenceId() != null
-								? fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()).getReferenceId() : 0);
-				farmerDynamicFieldsValue.setFarmerDynamicData(farmerDynamicData);
-				session.saveOrUpdate(farmerDynamicFieldsValue);
+					farmerDynamicFieldsValue
+							.setAccessType(fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()) != null
+									? fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()).getAccessType()
+									: 0);
+
+					farmerDynamicFieldsValue.setListMethod(fieldConfigMap
+							.get(farmerDynamicFieldsValue.getFieldName()) != null
+							&& fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()).getCatalogueType() != null
+									? fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()).getCatalogueType()
+									: "");
+					farmerDynamicFieldsValue.setParentId(fieldConfigMap
+							.get(farmerDynamicFieldsValue.getFieldName()) != null
+							&& fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()).getReferenceId() != null
+									? fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()).getReferenceId()
+									: 0);
+					farmerDynamicFieldsValue.setFarmerDynamicData(farmerDynamicData);
+					session.saveOrUpdate(farmerDynamicFieldsValue);
 				}
 
 			});
@@ -10640,12 +10623,10 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	@Override
 	public List<Object[]> trainingsByBranch() {
 		/*
-		 * Session session = getSessionFactory().openSession(); String
-		 * queryString =
+		 * Session session = getSessionFactory().openSession(); String queryString =
 		 * "SELECT SUM(tt.count),bm.`NAME`,tt.BRANCH_ID,GROUP_concat(tt.count,'~',tt.wh,'@',tt.wareId) from (SELECT count( ts.id ) as count,w.name as wh,w.ID as wareId,ts.BRANCH_ID as BRANCH_ID FROM training_status ts INNER JOIN transfer_info ti ON ts.TRANSFER_INFO_ID = ti.id INNER JOIN prof p ON ti.AGENT_ID = p.PROF_ID INNER JOIN warehouse w ON p.WAREHOUSE_ID = w.ID GROUP BY ts.BRANCH_ID ,p.WAREHOUSE_ID ) tt inner join branch_master bm on bm.BRANCH_ID=tt.BRANCH_ID GROUP BY tt.BRANCH_ID"
-		 * ; SQLQuery query = session.createSQLQuery(queryString);
-		 * List<Object[]> result = query.list(); session.flush();
-		 * session.close(); return result;
+		 * ; SQLQuery query = session.createSQLQuery(queryString); List<Object[]> result
+		 * = query.list(); session.flush(); session.close(); return result;
 		 */
 
 		Session session = getSessionFactory().openSession();
@@ -10662,7 +10643,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	}
 
 	@Override
-	public List<Object[]> findAgentTrainingData(long warehouseId,String selectedFinYear) {
+	public List<Object[]> findAgentTrainingData(long warehouseId, String selectedFinYear) {
 		String stDate = "2014-04-01";
 		String enDate = DateUtil.getCurrentYear() + "-03-31";
 		if (selectedFinYear != null && !StringUtil.isEmpty(selectedFinYear)) {
@@ -10687,16 +10668,18 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	}
 
 	@Override
-	public List<Object[]> populateWarehouseMobileUserToFarmer_AgentChart(String branch, String season,String selectedFinYear) {
+	public List<Object[]> populateWarehouseMobileUserToFarmer_AgentChart(String branch, String season,
+			String selectedFinYear) {
 		String queryString = null;
-		String sDate="2014-04-01";
-		String eDate=DateUtil.getCurrentYear()+"-03-31";
-		if(selectedFinYear!=null && !StringUtil.isEmpty(selectedFinYear)){
-		 sDate=selectedFinYear+"-04-01";
-		 int year=Integer.valueOf(selectedFinYear)+1;
-		 eDate=year+"-03-31";
+		String sDate = "2014-04-01";
+		String eDate = DateUtil.getCurrentYear() + "-03-31";
+		if (selectedFinYear != null && !StringUtil.isEmpty(selectedFinYear)) {
+			sDate = selectedFinYear + "-04-01";
+			int year = Integer.valueOf(selectedFinYear) + 1;
+			eDate = year + "-03-31";
 		}
-		//criteria = criteria + "where " + dateProperty + " BETWEEN " + from + " AND " + to;
+		// criteria = criteria + "where " + dateProperty + " BETWEEN " + from + " AND "
+		// + to;
 		Session session = getSessionFactory().getCurrentSession();
 		if (StringUtil.isEmpty(season)) {
 			if (!StringUtil.isEmpty(branch)) {
@@ -10827,7 +10810,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 				if (methodNameQ.contains("param" + i)) {
 					if (u != null && u.toString().contains(",")) {
 						query.setParameterList("param" + i, Arrays.asList(u.toString().split(",")));
-					}else {
+					} else {
 						query.setParameter("param" + i, u);
 					}
 					i++;
@@ -10892,12 +10875,14 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 
 		}
 
-		/*criteria.add(Restrictions.isNotNull("latitude"));
-		criteria.add(Restrictions.isNotNull("longitude"));
-		criteria.add(Restrictions.not(Restrictions.eq("latitude", "0")));
-		criteria.add(Restrictions.not(Restrictions.eq("longitude", "0")));
-		criteria.add(Restrictions.not(Restrictions.eq("latitude", "")));
-		criteria.add(Restrictions.not(Restrictions.eq("longitude", "")));*/
+		/*
+		 * criteria.add(Restrictions.isNotNull("latitude"));
+		 * criteria.add(Restrictions.isNotNull("longitude"));
+		 * criteria.add(Restrictions.not(Restrictions.eq("latitude", "0")));
+		 * criteria.add(Restrictions.not(Restrictions.eq("longitude", "0")));
+		 * criteria.add(Restrictions.not(Restrictions.eq("latitude", "")));
+		 * criteria.add(Restrictions.not(Restrictions.eq("longitude", "")));
+		 */
 		criteria.add(Restrictions.eq("f.status", 1));
 
 		pList.add(Projections.property("id"));
@@ -10914,27 +10899,34 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 		return list;
 	}
 
-	public List<Object[]> listOfFarmersByVillageAndFarmCrops(long villageId,String plottingType) {
-		String queryString =null;
+	public List<Object[]> listOfFarmersByVillageAndFarmCrops(long villageId, String plottingType) {
+		String queryString = null;
 		if (plottingType.equalsIgnoreCase("1")) {
-		if (!StringUtil.isEmpty(villageId)) {
-			queryString = "select fr.FARMER_ID,fr.FARMER_CODE,fr.FIRST_NAME,fr.LAST_NAME,fr.ID,fr.SUR_NAME from farm fa left Join farmer fr on fr.ID=fa.FARMER_ID  where fr.REF_ID is NULL and fr.STATUS_CODE='" + ESETxnStatus.SUCCESS.ordinal()+ "' and fr.VILLAGE_ID='"+ villageId + "' ";
-		}else{
-			queryString = "select fr.FARMER_ID,fr.FARMER_CODE,fr.FIRST_NAME,fr.LAST_NAME,fr.ID,fr.SUR_NAME from farm fa left Join farmer fr on fr.ID=fa.FARMER_ID  where fr.REF_ID is NULL and fr.STATUS_CODE='" + ESETxnStatus.SUCCESS.ordinal()+ "'";
-		}
-	   }else if(plottingType.equalsIgnoreCase("2")) {
 			if (!StringUtil.isEmpty(villageId)) {
-		    queryString = "select fr.FARMER_ID,fr.FARMER_CODE,fr.FIRST_NAME,fr.LAST_NAME,fr.ID,fr.SUR_NAME from farm_crops fcs left join farm fa on fa.ID=fcs.FARM_ID left Join farmer fr on fr.ID=fa.FARMER_ID  where fr.REF_ID is NULL and fr.STATUS_CODE='0' and fr.VILLAGE_ID='"+ villageId + "' ";
-			}else{
-			queryString = "select fr.FARMER_ID,fr.FARMER_CODE,fr.FIRST_NAME,fr.LAST_NAME,fr.ID,fr.SUR_NAME from farm_crops fcs left join farm fa on fa.ID=fcs.FARM_ID left Join farmer fr on fr.ID=fa.FARMER_ID  where fr.REF_ID is NULL and fr.STATUS_CODE='0'";
-		}}else if(plottingType.equalsIgnoreCase("3")) {
+				queryString = "select fr.FARMER_ID,fr.FARMER_CODE,fr.FIRST_NAME,fr.LAST_NAME,fr.ID,fr.SUR_NAME from farm fa left Join farmer fr on fr.ID=fa.FARMER_ID  where fr.REF_ID is NULL and fr.STATUS_CODE='"
+						+ ESETxnStatus.SUCCESS.ordinal() + "' and fr.VILLAGE_ID='" + villageId + "' ";
+			} else {
+				queryString = "select fr.FARMER_ID,fr.FARMER_CODE,fr.FIRST_NAME,fr.LAST_NAME,fr.ID,fr.SUR_NAME from farm fa left Join farmer fr on fr.ID=fa.FARMER_ID  where fr.REF_ID is NULL and fr.STATUS_CODE='"
+						+ ESETxnStatus.SUCCESS.ordinal() + "'";
+			}
+		} else if (plottingType.equalsIgnoreCase("2")) {
 			if (!StringUtil.isEmpty(villageId)) {
-			queryString ="SELECT farmerId,farmerCode,firstName,lastName,id,surname FROM	(SELECT	fr.FARMER_ID AS farmerId,fr.FARMER_CODE AS farmerCode,	fr.FIRST_NAME AS firstName,fr.LAST_NAME AS lastName,fr.ID AS id,fr.SUR_NAME AS surname FROM	farm_crops fcs	LEFT JOIN farm fa ON fa.ID = fcs.FARM_ID	LEFT JOIN farmer fr ON fr.ID = fa.FARMER_ID WHERE fr.REF_ID IS NULL AND fr.STATUS_CODE = '0' AND fr.VILLAGE_ID = '"+ villageId + "' UNION SELECT	fr.FARMER_ID as farmerId,fr.FARMER_CODE as farmerCode,fr.FIRST_NAME as firstName,fr.LAST_NAME as lastName,fr.ID as id,fr.SUR_NAME as surname FROM farm fa	LEFT JOIN farmer fr ON fr.ID = fa.FARMER_ID WHERE fr.REF_ID IS NULL AND fr.STATUS_CODE = '0' AND fr.VILLAGE_ID ='"+ villageId + "') tt ";
-		}else{
-			queryString ="SELECT farmerId,farmerCode,firstName,lastName,id,surname FROM	(SELECT	fr.FARMER_ID AS farmerId,fr.FARMER_CODE AS farmerCode,	fr.FIRST_NAME AS firstName,fr.LAST_NAME AS lastName,fr.ID AS id,fr.SUR_NAME AS surname FROM	farm_crops fcs	LEFT JOIN farm fa ON fa.ID = fcs.FARM_ID	LEFT JOIN farmer fr ON fr.ID = fa.FARMER_ID WHERE fr.REF_ID IS NULL AND fr.STATUS_CODE = '0'  UNION SELECT fr.FARMER_ID as farmerId,fr.FARMER_CODE as farmerCode,fr.FIRST_NAME as firstName,fr.LAST_NAME as lastName,fr.ID as id,fr.SUR_NAME as surname FROM	farm fa	LEFT JOIN farmer fr ON fr.ID = fa.FARMER_ID WHERE fr.REF_ID IS NULL AND fr.STATUS_CODE = '0') tt ";
+				queryString = "select fr.FARMER_ID,fr.FARMER_CODE,fr.FIRST_NAME,fr.LAST_NAME,fr.ID,fr.SUR_NAME from farm_crops fcs left join farm fa on fa.ID=fcs.FARM_ID left Join farmer fr on fr.ID=fa.FARMER_ID  where fr.REF_ID is NULL and fr.STATUS_CODE='0' and fr.VILLAGE_ID='"
+						+ villageId + "' ";
+			} else {
+				queryString = "select fr.FARMER_ID,fr.FARMER_CODE,fr.FIRST_NAME,fr.LAST_NAME,fr.ID,fr.SUR_NAME from farm_crops fcs left join farm fa on fa.ID=fcs.FARM_ID left Join farmer fr on fr.ID=fa.FARMER_ID  where fr.REF_ID is NULL and fr.STATUS_CODE='0'";
+			}
+		} else if (plottingType.equalsIgnoreCase("3")) {
+			if (!StringUtil.isEmpty(villageId)) {
+				queryString = "SELECT farmerId,farmerCode,firstName,lastName,id,surname FROM	(SELECT	fr.FARMER_ID AS farmerId,fr.FARMER_CODE AS farmerCode,	fr.FIRST_NAME AS firstName,fr.LAST_NAME AS lastName,fr.ID AS id,fr.SUR_NAME AS surname FROM	farm_crops fcs	LEFT JOIN farm fa ON fa.ID = fcs.FARM_ID	LEFT JOIN farmer fr ON fr.ID = fa.FARMER_ID WHERE fr.REF_ID IS NULL AND fr.STATUS_CODE = '0' AND fr.VILLAGE_ID = '"
+						+ villageId
+						+ "' UNION SELECT	fr.FARMER_ID as farmerId,fr.FARMER_CODE as farmerCode,fr.FIRST_NAME as firstName,fr.LAST_NAME as lastName,fr.ID as id,fr.SUR_NAME as surname FROM farm fa	LEFT JOIN farmer fr ON fr.ID = fa.FARMER_ID WHERE fr.REF_ID IS NULL AND fr.STATUS_CODE = '0' AND fr.VILLAGE_ID ='"
+						+ villageId + "') tt ";
+			} else {
+				queryString = "SELECT farmerId,farmerCode,firstName,lastName,id,surname FROM	(SELECT	fr.FARMER_ID AS farmerId,fr.FARMER_CODE AS farmerCode,	fr.FIRST_NAME AS firstName,fr.LAST_NAME AS lastName,fr.ID AS id,fr.SUR_NAME AS surname FROM	farm_crops fcs	LEFT JOIN farm fa ON fa.ID = fcs.FARM_ID	LEFT JOIN farmer fr ON fr.ID = fa.FARMER_ID WHERE fr.REF_ID IS NULL AND fr.STATUS_CODE = '0'  UNION SELECT fr.FARMER_ID as farmerId,fr.FARMER_CODE as farmerCode,fr.FIRST_NAME as firstName,fr.LAST_NAME as lastName,fr.ID as id,fr.SUR_NAME as surname FROM	farm fa	LEFT JOIN farmer fr ON fr.ID = fa.FARMER_ID WHERE fr.REF_ID IS NULL AND fr.STATUS_CODE = '0') tt ";
+			}
 		}
-		}
-		
+
 		Session session = getSessionFactory().openSession();
 		SQLQuery query = session.createSQLQuery(queryString);
 		List<Object[]> result = query.list();
@@ -11066,7 +11058,8 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 					+ "f.village.name,img.image,f.seasonCode,f.branchId,f.createdDate,"
 					+ "fc.procurementVariety.procurementProduct.name,fc.cultiArea,fc.estimatedHarvestDate,fc.sowingDate from Farmer f "
 					+ " LEFT JOIN f.imageInfo.photo img INNER JOIN f.farms farm INNER JOIN farm.farmDetailedInfo fdi INNER JOIN farm.farmCrops fc"
-					+ " where f.statusCode='" + ESETxnStatus.SUCCESS.ordinal()+"' and farm.id='" + farmId+"' and fc.id='" + farmCropId+"'");
+					+ " where f.statusCode='" + ESETxnStatus.SUCCESS.ordinal() + "' and farm.id='" + farmId
+					+ "' and fc.id='" + farmCropId + "'");
 		} else {
 			return list("SELECT f.id,f.farmerId,f.farmerCode,f.firstName,f.lastName,farm.farmName,farm.farmCode,"
 					+ "farm.latitude,farm.longitude,farm.landmark,fdi.totalLandHolding,fdi.proposedPlantingArea,"
@@ -11237,10 +11230,13 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	public List<FarmerDynamicFieldsValue> listFarmerDynamicFieldByFdIds(List<Long> ids) {
 		// TODO Auto-generated method stub
 		Session session = getSessionFactory().openSession();
-	
-		/*Query query = session.createQuery(
-				"from FarmerDynamicFieldsValue fdv join fetch fdv.farmerDynamicData  left join fetch fdv.followUps fw where fdv.farmerDynamicData.id in (:ids) or fw.farmerDynamicData.id in (:ids)");*/
-		
+
+		/*
+		 * Query query = session.createQuery(
+		 * "from FarmerDynamicFieldsValue fdv join fetch fdv.farmerDynamicData  left join fetch fdv.followUps fw where fdv.farmerDynamicData.id in (:ids) or fw.farmerDynamicData.id in (:ids)"
+		 * );
+		 */
+
 		Query query = session.createQuery(
 				"from FarmerDynamicFieldsValue fdv join fetch fdv.farmerDynamicData  where fdv.farmerDynamicData.id in (:ids) ");
 		query.setParameterList("ids", ids);
@@ -11267,7 +11263,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	List<Object[]> result = new ArrayList<>();
 
 	@Override
-	public List<Object[]> listFDVSForFolloUp(String agentId,String revsionNo) {
+	public List<Object[]> listFDVSForFolloUp(String agentId, String revsionNo) {
 		result = new ArrayList<>();
 		Session session = getSessionFactory().openSession();
 		SQLQuery query = session
@@ -11277,17 +11273,21 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 			list.stream().forEach(u -> {
 				if (u[1].toString().equals("1")) {
 					SQLQuery sql = session.createSQLQuery(
-							"SELECT distinct fd.txn_Type,fd.id,fd.DATE,fd.CREATED_USER,fdv.FIELD_NAME,fdv.FIELD_VALUE,fdv.ACCESS_TYPE,fdv.CATALOGUE_TYPE,concat(f.first_name,' ',f.last_name),f.farmer_id,act.field_value  as act_value ,dead.field_value as dead,fdv.id AS DEALINE,fd.REVISION_NO,f.farmer_code AS code,w.name AS grp,v.name AS village    FROM `prof` p join agent_warehouse_map amp on p.id = amp.AGENT_ID  and p.PROF_ID='"+agentId+"' join farmer f on f.SAMITHI_ID = amp.WAREHOUSE_ID join warehouse w on w.id=f.samithi_id join village v on v.id = f.village_id join farmer_dynamic_data fd on fd.REFERENCE_ID = f.id AND (fd.ACT_STATUS=1) and fd.REVISION_NO >'"+ revsionNo+"' and TXN_TYPE ='"
-									+ u[0].toString().trim()
+							"SELECT distinct fd.txn_Type,fd.id,fd.DATE,fd.CREATED_USER,fdv.FIELD_NAME,fdv.FIELD_VALUE,fdv.ACCESS_TYPE,fdv.CATALOGUE_TYPE,concat(f.first_name,' ',f.last_name),f.farmer_id,act.field_value  as act_value ,dead.field_value as dead,fdv.id AS DEALINE,fd.REVISION_NO,f.farmer_code AS code,w.name AS grp,v.name AS village    FROM `prof` p join agent_warehouse_map amp on p.id = amp.AGENT_ID  and p.PROF_ID='"
+									+ agentId
+									+ "' join farmer f on f.SAMITHI_ID = amp.WAREHOUSE_ID join warehouse w on w.id=f.samithi_id join village v on v.id = f.village_id join farmer_dynamic_data fd on fd.REFERENCE_ID = f.id AND (fd.ACT_STATUS=1) and fd.REVISION_NO >'"
+									+ revsionNo + "' and TXN_TYPE ='" + u[0].toString().trim()
 									+ "' join farmer_dynamic_field_value fdv on fdv.FARMER_DYNAMIC_DATA_ID = fd.id   join farmer_dynamic_field_value act on fdv.action_plan = act.id  join farmer_dynamic_field_value dead on fdv.deadline = dead.id  order by fd.TXN_UNIQUE_ID DESC ");
 					result.addAll(sql.list());
 				} else if (u[1].toString().equals("2") || u[1].toString().equals("4")) {
 					SQLQuery sql = session.createSQLQuery(
-							"SELECT distinct fd.txn_Type,fd.id,fd.DATE,fd.CREATED_USER,fdv.FIELD_NAME,fdv.FIELD_VALUE,fdv.ACCESS_TYPE,fdv.CATALOGUE_TYPE,concat(f.first_name,'-',fm.farm_Name),fm.farm_Code,act.field_value  as act_value ,dead.field_value as dead,fdv.id AS DEALINE,fd.REVISION_NO,'',w.name AS grp,v.name AS village    FROM `prof` p join agent_warehouse_map amp on p.id = amp.AGENT_ID  and p.PROF_ID='"+agentId+"' join farmer f on f.SAMITHI_ID = amp.WAREHOUSE_ID join warehouse w on w.id=f.samithi_id join village v on v.id = f.village_id join farm fm on fm.FARMER_ID = f.id  join farmer_dynamic_data fd on fd.REFERENCE_ID = fm.id AND (fd.ACT_STATUS=1) and fd.REVISION_NO >'"+ revsionNo+"'  and TXN_TYPE ='"
-									+ u[0].toString().trim()
+							"SELECT distinct fd.txn_Type,fd.id,fd.DATE,fd.CREATED_USER,fdv.FIELD_NAME,fdv.FIELD_VALUE,fdv.ACCESS_TYPE,fdv.CATALOGUE_TYPE,concat(f.first_name,'-',fm.farm_Name),fm.farm_Code,act.field_value  as act_value ,dead.field_value as dead,fdv.id AS DEALINE,fd.REVISION_NO,'',w.name AS grp,v.name AS village    FROM `prof` p join agent_warehouse_map amp on p.id = amp.AGENT_ID  and p.PROF_ID='"
+									+ agentId
+									+ "' join farmer f on f.SAMITHI_ID = amp.WAREHOUSE_ID join warehouse w on w.id=f.samithi_id join village v on v.id = f.village_id join farm fm on fm.FARMER_ID = f.id  join farmer_dynamic_data fd on fd.REFERENCE_ID = fm.id AND (fd.ACT_STATUS=1) and fd.REVISION_NO >'"
+									+ revsionNo + "'  and TXN_TYPE ='" + u[0].toString().trim()
 									+ "' join farmer_dynamic_field_value fdv on fdv.FARMER_DYNAMIC_DATA_ID = fd.id   join farmer_dynamic_field_value act on fdv.action_plan = act.id  join farmer_dynamic_field_value dead on fdv.deadline = dead.id order by fd.TXN_UNIQUE_ID DESC ");
 					result.addAll(sql.list());
-				} 
+				}
 			});
 		}
 		session.flush();
@@ -11310,8 +11310,8 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	@Override
 	public String findComponentNameByDynamicFieldCode(String fieldCode) {
 		Session session = getSessionFactory().getCurrentSession();
-		Query query = session.createQuery(
-				"SELECT componentName from DynamicFieldConfig dfc  WHERE dfc.code=:componenCode");
+		Query query = session
+				.createQuery("SELECT componentName from DynamicFieldConfig dfc  WHERE dfc.code=:componenCode");
 		query.setParameter("componenCode", fieldCode);
 		String val = "";
 		Object obj = query.uniqueResult();
@@ -11320,84 +11320,85 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 		}
 		return val;
 	}
-	
-	
-	public List<Object[]> listFarmerDynamicFieldsValuesByFarmIdList(List<String> farmIdList,List<String> selectedDynamicFieldCodeList) {
 
-		//0 - fdfv.FIELD_NAME
-		//1 - fdfv.FIELD_VALUE
-		//2 - fdfv.COMPONENT_TYPE
-		//3 - fdfv.TYPEZ
-		//4 - fdfv.REFERENCE_ID
-		//5 - fdfv.TXN_TYPE
-		//6 - fdfv.FARMER_DYNAMIC_DATA_ID
-		//7 - fdfv.ACCESS_TYPE
-		//8 - fdfv.PARENT_ID
-		//9 - fic.INSPECTION_DATE
-		//10 - fic.INSPECTOR_NAME
-		//11 - fic.INSPECTION_TYPE
-		//12 - fic.TOTAL_LANDHOLD
-		//13 - fic.LAND_ORGANIC
-		
-		/*String str = farmIdList.toString();
-		String csv = str.substring(1, str.length() - 1).replace(", ", ",");
-		
+	public List<Object[]> listFarmerDynamicFieldsValuesByFarmIdList(List<String> farmIdList,
+			List<String> selectedDynamicFieldCodeList) {
+
+		// 0 - fdfv.FIELD_NAME
+		// 1 - fdfv.FIELD_VALUE
+		// 2 - fdfv.COMPONENT_TYPE
+		// 3 - fdfv.TYPEZ
+		// 4 - fdfv.REFERENCE_ID
+		// 5 - fdfv.TXN_TYPE
+		// 6 - fdfv.FARMER_DYNAMIC_DATA_ID
+		// 7 - fdfv.ACCESS_TYPE
+		// 8 - fdfv.PARENT_ID
+		// 9 - fic.INSPECTION_DATE
+		// 10 - fic.INSPECTOR_NAME
+		// 11 - fic.INSPECTION_TYPE
+		// 12 - fic.TOTAL_LANDHOLD
+		// 13 - fic.LAND_ORGANIC
+
+		/*
+		 * String str = farmIdList.toString(); String csv = str.substring(1,
+		 * str.length() - 1).replace(", ", ",");
+		 * 
+		 * String query = "SELECT "; query +=
+		 * " fdfv.FIELD_NAME,fdfv.FIELD_VALUE,fdfv.COMPONENT_TYPE,fdfv.TYPEZ,fdfv.REFERENCE_ID,fdfv.TXN_TYPE,fdfv.FARMER_DYNAMIC_DATA_ID,fdfv.ACCESS_TYPE,fdfv.PARENT_ID,fic.INSPECTION_DATE,fic.INSPECTOR_NAME,fic.INSPECTION_TYPE,fic.TOTAL_LANDHOLD,fic.LAND_ORGANIC "
+		 * ; query += " FROM farmer_dynamic_field_value fdfv "; query +=
+		 * " inner join farmer_dynamic_data fdd on fdd.ID = fdfv.FARMER_DYNAMIC_DATA_ID "
+		 * ; query +=
+		 * " inner join farm_ics_conversion fic on fic.ID = fdd.FARM_ICS_CONV_ID ";
+		 * query += " WHERE "; if(selectedDynamicFieldCodeList != null &&
+		 * !selectedDynamicFieldCodeList.isEmpty()){ query +=
+		 * "  fdfv.FIELD_NAME in ( :selectedDynFields )  and "; } query +=
+		 * " fdfv.REFERENCE_ID IN ( :referenceId ) "; query +=
+		 * " AND fdfv.FARMER_DYNAMIC_DATA_ID IN ( SELECT Max( fdfv2.FARMER_DYNAMIC_DATA_ID ) FROM farmer_dynamic_field_value fdfv2 WHERE fdfv2.REFERENCE_ID IN ( :referenceId ) GROUP BY fdfv2.REFERENCE_ID ORDER BY instr( :referenceIdStr ,fdfv2.REFERENCE_ID) ) "
+		 * ;
+		 * 
+		 * query += " ORDER BY instr( :referenceIdStr ,fdfv.REFERENCE_ID) ";
+		 * 
+		 * if(selectedDynamicFieldCodeList != null &&
+		 * !selectedDynamicFieldCodeList.isEmpty()){ query +=
+		 * " , instr( :selectedDynFieldsStr ,fdfv.FIELD_NAME) "; }
+		 * sqlQuery.setParameterList("referenceId", farmIdList);
+		 * sqlQuery.setParameter("referenceIdStr", csv);
+		 * 
+		 */
+
 		String query = "SELECT ";
-		query += " fdfv.FIELD_NAME,fdfv.FIELD_VALUE,fdfv.COMPONENT_TYPE,fdfv.TYPEZ,fdfv.REFERENCE_ID,fdfv.TXN_TYPE,fdfv.FARMER_DYNAMIC_DATA_ID,fdfv.ACCESS_TYPE,fdfv.PARENT_ID,fic.INSPECTION_DATE,fic.INSPECTOR_NAME,fic.INSPECTION_TYPE,fic.TOTAL_LANDHOLD,fic.LAND_ORGANIC ";
+		query += " fdfv.FIELD_NAME,fdfv.FIELD_VALUE,fdfv.COMPONENT_TYPE,fdfv.TYPEZ,fdfv.REFERENCE_ID,fdfv.TXN_TYPE,fdfv.FARMER_DYNAMIC_DATA_ID,fdfv.ACCESS_TYPE,fdfv.PARENT_ID,fic.INSPECTION_DATE,fic.INSPECTOR_NAME,fic.INSPECTION_TYPE,fic.TOTAL_LANDHOLD,fic.LAND_ORGANIC  ";
 		query += " FROM farmer_dynamic_field_value fdfv ";
-		query += " inner join farmer_dynamic_data fdd on fdd.ID = fdfv.FARMER_DYNAMIC_DATA_ID ";
-		query += " inner join farm_ics_conversion fic on fic.ID = fdd.FARM_ICS_CONV_ID ";
-		query += " WHERE ";
-		if(selectedDynamicFieldCodeList != null && !selectedDynamicFieldCodeList.isEmpty()){
-			query += "  fdfv.FIELD_NAME in ( :selectedDynFields )  and ";
-		}
-		query += " fdfv.REFERENCE_ID IN ( :referenceId ) ";
-		query += " AND fdfv.FARMER_DYNAMIC_DATA_ID IN ( SELECT Max( fdfv2.FARMER_DYNAMIC_DATA_ID ) FROM farmer_dynamic_field_value fdfv2 WHERE fdfv2.REFERENCE_ID IN ( :referenceId ) GROUP BY fdfv2.REFERENCE_ID ORDER BY instr( :referenceIdStr ,fdfv2.REFERENCE_ID) ) ";
-		
-		query += " ORDER BY instr( :referenceIdStr ,fdfv.REFERENCE_ID) ";
-		
-		if(selectedDynamicFieldCodeList != null && !selectedDynamicFieldCodeList.isEmpty()){
-		query += " , instr( :selectedDynFieldsStr ,fdfv.FIELD_NAME) ";
-		}
-		sqlQuery.setParameterList("referenceId", farmIdList);
-		sqlQuery.setParameter("referenceIdStr", csv);
-		
-		*/
-		
-		String query = "SELECT ";
-		query +=  " fdfv.FIELD_NAME,fdfv.FIELD_VALUE,fdfv.COMPONENT_TYPE,fdfv.TYPEZ,fdfv.REFERENCE_ID,fdfv.TXN_TYPE,fdfv.FARMER_DYNAMIC_DATA_ID,fdfv.ACCESS_TYPE,fdfv.PARENT_ID,fic.INSPECTION_DATE,fic.INSPECTOR_NAME,fic.INSPECTION_TYPE,fic.TOTAL_LANDHOLD,fic.LAND_ORGANIC  ";
-		query +=  " FROM farmer_dynamic_field_value fdfv ";
-		query +=  " INNER JOIN farmer_dynamic_data fdd ON fdd.ID = fdfv.FARMER_DYNAMIC_DATA_ID ";
-		query +=  " AND fdfv.FIELD_NAME IN ( :selectedDynFields ) ";
-		query +=  " AND fdd.ENTITY_ID = 4 ";
-		query +=  " INNER JOIN farm_ics_conversion fic ON fic.ID = fdd.FARM_ICS_CONV_ID ";
-		query +=  " JOIN ( SELECT df.REFERENCE_ID,max( FARMER_DYNAMIC_DATA_ID ) AS ffdis  ";
-		query +=  " FROM farmer_dynamic_field_value df";
-		query +=  " JOIN farmer_dynamic_data fdd ON fdd.id = df.FARMER_DYNAMIC_DATA_ID ";
-		query +=  " AND fdd.ENTITY_ID = 4";
-		query +=  " GROUP BY df.REFERENCE_ID";
-		query +=  " ) x ON x.REFERENCE_ID = fdfv.REFERENCE_ID";
-		query +=  " AND fdd.id = ffdis";
-		query +=  " ORDER BY instr( :selectedDynFieldsStr , fdfv.FIELD_NAME )";
-				
-		
-		
+		query += " INNER JOIN farmer_dynamic_data fdd ON fdd.ID = fdfv.FARMER_DYNAMIC_DATA_ID ";
+		query += " AND fdfv.FIELD_NAME IN ( :selectedDynFields ) ";
+		query += " AND fdd.ENTITY_ID = 4 ";
+		query += " INNER JOIN farm_ics_conversion fic ON fic.ID = fdd.FARM_ICS_CONV_ID ";
+		query += " JOIN ( SELECT df.REFERENCE_ID,max( FARMER_DYNAMIC_DATA_ID ) AS ffdis  ";
+		query += " FROM farmer_dynamic_field_value df";
+		query += " JOIN farmer_dynamic_data fdd ON fdd.id = df.FARMER_DYNAMIC_DATA_ID ";
+		query += " AND fdd.ENTITY_ID = 4";
+		query += " GROUP BY df.REFERENCE_ID";
+		query += " ) x ON x.REFERENCE_ID = fdfv.REFERENCE_ID";
+		query += " AND fdd.id = ffdis";
+		query += " ORDER BY instr( :selectedDynFieldsStr , fdfv.FIELD_NAME )";
+
 		Session session = getSessionFactory().openSession();
 		SQLQuery sqlQuery = session.createSQLQuery(query);
-		
-		if(selectedDynamicFieldCodeList != null && !selectedDynamicFieldCodeList.isEmpty()){
+
+		if (selectedDynamicFieldCodeList != null && !selectedDynamicFieldCodeList.isEmpty()) {
 			sqlQuery.setParameterList("selectedDynFields", selectedDynamicFieldCodeList);
 			String selectedFields_str = selectedDynamicFieldCodeList.toString();
-			String selectedFields_csv = selectedFields_str.substring(1, selectedFields_str.length() - 1).replace(", ", ",");
+			String selectedFields_csv = selectedFields_str.substring(1, selectedFields_str.length() - 1).replace(", ",
+					",");
 			sqlQuery.setParameter("selectedDynFieldsStr", selectedFields_csv);
 		}
-		
+
 		List<Object[]> list = sqlQuery.list();
 		session.flush();
 		session.close();
 		return list;
 	}
-	
+
 	@Override
 	public Farmer findFarmerByMSISDN(String msisdn) {
 		Object[] values = { msisdn, ESETxnStatus.SUCCESS.ordinal() };
@@ -11422,12 +11423,13 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 				"select distinct dfm FROM DynamicMenuFieldMap dfm join fetch dfm.field ff  left join fetch ff.languagePreferences   left join fetch ff.dynamicSectionConfig ffs  where dfm.menu.isScore =? and ff.followUp in (3,4) ",
 				i);
 	}
-	
+
 	@Override
 	public List<DynamicMenuFieldMap> listDynamisMenubyscoreType() {
-		return list("select distinct dfm FROM DynamicMenuFieldMap dfm join fetch dfm.field ff  left join fetch ff.languagePreferences   left join fetch ff.dynamicSectionConfig ffs  where dfm.menu.isScore in (2,3) and ff.followUp in (3,4) order by dfm.menu.mTxnType,dfm.order ");
+		return list(
+				"select distinct dfm FROM DynamicMenuFieldMap dfm join fetch dfm.field ff  left join fetch ff.languagePreferences   left join fetch ff.dynamicSectionConfig ffs  where dfm.menu.isScore in (2,3) and ff.followUp in (3,4) order by dfm.menu.mTxnType,dfm.order ");
 	}
-	
+
 	@Override
 	public List<Object[]> listFarmerCodeIdNameByStateCode(String stateCode) {
 
@@ -11444,36 +11446,38 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	}
 
 	@Override
-	public List<DynamicFeildMenuConfig> listDynamicMenusByRevNo(String revisionNo, String branchId,String tenantId) {
-		
-		//Session session = getHibernateTemplate().getSessionFactory().openSession();
+	public List<DynamicFeildMenuConfig> listDynamicMenusByRevNo(String revisionNo, String branchId, String tenantId) {
+
+		// Session session = getHibernateTemplate().getSessionFactory().openSession();
 		Session session = getSessionFactory().withOptions().tenantIdentifier(tenantId).openSession();
-		//Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
-		Query query = session.createQuery("select distinct dsc FROM DynamicFeildMenuConfig dsc  join fetch dsc.dynamicSectionConfigs dsm  join fetch dsc.dynamicFieldConfigs dfm  join fetch dsm.section ss  join fetch dfm.field ff  left join fetch ff.languagePreferences left join fetch ss.languagePreferences  left join fetch ff.dynamicSectionConfig ffs left join fetch dfm.dynamicFieldScoreMap  where dsc.revisionNo > :revNo  and (dsc.branchId is null or dsc.branchId =''  or dsc.branchId like :branchId) and  (dfm.branchId is null or dfm.branchId ='' or dfm.branchId like :branchId) and  (dsm.branchId is null or dsm.branchId ='' or dsm.branchId like :branchId)  order by dsc.revisionNo desc ");
-		query.setParameter("branchId", "%"+branchId+"%");
+		// Session session =
+		// getHibernateTemplate().getSessionFactory().getCurrentSession();
+		Query query = session.createQuery(
+				"select distinct dsc FROM DynamicFeildMenuConfig dsc  join fetch dsc.dynamicSectionConfigs dsm  join fetch dsc.dynamicFieldConfigs dfm  join fetch dsm.section ss  join fetch dfm.field ff  left join fetch ff.languagePreferences left join fetch ss.languagePreferences  left join fetch ff.dynamicSectionConfig ffs left join fetch dfm.dynamicFieldScoreMap  where dsc.revisionNo > :revNo  and (dsc.branchId is null or dsc.branchId =''  or dsc.branchId like :branchId) and  (dfm.branchId is null or dfm.branchId ='' or dfm.branchId like :branchId) and  (dsm.branchId is null or dsm.branchId ='' or dsm.branchId like :branchId)  order by dsc.revisionNo desc ");
+		query.setParameter("branchId", "%" + branchId + "%");
 		query.setParameter("revNo", Long.valueOf(revisionNo));
-	
+
 		List<DynamicFeildMenuConfig> result = query.list();
 		session.flush();
 		session.close();
 		return result;
-		
-		
+
 	}
-	
+
 	@Override
-	public List<DynamicFeildMenuConfig> findDynamicMenusByType(String txnTypez, String branchId){
+	public List<DynamicFeildMenuConfig> findDynamicMenusByType(String txnTypez, String branchId) {
 		Session session = getHibernateTemplate().getSessionFactory().openSession();
-		Query query = session.createQuery("select distinct dsc FROM DynamicFeildMenuConfig dsc join fetch dsc.dynamicSectionConfigs dss left join fetch dss.section ds left join fetch ds.languagePreferences join fetch dsc.dynamicFieldConfigs  dc  join fetch dc.field ff   left join fetch ff.languagePreferences join fetch ff.dynamicSectionConfig sec join fetch dc.field WHERE dsc.txnType = :txnType and (dsc.branchId is null or dsc.branchId =''  or dsc.branchId like :branchId) and  (dc.branchId is null or dc.branchId ='' or dc.branchId like :branchId) and  (dss.branchId is null or dss.branchId ='' or dss.branchId like :branchId) ORDER BY dsc.order ASC");
-		query.setParameter("branchId", "%"+branchId+"%");
-		query.setParameter("txnType",txnTypez);
-	
+		Query query = session.createQuery(
+				"select distinct dsc FROM DynamicFeildMenuConfig dsc join fetch dsc.dynamicSectionConfigs dss left join fetch dss.section ds left join fetch ds.languagePreferences join fetch dsc.dynamicFieldConfigs  dc  join fetch dc.field ff   left join fetch ff.languagePreferences join fetch ff.dynamicSectionConfig sec join fetch dc.field WHERE dsc.txnType = :txnType and (dsc.branchId is null or dsc.branchId =''  or dsc.branchId like :branchId) and  (dc.branchId is null or dc.branchId ='' or dc.branchId like :branchId) and  (dss.branchId is null or dss.branchId ='' or dss.branchId like :branchId) ORDER BY dsc.order ASC");
+		query.setParameter("branchId", "%" + branchId + "%");
+		query.setParameter("txnType", txnTypez);
+
 		List<DynamicFeildMenuConfig> result = query.list();
 		session.flush();
 		session.close();
-		return result;	
+		return result;
 	}
-	
+
 	@Override
 	public List<DynamicFeildMenuConfig> findDynamicMenusByTypeForOCP(String txnTypez, String branchId) {
 		Session session = getHibernateTemplate().getSessionFactory().openSession();
@@ -11494,11 +11498,11 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 		session.close();
 		return result;
 	}
-	
-	public List<Object[]> listValueByFieldName(String field,String branchId) {
+
+	public List<Object[]> listValueByFieldName(String field, String branchId) {
 		Session session = getSessionFactory().openSession();
 		Criteria criteria = session.createCriteria(FarmerDynamicFieldsValue.class);
-		criteria.createAlias("farmerDynamicData", "fd",JoinType.LEFT_OUTER_JOIN);
+		criteria.createAlias("farmerDynamicData", "fd", JoinType.LEFT_OUTER_JOIN);
 		criteria.add(Restrictions.eq("fd.branch", branchId));
 		criteria.add(Restrictions.eq("fieldName", field));
 		ProjectionList pList = Projections.projectionList();
@@ -11511,20 +11515,20 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 		session.close();
 		return list;
 	}
-	
+
 	public FarmCrops findFarmCropFullObjectById(String id) {
 		Session session = getSessionFactory().openSession();
 		Criteria criteria = session.createCriteria(FarmCrops.class);
 		criteria.add(Restrictions.eq("id", Long.valueOf(id)));
-		criteria.createAlias("farm", "fa",JoinType.LEFT_OUTER_JOIN);
-		criteria.createAlias("fa.farmer", "f",JoinType.LEFT_OUTER_JOIN);
-		criteria.createAlias("f.samithi", "w",JoinType.LEFT_OUTER_JOIN);
+		criteria.createAlias("farm", "fa", JoinType.LEFT_OUTER_JOIN);
+		criteria.createAlias("fa.farmer", "f", JoinType.LEFT_OUTER_JOIN);
+		criteria.createAlias("f.samithi", "w", JoinType.LEFT_OUTER_JOIN);
 		FarmCrops fc = (FarmCrops) criteria.uniqueResult();
 		session.flush();
 		session.close();
 		return fc;
 	}
-	
+
 	public FarmerDynamicFieldsValue findFarmerDynamicFieldsValueById(String id) {
 		Session session = getSessionFactory().openSession();
 		Criteria criteria = session.createCriteria(FarmerDynamicFieldsValue.class);
@@ -11549,47 +11553,50 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 			fmap.sort((p1, p2) -> p1.getCode().compareTo(p2.getCode()));
 			ScriptEngineManager mgr = new ScriptEngineManager();
 			ScriptEngine engine = mgr.getEngineByName("JavaScript");
-			
-			
+
 			fmap.stream().forEach(u -> {
-				if(u.getReferenceId()!=null && u.getReferenceId()>0){
+				if (u.getReferenceId() != null && u.getReferenceId() > 0) {
 					u.setFormula(u.getFormula().replace("##REFID##", String.valueOf(farmerDynamicData.getId())));
-					u.setFormula(u.getFormula().replace("##REFERID##", String.valueOf(farmerDynamicData.getReferenceId())));
-					u.setFormula(u.getFormula().replace("##SEASON##", String.valueOf(farmerDynamicData.getSeason())));		
-					
+					u.setFormula(
+							u.getFormula().replace("##REFERID##", String.valueOf(farmerDynamicData.getReferenceId())));
+					u.setFormula(u.getFormula().replace("##SEASON##", String.valueOf(farmerDynamicData.getSeason())));
+
 					List<String> fieldLiust = new ArrayList<>();
 					Pattern p = Pattern.compile("\\{([^}]*)\\}");
 					Matcher m = p.matcher(u.getFormula());
 					while (m.find())
 						fieldLiust.add(m.group(1));
-					
+
 					fieldLiust.stream().filter(ff -> fieldConfigMap.containsKey(ff)).forEach(g -> {
 						if (fieldConfigMap.get(g).getValidation() != null
 								&& fieldConfigMap.get(g).getValidation().equals("4")) {
 							Double String = fdMap.get(g) != null ? fdMap.get(g).stream()
 									.map(e -> Double.valueOf(e.getFieldValue())).reduce(0.00, (a, b) -> a + b) : 0.0;
-									u.setFormula(u.getFormula().replaceAll("\\{" + g + "\\}",
+							u.setFormula(u.getFormula().replaceAll("\\{" + g + "\\}",
 									fdMap.containsKey(g) ? String.toString() : "0"));
 						} else if (fieldConfigMap.get(g).getValidation() != null
 								&& fieldConfigMap.get(g).getValidation().equals("2")) {
 							Integer String = fdMap.get(g) != null ? fdMap.get(g).stream()
 									.map(e -> Integer.valueOf(e.getFieldValue())).reduce(0, (a, b) -> a + b) : 0;
-									u.setFormula(u.getFormula().replaceAll("\\{" + g + "\\}",
+							u.setFormula(u.getFormula().replaceAll("\\{" + g + "\\}",
 									fdMap.containsKey(g) ? String.toString() : "0"));
 						} else {
-							u.setFormula(u.getFormula().replaceAll("\\{" + g + "\\}", fdMap.containsKey(g) ?'"'+fdMap.get(g).get(0).getFieldValue()+'"' : "0"));
+							u.setFormula(u.getFormula().replaceAll("\\{" + g + "\\}",
+									fdMap.containsKey(g) ? '"' + fdMap.get(g).get(0).getFieldValue() + '"' : "0"));
 						}
 
 					});
-					
+
 					Query query = session.createSQLQuery(u.getFormula());
 					List<Object[]> result = (List<Object[]>) query.list();
-					if(result!=null ){
-						result.stream().forEach(ff ->{
+					if (result != null) {
+						result.stream().forEach(ff -> {
 							FarmerDynamicFieldsValue farmerDynamicFieldsValue = new FarmerDynamicFieldsValue();
 							farmerDynamicFieldsValue.setFieldName(u.getCode());
-							farmerDynamicFieldsValue.setFieldValue(!ObjectUtil.isEmpty(ff[0].toString())?ff[0].toString():"");
-							farmerDynamicFieldsValue.setTypez(!ObjectUtil.isEmpty(ff[1].toString())?Integer.parseInt(ff[1].toString()):0);
+							farmerDynamicFieldsValue
+									.setFieldValue(!ObjectUtil.isEmpty(ff[0].toString()) ? ff[0].toString() : "");
+							farmerDynamicFieldsValue.setTypez(
+									!ObjectUtil.isEmpty(ff[1].toString()) ? Integer.parseInt(ff[1].toString()) : 0);
 							farmerDynamicFieldsValue.setComponentType(u.getComponentType());
 							farmerDynamicFieldsValue.setTxnType(farmerDynamicData.getTxnType());
 							farmerDynamicFieldsValue.setReferenceId(farmerDynamicData.getReferenceId());
@@ -11598,117 +11605,137 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 							farmerDynamicFieldsValue.setTxnUniqueId(farmerDynamicData.getTxnUniqueId());
 							farmerDynamicFieldsValue.setIsMobileAvail(u.getIsMobileAvail());
 							farmerDynamicFieldsValue.setValidationType(u.getValidation());
-							farmerDynamicFieldsValue
-									.setIsMobileAvail(fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()) != null
-											? fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()).getIsMobileAvail() : "0");
+							farmerDynamicFieldsValue.setIsMobileAvail(
+									fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()) != null ? fieldConfigMap
+											.get(farmerDynamicFieldsValue.getFieldName()).getIsMobileAvail() : "0");
+
+							farmerDynamicFieldsValue.setAccessType(
+									fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()) != null ? fieldConfigMap
+											.get(farmerDynamicFieldsValue.getFieldName()).getAccessType() : 0);
 
 							farmerDynamicFieldsValue
-									.setAccessType(fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()) != null
-											? fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()).getAccessType() : 0);
-
-							farmerDynamicFieldsValue.setListMethod(
-									fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()) != null && fieldConfigMap
-											.get(farmerDynamicFieldsValue.getFieldName()).getCatalogueType() != null
-													? fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()).getCatalogueType()
-													: "");
-							farmerDynamicFieldsValue.setParentId(fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()) != null
-									&& fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()).getReferenceId() != null
-											? fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()).getReferenceId() : 0);
+									.setListMethod(fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()) != null
+											&& fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName())
+													.getCatalogueType() != null
+															? fieldConfigMap
+																	.get(farmerDynamicFieldsValue.getFieldName())
+																	.getCatalogueType()
+															: "");
+							farmerDynamicFieldsValue
+									.setParentId(fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()) != null
+											&& fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName())
+													.getReferenceId() != null
+															? fieldConfigMap
+																	.get(farmerDynamicFieldsValue.getFieldName())
+																	.getReferenceId()
+															: 0);
 							farmerDynamicFieldsValue.setFarmerDynamicData(farmerDynamicData);
 							session.saveOrUpdate(farmerDynamicFieldsValue);
 						});
 					}
-					
-				}else{
-				FarmerDynamicFieldsValue farmerDynamicFieldsValue = new FarmerDynamicFieldsValue();
-				u.setFormula(u.getFormula().replace("##REFID##", String.valueOf(farmerDynamicData.getId())));
-				u.setFormula(u.getFormula().replace("##REFERID##", String.valueOf(farmerDynamicData.getReferenceId())));
-				u.setFormula(u.getFormula().replace("##SEASON##", String.valueOf(farmerDynamicData.getSeason())));	
-				u.setFormula(u.getFormula().replace("##BRANCH##", String.valueOf(farmerDynamicData.getBranch())));	
-				List<String> fieldLiust = new ArrayList<>();
-				Pattern p = Pattern.compile("\\{([^}]*)\\}");
-				Matcher m = p.matcher(u.getFormula());
-				while (m.find())
-					fieldLiust.add(m.group(1));
-				
-				fieldLiust.stream().filter(ff -> fieldConfigMap.containsKey(ff)).forEach(g -> {
-					if (fieldConfigMap.get(g).getValidation() != null
-							&& fieldConfigMap.get(g).getValidation().equals("4")) {
-						Double String = fdMap.get(g) != null ? fdMap.get(g).stream()
-								.map(e -> Double.valueOf(e.getFieldValue())).reduce(0.00, (a, b) -> a + b) : 0.0;
-								u.setFormula(u.getFormula().replaceAll("\\{" + g + "\\}",
-								fdMap.containsKey(g) ? String.toString() : "0"));
-					} else if (fieldConfigMap.get(g).getValidation() != null
-							&& fieldConfigMap.get(g).getValidation().equals("2")) {
-						Integer String = fdMap.get(g) != null ? fdMap.get(g).stream()
-								.map(e -> Integer.valueOf(e.getFieldValue())).reduce(0, (a, b) -> a + b) : 0;
-								u.setFormula(u.getFormula().replaceAll("\\{" + g + "\\}",
-								fdMap.containsKey(g) ? String.toString() : "0"));
-					} else {
-						u.setFormula(u.getFormula().replaceAll("\\{" + g + "\\}", fdMap.containsKey(g) ?'"'+fdMap.get(g).get(0).getFieldValue()+'"' : "0"));
-					}
 
-				});
-				
-				Query query = session.createSQLQuery(u.getFormula());
-				String result = (String) query.uniqueResult();
-				farmerDynamicFieldsValue.setFieldName(u.getCode());
-					farmerDynamicFieldsValue.setFieldValue(result);	
-				farmerDynamicFieldsValue.setComponentType(u.getComponentType());
-				farmerDynamicFieldsValue.setTxnType(farmerDynamicData.getTxnType());
-				farmerDynamicFieldsValue.setReferenceId(farmerDynamicData.getReferenceId());
-				farmerDynamicFieldsValue.setCreatedDate(farmerDynamicData.getCreatedDate());
-				farmerDynamicFieldsValue.setCreatedUser(farmerDynamicData.getCreatedUser());
-				farmerDynamicFieldsValue.setTxnUniqueId(farmerDynamicData.getTxnUniqueId());
-				farmerDynamicFieldsValue.setIsMobileAvail(u.getIsMobileAvail());
-				farmerDynamicFieldsValue.setValidationType(u.getValidation());
-				farmerDynamicFieldsValue
-						.setIsMobileAvail(fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()) != null
-								? fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()).getIsMobileAvail() : "0");
+				} else {
+					FarmerDynamicFieldsValue farmerDynamicFieldsValue = new FarmerDynamicFieldsValue();
+					u.setFormula(u.getFormula().replace("##REFID##", String.valueOf(farmerDynamicData.getId())));
+					u.setFormula(
+							u.getFormula().replace("##REFERID##", String.valueOf(farmerDynamicData.getReferenceId())));
+					u.setFormula(u.getFormula().replace("##SEASON##", String.valueOf(farmerDynamicData.getSeason())));
+					u.setFormula(u.getFormula().replace("##BRANCH##", String.valueOf(farmerDynamicData.getBranch())));
+					List<String> fieldLiust = new ArrayList<>();
+					Pattern p = Pattern.compile("\\{([^}]*)\\}");
+					Matcher m = p.matcher(u.getFormula());
+					while (m.find())
+						fieldLiust.add(m.group(1));
 
-				farmerDynamicFieldsValue
-						.setAccessType(fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()) != null
-								? fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()).getAccessType() : 0);
+					fieldLiust.stream().filter(ff -> fieldConfigMap.containsKey(ff)).forEach(g -> {
+						if (fieldConfigMap.get(g).getValidation() != null
+								&& fieldConfigMap.get(g).getValidation().equals("4")) {
+							Double String = fdMap.get(g) != null ? fdMap.get(g).stream()
+									.map(e -> Double.valueOf(e.getFieldValue())).reduce(0.00, (a, b) -> a + b) : 0.0;
+							u.setFormula(u.getFormula().replaceAll("\\{" + g + "\\}",
+									fdMap.containsKey(g) ? String.toString() : "0"));
+						} else if (fieldConfigMap.get(g).getValidation() != null
+								&& fieldConfigMap.get(g).getValidation().equals("2")) {
+							Integer String = fdMap.get(g) != null ? fdMap.get(g).stream()
+									.map(e -> Integer.valueOf(e.getFieldValue())).reduce(0, (a, b) -> a + b) : 0;
+							u.setFormula(u.getFormula().replaceAll("\\{" + g + "\\}",
+									fdMap.containsKey(g) ? String.toString() : "0"));
+						} else {
+							u.setFormula(u.getFormula().replaceAll("\\{" + g + "\\}",
+									fdMap.containsKey(g) ? '"' + fdMap.get(g).get(0).getFieldValue() + '"' : "0"));
+						}
 
-				farmerDynamicFieldsValue.setListMethod(
-						fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()) != null && fieldConfigMap
-								.get(farmerDynamicFieldsValue.getFieldName()).getCatalogueType() != null
-										? fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()).getCatalogueType()
-										: "");
-				farmerDynamicFieldsValue.setParentId(fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()) != null
-						&& fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()).getReferenceId() != null
-								? fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()).getReferenceId() : 0);
-				farmerDynamicFieldsValue.setFarmerDynamicData(farmerDynamicData);
-				
-				farmerDynamicFieldsValue.setIsUpdateProfile(fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()) != null
-						? fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()).getIsUpdateProfile()
-						: "0");
-				LinkedHashMap<String, DynamicFieldConfig> newMap = new LinkedHashMap<> (fieldConfigMap);
-				Map<String, Object> profileUpdateFields = new HashMap<>();
-				profileUpdateFields = new HashMap<>();
-				profileUpdateFields.put(farmerDynamicFieldsValue.getFieldName(),
-						farmerDynamicFieldsValue.getFieldValue());
-				farmerDynamicFieldsValue.getFarmerDynamicData().setProfileUpdateFields(profileUpdateFields);
-			/*	if (farmerDynamicData.getProfileUpdateFields() != null && !ObjectUtil.isEmpty(farmerDynamicData.getProfileUpdateFields())) {
-					processProfileUpdates(farmerDynamicData.getProfileUpdateFields(), fieldConfigMap, farmerDynamicData);
-				}*/
-				session.saveOrUpdate(farmerDynamicFieldsValue);
-				farmerService.processProfileUpdates(farmerDynamicFieldsValue.getFarmerDynamicData().getProfileUpdateFields(), fieldConfigMap, farmerDynamicData);
-				farmerDynamicData.getFarmerDynamicFieldsValues().add(farmerDynamicFieldsValue);
-				
-				//farmerService.saveOrUpdate(farmerDynamicData,fdMap,newMap);
+					});
+
+					Query query = session.createSQLQuery(u.getFormula());
+					String result = (String) query.uniqueResult();
+					farmerDynamicFieldsValue.setFieldName(u.getCode());
+					farmerDynamicFieldsValue.setFieldValue(result);
+					farmerDynamicFieldsValue.setComponentType(u.getComponentType());
+					farmerDynamicFieldsValue.setTxnType(farmerDynamicData.getTxnType());
+					farmerDynamicFieldsValue.setReferenceId(farmerDynamicData.getReferenceId());
+					farmerDynamicFieldsValue.setCreatedDate(farmerDynamicData.getCreatedDate());
+					farmerDynamicFieldsValue.setCreatedUser(farmerDynamicData.getCreatedUser());
+					farmerDynamicFieldsValue.setTxnUniqueId(farmerDynamicData.getTxnUniqueId());
+					farmerDynamicFieldsValue.setIsMobileAvail(u.getIsMobileAvail());
+					farmerDynamicFieldsValue.setValidationType(u.getValidation());
+					farmerDynamicFieldsValue
+							.setIsMobileAvail(fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()) != null
+									? fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()).getIsMobileAvail()
+									: "0");
+
+					farmerDynamicFieldsValue
+							.setAccessType(fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()) != null
+									? fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()).getAccessType()
+									: 0);
+
+					farmerDynamicFieldsValue.setListMethod(fieldConfigMap
+							.get(farmerDynamicFieldsValue.getFieldName()) != null
+							&& fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()).getCatalogueType() != null
+									? fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()).getCatalogueType()
+									: "");
+					farmerDynamicFieldsValue.setParentId(fieldConfigMap
+							.get(farmerDynamicFieldsValue.getFieldName()) != null
+							&& fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()).getReferenceId() != null
+									? fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()).getReferenceId()
+									: 0);
+					farmerDynamicFieldsValue.setFarmerDynamicData(farmerDynamicData);
+
+					farmerDynamicFieldsValue
+							.setIsUpdateProfile(fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()) != null
+									? fieldConfigMap.get(farmerDynamicFieldsValue.getFieldName()).getIsUpdateProfile()
+									: "0");
+					LinkedHashMap<String, DynamicFieldConfig> newMap = new LinkedHashMap<>(fieldConfigMap);
+					Map<String, Object> profileUpdateFields = new HashMap<>();
+					profileUpdateFields = new HashMap<>();
+					profileUpdateFields.put(farmerDynamicFieldsValue.getFieldName(),
+							farmerDynamicFieldsValue.getFieldValue());
+					farmerDynamicFieldsValue.getFarmerDynamicData().setProfileUpdateFields(profileUpdateFields);
+					/*
+					 * if (farmerDynamicData.getProfileUpdateFields() != null &&
+					 * !ObjectUtil.isEmpty(farmerDynamicData.getProfileUpdateFields())) {
+					 * processProfileUpdates(farmerDynamicData.getProfileUpdateFields(),
+					 * fieldConfigMap, farmerDynamicData); }
+					 */
+					session.saveOrUpdate(farmerDynamicFieldsValue);
+					farmerService.processProfileUpdates(
+							farmerDynamicFieldsValue.getFarmerDynamicData().getProfileUpdateFields(), fieldConfigMap,
+							farmerDynamicData);
+					farmerDynamicData.getFarmerDynamicFieldsValues().add(farmerDynamicFieldsValue);
+
+					// farmerService.saveOrUpdate(farmerDynamicData,fdMap,newMap);
 				}
 
 			});
 			session.flush();
 			session.clear();
 			session.close();
-			
+
 		}
 		return farmerDynamicData;
 
 	}
-	
+
 	public ColdStorage findColdStorageById(String id) {
 
 		return (ColdStorage) find("FROM ColdStorage cs LEFT JOIN FETCH cs.farmer WHERE cs.id  = ?", Long.valueOf(id));
@@ -11717,11 +11744,14 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	@Override
 	public ColdStorageDetail findColdStorageDetailById(Long valueOf) {
 		// TODO Auto-generated method stub
-		return (ColdStorageDetail) find("FROM ColdStorageDetail cs LEFT JOIN FETCH cs.coldStorage c LEFT JOIN FETCH c.farmer WHERE cs.id  = ?", Long.valueOf(valueOf));
+		return (ColdStorageDetail) find(
+				"FROM ColdStorageDetail cs LEFT JOIN FETCH cs.coldStorage c LEFT JOIN FETCH c.farmer WHERE cs.id  = ?",
+				Long.valueOf(valueOf));
 	}
-	
+
 	@Override
-	public List<Object[]> listFarmerFarmInfoByVillageId(Farm farm,String selectedOrganicStatus,String selectedFarmer,List<Long> yieldEstimationDoneFarmers) {
+	public List<Object[]> listFarmerFarmInfoByVillageId(Farm farm, String selectedOrganicStatus, String selectedFarmer,
+			List<Long> yieldEstimationDoneFarmers) {
 
 		ProjectionList pList = Projections.projectionList();
 		Session session = getSessionFactory().getCurrentSession();
@@ -11736,9 +11766,9 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 		pList.add(Projections.property("farmName"));
 		pList.add(Projections.property("id"));
 		pList.add(Projections.property("f.isCertifiedFarmer"));
-		//pList.add(Projections.property("fic.organicStatus"));
-		 iscList = new HashMap<>();
-	
+		// pList.add(Projections.property("fic.organicStatus"));
+		iscList = new HashMap<>();
+
 		if (!StringUtil.isEmpty(farm.getCropCode())) {
 			criteria.createAlias("farmCrops", "fc");
 
@@ -11754,8 +11784,6 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 				criteria.createAlias("f.village", "v");
 				criteria.add(Restrictions.eq("v.id", farm.getFarmer().getVillage().getId()));
 			}
-			
-			
 
 			if (!ObjectUtil.isEmpty(farm.getFarmer().getCity())
 					&& !ObjectUtil.isEmpty(farm.getFarmer().getCity().getLocality())) {
@@ -11775,8 +11803,8 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 					&& !(farm.getFarmer().getIsCertifiedFarmer() < 0)) {
 				if (selectedOrganicStatus.equalsIgnoreCase("Conventional")) {
 					criteria.add(Restrictions.eq("f.isCertifiedFarmer", 0));
-				}else{
-				criteria.add(Restrictions.eq("f.isCertifiedFarmer", farm.getFarmer().getIsCertifiedFarmer()));
+				} else {
+					criteria.add(Restrictions.eq("f.isCertifiedFarmer", farm.getFarmer().getIsCertifiedFarmer()));
 				}
 			}
 			if (!StringUtil.isEmpty(farm.getFarmer().getSeasonCode())) {
@@ -11785,36 +11813,47 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 			if (farm.getFarmer().getBranchId() != null && !StringUtil.isEmpty(farm.getFarmer().getBranchId())) {
 				criteria.add(Restrictions.eq("f.branchId", farm.getFarmer().getBranchId()));
 			}
-			/* querying with left join ics conversion takes time so when filtering used join when no ics filter used takes seperate list for farm and organic status map and set to the object*/
+			/*
+			 * querying with left join ics conversion takes time so when filtering used join
+			 * when no ics filter used takes seperate list for farm and organic status map
+			 * and set to the object
+			 */
 			if (!ObjectUtil.isEmpty(farm.getFarmICSConversion())) {
 				if (selectedOrganicStatus.equalsIgnoreCase("3")) {
-				Stream<Object[]>  icsMap= list("select fi.farm.id,COALESCE(fi.organicStatus,'0') from  FarmIcsConversion fi  where  fi.farm is not null and  isActive=1 and fi.organicStatus=?",new Object[]{farm.getFarmICSConversion().iterator().next().getOrganicStatus()}).stream();
-		     	 iscList = icsMap.collect(Collectors.toMap(u ->(Long) u[0], u -> u[1].toString()));
-		     	criteria.add(Restrictions.in("id", iscList.keySet()));
+					Stream<Object[]> icsMap = list(
+							"select fi.farm.id,COALESCE(fi.organicStatus,'0') from  FarmIcsConversion fi  where  fi.farm is not null and  isActive=1 and fi.organicStatus=?",
+							new Object[] { farm.getFarmICSConversion().iterator().next().getOrganicStatus() }).stream();
+					iscList = icsMap.collect(Collectors.toMap(u -> (Long) u[0], u -> u[1].toString()));
+					criteria.add(Restrictions.in("id", iscList.keySet()));
+				} else {
+					Stream<Object[]> icsMap = list(
+							"select fi.farm.id,COALESCE(fi.organicStatus,'0') from  FarmIcsConversion fi  where  fi.farm is not null and  isActive=1 and fi.organicStatus in (0 ,1 ,2)")
+									.stream();
+					iscList = icsMap.collect(Collectors.toMap(u -> (Long) u[0], u -> u[1].toString()));
+					criteria.add(Restrictions.in("id", iscList.keySet()));
 				}
-				else{
-					Stream<Object[]>  icsMap= list("select fi.farm.id,COALESCE(fi.organicStatus,'0') from  FarmIcsConversion fi  where  fi.farm is not null and  isActive=1 and fi.organicStatus in (0 ,1 ,2)").stream();
-			     	 iscList = icsMap.collect(Collectors.toMap(u ->(Long) u[0], u -> u[1].toString()));
-			     	criteria.add(Restrictions.in("id", iscList.keySet()));
-				}
-			}else{
-				
-					Stream<Object[]>  icsMap= list("select fi.farm.id,COALESCE(fi.organicStatus,'0') from  FarmIcsConversion fi  where fi.farm is not null and isActive=1").stream();
-					 iscList = icsMap.collect(Collectors.toMap(u ->(Long) u[0], u -> u[1].toString()));
-				
-			   /*  
-				String queryString = "select fi.farm.id,COALESCE(fi.organicStatus,'0') from  FarmIcsConversion fi  where fi.farm is not null and isActive=1";
-				Session ses = getSessionFactory().openSession();
-				Query query = ses.createQuery(queryString);
-				List<Long> results = ((List<Object[]>) query.list()).stream().map(result ->(Long) result[0]).collect(Collectors.toList());
-		     	//criteria.add(Restrictions.in("id", results));
-*/			}
+			} else {
+
+				Stream<Object[]> icsMap = list(
+						"select fi.farm.id,COALESCE(fi.organicStatus,'0') from  FarmIcsConversion fi  where fi.farm is not null and isActive=1")
+								.stream();
+				iscList = icsMap.collect(Collectors.toMap(u -> (Long) u[0], u -> u[1].toString()));
+
+				/*
+				 * String queryString =
+				 * "select fi.farm.id,COALESCE(fi.organicStatus,'0') from  FarmIcsConversion fi  where fi.farm is not null and isActive=1"
+				 * ; Session ses = getSessionFactory().openSession(); Query query =
+				 * ses.createQuery(queryString); List<Long> results = ((List<Object[]>)
+				 * query.list()).stream().map(result ->(Long)
+				 * result[0]).collect(Collectors.toList()); //criteria.add(Restrictions.in("id",
+				 * results));
+				 */ }
 		}
-		if (!selectedFarmer.equalsIgnoreCase("") && !StringUtil.isEmpty(selectedFarmer)){
-		if (!ObjectUtil.isEmpty(farm.getFarmer().getId())) {
-			criteria.add(Restrictions.eq("f.id",  Long.valueOf(selectedFarmer)));
+		if (!selectedFarmer.equalsIgnoreCase("") && !StringUtil.isEmpty(selectedFarmer)) {
+			if (!ObjectUtil.isEmpty(farm.getFarmer().getId())) {
+				criteria.add(Restrictions.eq("f.id", Long.valueOf(selectedFarmer)));
+			}
 		}
-}	
 		criteria.add(Restrictions.isNotNull("latitude"));
 		criteria.add(Restrictions.isNotNull("longitude"));
 		criteria.add(Restrictions.not(Restrictions.eq("latitude", "0")));
@@ -11823,53 +11862,56 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 		criteria.add(Restrictions.not(Restrictions.eq("longitude", "")));
 		criteria.add(Restrictions.eq("f.status", 1));
 		criteria.add(Restrictions.eq("status", 1));
-		
-		if(yieldEstimationDoneFarmers.size() >= 1){
+
+		if (yieldEstimationDoneFarmers.size() >= 1) {
 			criteria.add(Restrictions.in("id", yieldEstimationDoneFarmers));
 		}
-		
-     	criteria.setProjection(pList);
+
+		criteria.setProjection(pList);
 		List<Object[]> list = criteria.list();
-		List<Object[]> output = list.stream().map(a-> {
-			 a  = Arrays.copyOf(a, a.length + 1);
-			 
-			    a[a.length - 1] = iscList.containsKey(Long.valueOf(a[6].toString())) ? iscList.get(Long.valueOf(a[6].toString())) : "0";
-			    return a;
-			   
-         }).collect(Collectors.toList());
-		
+		List<Object[]> output = list.stream().map(a -> {
+			a = Arrays.copyOf(a, a.length + 1);
+
+			a[a.length - 1] = iscList.containsKey(Long.valueOf(a[6].toString()))
+					? iscList.get(Long.valueOf(a[6].toString()))
+					: "0";
+			return a;
+
+		}).collect(Collectors.toList());
+
 		list.clear();
 		return output;
 	}
-	
+
 	public FarmerDynamicData findFarmerDynamicDataByReferenceIdAndTxnType(long referenceId) {
 
-		return (FarmerDynamicData) find("FROM FarmerDynamicData fdfv where fdfv.referenceId=? and fdfv.txnType=2001 order by fdfv.id desc",
+		return (FarmerDynamicData) find(
+				"FROM FarmerDynamicData fdfv where fdfv.referenceId=? and fdfv.txnType=2001 order by fdfv.id desc",
 				String.valueOf(referenceId));
 	}
-	
+
 	public List<Object[]> listfarmerDynamicData(List<Long> fidLi) {
 		Session session = getSessionFactory().openSession();
-		Query query = session.createSQLQuery("SELECT fd.REFERENCE_ID,DATE(max( fd.DATE )),(SELECT fddv.field_value FROM farmer_dynamic_field_value fdv JOIN farmer_dynamic_field_value fddv ON fdv.deadline = fddv.id  where fdv.FARMER_DYNAMIC_DATA_ID = max( fd.id ) LIMIT 1) FROM farmer_dynamic_data fd  WHERE fd.REFERENCE_ID IN ( :ids)  AND fd.TXN_TYPE = 2001 GROUP BY fd.REFERENCE_ID");
-		
-		//SQLQuery sqlQuery = session.createSQLQuery(query);
+		Query query = session.createSQLQuery(
+				"SELECT fd.REFERENCE_ID,DATE(max( fd.DATE )),(SELECT fddv.field_value FROM farmer_dynamic_field_value fdv JOIN farmer_dynamic_field_value fddv ON fdv.deadline = fddv.id  where fdv.FARMER_DYNAMIC_DATA_ID = max( fd.id ) LIMIT 1) FROM farmer_dynamic_data fd  WHERE fd.REFERENCE_ID IN ( :ids)  AND fd.TXN_TYPE = 2001 GROUP BY fd.REFERENCE_ID");
+
+		// SQLQuery sqlQuery = session.createSQLQuery(query);
 		query.setParameterList("ids", fidLi);
 		List<Object[]> list = query.list();
 		session.flush();
 		session.close();
 		return list;
 	}
-	
-	
+
 	@Override
 	public FarmCrops findFarmCropByCropIdAndFarmIdAndSeason(long farmId, long varietyId, long seasonId) {
 		// TODO Auto-generated method stub
 		Object[] values = { farmId, varietyId, seasonId };
-		return (FarmCrops) find("FROM FarmCrops fc WHERE fc.status=1 and fc.farm.id = ? and fc.procurementVariety.id=? and fc.cropSeason.id=?",
+		return (FarmCrops) find(
+				"FROM FarmCrops fc WHERE fc.status=1 and fc.farm.id = ? and fc.procurementVariety.id=? and fc.cropSeason.id=?",
 				values);
 	}
-	
-	
+
 	@Override
 	public List<Object> listFarmerCountByGroupTraderAndBranchStateCoop(String selectedBranch, String selectedState,
 			String selectedGender, String selectedCooperative, String selectedCrop, String typez,
@@ -11916,9 +11958,9 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 		}
 		return query.list();
 	}
-	
+
 	@Override
-	public List<Object> listFarmerCountByFarmInspection(Date sDate, Date eDate){
+	public List<Object> listFarmerCountByFarmInspection(Date sDate, Date eDate) {
 		Session session = getSessionFactory().getCurrentSession();
 		Map<String, Object> params = new HashMap<String, Object>();
 		String hqlQuery = null;
@@ -11927,12 +11969,14 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 		query.setParameter("sDate", sDate).setParameter("eDate", eDate);
 		return query.list();
 	}
-	
-	public FarmerDynamicFieldsValue findLotCodeFromFarmerDynamicFieldsValue(Long id,String fieldName){
+
+	public FarmerDynamicFieldsValue findLotCodeFromFarmerDynamicFieldsValue(Long id, String fieldName) {
 		Object[] values = { id, fieldName };
-		return (FarmerDynamicFieldsValue) find("FROM FarmerDynamicFieldsValue fdfv WHERE fdfv.farmerDynamicData.id  = ? AND  fdfv.fieldName= ?", values);
+		return (FarmerDynamicFieldsValue) find(
+				"FROM FarmerDynamicFieldsValue fdfv WHERE fdfv.farmerDynamicData.id  = ? AND  fdfv.fieldName= ?",
+				values);
 	}
-	
+
 	@Override
 	public List<Object[]> populateTrainingChart(String branch, String selectedFinYear) {
 		// TODO Auto-generated method stub
@@ -11944,12 +11988,12 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 			int year = Integer.valueOf(selectedFinYear) + 1;
 			eDate = year + "-03-31 23:59:59";
 		}
-		
+
 		Session session = getSessionFactory().getCurrentSession();
 		if (!StringUtil.isEmpty(branch)) {
-			queryString= "SELECT GROUP_concat( tt.TRAINING_CODE), bm.`NAME`,tt.BRANCH_ID,GROUP_concat( tt.TRAINING_CODE, '~', tt.wh, '~', tt.wareId SEPARATOR '$') FROM	(SELECT	GROUP_CONCAT( ts.TRAINING_CODE ) AS TRAINING_CODE,	w.NAME AS wh,	w.ID AS wareId,	ts.BRANCH_ID AS BRANCH_ID FROM	training_status ts	INNER JOIN transfer_info ti ON ts.TRANSFER_INFO_ID = ti.id	INNER JOIN prof p ON ti.AGENT_ID = p.PROF_ID	INNER JOIN warehouse w ON p.WAREHOUSE_ID = w.ID  WHERE CAST(ts.TRAINING_DATE as date) BETWEEN :startDate AND :endDate AND ts.branch_id=:branch  GROUP BY	ts.BRANCH_ID,	p.WAREHOUSE_ID 	) tt	INNER JOIN branch_master bm ON bm.BRANCH_ID = tt.BRANCH_ID GROUP BY	tt.BRANCH_ID";
+			queryString = "SELECT GROUP_concat( tt.TRAINING_CODE), bm.`NAME`,tt.BRANCH_ID,GROUP_concat( tt.TRAINING_CODE, '~', tt.wh, '~', tt.wareId SEPARATOR '$') FROM	(SELECT	GROUP_CONCAT( ts.TRAINING_CODE ) AS TRAINING_CODE,	w.NAME AS wh,	w.ID AS wareId,	ts.BRANCH_ID AS BRANCH_ID FROM	training_status ts	INNER JOIN transfer_info ti ON ts.TRANSFER_INFO_ID = ti.id	INNER JOIN prof p ON ti.AGENT_ID = p.PROF_ID	INNER JOIN warehouse w ON p.WAREHOUSE_ID = w.ID  WHERE CAST(ts.TRAINING_DATE as date) BETWEEN :startDate AND :endDate AND ts.branch_id=:branch  GROUP BY	ts.BRANCH_ID,	p.WAREHOUSE_ID 	) tt	INNER JOIN branch_master bm ON bm.BRANCH_ID = tt.BRANCH_ID GROUP BY	tt.BRANCH_ID";
 		} else {
-			queryString= "SELECT GROUP_concat( tt.TRAINING_CODE), bm.`NAME`,tt.BRANCH_ID,GROUP_concat( tt.TRAINING_CODE, '~', tt.wh, '~', tt.wareId SEPARATOR '$') FROM	(SELECT	GROUP_CONCAT( ts.TRAINING_CODE ) AS TRAINING_CODE,	w.NAME AS wh,	w.ID AS wareId,	ts.BRANCH_ID AS BRANCH_ID FROM	training_status ts	INNER JOIN transfer_info ti ON ts.TRANSFER_INFO_ID = ti.id	INNER JOIN prof p ON ti.AGENT_ID = p.PROF_ID	INNER JOIN warehouse w ON p.WAREHOUSE_ID = w.ID  WHERE CAST(ts.TRAINING_DATE as date) BETWEEN :startDate AND :endDate GROUP BY	ts.BRANCH_ID,	p.WAREHOUSE_ID 	) tt	INNER JOIN branch_master bm ON bm.BRANCH_ID = tt.BRANCH_ID GROUP BY	tt.BRANCH_ID";
+			queryString = "SELECT GROUP_concat( tt.TRAINING_CODE), bm.`NAME`,tt.BRANCH_ID,GROUP_concat( tt.TRAINING_CODE, '~', tt.wh, '~', tt.wareId SEPARATOR '$') FROM	(SELECT	GROUP_CONCAT( ts.TRAINING_CODE ) AS TRAINING_CODE,	w.NAME AS wh,	w.ID AS wareId,	ts.BRANCH_ID AS BRANCH_ID FROM	training_status ts	INNER JOIN transfer_info ti ON ts.TRANSFER_INFO_ID = ti.id	INNER JOIN prof p ON ti.AGENT_ID = p.PROF_ID	INNER JOIN warehouse w ON p.WAREHOUSE_ID = w.ID  WHERE CAST(ts.TRAINING_DATE as date) BETWEEN :startDate AND :endDate GROUP BY	ts.BRANCH_ID,	p.WAREHOUSE_ID 	) tt	INNER JOIN branch_master bm ON bm.BRANCH_ID = tt.BRANCH_ID GROUP BY	tt.BRANCH_ID";
 		}
 		Query query = session.createSQLQuery(queryString);
 		if (!StringUtil.isEmpty(branch)) {
@@ -11977,7 +12021,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 		Session session = getSessionFactory().getCurrentSession();
 		Map<String, Object> params = new HashMap<String, Object>();
 		String hqlQuery = null;
-		
+
 		if (!StringUtil.isEmpty(selectedCrop)) {
 			hqlQuery = "select count(*) FROM FarmCrops fc INNER JOIN fc.farm fa INNER JOIN fa.farmer f WHERE f.f.status=1 AND fc.procurementVariety.procurementProduct.code=:selectedCrop and f.enrollDate BETWEEN :sDate AND :eDate and fc.status=1";
 			params.put("selectedCrop", selectedCrop);
@@ -12011,10 +12055,10 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 		}
 		query.setParameter("sDate", startDate).setParameter("eDate", endDate);
 		Integer val = ((Long) query.uniqueResult()).intValue();
-		/*Object obj = query.uniqueResult();
-		if (obj != null && ObjectUtil.isInteger(obj)) {
-			val = Integer.valueOf(obj.toString());
-		}*/
+		/*
+		 * Object obj = query.uniqueResult(); if (obj != null &&
+		 * ObjectUtil.isInteger(obj)) { val = Integer.valueOf(obj.toString()); }
+		 */
 		return val;
 	}
 
@@ -12109,8 +12153,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 		List<Object[]> result = query.list();
 		return result;
 	}
-	
-	
+
 	@Override
 	public List<FarmCropsField> listRemoveFarmCropFields() {
 		Object[] values = { FarmerField.ACTIVE };
@@ -12120,20 +12163,23 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	@Override
 	public List<Object[]> listFarmsLastInspectionDate() {
 		Session session = getSessionFactory().openSession();
-		SQLQuery query = session.createSQLQuery("SELECT max(DATE(pi.INSPECTION_DATE)),pi.FARM_ID from periodic_inspection pi group by pi.FARM_ID");
+		SQLQuery query = session.createSQLQuery(
+				"SELECT max(DATE(pi.INSPECTION_DATE)),pi.FARM_ID from periodic_inspection pi group by pi.FARM_ID");
 		List list = query.list();
 		return list;
 	}
-	
-	public CropYield findMoleculeDateByLotCode(String lotCode){
-		return (CropYield) find("FROM CropYield cy WHERE cy.landHolding=?",lotCode);
+
+	public CropYield findMoleculeDateByLotCode(String lotCode) {
+		return (CropYield) find("FROM CropYield cy WHERE cy.landHolding=?", lotCode);
 	}
+
 	@Override
 	public Farmer findOlivadoFarmerByFarmerCode(String farmerCode) {
 		Object[] values = { farmerCode, ESETxnStatus.SUCCESS.ordinal() };
 		Farmer farmer = (Farmer) find("FROM Farmer fr WHERE  fr.farmerCode = ? AND fr.statusCode = ?", values);
 		return farmer;
 	}
+
 	@Override
 	public List<Object[]> listFarmerAddressById(Long farmerId) {
 
@@ -12169,21 +12215,20 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 		List<Object[]> result = query.list();
 		return result;
 	}
-	
+
 	@Override
 	public List<Object[]> findDyamicReportTableConfigParentIdsById(String entity) {
 
-		String queryString = "SELECT parent FROM dynamic_report_table_config fr WHERE fr.id in ("+entity+")";
+		String queryString = "SELECT parent FROM dynamic_report_table_config fr WHERE fr.id in (" + entity + ")";
 		Session session = getSessionFactory().openSession();
 		SQLQuery query = session.createSQLQuery(queryString);
 		List<Object[]> result = query.list();
 		session.flush();
 		session.close();
 		return result;
-		
-	
+
 	}
-	
+
 	@Override
 	public List<String> listFarmerByCreatedUser() {
 		String queryString = "SELECT DISTINCT f.CREATED_USERNAME from farmer f GROUP BY f.CREATED_USERNAME;";
@@ -12193,9 +12238,9 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 		session.flush();
 		session.close();
 		return result;
-		//return list("SELECT DISTINCT f.createdUsername from farmer f GROUP BY f.createdUsername");
+		// return list("SELECT DISTINCT f.createdUsername from farmer f GROUP BY
+		// f.createdUsername");
 	}
-	
 
 	@Override
 	public List<Object[]> listFarmersWithFarmParcelIds() {
@@ -12203,14 +12248,14 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 				"SELECT DISTINCT frm.farmer.id,CONCAT(frm.farmer.firstName,' ', frm.farmer.lastName) FROM Farm frm where (frm.gcParcelID IS NOT NULL AND frm.gcParcelID <> '')");
 		return farmerList;
 	}
-	
+
 	@Override
 	public List<Object[]> listFarmersWithFarmCropParcelIds() {
 		List<Object[]> farmerList = list(
 				"SELECT DISTINCT frmCrp.farm.farmer.id,CONCAT(frmCrp.farm.farmer.firstName,' ', frmCrp.farm.farmer.lastName) FROM FarmCrops frmCrp where ((frmCrp.gcParcelID IS NOT NULL AND frmCrp.gcParcelID <> ''))");
 		return farmerList;
 	}
-	
+
 	@Override
 	public List<Object[]> listFarmParcelIdsByFarmer(String farmerId) {
 		List<Object[]> farmerList = list(
@@ -12219,7 +12264,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 						+ "' AND ((frmCrp.farm.gcParcelID IS NOT NULL AND frmCrp.farm.gcParcelID <> '') OR (frmCrp.gcParcelID IS NOT NULL AND frmCrp.gcParcelID <> ''))");
 		return farmerList;
 	}
-	
+
 	@Override
 	public List<Object[]> listFarmCropsWithGcParcelIdsByFarm(String farmId) {
 		List<Object[]> farmerList = list(
@@ -12227,7 +12272,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 						+ farmId + "'");
 		return farmerList;
 	}
-	
+
 	@Override
 	public List<Object[]> listFarmWithoutCropParcelIdsByFarmer(String farmerId) {
 		List<Object[]> farmerList = list(
@@ -12235,14 +12280,14 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 						+ "' AND (frm.gcParcelID IS NOT NULL AND frm.gcParcelID <> '')");
 		return farmerList;
 	}
-	
+
 	@Override
 	public List<Object[]> listFarmersWithIdAndCode() {
 		List<Object[]> farmerIdCodeList = list(
 				"SELECT fm.farmer.id,concat(fm.farmer.firstName,' ',fm.farmer.lastName,' - ',fm.farmer.farmerId) FROM Farm fm WHERE fm.farmer.farmerId IS NOT NULL ORDER BY fm.farmer.firstName");
 		return farmerIdCodeList;
 	}
-	
+
 	@Override
 	public List<Object[]> listFarmsOfFarmerId(long farmerId) {
 
@@ -12251,7 +12296,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 				farmerId);
 		return farmList;
 	}
-	
+
 	@Override
 	public boolean findIfFarmHasParcelId(String farmId) {
 		boolean hasGCParcelId = false;
@@ -12262,7 +12307,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 		}
 		return hasGCParcelId;
 	}
-	
+
 	@Override
 	public List<Object[]> listFarmCropsByFarm(String farmId) {
 		List<Object[]> farmerList = list(
@@ -12270,7 +12315,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 						+ farmId + "'");
 		return farmerList;
 	}
-	
+
 	@Override
 	public List<Object[]> listFarmersWithFarmCoordinates() {
 		Session session = getHibernateTemplate().getSessionFactory().openSession();
@@ -12294,7 +12339,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 		session.close();
 		return farmerIdCodeList;
 	}
-	
+
 	@Override
 	public List<Object[]> listFarmCropByFarmId(String farmId) {
 		Session session = getHibernateTemplate().getSessionFactory().openSession();
@@ -12309,7 +12354,6 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 		return farmList;
 	}
 
-	
 	@Override
 	public List<Object[]> listFarmWithCropParcelIdsByFarmer(String farmerId) {
 		Session session = getHibernateTemplate().getSessionFactory().openSession();
@@ -12323,7 +12367,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 		session.close();
 		return farmList;
 	}
-	
+
 	@Override
 	public List<Object[]> listFarmCropsWithFarmId(long farmId) {
 		Session session = getSessionFactory().openSession();
@@ -12340,7 +12384,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	public List<Object[]> listValueByFieldName(String field) {
 		Session session = getSessionFactory().openSession();
 		Criteria criteria = session.createCriteria(FarmerDynamicFieldsValue.class);
-		criteria.createAlias("farmerDynamicData", "fd",JoinType.LEFT_OUTER_JOIN);
+		criteria.createAlias("farmerDynamicData", "fd", JoinType.LEFT_OUTER_JOIN);
 		criteria.add(Restrictions.eq("fieldName", field));
 		ProjectionList pList = Projections.projectionList();
 		pList.add(Projections.property("id"));
@@ -12352,20 +12396,20 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 		session.close();
 		return list;
 	}
-	
+
 	@Override
 	public List<Object[]> listOfProofNo() {
-		// TODO Auto-generated method stub	
-		Object[] values = { Farmer.Status.ACTIVE.ordinal()};
+		// TODO Auto-generated method stub
+		Object[] values = { Farmer.Status.ACTIVE.ordinal() };
 		return list(
 				"SELECT fr.farmerId,fr.firstName,fr.id,fr.idproofNo FROM Farmer fr  WHERE fr.idproofNo !=null and fr.status=? order by fr.farmerId ASC",
 				values);
 	}
 
 	@Override
-	public List<Object[]> listVendorByLoanStatusAndFarmerAndVendor(Long farmerId,String vendorId) {
-		
-		Object[] values = { farmerId,vendorId};
+	public List<Object[]> listVendorByLoanStatusAndFarmerAndVendor(Long farmerId, String vendorId) {
+
+		Object[] values = { farmerId, vendorId };
 		return list(
 				"SELECT db.vendor.vendorId,db.vendor.vendorName,db.vendor.id FROM DistributionBalance db  WHERE db.farmer.id =? AND db.vendor.vendorId=? order by db.vendor.vendorId ASC",
 				values);
@@ -12374,15 +12418,18 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	public List<Object[]> listFarmerCodeIdNameByFarmerTypezAndLoanApplication(String branchId) {
 
 		Session session = getHibernateTemplate().getSessionFactory().openSession();
-		/*Query query = session.createSQLQuery(
-				"SELECT f.farmer_Id,f.farmer_Code,f.first_Name,f.last_Name,f.id,f.sur_Name FROM Farmer f INNER JOIN loan_application l ON l.farmer_Id = f.id  where f.VILLAGE_Id=:villageCode AND"
-				+ " f.status=:status AND f.status_Code=:statusCode AND f.typez=:typez AND l.LOAN_STATUS =:loanStaus group by f.ID");
-		*/
+		/*
+		 * Query query = session.createSQLQuery(
+		 * "SELECT f.farmer_Id,f.farmer_Code,f.first_Name,f.last_Name,f.id,f.sur_Name FROM Farmer f INNER JOIN loan_application l ON l.farmer_Id = f.id  where f.VILLAGE_Id=:villageCode AND"
+		 * +
+		 * " f.status=:status AND f.status_Code=:statusCode AND f.typez=:typez AND l.LOAN_STATUS =:loanStaus group by f.ID"
+		 * );
+		 */
 		Query query = session.createSQLQuery(
 				"SELECT f.farmer_Id,f.farmer_Code,f.first_Name,f.last_Name,f.id,f.sur_Name,f.proof_No FROM Farmer f WHERE f.status=1 and f.branch_id=:branchId ");
 		query.setParameter("branchId", branchId);
 
-		//query.setMaxResults(1);
+		// query.setMaxResults(1);
 		List<Object[]> result = query.list();
 		session.flush();
 		session.close();
@@ -12390,15 +12437,14 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 	}
 
 	@Override
-	public List<Object[]> listActiveContractFarmersByLoanStatusAndSamithiAndVendor(Long id,String vendorId) {
-		
-		Object[] values = { id,vendorId,Farmer.Status.ACTIVE.ordinal()};
+	public List<Object[]> listActiveContractFarmersByLoanStatusAndSamithiAndVendor(Long id, String vendorId) {
+
+		Object[] values = { id, vendorId, Farmer.Status.ACTIVE.ordinal() };
 		return list(
 				"SELECT db.farmer.farmerId,db.farmer.firstName,db.farmer.id,db.farmer.idproofNo FROM DistributionBalance db  WHERE db.farmer.samithi.id =? AND db.vendor.vendorId=? AND db.farmer.status=? order by db.farmer.farmerId ASC",
 				values);
 	}
-	
-	
+
 	@Override
 	public LoanDistribution findFarmerLatestLoanYear(Long farmerId) {
 
@@ -12411,7 +12457,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 		return loanDistribution;
 
 	}
-	
+
 	public LoanDistribution findGroupLatestLoanYear(Long farmerId) {
 		Session session = getSessionFactory().getCurrentSession();
 		Query query = session.createQuery("FROM LoanDistribution ld WHERE ld.group.id=:fId ORDER BY ld.id DESC");
@@ -12421,7 +12467,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 
 		return loanDistribution;
 	}
-	
+
 	@Override
 	public LoanApplication findFarmerLatestLoanApplication(Long farmerId) {
 
@@ -12434,6 +12480,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 		return loanApplication;
 
 	}
+
 	@Override
 	public LoanApplication findGroupLatestLoanApplication(Long farmerId) {
 
@@ -12446,12 +12493,12 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 		return loanApplication;
 
 	}
-	
+
 	public List<Farmer> listGroup() {
 		Object[] values = { Farmer.IRP, ESETxnStatus.SUCCESS.ordinal() };
 		return list("FROM Farmer f WHERE f.typez= ? AND f.statusCode = ? ORDER BY f.firstName ASC", values);
 	}
-	
+
 	public Farmer findGroupById(Long id) {
 		Object[] values = { id, Farmer.IRP };
 		return (Farmer) find("FROM Farmer fr WHERE fr.id = ? AND fr.typez=?", values);
@@ -12462,9 +12509,10 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 
 		return list("SELECT f.id,f.farms.size from Farmer f  where f.statusCode=0 and f.status=1 ");
 	}
-	
+
 	@Override
-	public List<Object[]> listFarmerFarmInfoByVillageId(Farm farm,String selectedOrganicStatus,String selectedFarmer,List<Long> yieldEstimationDoneFarmers,String selectedStatus ) {
+	public List<Object[]> listFarmerFarmInfoByVillageId(Farm farm, String selectedOrganicStatus, String selectedFarmer,
+			List<Long> yieldEstimationDoneFarmers, String selectedStatus) {
 
 		ProjectionList pList = Projections.projectionList();
 		Session session = getSessionFactory().getCurrentSession();
@@ -12479,9 +12527,9 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 		pList.add(Projections.property("farmName"));
 		pList.add(Projections.property("id"));
 		pList.add(Projections.property("f.isCertifiedFarmer"));
-		//pList.add(Projections.property("fic.organicStatus"));
-		 iscList = new HashMap<>();
-	
+		// pList.add(Projections.property("fic.organicStatus"));
+		iscList = new HashMap<>();
+
 		if (!StringUtil.isEmpty(farm.getCropCode())) {
 			criteria.createAlias("farmCrops", "fc");
 
@@ -12497,41 +12545,39 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 				criteria.createAlias("f.village", "v");
 				criteria.add(Restrictions.eq("v.id", farm.getFarmer().getVillage().getId()));
 			}
-			
-			
 
-			if (!ObjectUtil.isEmpty(farm.getFarmer().getCity()) 
-					&& !ObjectUtil.isEmpty(farm.getFarmer().getCity().getId()) 
+			if (!ObjectUtil.isEmpty(farm.getFarmer().getCity())
+					&& !ObjectUtil.isEmpty(farm.getFarmer().getCity().getId())
 					&& farm.getFarmer().getCity().getId() > 0) {
-				criteria.createAlias("f.city", "c");				
+				criteria.createAlias("f.city", "c");
 				criteria.add(Restrictions.eq("c.id", farm.getFarmer().getCity().getId()));
-				
-				if (!ObjectUtil.isEmpty(farm.getFarmer().getCity()) 
-						&& !ObjectUtil.isEmpty(farm.getFarmer().getCity().getLocality()) 
-						&& !ObjectUtil.isEmpty(farm.getFarmer().getCity().getLocality().getId()) 
+
+				if (!ObjectUtil.isEmpty(farm.getFarmer().getCity())
+						&& !ObjectUtil.isEmpty(farm.getFarmer().getCity().getLocality())
+						&& !ObjectUtil.isEmpty(farm.getFarmer().getCity().getLocality().getId())
 						&& farm.getFarmer().getCity().getLocality().getId() > 0) {
 					criteria.createAlias("c.locality", "l");
 					criteria.add(Restrictions.eq("l.id", farm.getFarmer().getCity().getLocality().getId()));
 				}
-				
-				if (!ObjectUtil.isEmpty(farm.getFarmer().getCity().getLocality()) 
-						&& !ObjectUtil.isEmpty(farm.getFarmer().getCity().getLocality().getState()) 
+
+				if (!ObjectUtil.isEmpty(farm.getFarmer().getCity().getLocality())
+						&& !ObjectUtil.isEmpty(farm.getFarmer().getCity().getLocality().getState())
 						&& !ObjectUtil.isEmpty(farm.getFarmer().getCity().getLocality().getState().getId())
 						&& farm.getFarmer().getCity().getLocality().getState().getId() > 0) {
 					criteria.createAlias("l.state", "s");
 					criteria.add(Restrictions.eq("s.id", farm.getFarmer().getCity().getLocality().getState().getId()));
 				}
 
-				
 			}
 			if (!ObjectUtil.isEmpty(farm.getFarmer().getIsCertifiedFarmer())
 					&& !(farm.getFarmer().getIsCertifiedFarmer() < 0)) {
 				if (selectedOrganicStatus.equalsIgnoreCase("Conventional")) {
 					criteria.add(Restrictions.eq("f.isCertifiedFarmer", 0));
-				}/*else if(selectedOrganicStatus.equalsIgnoreCase("3")){
-					criteria.add(Restrictions.eq("f.isCertifiedFarmer", 0));
-				}*/else{
-				criteria.add(Restrictions.eq("f.isCertifiedFarmer", farm.getFarmer().getIsCertifiedFarmer()));
+				} /*
+					 * else if(selectedOrganicStatus.equalsIgnoreCase("3")){
+					 * criteria.add(Restrictions.eq("f.isCertifiedFarmer", 0)); }
+					 */else {
+					criteria.add(Restrictions.eq("f.isCertifiedFarmer", farm.getFarmer().getIsCertifiedFarmer()));
 				}
 			}
 			if (!StringUtil.isEmpty(farm.getFarmer().getSeasonCode())) {
@@ -12540,83 +12586,93 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 			if (farm.getFarmer().getBranchId() != null && !StringUtil.isEmpty(farm.getFarmer().getBranchId())) {
 				criteria.add(Restrictions.eq("f.branchId", farm.getFarmer().getBranchId()));
 			}
-			/* querying with left join ics conversion takes time so when filtering used join when no ics filter used takes seperate list for farm and organic status map and set to the object*/
+			/*
+			 * querying with left join ics conversion takes time so when filtering used join
+			 * when no ics filter used takes seperate list for farm and organic status map
+			 * and set to the object
+			 */
 			if (!ObjectUtil.isEmpty(farm.getFarmICSConversion())) {
 				if (selectedOrganicStatus.equalsIgnoreCase("3")) {
-				Stream<Object[]>  icsMap= list("select fi.farm.id,COALESCE(fi.organicStatus,'0') from  FarmIcsConversion fi  where  fi.farm is not null and  fi.isActive=1 and fi.organicStatus=?",new Object[]{farm.getFarmICSConversion().iterator().next().getOrganicStatus()}).stream();
-		     	 iscList = icsMap.collect(Collectors.toMap(u ->(Long) u[0], u -> u[1].toString()));
-		     	if(!iscList.isEmpty()){
-		     		criteria.add(Restrictions.in("id", iscList.keySet()));
-		     	}
-		     	 
+					Stream<Object[]> icsMap = list(
+							"select fi.farm.id,COALESCE(fi.organicStatus,'0') from  FarmIcsConversion fi  where  fi.farm is not null and  fi.isActive=1 and fi.organicStatus=?",
+							new Object[] { farm.getFarmICSConversion().iterator().next().getOrganicStatus() }).stream();
+					iscList = icsMap.collect(Collectors.toMap(u -> (Long) u[0], u -> u[1].toString()));
+					if (!iscList.isEmpty()) {
+						criteria.add(Restrictions.in("id", iscList.keySet()));
+					}
+
+				} else {
+					Stream<Object[]> icsMap = list(
+							"select fi.farm.id,COALESCE(fi.organicStatus,'0') from  FarmIcsConversion fi  where  fi.farm is not null and  fi.isActive=1 and fi.icsType in (0 ,1 ,2) GROUP BY fi.farm.id")
+									.stream();
+					iscList = icsMap.collect(Collectors.toMap(u -> (Long) u[0], u -> u[1].toString()));
+					criteria.add(Restrictions.in("id", iscList.keySet()));
 				}
-				else{
-					Stream<Object[]>  icsMap= list("select fi.farm.id,COALESCE(fi.organicStatus,'0') from  FarmIcsConversion fi  where  fi.farm is not null and  fi.isActive=1 and fi.icsType in (0 ,1 ,2) GROUP BY fi.farm.id").stream();
-			     	 iscList = icsMap.collect(Collectors.toMap(u ->(Long) u[0], u -> u[1].toString()));
-			     	criteria.add(Restrictions.in("id", iscList.keySet()));
-				}
-			}else{
-				
-					Stream<Object[]>  icsMap= list("select fi.farm.id,COALESCE(fi.organicStatus,'0') from  FarmIcsConversion fi  where fi.farm is not null and fi.isActive=1 GROUP BY fi.farm.id").stream();
-					 iscList = icsMap.collect(Collectors.toMap(u ->(Long) u[0], u -> u[1].toString()));
-				
-			   /*  
-				String queryString = "select fi.farm.id,COALESCE(fi.organicStatus,'0') from  FarmIcsConversion fi  where fi.farm is not null and isActive=1";
-				Session ses = getSessionFactory().openSession();
-				Query query = ses.createQuery(queryString);
-				List<Long> results = ((List<Object[]>) query.list()).stream().map(result ->(Long) result[0]).collect(Collectors.toList());
-		     	//criteria.add(Restrictions.in("id", results));
-*/			}
+			} else {
+
+				Stream<Object[]> icsMap = list(
+						"select fi.farm.id,COALESCE(fi.organicStatus,'0') from  FarmIcsConversion fi  where fi.farm is not null and fi.isActive=1 GROUP BY fi.farm.id")
+								.stream();
+				iscList = icsMap.collect(Collectors.toMap(u -> (Long) u[0], u -> u[1].toString()));
+
+				/*
+				 * String queryString =
+				 * "select fi.farm.id,COALESCE(fi.organicStatus,'0') from  FarmIcsConversion fi  where fi.farm is not null and isActive=1"
+				 * ; Session ses = getSessionFactory().openSession(); Query query =
+				 * ses.createQuery(queryString); List<Long> results = ((List<Object[]>)
+				 * query.list()).stream().map(result ->(Long)
+				 * result[0]).collect(Collectors.toList()); //criteria.add(Restrictions.in("id",
+				 * results));
+				 */ }
 		}
-		if (!selectedFarmer.equalsIgnoreCase("") && !StringUtil.isEmpty(selectedFarmer)){
-		if (!ObjectUtil.isEmpty(farm.getFarmer().getId())) {
-			criteria.add(Restrictions.eq("f.id",  Long.valueOf(selectedFarmer)));
+		if (!selectedFarmer.equalsIgnoreCase("") && !StringUtil.isEmpty(selectedFarmer)) {
+			if (!ObjectUtil.isEmpty(farm.getFarmer().getId())) {
+				criteria.add(Restrictions.eq("f.id", Long.valueOf(selectedFarmer)));
+			}
 		}
-}	
 		criteria.add(Restrictions.isNotNull("latitude"));
 		criteria.add(Restrictions.isNotNull("longitude"));
 		criteria.add(Restrictions.not(Restrictions.eq("latitude", "0")));
 		criteria.add(Restrictions.not(Restrictions.eq("longitude", "0")));
 		criteria.add(Restrictions.not(Restrictions.eq("latitude", "")));
 		criteria.add(Restrictions.not(Restrictions.eq("longitude", "")));
-		
-		
+
 		if (!StringUtil.isEmpty(selectedStatus) && selectedStatus != null) {
-			if(!selectedStatus.equalsIgnoreCase("2")){
+			if (!selectedStatus.equalsIgnoreCase("2")) {
 				criteria.add(Restrictions.eq("f.status", Integer.valueOf(selectedStatus)));
-			}else{
+			} else {
 				criteria.add(Restrictions.isNotNull("f.status"));
 			}
-		}else{
-			criteria.add(Restrictions.eq("f.status",1));
+		} else {
+			criteria.add(Restrictions.eq("f.status", 1));
 		}
 
 		criteria.add(Restrictions.eq("status", 1));
-		
-		if(yieldEstimationDoneFarmers.size() >= 1){
+
+		if (yieldEstimationDoneFarmers.size() >= 1) {
 			criteria.add(Restrictions.in("id", yieldEstimationDoneFarmers));
 		}
-		
-     	criteria.setProjection(pList);
+
+		criteria.setProjection(pList);
 		List<Object[]> list = criteria.list();
-		List<Object[]> output = list.stream().map(a-> {
-			 a  = Arrays.copyOf(a, a.length + 1);
-			 
-			    a[a.length - 1] = iscList.containsKey(Long.valueOf(a[6].toString())) ? iscList.get(Long.valueOf(a[6].toString())) : "0";
-			    return a;
-			   
-         }).collect(Collectors.toList());
-		
+		List<Object[]> output = list.stream().map(a -> {
+			a = Arrays.copyOf(a, a.length + 1);
+
+			a[a.length - 1] = iscList.containsKey(Long.valueOf(a[6].toString()))
+					? iscList.get(Long.valueOf(a[6].toString()))
+					: "0";
+			return a;
+
+		}).collect(Collectors.toList());
+
 		list.clear();
 		return output;
 	}
-	
-	
-	
+
 	@Override
 	public Integer findFarmersCountFarmerLoca(String selectedCrop, String selectedState, String selectedLocality,
 			String selectedTaluk, String selectedVillage, String selectedFarmer, String selectedSeason,
-			String selectedOrganicStatus,String selectedStatus) {
+			String selectedOrganicStatus, String selectedStatus) {
 		// TODO Auto-generated method stub
 		Session session = getSessionFactory().getCurrentSession();
 		Map<String, Object> params = new HashMap<String, Object>();
@@ -12627,18 +12683,18 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 		} else {
 			hqlQuery = "select count(*) FROM Farmer f WHERE  f.statusCode=0";
 		}
-		
+
 		if (!StringUtil.isEmpty(selectedStatus) && selectedStatus != null) {
-			if(!selectedStatus.equalsIgnoreCase("2")){
+			if (!selectedStatus.equalsIgnoreCase("2")) {
 				hqlQuery += " and f.status=:selectedStatus";
-			params.put("selectedStatus", Integer.valueOf(selectedStatus));
-			}else{
+				params.put("selectedStatus", Integer.valueOf(selectedStatus));
+			} else {
 				hqlQuery += " and f.status is not null";
 			}
-		}else{
+		} else {
 			hqlQuery += " and f.status=1";
 		}
-		
+
 		if (!StringUtil.isEmpty(selectedState) && selectedState != null) {
 			hqlQuery += " AND f.village.city.locality.state.id =:selectedState";
 			params.put("selectedState", Long.valueOf(selectedState));
@@ -12691,14 +12747,14 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 					List<Long> icsMap = list(
 							"select fi.farm.farmer.id from  FarmIcsConversion fi  where  fi.farm is not null and  fi.isActive=1 and fi.organicStatus=?",
 							new Object[] { selectedOrganicStatus });
-					
-						if(!ObjectUtil.isListEmpty(icsMap)){
-							hqlQuery += " AND f.id in (:fList)";
-							params.put("fList", icsMap);
-						}else{
-							hqlQuery += " AND f.isCertifiedFarmer=0";
-						}
-										
+
+					if (!ObjectUtil.isListEmpty(icsMap)) {
+						hqlQuery += " AND f.id in (:fList)";
+						params.put("fList", icsMap);
+					} else {
+						hqlQuery += " AND f.isCertifiedFarmer=0";
+					}
+
 				} else if (selectedOrganicStatus.equalsIgnoreCase("0")) {
 					List<Long> icsMap = list(
 							"select fi.farm.farmer.id from  FarmIcsConversion fi  where  fi.farm is not null and  fi.isActive=1 and fi.organicStatus in (0 ,1 ,2)");
@@ -12719,10 +12775,9 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 		for (String str : query.getNamedParameters()) {
 			if (str.equalsIgnoreCase("fList")) {
 				List<Long> result = (List<Long>) params.get(str);
-				if(!ObjectUtil.isListEmpty(result)){
+				if (!ObjectUtil.isListEmpty(result)) {
 					query.setParameterList(str, result);
 				}
-				
 
 			} else {
 				query.setParameter(str, params.get(str));
@@ -12737,34 +12792,28 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 		return val;
 
 	}
-	
-	
-	
+
 	@Override
 	public Object[] findTotalAcreAndEstimatedYield(String selectedCrop, String selectedState, String selectedLocality,
 			String selectedTaluk, String selectedVillage, String selectedFarmer, String selectedSeason,
-			String selectedOrganicStatus,String selectedStatus) {
+			String selectedOrganicStatus, String selectedStatus) {
 
 		// TODO Auto-generated method stub
 		Session session = getSessionFactory().getCurrentSession();
 		Map<String, Object> params = new HashMap<String, Object>();
 		String hqlQuery = "SELECT  SUM(fc.cultiArea),sum(fc.actualSeedYield),sum(fc.estimatedYield) FROM FarmCrops fc INNER JOIN fc.farm fa INNER JOIN fc.farm.farmer f  WHERE  fc.status=1 ";
-		
-		
+
 		if (!StringUtil.isEmpty(selectedStatus) && selectedStatus != null) {
-			if(!selectedStatus.equalsIgnoreCase("2")){
+			if (!selectedStatus.equalsIgnoreCase("2")) {
 				hqlQuery += " and f.status=:selectedStatus";
-			params.put("selectedStatus", Integer.valueOf(selectedStatus));
-			}else{
+				params.put("selectedStatus", Integer.valueOf(selectedStatus));
+			} else {
 				hqlQuery += " and f.status is not null";
 			}
-		}else{
+		} else {
 			hqlQuery += " and f.status=1";
 		}
-			
-		
-		
-		
+
 		if (!StringUtil.isEmpty(selectedState) && selectedState != null) {
 			hqlQuery += " AND f.village.city.locality.state.id =:selectedState";
 			params.put("selectedState", Long.valueOf(selectedState));
@@ -12822,10 +12871,10 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 					List<Long> icsMap = list(
 							"select fi.farm.farmer.id from  FarmIcsConversion fi  where  fi.farm is not null and  isActive=1 and fi.organicStatus=?",
 							new Object[] { selectedOrganicStatus });
-					if(!ObjectUtil.isListEmpty(icsMap)){
+					if (!ObjectUtil.isListEmpty(icsMap)) {
 						hqlQuery += " AND f.id in (:fList)";
 						params.put("fList", icsMap);
-					}else{
+					} else {
 						hqlQuery += " AND f.isCertifiedFarmer = 0";
 					}
 				} else if (selectedOrganicStatus.equalsIgnoreCase("0")) {
@@ -12864,7 +12913,6 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 
 	}
 
-	
 	public List<Object[]> farmersByGroup(String selectedBranch) {
 
 		Session session = getSessionFactory().getCurrentSession();
@@ -12880,44 +12928,43 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 		List<Object[]> result = query.list();
 		return result;
 	}
-	
+
 	public List<Object[]> getFarmDetailsAndProposedPlantingAreaByGroup(String locationLevel1, String selectedBranch,
 			String gramPanchayatEnable) {
 		HttpSession httpSession = ReflectUtil.getCurrentHttpSession();
 		HttpServletRequest request = ReflectUtil.getCurrentHttpRequest();
-		String tenantId = !StringUtil.isEmpty(ISecurityFilter.DEFAULT_TENANT_ID) ? ISecurityFilter.DEFAULT_TENANT_ID : "";
+		String tenantId = !StringUtil.isEmpty(ISecurityFilter.DEFAULT_TENANT_ID) ? ISecurityFilter.DEFAULT_TENANT_ID
+				: "";
 		if (!ObjectUtil.isEmpty(request)) {
 			tenantId = !StringUtil.isEmpty((String) request.getSession().getAttribute(ISecurityFilter.TENANT_ID))
-					? (String) request.getSession().getAttribute(ISecurityFilter.TENANT_ID) : "";
+					? (String) request.getSession().getAttribute(ISecurityFilter.TENANT_ID)
+					: "";
 		}
 		String locationLevel = String.valueOf(locationLevel1.charAt(0));
 		String flag = "enable";
-	
-			Session session = getSessionFactory().getCurrentSession();
-			Query query;
-			String hqlString = null;
-			 if (!StringUtil.isEmpty(locationLevel) && locationLevel.equals("f")) {
-				 hqlString = "select count(fa.id),COALESCE(sum(fdi.proposedPlantingArea),0) as TOTAL_LAND_HOLDING,s.name from Farm fa inner join fa.farmer f inner join fa.farmDetailedInfo fdi inner join f.samithi s where f.branchId = :branch and f.statusCode = 0 GROUP BY s.id ";
-					flag = "disable";
-					query = session.createQuery(hqlString);
-					query.setParameter("branch", selectedBranch);
-					List<Object[]> result = query.list();
-					return result;
-			 }else{
-				 hqlString = "select count(fm.id),COALESCE(sum(fdi.proposedPlantingArea),0) as TOTAL_LAND_HOLDING,CASE WHEN fic.icsType = 0 THEN 'IC-1' WHEN fic.icsType = 1 THEN 'IC-2' WHEN fic.icsType = 2 THEN 'IC-3' WHEN fic.icsType = 3 THEN 'Organic' ELSE 'Non-Certified' END,f.samithi.name,f.samithi.code FROM Farm fm inner join fm.farmDetailedInfo fdi INNER JOIN fm.farmICSConversion fic INNER JOIN  fm.farmer f  inner join f.samithi s WHERE f.status=1 AND f.branchId = :branch AND s.code= :locationCode GROUP BY fic.icsType";
-					flag = "disable";
-					query = session.createQuery(hqlString);
-					query.setParameter("branch", selectedBranch);
-					query.setParameter("locationCode", locationLevel1);
-					List<Object[]> result = query.list();
-					return result;
-			 }
-			
-			
-		
+
+		Session session = getSessionFactory().getCurrentSession();
+		Query query;
+		String hqlString = null;
+		if (!StringUtil.isEmpty(locationLevel) && locationLevel.equals("f")) {
+			hqlString = "select count(fa.id),COALESCE(sum(fdi.proposedPlantingArea),0) as TOTAL_LAND_HOLDING,s.name from Farm fa inner join fa.farmer f inner join fa.farmDetailedInfo fdi inner join f.samithi s where f.branchId = :branch and f.statusCode = 0 GROUP BY s.id ";
+			flag = "disable";
+			query = session.createQuery(hqlString);
+			query.setParameter("branch", selectedBranch);
+			List<Object[]> result = query.list();
+			return result;
+		} else {
+			hqlString = "select count(fm.id),COALESCE(sum(fdi.proposedPlantingArea),0) as TOTAL_LAND_HOLDING,CASE WHEN fic.icsType = 0 THEN 'IC-1' WHEN fic.icsType = 1 THEN 'IC-2' WHEN fic.icsType = 2 THEN 'IC-3' WHEN fic.icsType = 3 THEN 'Organic' ELSE 'Non-Certified' END,f.samithi.name,f.samithi.code FROM Farm fm inner join fm.farmDetailedInfo fdi INNER JOIN fm.farmICSConversion fic INNER JOIN  fm.farmer f  inner join f.samithi s WHERE f.status=1 AND f.branchId = :branch AND s.code= :locationCode GROUP BY fic.icsType";
+			flag = "disable";
+			query = session.createQuery(hqlString);
+			query.setParameter("branch", selectedBranch);
+			query.setParameter("locationCode", locationLevel1);
+			List<Object[]> result = query.list();
+			return result;
+		}
 
 	}
-	
+
 	@Override
 	public List<Object[]> findFarmerCountByGroupICS(String selectedBranch) {
 		String groupBy = " GROUP BY fic.icsType,f.samithi.name";
@@ -12927,7 +12974,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 		if (!StringUtil.isEmpty(selectedBranch)) {
 			hqlQuery += " AND f.branchId =:branch ";
 			params.put("branch", selectedBranch);
-		}		
+		}
 		hqlQuery += groupBy;
 		Query query = session.createQuery(hqlQuery);
 		for (String str : query.getNamedParameters()) {
@@ -12938,31 +12985,31 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 		return result;
 
 	}
-	
-	public List<Object[]> populateFarmerLocationCropChartByGroup(String codeForCropChart,String selectedBranch,String seasonCode) {
-		
-		
+
+	public List<Object[]> populateFarmerLocationCropChartByGroup(String codeForCropChart, String selectedBranch,
+			String seasonCode) {
+
 		String hqlString;
 		Session session = getSessionFactory().getCurrentSession();
 		Query query = null;
 
 		if (StringUtil.isEmpty(seasonCode)) {
 			if (!StringUtil.isEmpty(codeForCropChart)) {
-				if(StringUtil.isEmpty(selectedBranch)){
+				if (StringUtil.isEmpty(selectedBranch)) {
 					hqlString = "SELECT count(fa.id),sum(famcrps.cultiArea) as CULTIVATION_AREA,pp.name,pp.code,sum(famcrps.estimatedYield) as yield from Farmer f inner join f.samithi s inner join f.farms fa  inner join fa.farmDetailedInfo fdi inner join fa.farmCrops famcrps inner join famcrps.procurementVariety pv inner join pv.procurementProduct pp where f.statusCode = 0 AND s.code= :samCode group by pp.code";
-					
+
 					query = session.createQuery(hqlString);
 					query.setParameter("samCode", codeForCropChart);
 					List<Object[]> result = query.list();
 					return result;
-				}else{
-				hqlString = "SELECT count(fa.id),sum(famcrps.cultiArea) as CULTIVATION_AREA,pp.name,pp.code,sum(famcrps.estimatedYield) as yield from Farmer f inner join f.samithi s inner join f.farms fa  inner join fa.farmDetailedInfo fdi inner join fa.farmCrops famcrps inner join famcrps.procurementVariety pv inner join pv.procurementProduct pp where f.branchId = :branchId and f.statusCode = 0 AND s.code= :samCode group by pp.code";
-				
-				query = session.createQuery(hqlString);
-				query.setParameter("samCode", codeForCropChart);
-				query.setParameter("branchId", selectedBranch);
-				List<Object[]> result = query.list();
-				return result;
+				} else {
+					hqlString = "SELECT count(fa.id),sum(famcrps.cultiArea) as CULTIVATION_AREA,pp.name,pp.code,sum(famcrps.estimatedYield) as yield from Farmer f inner join f.samithi s inner join f.farms fa  inner join fa.farmDetailedInfo fdi inner join fa.farmCrops famcrps inner join famcrps.procurementVariety pv inner join pv.procurementProduct pp where f.branchId = :branchId and f.statusCode = 0 AND s.code= :samCode group by pp.code";
+
+					query = session.createQuery(hqlString);
+					query.setParameter("samCode", codeForCropChart);
+					query.setParameter("branchId", selectedBranch);
+					List<Object[]> result = query.list();
+					return result;
 				}
 			} else {
 				hqlString = "SELECT count(fa.id),sum(famcrps.cultiArea) as CULTIVATION_AREA,pp.name,pp.code,sum(famcrps.estimatedYield) as yield  from Farmer f inner join f.samithi s inner join f.farms fa  inner join fa.farmDetailedInfo fdi inner join fa.farmCrops famcrps inner join famcrps.procurementVariety pv inner join pv.procurementProduct pp where f.statusCode = 0 AND f.status=1 group by pp.code ";
@@ -12970,19 +13017,17 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 				List<Object[]> result = query.list();
 				return result;
 			}
-		}
-		else
-		{
+		} else {
 			if (!StringUtil.isEmpty(codeForCropChart)) {
 				hqlString = "SELECT count(fa.id),sum(famcrps.cultiArea) as CULTIVATION_AREA,pp.name,pp.code,sum(famcrps.estimatedYield) as yield from Farmer f inner join f.samithi s inner join f.farms fa inner join fa.farmDetailedInfo fdi inner join fa.farmCrops famcrps inner join famcrps.procurementVariety pv inner join pv.procurementProduct pp where f.branchId = :branchId and f.statusCode = 0 AND s.code= :samCode and famcrps.cropSeason.code = :season group by pp.code";
-				
+
 				query = session.createQuery(hqlString);
 				query.setParameter("samCode", codeForCropChart);
 				query.setParameter("branchId", selectedBranch);
 				query.setParameter("season", seasonCode);
 				List<Object[]> result = query.list();
 				return result;
-				
+
 			} else {
 				hqlString = "SELECT count(fa.id),sum(famcrps.cultiArea) as CULTIVATION_AREA,pp.name,pp.code,sum(famcrps.estimatedYield) as yield  from Farmer f inner join f.samithi s inner join f.farms fa  inner join fa.farmDetailedInfo fdi inner join fa.farmCrops famcrps inner join famcrps.procurementVariety pv inner join pv.procurementProduct pp where f.statusCode = 0 AND f.status=1 and famcrps.cropSeason.code = :season group by pp.code ";
 				query = session.createQuery(hqlString);
@@ -12991,155 +13036,119 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 				return result;
 			}
 		}
-			
 
-		
 	}
 
+	/*
+	 * @Override public List<Object[]> listFarmerFarmInfoFarmCropsByVillageId(Object
+	 * obj, String selectedStatus, String plottingType) {
+	 * 
+	 * ProjectionList pList = Projections.projectionList(); Session session =
+	 * getSessionFactory().getCurrentSession(); Criteria criteria = null;
+	 * List<Object[]> list = null; if (obj instanceof FarmCrops &&
+	 * plottingType.equalsIgnoreCase("2")) { criteria =
+	 * session.createCriteria(FarmCrops.class); FarmCrops crops = (FarmCrops) obj;
+	 * criteria.createAlias("farm", "fm"); criteria.createAlias("fm.farmer", "f");
+	 * if (!StringUtil.isEmpty(crops.getCropCode())) {
+	 * criteria.createAlias("procurementVariety", "pv");
+	 * criteria.createAlias("pv.procurementProduct", "pp");
+	 * criteria.add(Restrictions.eq("pp.id", Long.valueOf(crops.getCropCode()))); }
+	 * 
+	 * if (!ObjectUtil.isEmpty(crops.getFarm()) &&
+	 * !ObjectUtil.isEmpty(crops.getFarm().getFarmer())) {
+	 * 
+	 * if (!ObjectUtil.isEmpty(crops.getFarm().getFarmer().getVillage())) {
+	 * criteria.createAlias("f.village", "v"); criteria.add(Restrictions.eq("v.id",
+	 * crops.getFarm().getFarmer().getVillage().getId())); }
+	 * 
+	 * if (!ObjectUtil.isEmpty(crops.getFarm().getFarmer().getCity()) &&
+	 * !ObjectUtil.isEmpty(crops.getFarm().getFarmer().getCity().getLocality())) {
+	 * criteria.createAlias("f.city", "c"); criteria.createAlias("c.locality", "l");
+	 * criteria.createAlias("l.state", "s");
+	 * 
+	 * if (!ObjectUtil.isEmpty(crops.getFarm().getFarmer().getStateId())) {
+	 * criteria.add(Restrictions.eq("s.id",
+	 * crops.getFarm().getFarmer().getCity().getLocality().getState().getId())); }
+	 * 
+	 * if (crops.getFarm().getFarmer().getCity().getLocality().getId() > 0) {
+	 * criteria.add( Restrictions.eq("l.id",
+	 * crops.getFarm().getFarmer().getCity().getLocality().getId())); } } if
+	 * (crops.getFarm().getFarmer().getId() > 0) {
+	 * criteria.add(Restrictions.eq("f.id", crops.getFarm().getFarmer().getId())); }
+	 * 
+	 * if (crops.getFarm().getFarmer().getBranchId() != null &&
+	 * !StringUtil.isEmpty(crops.getFarm().getFarmer().getBranchId())) {
+	 * criteria.add(Restrictions.eq("f.branchId",
+	 * crops.getFarm().getFarmer().getBranchId())); }
+	 * 
+	 * } if (!StringUtil.isEmpty(selectedStatus) && selectedStatus != null) { if
+	 * (!selectedStatus.equalsIgnoreCase("2")) {
+	 * criteria.add(Restrictions.eq("f.status", Integer.valueOf(selectedStatus))); }
+	 * else { criteria.add(Restrictions.isNotNull("f.status")); } } else {
+	 * criteria.add(Restrictions.eq("f.status", 1)); }
+	 * 
+	 * pList.add(Projections.property("id"));
+	 * pList.add(Projections.property("latitude"));
+	 * pList.add(Projections.property("longitude"));
+	 * pList.add(Projections.property("fm.farmCode"));
+	 * pList.add(Projections.property("f.firstName"));
+	 * pList.add(Projections.property("fm.farmName"));
+	 * pList.add(Projections.property("fm.id"));
+	 * pList.add(Projections.property("f.id")); criteria.setProjection(pList); list
+	 * = criteria.list(); } else if (obj instanceof Farm &&
+	 * plottingType.equalsIgnoreCase("1")) { criteria =
+	 * session.createCriteria(Farm.class); Farm crops = (Farm) obj;
+	 * criteria.createAlias("farmer", "f");
+	 * 
+	 * if (!ObjectUtil.isEmpty(crops) && !ObjectUtil.isEmpty(crops.getFarmer())) {
+	 * 
+	 * if (!ObjectUtil.isEmpty(crops.getFarmer().getVillage())) {
+	 * criteria.createAlias("f.village", "v"); criteria.add(Restrictions.eq("v.id",
+	 * crops.getFarmer().getVillage().getId())); }
+	 * 
+	 * if (!ObjectUtil.isEmpty(crops.getFarmer().getCity()) &&
+	 * !ObjectUtil.isEmpty(crops.getFarmer().getCity().getLocality())) {
+	 * criteria.createAlias("f.city", "c"); criteria.createAlias("c.locality", "l");
+	 * criteria.createAlias("l.state", "s");
+	 * 
+	 * if (!ObjectUtil.isEmpty(crops.getFarmer().getStateId())) {
+	 * criteria.add(Restrictions.eq("s.id",
+	 * crops.getFarmer().getCity().getLocality().getState().getId())); }
+	 * 
+	 * if (crops.getFarmer().getCity().getLocality().getId() > 0) {
+	 * criteria.add(Restrictions.eq("l.id",
+	 * crops.getFarmer().getCity().getLocality().getId())); } } if
+	 * (crops.getFarmer().getId() > 0) { criteria.add(Restrictions.eq("f.id",
+	 * crops.getFarmer().getId())); }
+	 * 
+	 * if (crops.getFarmer().getBranchId() != null &&
+	 * !StringUtil.isEmpty(crops.getFarmer().getBranchId())) {
+	 * criteria.add(Restrictions.eq("f.branchId", crops.getFarmer().getBranchId()));
+	 * }
+	 * 
+	 * } if (!StringUtil.isEmpty(selectedStatus) && selectedStatus != null) { if
+	 * (!selectedStatus.equalsIgnoreCase("2")) {
+	 * criteria.add(Restrictions.eq("f.status", Integer.valueOf(selectedStatus))); }
+	 * else { criteria.add(Restrictions.isNotNull("f.status")); } } else {
+	 * criteria.add(Restrictions.eq("f.status", 1)); }
+	 * pList.add(Projections.property("id"));
+	 * pList.add(Projections.property("latitude"));
+	 * pList.add(Projections.property("longitude"));
+	 * pList.add(Projections.property("farmCode"));
+	 * pList.add(Projections.property("f.firstName"));
+	 * pList.add(Projections.property("farmName"));
+	 * pList.add(Projections.property("id"));
+	 * pList.add(Projections.property("f.id")); criteria.setProjection(pList); list
+	 * = criteria.list(); }else if (obj instanceof Farm &&
+	 * plottingType.equalsIgnoreCase("3")) { Session sessions =
+	 * getSessionFactory().openSession(); Query query = session.
+	 * createSQLQuery("SELECT fmid,latitude,longitude,farmCode,firstName,farmName,farmrId,farmerId,ftype FROM (SELECT fmc.id AS fmid,fmc.LATITUDE AS latitude,fmc.LONGITUDE AS longitude,fm.FARM_CODE AS farmCode,fr.FIRST_NAME AS firstName,fm.FARM_NAME AS farmName,fmc.id AS farmrId,fr.id AS farmerId,	'2' AS ftype FROM	FARM_CROPS fmc	LEFT JOIN FARM fm ON fmc.FARM_ID = fm.id LEFT JOIN FARMER fr ON fm.FARMER_ID = fr.id WHERE	fr.STATUS = '1' UNION SELECT	frm.id AS fmid,	frm.LATITUDE AS latitude,	frm.LONGITUDE AS longitude,	frm.FARM_CODE AS farmCode,far.FIRST_NAME AS firstName,	frm.FARM_NAME AS farmName,	 frm.id AS farmrId,far.id AS farmerId,	'1' AS ftype FROM FARM frm INNER JOIN FARMER far ON frm.FARMER_ID = far.id WHERE far.STATUS = '1') tt"
+	 * ); list = (List<Object[]>) query.list(); sessions.flush(); sessions.close();
+	 * } return list; }
+	 */
 
-	
-	/*@Override
-	public List<Object[]> listFarmerFarmInfoFarmCropsByVillageId(Object obj, String selectedStatus,
-			String plottingType) {
-
-		ProjectionList pList = Projections.projectionList();
-		Session session = getSessionFactory().getCurrentSession();
-		Criteria criteria = null;
-		List<Object[]> list = null;
-		if (obj instanceof FarmCrops && plottingType.equalsIgnoreCase("2")) {
-			criteria = session.createCriteria(FarmCrops.class);
-			FarmCrops crops = (FarmCrops) obj;
-			criteria.createAlias("farm", "fm");
-			criteria.createAlias("fm.farmer", "f");
-			if (!StringUtil.isEmpty(crops.getCropCode())) {
-				criteria.createAlias("procurementVariety", "pv");
-				criteria.createAlias("pv.procurementProduct", "pp");
-				criteria.add(Restrictions.eq("pp.id", Long.valueOf(crops.getCropCode())));
-			}
-
-			if (!ObjectUtil.isEmpty(crops.getFarm()) && !ObjectUtil.isEmpty(crops.getFarm().getFarmer())) {
-
-				if (!ObjectUtil.isEmpty(crops.getFarm().getFarmer().getVillage())) {
-					criteria.createAlias("f.village", "v");
-					criteria.add(Restrictions.eq("v.id", crops.getFarm().getFarmer().getVillage().getId()));
-				}
-
-				if (!ObjectUtil.isEmpty(crops.getFarm().getFarmer().getCity())
-						&& !ObjectUtil.isEmpty(crops.getFarm().getFarmer().getCity().getLocality())) {
-					criteria.createAlias("f.city", "c");
-					criteria.createAlias("c.locality", "l");
-					criteria.createAlias("l.state", "s");
-
-					if (!ObjectUtil.isEmpty(crops.getFarm().getFarmer().getStateId())) {
-						criteria.add(Restrictions.eq("s.id",
-								crops.getFarm().getFarmer().getCity().getLocality().getState().getId()));
-					}
-
-					if (crops.getFarm().getFarmer().getCity().getLocality().getId() > 0) {
-						criteria.add(
-								Restrictions.eq("l.id", crops.getFarm().getFarmer().getCity().getLocality().getId()));
-					}
-				}
-				if (crops.getFarm().getFarmer().getId() > 0) {
-					criteria.add(Restrictions.eq("f.id", crops.getFarm().getFarmer().getId()));
-				}
-
-				if (crops.getFarm().getFarmer().getBranchId() != null
-						&& !StringUtil.isEmpty(crops.getFarm().getFarmer().getBranchId())) {
-					criteria.add(Restrictions.eq("f.branchId", crops.getFarm().getFarmer().getBranchId()));
-				}
-
-			}
-			if (!StringUtil.isEmpty(selectedStatus) && selectedStatus != null) {
-				if (!selectedStatus.equalsIgnoreCase("2")) {
-					criteria.add(Restrictions.eq("f.status", Integer.valueOf(selectedStatus)));
-				} else {
-					criteria.add(Restrictions.isNotNull("f.status"));
-				}
-			} else {
-				criteria.add(Restrictions.eq("f.status", 1));
-			}
-
-			pList.add(Projections.property("id"));
-			pList.add(Projections.property("latitude"));
-			pList.add(Projections.property("longitude"));
-			pList.add(Projections.property("fm.farmCode"));
-			pList.add(Projections.property("f.firstName"));
-			pList.add(Projections.property("fm.farmName"));
-			pList.add(Projections.property("fm.id"));
-			pList.add(Projections.property("f.id"));			
-			criteria.setProjection(pList);
-			 list = criteria.list();
-		} else if (obj instanceof Farm && plottingType.equalsIgnoreCase("1")) {
-				criteria = session.createCriteria(Farm.class);
-				Farm crops = (Farm) obj;
-				criteria.createAlias("farmer", "f");				
-
-				if (!ObjectUtil.isEmpty(crops) && !ObjectUtil.isEmpty(crops.getFarmer())) {
-
-					if (!ObjectUtil.isEmpty(crops.getFarmer().getVillage())) {
-						criteria.createAlias("f.village", "v");
-						criteria.add(Restrictions.eq("v.id", crops.getFarmer().getVillage().getId()));
-					}
-
-					if (!ObjectUtil.isEmpty(crops.getFarmer().getCity())
-							&& !ObjectUtil.isEmpty(crops.getFarmer().getCity().getLocality())) {
-						criteria.createAlias("f.city", "c");
-						criteria.createAlias("c.locality", "l");
-						criteria.createAlias("l.state", "s");
-
-						if (!ObjectUtil.isEmpty(crops.getFarmer().getStateId())) {
-							criteria.add(Restrictions.eq("s.id",
-									crops.getFarmer().getCity().getLocality().getState().getId()));
-						}
-
-						if (crops.getFarmer().getCity().getLocality().getId() > 0) {
-							criteria.add(Restrictions.eq("l.id",
-									crops.getFarmer().getCity().getLocality().getId()));
-						}
-					}
-					if (crops.getFarmer().getId() > 0) {
-						criteria.add(Restrictions.eq("f.id", crops.getFarmer().getId()));
-					}
-
-					if (crops.getFarmer().getBranchId() != null
-							&& !StringUtil.isEmpty(crops.getFarmer().getBranchId())) {
-						criteria.add(Restrictions.eq("f.branchId", crops.getFarmer().getBranchId()));
-					}
-
-				}
-				if (!StringUtil.isEmpty(selectedStatus) && selectedStatus != null) {
-					if (!selectedStatus.equalsIgnoreCase("2")) {
-						criteria.add(Restrictions.eq("f.status", Integer.valueOf(selectedStatus)));
-					} else {
-						criteria.add(Restrictions.isNotNull("f.status"));
-					}
-				} else {
-					criteria.add(Restrictions.eq("f.status", 1));
-				}
-				pList.add(Projections.property("id"));
-				pList.add(Projections.property("latitude"));
-				pList.add(Projections.property("longitude"));
-				pList.add(Projections.property("farmCode"));
-				pList.add(Projections.property("f.firstName"));
-				pList.add(Projections.property("farmName"));
-				pList.add(Projections.property("id"));
-				pList.add(Projections.property("f.id"));				
-				criteria.setProjection(pList);
-				 list = criteria.list();
-			}else if (obj instanceof Farm && plottingType.equalsIgnoreCase("3")) {
-				Session sessions = getSessionFactory().openSession();
-				Query query = session.createSQLQuery("SELECT fmid,latitude,longitude,farmCode,firstName,farmName,farmrId,farmerId,ftype FROM (SELECT fmc.id AS fmid,fmc.LATITUDE AS latitude,fmc.LONGITUDE AS longitude,fm.FARM_CODE AS farmCode,fr.FIRST_NAME AS firstName,fm.FARM_NAME AS farmName,fmc.id AS farmrId,fr.id AS farmerId,	'2' AS ftype FROM	FARM_CROPS fmc	LEFT JOIN FARM fm ON fmc.FARM_ID = fm.id LEFT JOIN FARMER fr ON fm.FARMER_ID = fr.id WHERE	fr.STATUS = '1' UNION SELECT	frm.id AS fmid,	frm.LATITUDE AS latitude,	frm.LONGITUDE AS longitude,	frm.FARM_CODE AS farmCode,far.FIRST_NAME AS firstName,	frm.FARM_NAME AS farmName,	 frm.id AS farmrId,far.id AS farmerId,	'1' AS ftype FROM FARM frm INNER JOIN FARMER far ON frm.FARMER_ID = far.id WHERE far.STATUS = '1') tt");
-				list = (List<Object[]>) query.list();
-				sessions.flush();
-				sessions.close();	
-			}
-		return list;
-	}*/
-
-	
 	public Integer findFarmersCountSowingLoca(String selectedCrop, String selectedState, String selectedLocality,
-			String selectedTaluk, String selectedVillage, String selectedFarmer,String selectedStatus) {
+			String selectedTaluk, String selectedVillage, String selectedFarmer, String selectedStatus) {
 		// TODO Auto-generated method stub
 		Session session = getSessionFactory().getCurrentSession();
 		Map<String, Object> params = new HashMap<String, Object>();
@@ -13156,20 +13165,18 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 		} else {
 			hqlQuery = "select count(*) FROM Farmer f WHERE f.statusCode=0";
 		}
-		
-		
+
 		if (!StringUtil.isEmpty(selectedStatus) && selectedStatus != null) {
-			if(!selectedStatus.equalsIgnoreCase("2")){
+			if (!selectedStatus.equalsIgnoreCase("2")) {
 				hqlQuery += " and f.status=:selectedStatus";
-			params.put("selectedStatus", Integer.valueOf(selectedStatus));
-			}else{
+				params.put("selectedStatus", Integer.valueOf(selectedStatus));
+			} else {
 				hqlQuery += " and f.status is not null";
 			}
-		}else{
+		} else {
 			hqlQuery += " and f.status=1";
 		}
-			
-		
+
 		if (!StringUtil.isEmpty(selectedState) && selectedState != null) {
 			hqlQuery += " AND f.village.city.locality.state.id =:selectedState";
 			params.put("selectedState", Long.valueOf(selectedState));
@@ -13210,27 +13217,27 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 		}
 		return val;
 	}
-	
+
 	public Object[] findTotalAcreAndEstimatedYieldSwoingLoca(String selectedCrop, String selectedState,
-			String selectedLocality, String selectedTaluk, String selectedVillage, String selectedFarmer,String selectedStatus,String selectedFarm) {
+			String selectedLocality, String selectedTaluk, String selectedVillage, String selectedFarmer,
+			String selectedStatus, String selectedFarm) {
 
 		// TODO Auto-generated method stub
 		Session session = getSessionFactory().getCurrentSession();
 		Map<String, Object> params = new HashMap<String, Object>();
 		String hqlQuery = "SELECT  SUM(fc.cultiArea),sum(fc.actualSeedYield),sum(fc.estimatedYield) FROM FarmCrops fc INNER JOIN fc.farm fa INNER JOIN fc.farm.farmer f left join fa.farmICSConversion fics WHERE  fc.status=1";
 
-		
 		if (!StringUtil.isEmpty(selectedStatus) && selectedStatus != null) {
-			if(!selectedStatus.equalsIgnoreCase("2")){
+			if (!selectedStatus.equalsIgnoreCase("2")) {
 				hqlQuery += " and f.status=:selectedStatus";
-			params.put("selectedStatus", Integer.valueOf(selectedStatus));
-			}else{
+				params.put("selectedStatus", Integer.valueOf(selectedStatus));
+			} else {
 				hqlQuery += " and f.status is not null";
 			}
-		}else{
+		} else {
 			hqlQuery += " and f.status=1";
 		}
-		
+
 		if (!StringUtil.isEmpty(selectedState) && selectedState != null) {
 			hqlQuery += " AND f.village.city.locality.state.id =:selectedState";
 			params.put("selectedState", Long.valueOf(selectedState));
@@ -13263,7 +13270,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 			params.put("farmer", Long.valueOf(selectedFarmer));
 
 		}
-		
+
 		if (!StringUtil.isEmpty(selectedFarm) && selectedFarm != null) {
 			hqlQuery += " AND fa.id =:farm";
 			params.put("farm", Long.valueOf(selectedFarm));
@@ -13283,60 +13290,68 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 		return val;
 
 	}
-	
+
 	@Override
 	public List<DynamicFeildMenuConfig> findDynamicMenus() {
 		Session session = getHibernateTemplate().getSessionFactory().openSession();
-		Query query = session.createQuery("select distinct dsc FROM DynamicFeildMenuConfig dsc join fetch dsc.dynamicSectionConfigs dss left join fetch dss.section ds left join fetch ds.languagePreferences join fetch dsc.dynamicFieldConfigs  dc  join fetch dc.field ff   left join fetch ff.languagePreferences join fetch ff.dynamicSectionConfig sec join fetch dc.field ORDER BY dsc.order ASC");
+		Query query = session.createQuery(
+				"select distinct dsc FROM DynamicFeildMenuConfig dsc join fetch dsc.dynamicSectionConfigs dss left join fetch dss.section ds left join fetch ds.languagePreferences join fetch dsc.dynamicFieldConfigs  dc  join fetch dc.field ff   left join fetch ff.languagePreferences join fetch ff.dynamicSectionConfig sec join fetch dc.field ORDER BY dsc.order ASC");
 
 		List<DynamicFeildMenuConfig> result = query.list();
 		session.flush();
 		session.close();
 		return result;
 	}
+
 	public List<Object[]> farmersByBranchandSeason(String season) {
 		Session session = getSessionFactory().openSession();
-		String queryString = "select count(f.ID),bm.`NAME`,bm.BRANCH_ID from farmer f inner join branch_master bm on bm.BRANCH_ID = f.BRANCH_ID where f.STATUS_CODE = 0 and f.SEASON_CODE = '"+season+"' group by bm.BRANCH_ID";
+		String queryString = "select count(f.ID),bm.`NAME`,bm.BRANCH_ID from farmer f inner join branch_master bm on bm.BRANCH_ID = f.BRANCH_ID where f.STATUS_CODE = 0 and f.SEASON_CODE = '"
+				+ season + "' group by bm.BRANCH_ID";
 		SQLQuery query = session.createSQLQuery(queryString);
 		List<Object[]> result = query.list();
 		session.flush();
 		session.close();
 		return result;
 	}
-	public List<Object[]> farmersByBranchandSeason(String branch,String season) {
+
+	public List<Object[]> farmersByBranchandSeason(String branch, String season) {
 		Session session = getSessionFactory().openSession();
-		String queryString = "select count(f.ID),bm.`NAME`,bm.BRANCH_ID from farmer f inner join branch_master bm on bm.BRANCH_ID = f.BRANCH_ID where f.STATUS_CODE = 0 and f.BRANCH_ID = '"+branch+"'and f.SEASON_CODE = '"+season+"' group by bm.BRANCH_ID";
+		String queryString = "select count(f.ID),bm.`NAME`,bm.BRANCH_ID from farmer f inner join branch_master bm on bm.BRANCH_ID = f.BRANCH_ID where f.STATUS_CODE = 0 and f.BRANCH_ID = '"
+				+ branch + "'and f.SEASON_CODE = '" + season + "' group by bm.BRANCH_ID";
 		SQLQuery query = session.createSQLQuery(queryString);
 		List<Object[]> result = query.list();
 		session.flush();
 		session.close();
 		return result;
 	}
-public List<Object[]> farmersByCountryAndSeason(String selectedBranch,String seasonCode) {
-		
+
+	public List<Object[]> farmersByCountryAndSeason(String selectedBranch, String seasonCode) {
+
 		HttpSession httpSession = ReflectUtil.getCurrentHttpSession();
 		HttpServletRequest request = ReflectUtil.getCurrentHttpRequest();
-		String tenantId = !StringUtil.isEmpty(ISecurityFilter.DEFAULT_TENANT_ID) ? ISecurityFilter.DEFAULT_TENANT_ID : "";
+		String tenantId = !StringUtil.isEmpty(ISecurityFilter.DEFAULT_TENANT_ID) ? ISecurityFilter.DEFAULT_TENANT_ID
+				: "";
 		if (!ObjectUtil.isEmpty(request)) {
 			tenantId = !StringUtil.isEmpty((String) request.getSession().getAttribute(ISecurityFilter.TENANT_ID))
-					? (String) request.getSession().getAttribute(ISecurityFilter.TENANT_ID) : "";
+					? (String) request.getSession().getAttribute(ISecurityFilter.TENANT_ID)
+					: "";
 		}
 		Session session = getSessionFactory().getCurrentSession();
 		Query query;
 		if (!StringUtil.isEmpty(selectedBranch)) {
 			String hqlString = "SELECT count(f.id),ctry.name,ctry.code,ctry.branchId from Farmer f inner join f.village v  inner join v.city c inner join c.locality ld inner join ld.state s inner join s.country ctry where f.branchId = :branch and f.seasonCode = :season and f.statusCode = 0";
-			if(!StringUtil.isEmpty(tenantId) && tenantId.equalsIgnoreCase(ESESystem.WELSPUN_TENANT_ID))
-			hqlString += " AND f.status=1";
+			if (!StringUtil.isEmpty(tenantId) && tenantId.equalsIgnoreCase(ESESystem.WELSPUN_TENANT_ID))
+				hqlString += " AND f.status=1";
 			hqlString += " group by ctry.code";
 			query = session.createQuery(hqlString);
 			query.setParameter("branch", selectedBranch);
 			query.setParameter("season", seasonCode);
-			
+
 		} else {
 			String hqlString = "SELECT count(f.id),ctry.name,ctry.code,ctry.branchId from Farmer f inner join f.village v  inner join v.city c inner join c.locality ld inner join ld.state s inner join s.country ctry where f.statusCode = 0 and f.seasonCode = :season";
-			if(!StringUtil.isEmpty(tenantId) && tenantId.equalsIgnoreCase(ESESystem.WELSPUN_TENANT_ID))
+			if (!StringUtil.isEmpty(tenantId) && tenantId.equalsIgnoreCase(ESESystem.WELSPUN_TENANT_ID))
 				hqlString += " AND f.status=1";
-				hqlString += " group by ctry.code";
+			hqlString += " group by ctry.code";
 			query = session.createQuery(hqlString);
 			query.setParameter("season", seasonCode);
 		}
@@ -13344,10 +13359,10 @@ public List<Object[]> farmersByCountryAndSeason(String selectedBranch,String sea
 		return result;
 	}
 
-public List<Object[]> farmersByGroupAndSeason(String selectedBranch,String seasonCode) {
+	public List<Object[]> farmersByGroupAndSeason(String selectedBranch, String seasonCode) {
 
-	Session session = getSessionFactory().getCurrentSession();
-	Query query;
+		Session session = getSessionFactory().getCurrentSession();
+		Query query;
 
 		if (!StringUtil.isEmpty(selectedBranch)) {
 			String hqlString = "SELECT count(f.id),s.name,s.code,f.branchId,s.id from Farmer f inner join f.samithi s where f.branchId = :branch and f.statusCode = 0 and f.seasonCode = :season group by s.id";
@@ -13359,616 +13374,625 @@ public List<Object[]> farmersByGroupAndSeason(String selectedBranch,String seaso
 			query = session.createQuery(hqlString);
 			query.setParameter("season", seasonCode);
 		}
-	
-	List<Object[]> result = query.list();
-	return result;
-}
 
-@Override
-public List<Object[]> farmersByBranch(String branch) {
-	Session session = getSessionFactory().openSession();
-	String queryString = "select count(f.ID),bm.`NAME`,bm.BRANCH_ID from farmer f inner join branch_master bm on bm.BRANCH_ID = f.BRANCH_ID where f.BRANCH_ID= "+branch+" and f.STATUS_CODE = 0 group by bm.BRANCH_ID";
-	SQLQuery query = session.createSQLQuery(queryString);
-	List<Object[]> result = query.list();
-	session.flush();
-	session.close();
-	return result;
-}
-
-@Override
-public List<Object[]> findFarmerCountByGroupICS(String selectedBranch, String season) {
-	String groupBy = " GROUP BY fic.icsType,f.samithi.name";
-	Session session = getSessionFactory().getCurrentSession();
-	Map<String, Object> params = new HashMap<String, Object>();
-	String hqlQuery = "select count(f.id),CASE WHEN fic.icsType = 0 THEN 'IC-1' WHEN fic.icsType = 1 THEN 'IC-2' WHEN fic.icsType = 2 THEN 'IC-3' WHEN fic.icsType = 3 THEN 'Organic' ELSE 'Non-Certified' END,f.samithi.name,f.samithi.code FROM Farm fm INNER JOIN fm.farmICSConversion fic INNER JOIN  fm.farmer f WHERE f.status=1 and f.seasonCode = :season";
-	if (!StringUtil.isEmpty(selectedBranch)) {
-		hqlQuery += " AND f.branchId =:branch ";
-		params.put("branch", selectedBranch);
-		hqlQuery += " AND f.branchId =:branch ";
-		params.put("season", season);
-	}		
-	hqlQuery += groupBy;
-	Query query = session.createQuery(hqlQuery);
-	for (String str : query.getNamedParameters()) {
-		query.setParameter(str, params.get(str));
+		List<Object[]> result = query.list();
+		return result;
 	}
 
-	List<Object[]> result = query.list();
-	return result;
+	@Override
+	public List<Object[]> farmersByBranch(String branch) {
+		Session session = getSessionFactory().openSession();
+		String queryString = "select count(f.ID),bm.`NAME`,bm.BRANCH_ID from farmer f inner join branch_master bm on bm.BRANCH_ID = f.BRANCH_ID where f.BRANCH_ID= "
+				+ branch + " and f.STATUS_CODE = 0 group by bm.BRANCH_ID";
+		SQLQuery query = session.createSQLQuery(queryString);
+		List<Object[]> result = query.list();
+		session.flush();
+		session.close();
+		return result;
+	}
 
-}
+	@Override
+	public List<Object[]> findFarmerCountByGroupICS(String selectedBranch, String season) {
+		String groupBy = " GROUP BY fic.icsType,f.samithi.name";
+		Session session = getSessionFactory().getCurrentSession();
+		Map<String, Object> params = new HashMap<String, Object>();
+		String hqlQuery = "select count(f.id),CASE WHEN fic.icsType = 0 THEN 'IC-1' WHEN fic.icsType = 1 THEN 'IC-2' WHEN fic.icsType = 2 THEN 'IC-3' WHEN fic.icsType = 3 THEN 'Organic' ELSE 'Non-Certified' END,f.samithi.name,f.samithi.code FROM Farm fm INNER JOIN fm.farmICSConversion fic INNER JOIN  fm.farmer f WHERE f.status=1 and f.seasonCode = :season";
+		if (!StringUtil.isEmpty(selectedBranch)) {
+			hqlQuery += " AND f.branchId =:branch ";
+			params.put("branch", selectedBranch);
+			hqlQuery += " AND f.branchId =:branch ";
+			params.put("season", season);
+		}
+		hqlQuery += groupBy;
+		Query query = session.createQuery(hqlQuery);
+		for (String str : query.getNamedParameters()) {
+			query.setParameter(str, params.get(str));
+		}
 
-public List<Object[]> populateFarmerCropCountChartByGroup(String seasonCode,String selectedics,String selectedBranch) {
-	String hqlString;
-	Session session = getSessionFactory().getCurrentSession();
-	Query query = null;
+		List<Object[]> result = query.list();
+		return result;
 
-	if (StringUtil.isEmpty(seasonCode)) {
-		
-			if(StringUtil.isEmpty(selectedics)){
+	}
+
+	public List<Object[]> populateFarmerCropCountChartByGroup(String seasonCode, String selectedics,
+			String selectedBranch) {
+		String hqlString;
+		Session session = getSessionFactory().getCurrentSession();
+		Query query = null;
+
+		if (StringUtil.isEmpty(seasonCode)) {
+
+			if (StringUtil.isEmpty(selectedics)) {
 				hqlString = "SELECT Count( f.id ),pp.name,pp.code from Farmer f inner join f.farms fa inner join f.samithi s inner join fa.farmCrops famcrps inner join famcrps.procurementVariety pv inner join pv.procurementProduct pp where f.statusCode = 0  group by pp.code ";
-				
+
 				query = session.createQuery(hqlString);
 				List<Object[]> result = query.list();
 				return result;
-			}else{
-			hqlString = "SELECT Count( f.id ),pp.name,pp.code FROM Farmer f inner join f.farms fa inner join f.samithi s inner join fa.farmCrops famcrps inner join famcrps.procurementVariety pv inner join pv.procurementProduct pp where f.statusCode = 0 AND s.code= :ics  group by pp.code ";
-			
-			query = session.createQuery(hqlString);
-			query.setParameter("ics", selectedics);
-			List<Object[]> result = query.list();
-			return result;
+			} else {
+				hqlString = "SELECT Count( f.id ),pp.name,pp.code FROM Farmer f inner join f.farms fa inner join f.samithi s inner join fa.farmCrops famcrps inner join famcrps.procurementVariety pv inner join pv.procurementProduct pp where f.statusCode = 0 AND s.code= :ics  group by pp.code ";
+
+				query = session.createQuery(hqlString);
+				query.setParameter("ics", selectedics);
+				List<Object[]> result = query.list();
+				return result;
 			}
-	}
-	else
-	{
-		if(!StringUtil.isEmpty(selectedics)){
-			hqlString = "SELECT Count( f.id ),pp.name,pp.code FROM Farmer f inner join f.farms fa inner join f.samithi s inner join fa.farmCrops famcrps inner join famcrps.procurementVariety pv inner join pv.procurementProduct pp where f.statusCode = 0 AND s.code= :ics and famcrps.cropSeason.code= :season  group by pp.code ";
-			
-			query = session.createQuery(hqlString);
-			query.setParameter("ics", selectedics);
-			query.setParameter("season", seasonCode);
-			List<Object[]> result = query.list();
-			return result;
-			
 		} else {
-			hqlString = "SELECT Count( f.id ),pp.name,pp.code FROM Farmer f inner join f.farms fa inner join f.samithi s inner join fa.farmCrops famcrps inner join famcrps.procurementVariety pv inner join pv.procurementProduct pp where f.statusCode = 0 and famcrps.cropSeason.code= :season  group by pp.code ";
-			query = session.createQuery(hqlString);
-			query.setParameter("season", seasonCode);
-			List<Object[]> result = query.list();
-			return result;
+			if (!StringUtil.isEmpty(selectedics)) {
+				hqlString = "SELECT Count( f.id ),pp.name,pp.code FROM Farmer f inner join f.farms fa inner join f.samithi s inner join fa.farmCrops famcrps inner join famcrps.procurementVariety pv inner join pv.procurementProduct pp where f.statusCode = 0 AND s.code= :ics and famcrps.cropSeason.code= :season  group by pp.code ";
+
+				query = session.createQuery(hqlString);
+				query.setParameter("ics", selectedics);
+				query.setParameter("season", seasonCode);
+				List<Object[]> result = query.list();
+				return result;
+
+			} else {
+				hqlString = "SELECT Count( f.id ),pp.name,pp.code FROM Farmer f inner join f.farms fa inner join f.samithi s inner join fa.farmCrops famcrps inner join famcrps.procurementVariety pv inner join pv.procurementProduct pp where f.statusCode = 0 and famcrps.cropSeason.code= :season  group by pp.code ";
+				query = session.createQuery(hqlString);
+				query.setParameter("season", seasonCode);
+				List<Object[]> result = query.list();
+				return result;
+			}
 		}
-	}
-		
 
-	
-}
-
-@Override
-public FarmIcsConversion findFarmIcsConversionByFarmSeasonScopeAndInspectionType(long selectedFarm, String season,String scope,String insType) {
-	Object[] values = { selectedFarm, season, scope, insType };
-	return (FarmIcsConversion) find(
-			"FROM FarmIcsConversion fc WHERE fc.farm.id=? AND fc.season=? AND fc.scope=? AND fc.insType=?",values);
-}
-
-@Override
-public List<Object[]> ListFarmerCropDetails(List<String> mainIds) {
-	List<Object> finalLis = new ArrayList<>();
-	Session session = getSessionFactory().openSession();
-	// Query query = session.createQuery("SELECT fs from FarmCrops fr INNER
-	// JOIN fr.seedTreatments fs WHERE fr.id=:ID");FROM Farmer fr WHERE fr.id in (:ids)
-	Query query = session.createSQLQuery(
-			"SELECT f.ID,fc.PROCUREMENT_CROPS_VARIETY_ID,IFNULL(fc.EST_YIELD/1000,0) AS Yield ,pp.`NAME`,fm.CREATED_USERNAME,sum(fd.TOTAL_LAND_HOLDING) FROM farm_crops fc inner JOIN farm fm ON fc.FARM_ID = fm.ID inner JOIN farmer f ON f.ID = fm.FARMER_ID  inner join procurement_variety pv on pv.ID=fc.PROCUREMENT_CROPS_VARIETY_ID inner join procurement_product pp on pp.ID=pv.PROCUREMENT_PRODUCT_ID inner join farm_detailed_info fd on fd.ID=fm.FARM_DETAILED_INFO_ID WHERE fc.CROP_CATEGORY=0 AND fm.STATUS=1 AND f.ID IN (:ids) GROUP BY f.ID");
-	query.setParameterList("ids", mainIds);
-	List list = query.list();
-	List<Object[]> result = (List<Object[]>) query.list();
-	session.flush();
-	session.close();
-	return result;
-}
-
-@Override
-public List<Object[]> ListFarmerCropDetailsByFarmer(List<String> mainIds) {
-	List<Object> finalLis = new ArrayList<>();
-	Session session = getSessionFactory().openSession();
-	// Query query = session.createQuery("SELECT fs from FarmCrops fr INNER
-	// JOIN fr.seedTreatments fs WHERE fr.id=:ID");FROM Farmer fr WHERE fr.id in (:ids)
-	Query query = session.createSQLQuery(
-			"SELECT f.ID,f.FARMER_CODE,f.FIRST_NAME,f.LAST_NAME,fm.CREATED_USERNAME,sum( fd.TOTAL_LAND_HOLDING ) FROM farmer f	left JOIN farm fm ON fm.FARMER_ID = f.ID left JOIN farm_detailed_info fd ON fd.ID = fm.FARM_DETAILED_INFO_ID inner join village v on v.ID=f.VILLAGE_ID inner join warehouse w on w.ID=f.SAMITHI_ID WHERE fm.STATUS=1  AND  f.ID IN (:ids ) GROUP BY f.ID");
-	query.setParameterList("ids", mainIds);
-	List list = query.list();
-	List<Object[]> result = (List<Object[]>) query.list();
-	session.flush();
-	session.close();
-	return result;
-}
-
-@Override
-public List<Object[]> listMaxTypez(List<Long> collect,String txnType) {
-	Session session = getSessionFactory().openSession();
-	SQLQuery query = session.createSQLQuery("select t.PARENT_ID,max(t.types) from (select fdv.PARENT_ID,fdv.FARMER_DYNAMIC_DATA_ID,count(distinct typez) as types from farmer_dynamic_field_value fdv join dynamic_fields_config df on df.COMPONENT_CODE =fdv.FIELD_NAME and TYPEZ is not  null and fdv.txn_type=:txnType and fdv.FARMER_DYNAMIC_DATA_ID in (:ids) group by fdv.PARENT_ID,fdv.FARMER_DYNAMIC_DATA_ID ) t group by t.PARENT_ID");
-	query.setParameterList("ids", collect);
-	query.setParameter("txnType", txnType);
-	List<Object[]> list = query.list();
-	session.flush();
-	session.close();
-	return list;
-
-}
-
-@Override
-public List<FarmCrops> listOfCropsByFarmIdAndSeason(List<Long> id,long season) {
-	Session session = getSessionFactory().openSession();
-	Query query = session.createQuery(
-			"FROM FarmCrops cd WHERE cd.farm.id in(:id) and cd.cropSeason.id=:season");
-	query.setParameter("season", season);
-	query.setParameterList("id", id);
-	List result = query.list();
-	session.flush();
-	session.close();
-	return result;
-}
-
-@Override
-public List<Object[]> listOfFarmsByFarmer(Long farmerId) {
-	// TODO Auto-generated method stub
-	return list(
-			"SELECT DISTINCT fm.farmer.farmerId,fm.farmer.firstName,fm.farmer.farmerCode,fm.id,fm.farmCode,fm.farmName from Farm fm  where fm.farmer.id='"
-					+ farmerId + "' AND fm.farmer.refId is null AND fm.farmer.statusCode='" + ESETxnStatus.SUCCESS.ordinal()
-					+ "'");
-}
-
-
-@Override
-public List<FarmerDynamicFieldsValue> listFarmerDynmaicFieldsByRefId(String refId, String txnType,Long farmerDynamicDataId) {
-	Object[] values = { refId, txnType ,farmerDynamicDataId};
-	return list(
-			"select fdfv FROM FarmerDynamicFieldsValue fdfv LEFT JOIN FETCH fdfv.dymamicImageData di LEFT JOIN FETCH  fdfv.followUps where fdfv.referenceId=? AND fdfv.txnType=? AND fdfv.farmerDynamicData.id=?",
-			values);
-
-}
-
-@Override
-public List<Object[]> findAmtAndQtyByProcurmentTraceability(String selectedBranch, String selectedState, String selectedSeason,
-		Date sDate, Date eDate) {
-	// TODO Auto-generated method stub
-	Map<String, Object> params = new HashMap<String, Object>();
-	Session session = getSessionFactory().getCurrentSession();
-	String hqlQuery = "select pd.procurementProduct.name,sum(pd.netWeight),sum(pd.totalPricepremium),sum(pd.procurementTraceability.paymentAmount) from ProcurementTraceabilityDetails pd "
-			+ "inner join pd.procurementTraceability p inner join p.farmer f "
-			+ "WHERE pd.procurementProduct.name !=null and p.farmer.status=1 and p.farmer.statusCode=0";
-
-	if (!StringUtil.isEmpty(sDate) && eDate != null) {
-		hqlQuery += " AND pd.procurementTraceability.procurementDate BETWEEN :startDate AND :endDate";
-		params.put("startDate", sDate);
-		params.put("endDate", eDate);
 	}
 
-	if (!StringUtil.isEmpty(selectedBranch)) {
-
-		hqlQuery += " AND pd.procurementTraceability.branchId=:branchId";
-		params.put("branchId", selectedBranch);
+	@Override
+	public FarmIcsConversion findFarmIcsConversionByFarmSeasonScopeAndInspectionType(long selectedFarm, String season,
+			String scope, String insType) {
+		Object[] values = { selectedFarm, season, scope, insType };
+		return (FarmIcsConversion) find(
+				"FROM FarmIcsConversion fc WHERE fc.farm.id=? AND fc.season=? AND fc.scope=? AND fc.insType=?", values);
 	}
 
-	if (!StringUtil.isEmpty(selectedSeason)) {
-
-		hqlQuery += " AND pd.procurementTraceability.season=:season";
-		params.put("season", selectedSeason);
+	@Override
+	public List<Object[]> ListFarmerCropDetails(List<String> mainIds) {
+		List<Object> finalLis = new ArrayList<>();
+		Session session = getSessionFactory().openSession();
+		// Query query = session.createQuery("SELECT fs from FarmCrops fr INNER
+		// JOIN fr.seedTreatments fs WHERE fr.id=:ID");FROM Farmer fr WHERE fr.id in
+		// (:ids)
+		Query query = session.createSQLQuery(
+				"SELECT f.ID,fc.PROCUREMENT_CROPS_VARIETY_ID,IFNULL(fc.EST_YIELD/1000,0) AS Yield ,pp.`NAME`,fm.CREATED_USERNAME,sum(fd.TOTAL_LAND_HOLDING) FROM farm_crops fc inner JOIN farm fm ON fc.FARM_ID = fm.ID inner JOIN farmer f ON f.ID = fm.FARMER_ID  inner join procurement_variety pv on pv.ID=fc.PROCUREMENT_CROPS_VARIETY_ID inner join procurement_product pp on pp.ID=pv.PROCUREMENT_PRODUCT_ID inner join farm_detailed_info fd on fd.ID=fm.FARM_DETAILED_INFO_ID WHERE fc.CROP_CATEGORY=0 AND fm.STATUS=1 AND f.ID IN (:ids) GROUP BY f.ID");
+		query.setParameterList("ids", mainIds);
+		List list = query.list();
+		List<Object[]> result = (List<Object[]>) query.list();
+		session.flush();
+		session.close();
+		return result;
 	}
 
-	if (!StringUtil.isEmpty(selectedState)) {
-
-		hqlQuery += " AND f.village.city.locality.state.id=:state";
-		params.put("state", Long.valueOf(selectedState));
+	@Override
+	public List<Object[]> ListFarmerCropDetailsByFarmer(List<String> mainIds) {
+		List<Object> finalLis = new ArrayList<>();
+		Session session = getSessionFactory().openSession();
+		// Query query = session.createQuery("SELECT fs from FarmCrops fr INNER
+		// JOIN fr.seedTreatments fs WHERE fr.id=:ID");FROM Farmer fr WHERE fr.id in
+		// (:ids)
+		Query query = session.createSQLQuery(
+				"SELECT f.ID,f.FARMER_CODE,f.FIRST_NAME,f.LAST_NAME,fm.CREATED_USERNAME,sum( fd.TOTAL_LAND_HOLDING ) FROM farmer f	left JOIN farm fm ON fm.FARMER_ID = f.ID left JOIN farm_detailed_info fd ON fd.ID = fm.FARM_DETAILED_INFO_ID inner join village v on v.ID=f.VILLAGE_ID inner join warehouse w on w.ID=f.SAMITHI_ID WHERE fm.STATUS=1  AND  f.ID IN (:ids ) GROUP BY f.ID");
+		query.setParameterList("ids", mainIds);
+		List list = query.list();
+		List<Object[]> result = (List<Object[]>) query.list();
+		session.flush();
+		session.close();
+		return result;
 	}
-	hqlQuery += " GROUP BY pd.procurementProduct.name";
-	Query query = session.createQuery(hqlQuery);
-	for (String str : query.getNamedParameters()) {
-		query.setParameter(str, params.get(str));
+
+	@Override
+	public List<Object[]> listMaxTypez(List<Long> collect, String txnType) {
+		Session session = getSessionFactory().openSession();
+		SQLQuery query = session.createSQLQuery(
+				"select t.PARENT_ID,max(t.types) from (select fdv.PARENT_ID,fdv.FARMER_DYNAMIC_DATA_ID,count(distinct typez) as types from farmer_dynamic_field_value fdv join dynamic_fields_config df on df.COMPONENT_CODE =fdv.FIELD_NAME and TYPEZ is not  null and fdv.txn_type=:txnType and fdv.FARMER_DYNAMIC_DATA_ID in (:ids) group by fdv.PARENT_ID,fdv.FARMER_DYNAMIC_DATA_ID ) t group by t.PARENT_ID");
+		query.setParameterList("ids", collect);
+		query.setParameter("txnType", txnType);
+		List<Object[]> list = query.list();
+		session.flush();
+		session.close();
+		return list;
+
 	}
 
-	return query.list();
-}
-
-public List<DataLevel> listDataLevelByType(String type){
-	return list("FROM DataLevel d where d.idendifier=?", type);
-}
-
-@Override
-public SamithiIcs findSamithiIcsById(Long id) {
-	// TODO Auto-generated method stub
-	return (SamithiIcs) find("FROM SamithiIcs s WHERE s.id = ?", id);
-}
-
-@Override
-public List<Object[]> listFarmInfoLatLon() {
-
-	return list("SELECT f.id,f.farmCode,f.farmName,f.latitude,f.longitude from Farm f  where  f.status=1 ");
-}
-
-
-public List<Object[]> findCountOfDynamicDataByFarmerId(List<Long> fidLi,String season) {
-	Session session = getSessionFactory().openSession();
-	Query query = session.createSQLQuery("SELECT FARMER_ID,group_concat( concat( `name`, '-', `value` ) SEPARATOR ',' ) AS `ColumnName` FROM(SELECT fm.FARMER_ID,(CASE WHEN fdd.TXN_TYPE = 2001 THEN 'Land Preparation ' WHEN fdd.TXN_TYPE = 2002 THEN 'After Sowing ' WHEN fdd.TXN_TYPE = 2003 THEN 'Vegetative Growth phase I ' WHEN fdd.TXN_TYPE = 2004 THEN 'Vegetative Growth phase II ' WHEN fdd.TXN_TYPE = 2005 THEN 'Flowering and boll formation ' WHEN fdd.TXN_TYPE = 2006 THEN 'Harvesting ' ELSE '' END ) AS NAME,count( fdd.ID ) AS VALUE FROM farm_crops fc INNER JOIN farm fm ON fc.FARM_ID = fm.ID INNER JOIN farmer_dynamic_data fdd ON fdd.REFERENCE_ID = fc.ID  WHERE fm.FARMER_ID IN ( :ids ) AND fdd.TXN_TYPE in (2001,2002,2003,2004,2005,2006) AND fdd.SEASON =:season GROUP BY fm.FARMER_ID,fdd.TXN_TYPE ) tbl GROUP BY FARMER_ID");
-	query.setParameter("season", season);
-	query.setParameterList("ids", fidLi);
-	List<Object[]> list = query.list();
-	session.flush();
-	session.close();
-	return list;
-}
-
-public ESEAccount findEseAccountByFarmerId(String farmerId) {
-
-	// HQL Query procurementProductId based constraints removed for fetching
-	// single farmer
-	// account
-	return (ESEAccount) find("FROM ESEAccount ea WHERE ea.profileId=?", new Object[] { farmerId });
-}
-
-public List<Object[]> listLoanLedgerByEseAccountId(String accountId) {
-
-	String query = "SELECT LL.TXN_TIME TXN_TIME,LL.RECEIPT_NO RECEIPT_NO,LL.LOAN_DESC LOAN_DESC,LL.ACTUAL_AMT ACTUAL_AMT FROM ESE_ACCOUNT EA "
-			+ "INNER JOIN LOAN_LEDGER LL ON LL.FARMER_ID=EA.PROFILE_ID " + "WHERE LL.TXN_TYPE!='316' AND EA.PROFILE_ID='" + accountId
-			+ "' ORDER BY LL.ID DESC;";
-	Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
-	return session.createSQLQuery(query).addScalar("TXN_TIME", StringType.INSTANCE)
-			.addScalar("RECEIPT_NO", StringType.INSTANCE).addScalar("LOAN_DESC", StringType.INSTANCE)
-			.addScalar("ACTUAL_AMT", DoubleType.INSTANCE).list();
-}
-
-public List<Object[]> listLoanLedgerByEseAccountId(String accountId, int startIndex, int limit) {
-
-	String query = "SELECT LL.TXN_TIME TXN_TIME,LL.RECEIPT_NO RECEIPT_NO,LL.LOAN_DESC LOAN_DESC,LL.ACTUAL_AMT ACTUAL_AMT FROM ESE_ACCOUNT EA "
-			+ "INNER JOIN LOAN_LEDGER LL ON LL.FARMER_ID=EA.PROFILE_ID " + "WHERE LL.TXN_TYPE!='316' AND EA.PROFILE_ID='" + accountId
-			+ "' ORDER BY LL.ID DESC" + " LIMIT " + startIndex + "," + limit + ";";
-	Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
-	return session.createSQLQuery(query).addScalar("TXN_TIME", StringType.INSTANCE)
-			.addScalar("RECEIPT_NO", StringType.INSTANCE).addScalar("LOAN_DESC", StringType.INSTANCE)
-			.addScalar("ACTUAL_AMT", DoubleType.INSTANCE).list();
-}
-
-public ESEAccount findEseAccountById(Long id) {
-	Object[] values = { id, ESEAccount.ACTIVE };
-	return (ESEAccount) find("FROM ESEAccount fr WHERE fr.id = ? AND fr.status=?", values);
-}
-
-@Override
-public List<Object[]> listFarmerInfoByProcurementWithTypez() {
-
-	List<Object[]> result = list(
-			"SELECT f.farmerId,f.firstName,f.farmerCode,f.lastName FROM  Farmer f where f.farmerId in (select DISTINCT(e.profileId) from LoanLedger ll INNER JOIN ll.account e)");
-
-	return result;
-}
-@Override
-public List<Object[]> listGroupInfoByProcurementWithTypez() {
-
-	List<Object[]> result = list(
-			"SELECT DISTINCT f.farmerId,f.firstName,f.farmerCode FROM  Farmer f where f.typez=2 AND f.farmerId in (select t.farmerId from AgroTransaction t)");
-
-	return result;
-}
-
-public List<Object[]> listFarmerStatementByEseAccountId(String accountId) {
-
-	String query = "SELECT LL.TXN_TIME TXN_TIME,LL.RECEIPT_NO RECEIPT_NO,LL.LOAN_DESC LOAN_DESC,LL.ACTUAL_AMT ACTUAL_AMT FROM ESE_ACCOUNT EA "
-			+ "INNER JOIN LOAN_LEDGER LL ON LL.FARMER_ID=EA.PROFILE_ID " + "WHERE LL.TXN_TYPE!='701' AND EA.PROFILE_ID='" + accountId
-			+ "' ORDER BY LL.ID DESC;";
-	Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
-	return session.createSQLQuery(query).addScalar("TXN_TIME", StringType.INSTANCE)
-			.addScalar("RECEIPT_NO", StringType.INSTANCE).addScalar("LOAN_DESC", StringType.INSTANCE)
-			.addScalar("ACTUAL_AMT", DoubleType.INSTANCE).list();
-}
-
-public List<Object[]> listFarmerStatementByEseAccountId(String accountId, int startIndex, int limit) {
-
-	String query = "SELECT LL.TXN_TIME TXN_TIME,LL.RECEIPT_NO RECEIPT_NO,LL.LOAN_DESC LOAN_DESC,LL.ACTUAL_AMT ACTUAL_AMT FROM ESE_ACCOUNT EA "
-			+ "INNER JOIN LOAN_LEDGER LL ON LL.FARMER_ID=EA.PROFILE_ID " + "WHERE LL.TXN_TYPE!='701' AND EA.PROFILE_ID='" + accountId
-			+ "' ORDER BY LL.ID DESC" + " LIMIT " + startIndex + "," + limit + ";";
-	Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
-	return session.createSQLQuery(query).addScalar("TXN_TIME", StringType.INSTANCE)
-			.addScalar("RECEIPT_NO", StringType.INSTANCE).addScalar("LOAN_DESC", StringType.INSTANCE)
-			.addScalar("ACTUAL_AMT", DoubleType.INSTANCE).list();
-}
-
-@Override
-public List<Object[]> listFarmerFilterWithLoanLedger() {
-	// 0=Id,1=Farmer Id,2=Farmer Code,3=First Name,4=Last
-	// name,5=surName,6=village name,7=Group name,8=Is certified
-	// Farmer,9=Status,10=BranchId
-	return list(
-			"SELECT f.id,f.farmerId,f.farmerCode,f.firstName,f.lastName,f.surName from Farmer f where f.refId is null AND f.typez=1 AND f.farmerId In (select DISTINCT(e.profileId) from LoanLedger ll INNER JOIN ll.account e where ll.txnType <> 701) AND f.status='"
-					+ Farm.Status.ACTIVE.ordinal() + "'");
-}
-
-@Override
-public List<Object[]> listGroupFilterWithLoanLedger() {
-	// 0=Id,1=Farmer Id,2=Farmer Code,3=First Name,4=Last
-	// name,5=surName,6=village name,7=Group name,8=Is certified
-	// Farmer,9=Status,10=BranchId
-	return list(
-			"SELECT f.id,f.farmerId,f.farmerCode,f.firstName,f.lastName,f.surName from Farmer f where f.refId is null AND f.typez=2 AND f.farmerId In (select DISTINCT(e.profileId) from LoanLedger ll INNER JOIN ll.account e where ll.txnType <> 701) AND f.status='"
-					+ Farm.Status.ACTIVE.ordinal() + "'");
-}
-
-public List<Object[]> listFFBpurchaseAndFFBRepaymentAmt(String accountId) {
-
-	String query = "SELECT (SELECT IFNULL(CAST(SUM(ll.ACTUAL_AMT) AS DECIMAL(30,2)),'0') FROM LOAN_LEDGER LL where LL.FARMER_ID='"+accountId+"' and TXN_TYPE='316') TOTAL_FRUIT_PURCHASE,"
-			+ "(SELECT IFNULL(CAST(SUM(ll.ACTUAL_AMT) AS DECIMAL(30,2)),'0') FROM LOAN_LEDGER LL where LL.FARMER_ID='"+accountId+"' and TXN_TYPE='702') TOTAL_REPAYMENT from LOAN_LEDGER LL "
-					+ "where LL.TXN_TYPE!='701' AND LL.FARMER_ID='"+accountId+"' GROUP BY LL.FARMER_ID;";
-	Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
-	return session.createSQLQuery(query).addScalar("TOTAL_FRUIT_PURCHASE", StringType.INSTANCE)
-			.addScalar("TOTAL_REPAYMENT", StringType.INSTANCE).list();
-}
-
-public Farmer findFarmerInfoByFarmerId(String farmerId) {
-
-	Object[] values = { farmerId };
-	Farmer farmer = (Farmer) find("FROM Farmer fr WHERE  fr.farmerId = ?", values);
-	return farmer;
-}
-
-public List<Object[]> findDateOfLoanLedger(Date startDate, Date endDate) {
-	String query = "SELECT DISTINCT(ll.TXN_TIME) from loan_ledger ll Where ll.TXN_TIME BETWEEN :startDate AND :endDate GROUP BY date(TXN_TIME) ORDER BY ll.ID DESC";
-	Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
-	Query sqlQuery = session.createSQLQuery(query).setParameter("startDate", startDate).setParameter("endDate",
-			endDate);
-	List list = sqlQuery.list();
-	return list;
-}
-
-public List<Object[]> findDateOfLoanLedger(Date startDate, Date endDate, int startIndex, int limit) {
-	String query = "SELECT DISTINCT(ll.TXN_TIME) from loan_ledger ll Where ll.TXN_TIME BETWEEN :startDate AND :endDate GROUP BY date(TXN_TIME) ORDER BY ll.ID DESC"
-			+ " LIMIT " + startIndex + "," + limit + ";";
-	Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
-	Query sqlQuery = session.createSQLQuery(query).setParameter("startDate", startDate).setParameter("endDate",
-			endDate);
-	List list = sqlQuery.list();
-	return list;
-}
-
-public List<Object[]> listLoanLedgerByDate(String date,String branchId) {
-	String query = "SELECT (SELECT IFNULL(CAST(SUM(ll.ACTUAL_AMT) AS DECIMAL(30,2)),'0') from loan_ledger ll where ll.TXN_TYPE='701' AND ll.BRANCH='"+branchId+"' AND ll.TXN_TIME='"
-			+ date
-			+ "' )AS LOAN_DIST,(SELECT IFNULL(CAST(SUM(ll.ACTUAL_AMT) AS DECIMAL(30,2)),'0') from loan_ledger ll where ll.TXN_TYPE IN ('702') AND ll.BRANCH='"+branchId+"' AND ll.TXN_TIME='"
-			+ date + "' )AS LOAN_REPAY from loan_ledger ll GROUP BY ll.TXN_TYPE AND ll.TXN_TIME";
-	Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
-	SQLQuery sqlQuery = session.createSQLQuery(query);
-	List list = sqlQuery.list();
-	return list;
-}
-
-public List<Object[]> listLoanLedgerByDate(String date, int startIndex, int limit) {
-	String query = "SELECT (SELECT IFNULL(CAST(SUM(ll.ACTUAL_AMT) AS DECIMAL(30,2)),'0') from loan_ledger ll where ll.TXN_TYPE='701' AND ll.TXN_TIME='"
-			+ date
-			+ "' )AS LOAN_DIST,(SELECT IFNULL(CAST(SUM(ll.ACTUAL_AMT) AS DECIMAL(30,2)),'0') from loan_ledger ll where ll.TXN_TYPE IN ('702') AND ll.TXN_TIME='"
-			+ date + "' )AS LOAN_REPAY from loan_ledger ll GROUP BY ll.TXN_TYPE AND ll.TXN_TIME" + " LIMIT "
-			+ startIndex + "," + limit + ";";
-	Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
-	SQLQuery sqlQuery = session.createSQLQuery(query);
-	List list = sqlQuery.list();
-	return list;
-}
-
-public ESEAccount findAccountByFarmerLoanProduct(long farmerId) {
-
-	// HQL Query procurementProductId based constraints removed for fetching
-	// single farmer
-	// account
-	return (ESEAccount) find("SELECT c.account FROM Contract c WHERE c.farmer.id=?", new Object[] { farmerId });
-}
-
-@Override
-public LoanInterest findLoanPercent(Long amt) {
-	// TODO Auto-generated method stub
-	Object[] values = { amt };
-	return (LoanInterest) find("From LoanInterest li where ? between li.minRange and li.maxRange", values);
-}
-
-@Override
-public LoanInterest findLoanRangeById(Long id) {
-	// TODO Auto-generated method stub
-	LoanInterest loanInterest = (LoanInterest) find("FROM LoanInterest li WHERE li.id = ?", id);
-	return loanInterest;
-
-}
-
-public List<Farmer> listFarmerWithOutstandLoanBal(String villageCode) {
-	
-	Object[] values = { villageCode, ESETxnStatus.SUCCESS.ordinal() };
-	
-	return list(
-			"FROM Farmer f WHERE f.village.code = ? AND f.statusCode = ? AND f.farmerId In (select e.profileId from ESEAccount e where e.outstandingLoanAmount != 0) ORDER BY f.firstName ASC",
-			values);
-}
-
-@Override
-public List<Object[]> listFarmerByLoanDistribution() {
-	return list("SELECT DISTINCT ld.farmer.id,ld.farmer.farmerId,ld.farmer.farmerCode,ld.farmer.firstName,ld.farmer.lastName from LoanDistribution ld");
-}
-
-@Override
-public List<byte[]> getImageByQuery(String methodName, Object[] parameter, String branchId) {
-	List<byte[]> a=null;
-	methodNameQ = methodName;
-	Session session = getSessionFactory().openSession();
-	if (branchId == null) {
-		methodNameQ = methodName.replaceAll("<.*?>", "");
-
-	} else {
-		methodNameQ = methodNameQ.replaceAll("<", "").replaceAll(">", "").replaceAll("branchId",
-				"'" + branchId + "'");
+	@Override
+	public List<FarmCrops> listOfCropsByFarmIdAndSeason(List<Long> id, long season) {
+		Session session = getSessionFactory().openSession();
+		Query query = session.createQuery("FROM FarmCrops cd WHERE cd.farm.id in(:id) and cd.cropSeason.id=:season");
+		query.setParameter("season", season);
+		query.setParameterList("id", id);
+		List result = query.list();
+		session.flush();
+		session.close();
+		return result;
 	}
-	Query query = session.createSQLQuery(methodNameQ);
-	if (parameter != null && parameter.length > 0) {
-		i = 1;
-		Arrays.asList(parameter).stream().forEach(u -> {
-			if (methodNameQ.contains("param" + i)) {
-				if (u != null && u.toString().contains(",")) {
-					query.setParameterList("param" + i, Arrays.asList(u.toString().split(",")));
-				} else {
-					query.setParameter("param" + i, u);
+
+	@Override
+	public List<Object[]> listOfFarmsByFarmer(Long farmerId) {
+		// TODO Auto-generated method stub
+		return list(
+				"SELECT DISTINCT fm.farmer.farmerId,fm.farmer.firstName,fm.farmer.farmerCode,fm.id,fm.farmCode,fm.farmName from Farm fm  where fm.farmer.id='"
+						+ farmerId + "' AND fm.farmer.refId is null AND fm.farmer.statusCode='"
+						+ ESETxnStatus.SUCCESS.ordinal() + "'");
+	}
+
+	@Override
+	public List<FarmerDynamicFieldsValue> listFarmerDynmaicFieldsByRefId(String refId, String txnType,
+			Long farmerDynamicDataId) {
+		Object[] values = { refId, txnType, farmerDynamicDataId };
+		return list(
+				"select fdfv FROM FarmerDynamicFieldsValue fdfv LEFT JOIN FETCH fdfv.dymamicImageData di LEFT JOIN FETCH  fdfv.followUps where fdfv.referenceId=? AND fdfv.txnType=? AND fdfv.farmerDynamicData.id=?",
+				values);
+
+	}
+
+	@Override
+	public List<Object[]> findAmtAndQtyByProcurmentTraceability(String selectedBranch, String selectedState,
+			String selectedSeason, Date sDate, Date eDate) {
+		// TODO Auto-generated method stub
+		Map<String, Object> params = new HashMap<String, Object>();
+		Session session = getSessionFactory().getCurrentSession();
+		String hqlQuery = "select pd.procurementProduct.name,sum(pd.netWeight),sum(pd.totalPricepremium),sum(pd.procurementTraceability.paymentAmount) from ProcurementTraceabilityDetails pd "
+				+ "inner join pd.procurementTraceability p inner join p.farmer f "
+				+ "WHERE pd.procurementProduct.name !=null and p.farmer.status=1 and p.farmer.statusCode=0";
+
+		if (!StringUtil.isEmpty(sDate) && eDate != null) {
+			hqlQuery += " AND pd.procurementTraceability.procurementDate BETWEEN :startDate AND :endDate";
+			params.put("startDate", sDate);
+			params.put("endDate", eDate);
+		}
+
+		if (!StringUtil.isEmpty(selectedBranch)) {
+
+			hqlQuery += " AND pd.procurementTraceability.branchId=:branchId";
+			params.put("branchId", selectedBranch);
+		}
+
+		if (!StringUtil.isEmpty(selectedSeason)) {
+
+			hqlQuery += " AND pd.procurementTraceability.season=:season";
+			params.put("season", selectedSeason);
+		}
+
+		if (!StringUtil.isEmpty(selectedState)) {
+
+			hqlQuery += " AND f.village.city.locality.state.id=:state";
+			params.put("state", Long.valueOf(selectedState));
+		}
+		hqlQuery += " GROUP BY pd.procurementProduct.name";
+		Query query = session.createQuery(hqlQuery);
+		for (String str : query.getNamedParameters()) {
+			query.setParameter(str, params.get(str));
+		}
+
+		return query.list();
+	}
+
+	public List<DataLevel> listDataLevelByType(String type) {
+		return list("FROM DataLevel d where d.idendifier=?", type);
+	}
+
+	@Override
+	public SamithiIcs findSamithiIcsById(Long id) {
+		// TODO Auto-generated method stub
+		return (SamithiIcs) find("FROM SamithiIcs s WHERE s.id = ?", id);
+	}
+
+	@Override
+	public List<Object[]> listFarmInfoLatLon() {
+
+		return list("SELECT f.id,f.farmCode,f.farmName,f.latitude,f.longitude from Farm f  where  f.status=1 ");
+	}
+
+	public List<Object[]> findCountOfDynamicDataByFarmerId(List<Long> fidLi, String season) {
+		Session session = getSessionFactory().openSession();
+		Query query = session.createSQLQuery(
+				"SELECT FARMER_ID,group_concat( concat( `name`, '-', `value` ) SEPARATOR ',' ) AS `ColumnName` FROM(SELECT fm.FARMER_ID,(CASE WHEN fdd.TXN_TYPE = 2001 THEN 'Land Preparation ' WHEN fdd.TXN_TYPE = 2002 THEN 'After Sowing ' WHEN fdd.TXN_TYPE = 2003 THEN 'Vegetative Growth phase I ' WHEN fdd.TXN_TYPE = 2004 THEN 'Vegetative Growth phase II ' WHEN fdd.TXN_TYPE = 2005 THEN 'Flowering and boll formation ' WHEN fdd.TXN_TYPE = 2006 THEN 'Harvesting ' ELSE '' END ) AS NAME,count( fdd.ID ) AS VALUE FROM farm_crops fc INNER JOIN farm fm ON fc.FARM_ID = fm.ID INNER JOIN farmer_dynamic_data fdd ON fdd.REFERENCE_ID = fc.ID  WHERE fm.FARMER_ID IN ( :ids ) AND fdd.TXN_TYPE in (2001,2002,2003,2004,2005,2006) AND fdd.SEASON =:season GROUP BY fm.FARMER_ID,fdd.TXN_TYPE ) tbl GROUP BY FARMER_ID");
+		query.setParameter("season", season);
+		query.setParameterList("ids", fidLi);
+		List<Object[]> list = query.list();
+		session.flush();
+		session.close();
+		return list;
+	}
+
+	public ESEAccount findEseAccountByFarmerId(String farmerId) {
+
+		// HQL Query procurementProductId based constraints removed for fetching
+		// single farmer
+		// account
+		return (ESEAccount) find("FROM ESEAccount ea WHERE ea.profileId=?", new Object[] { farmerId });
+	}
+
+	public List<Object[]> listLoanLedgerByEseAccountId(String accountId) {
+
+		String query = "SELECT LL.TXN_TIME TXN_TIME,LL.RECEIPT_NO RECEIPT_NO,LL.LOAN_DESC LOAN_DESC,LL.ACTUAL_AMT ACTUAL_AMT FROM ESE_ACCOUNT EA "
+				+ "INNER JOIN LOAN_LEDGER LL ON LL.FARMER_ID=EA.PROFILE_ID "
+				+ "WHERE LL.TXN_TYPE!='316' AND EA.PROFILE_ID='" + accountId + "' ORDER BY LL.ID DESC;";
+		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+		return session.createSQLQuery(query).addScalar("TXN_TIME", StringType.INSTANCE)
+				.addScalar("RECEIPT_NO", StringType.INSTANCE).addScalar("LOAN_DESC", StringType.INSTANCE)
+				.addScalar("ACTUAL_AMT", DoubleType.INSTANCE).list();
+	}
+
+	public List<Object[]> listLoanLedgerByEseAccountId(String accountId, int startIndex, int limit) {
+
+		String query = "SELECT LL.TXN_TIME TXN_TIME,LL.RECEIPT_NO RECEIPT_NO,LL.LOAN_DESC LOAN_DESC,LL.ACTUAL_AMT ACTUAL_AMT FROM ESE_ACCOUNT EA "
+				+ "INNER JOIN LOAN_LEDGER LL ON LL.FARMER_ID=EA.PROFILE_ID "
+				+ "WHERE LL.TXN_TYPE!='316' AND EA.PROFILE_ID='" + accountId + "' ORDER BY LL.ID DESC" + " LIMIT "
+				+ startIndex + "," + limit + ";";
+		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+		return session.createSQLQuery(query).addScalar("TXN_TIME", StringType.INSTANCE)
+				.addScalar("RECEIPT_NO", StringType.INSTANCE).addScalar("LOAN_DESC", StringType.INSTANCE)
+				.addScalar("ACTUAL_AMT", DoubleType.INSTANCE).list();
+	}
+
+	public ESEAccount findEseAccountById(Long id) {
+		Object[] values = { id, ESEAccount.ACTIVE };
+		return (ESEAccount) find("FROM ESEAccount fr WHERE fr.id = ? AND fr.status=?", values);
+	}
+
+	@Override
+	public List<Object[]> listFarmerInfoByProcurementWithTypez() {
+
+		List<Object[]> result = list(
+				"SELECT f.farmerId,f.firstName,f.farmerCode,f.lastName FROM  Farmer f where f.farmerId in (select DISTINCT(e.profileId) from LoanLedger ll INNER JOIN ll.account e)");
+
+		return result;
+	}
+
+	@Override
+	public List<Object[]> listGroupInfoByProcurementWithTypez() {
+
+		List<Object[]> result = list(
+				"SELECT DISTINCT f.farmerId,f.firstName,f.farmerCode FROM  Farmer f where f.typez=2 AND f.farmerId in (select t.farmerId from AgroTransaction t)");
+
+		return result;
+	}
+
+	public List<Object[]> listFarmerStatementByEseAccountId(String accountId) {
+
+		String query = "SELECT LL.TXN_TIME TXN_TIME,LL.RECEIPT_NO RECEIPT_NO,LL.LOAN_DESC LOAN_DESC,LL.ACTUAL_AMT ACTUAL_AMT FROM ESE_ACCOUNT EA "
+				+ "INNER JOIN LOAN_LEDGER LL ON LL.FARMER_ID=EA.PROFILE_ID "
+				+ "WHERE LL.TXN_TYPE!='701' AND EA.PROFILE_ID='" + accountId + "' ORDER BY LL.ID DESC;";
+		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+		return session.createSQLQuery(query).addScalar("TXN_TIME", StringType.INSTANCE)
+				.addScalar("RECEIPT_NO", StringType.INSTANCE).addScalar("LOAN_DESC", StringType.INSTANCE)
+				.addScalar("ACTUAL_AMT", DoubleType.INSTANCE).list();
+	}
+
+	public List<Object[]> listFarmerStatementByEseAccountId(String accountId, int startIndex, int limit) {
+
+		String query = "SELECT LL.TXN_TIME TXN_TIME,LL.RECEIPT_NO RECEIPT_NO,LL.LOAN_DESC LOAN_DESC,LL.ACTUAL_AMT ACTUAL_AMT FROM ESE_ACCOUNT EA "
+				+ "INNER JOIN LOAN_LEDGER LL ON LL.FARMER_ID=EA.PROFILE_ID "
+				+ "WHERE LL.TXN_TYPE!='701' AND EA.PROFILE_ID='" + accountId + "' ORDER BY LL.ID DESC" + " LIMIT "
+				+ startIndex + "," + limit + ";";
+		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+		return session.createSQLQuery(query).addScalar("TXN_TIME", StringType.INSTANCE)
+				.addScalar("RECEIPT_NO", StringType.INSTANCE).addScalar("LOAN_DESC", StringType.INSTANCE)
+				.addScalar("ACTUAL_AMT", DoubleType.INSTANCE).list();
+	}
+
+	@Override
+	public List<Object[]> listFarmerFilterWithLoanLedger() {
+		// 0=Id,1=Farmer Id,2=Farmer Code,3=First Name,4=Last
+		// name,5=surName,6=village name,7=Group name,8=Is certified
+		// Farmer,9=Status,10=BranchId
+		return list(
+				"SELECT f.id,f.farmerId,f.farmerCode,f.firstName,f.lastName,f.surName from Farmer f where f.refId is null AND f.typez=1 AND f.farmerId In (select DISTINCT(e.profileId) from LoanLedger ll INNER JOIN ll.account e where ll.txnType <> 701) AND f.status='"
+						+ Farm.Status.ACTIVE.ordinal() + "'");
+	}
+
+	@Override
+	public List<Object[]> listGroupFilterWithLoanLedger() {
+		// 0=Id,1=Farmer Id,2=Farmer Code,3=First Name,4=Last
+		// name,5=surName,6=village name,7=Group name,8=Is certified
+		// Farmer,9=Status,10=BranchId
+		return list(
+				"SELECT f.id,f.farmerId,f.farmerCode,f.firstName,f.lastName,f.surName from Farmer f where f.refId is null AND f.typez=2 AND f.farmerId In (select DISTINCT(e.profileId) from LoanLedger ll INNER JOIN ll.account e where ll.txnType <> 701) AND f.status='"
+						+ Farm.Status.ACTIVE.ordinal() + "'");
+	}
+
+	public List<Object[]> listFFBpurchaseAndFFBRepaymentAmt(String accountId) {
+
+		String query = "SELECT (SELECT IFNULL(CAST(SUM(ll.ACTUAL_AMT) AS DECIMAL(30,2)),'0') FROM LOAN_LEDGER LL where LL.FARMER_ID='"
+				+ accountId + "' and TXN_TYPE='316') TOTAL_FRUIT_PURCHASE,"
+				+ "(SELECT IFNULL(CAST(SUM(ll.ACTUAL_AMT) AS DECIMAL(30,2)),'0') FROM LOAN_LEDGER LL where LL.FARMER_ID='"
+				+ accountId + "' and TXN_TYPE='702') TOTAL_REPAYMENT from LOAN_LEDGER LL "
+				+ "where LL.TXN_TYPE!='701' AND LL.FARMER_ID='" + accountId + "' GROUP BY LL.FARMER_ID;";
+		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+		return session.createSQLQuery(query).addScalar("TOTAL_FRUIT_PURCHASE", StringType.INSTANCE)
+				.addScalar("TOTAL_REPAYMENT", StringType.INSTANCE).list();
+	}
+
+	public Farmer findFarmerInfoByFarmerId(String farmerId) {
+
+		Object[] values = { farmerId };
+		Farmer farmer = (Farmer) find("FROM Farmer fr WHERE  fr.farmerId = ?", values);
+		return farmer;
+	}
+
+	public List<Object[]> findDateOfLoanLedger(Date startDate, Date endDate) {
+		String query = "SELECT DISTINCT(ll.TXN_TIME) from loan_ledger ll Where ll.TXN_TIME BETWEEN :startDate AND :endDate GROUP BY date(TXN_TIME) ORDER BY ll.ID DESC";
+		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+		Query sqlQuery = session.createSQLQuery(query).setParameter("startDate", startDate).setParameter("endDate",
+				endDate);
+		List list = sqlQuery.list();
+		return list;
+	}
+
+	public List<Object[]> findDateOfLoanLedger(Date startDate, Date endDate, int startIndex, int limit) {
+		String query = "SELECT DISTINCT(ll.TXN_TIME) from loan_ledger ll Where ll.TXN_TIME BETWEEN :startDate AND :endDate GROUP BY date(TXN_TIME) ORDER BY ll.ID DESC"
+				+ " LIMIT " + startIndex + "," + limit + ";";
+		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+		Query sqlQuery = session.createSQLQuery(query).setParameter("startDate", startDate).setParameter("endDate",
+				endDate);
+		List list = sqlQuery.list();
+		return list;
+	}
+
+	public List<Object[]> listLoanLedgerByDate(String date, String branchId) {
+		String query = "SELECT (SELECT IFNULL(CAST(SUM(ll.ACTUAL_AMT) AS DECIMAL(30,2)),'0') from loan_ledger ll where ll.TXN_TYPE='701' AND ll.BRANCH='"
+				+ branchId + "' AND ll.TXN_TIME='" + date
+				+ "' )AS LOAN_DIST,(SELECT IFNULL(CAST(SUM(ll.ACTUAL_AMT) AS DECIMAL(30,2)),'0') from loan_ledger ll where ll.TXN_TYPE IN ('702') AND ll.BRANCH='"
+				+ branchId + "' AND ll.TXN_TIME='" + date
+				+ "' )AS LOAN_REPAY from loan_ledger ll GROUP BY ll.TXN_TYPE AND ll.TXN_TIME";
+		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+		SQLQuery sqlQuery = session.createSQLQuery(query);
+		List list = sqlQuery.list();
+		return list;
+	}
+
+	public List<Object[]> listLoanLedgerByDate(String date, int startIndex, int limit) {
+		String query = "SELECT (SELECT IFNULL(CAST(SUM(ll.ACTUAL_AMT) AS DECIMAL(30,2)),'0') from loan_ledger ll where ll.TXN_TYPE='701' AND ll.TXN_TIME='"
+				+ date
+				+ "' )AS LOAN_DIST,(SELECT IFNULL(CAST(SUM(ll.ACTUAL_AMT) AS DECIMAL(30,2)),'0') from loan_ledger ll where ll.TXN_TYPE IN ('702') AND ll.TXN_TIME='"
+				+ date + "' )AS LOAN_REPAY from loan_ledger ll GROUP BY ll.TXN_TYPE AND ll.TXN_TIME" + " LIMIT "
+				+ startIndex + "," + limit + ";";
+		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+		SQLQuery sqlQuery = session.createSQLQuery(query);
+		List list = sqlQuery.list();
+		return list;
+	}
+
+	public ESEAccount findAccountByFarmerLoanProduct(long farmerId) {
+
+		// HQL Query procurementProductId based constraints removed for fetching
+		// single farmer
+		// account
+		return (ESEAccount) find("SELECT c.account FROM Contract c WHERE c.farmer.id=?", new Object[] { farmerId });
+	}
+
+	@Override
+	public LoanInterest findLoanPercent(Long amt) {
+		// TODO Auto-generated method stub
+		Object[] values = { amt };
+		return (LoanInterest) find("From LoanInterest li where ? between li.minRange and li.maxRange", values);
+	}
+
+	@Override
+	public LoanInterest findLoanRangeById(Long id) {
+		// TODO Auto-generated method stub
+		LoanInterest loanInterest = (LoanInterest) find("FROM LoanInterest li WHERE li.id = ?", id);
+		return loanInterest;
+
+	}
+
+	public List<Farmer> listFarmerWithOutstandLoanBal(String villageCode) {
+
+		Object[] values = { villageCode, ESETxnStatus.SUCCESS.ordinal() };
+
+		return list(
+				"FROM Farmer f WHERE f.village.code = ? AND f.statusCode = ? AND f.farmerId In (select e.profileId from ESEAccount e where e.outstandingLoanAmount != 0) ORDER BY f.firstName ASC",
+				values);
+	}
+
+	@Override
+	public List<Object[]> listFarmerByLoanDistribution() {
+		return list(
+				"SELECT DISTINCT ld.farmer.id,ld.farmer.farmerId,ld.farmer.farmerCode,ld.farmer.firstName,ld.farmer.lastName from LoanDistribution ld");
+	}
+
+	@Override
+	public List<byte[]> getImageByQuery(String methodName, Object[] parameter, String branchId) {
+		List<byte[]> a = null;
+		methodNameQ = methodName;
+		Session session = getSessionFactory().openSession();
+		if (branchId == null) {
+			methodNameQ = methodName.replaceAll("<.*?>", "");
+
+		} else {
+			methodNameQ = methodNameQ.replaceAll("<", "").replaceAll(">", "").replaceAll("branchId",
+					"'" + branchId + "'");
+		}
+		Query query = session.createSQLQuery(methodNameQ);
+		if (parameter != null && parameter.length > 0) {
+			i = 1;
+			Arrays.asList(parameter).stream().forEach(u -> {
+				if (methodNameQ.contains("param" + i)) {
+					if (u != null && u.toString().contains(",")) {
+						query.setParameterList("param" + i, Arrays.asList(u.toString().split(",")));
+					} else {
+						query.setParameter("param" + i, u);
+					}
+					i++;
 				}
-				i++;
-			}
-		});
-	}
-	List ls = query.list();
-	session.flush();
-	session.close();
-	if (ls != null && ls.size() > 0) {
-		return (List<byte[]>) (ls);
-	} else {
-		return a;
-	}
-
-}
-public List<Long> listFarmerPrimaryId(Farmer f) {
-	Criteria c = getSessionFactory().getCurrentSession().createCriteria(Farmer.class);
-	c.createAlias("city", "c");
-	c.createAlias("village", "v");
-	//c.createAlias("samithi", "w");
-	 c.createAlias("c.locality", "l");
-     c.createAlias("l.state", "s");
-     c.createAlias("farms", "fa",c.LEFT_JOIN);
-     c.createAlias("fa.farmCrops", "fc",c.LEFT_JOIN);
-     c.createAlias("fc.procurementVariety", "pv",c.LEFT_JOIN);
-     c.createAlias("pv.procurementProduct", "pp",c.LEFT_JOIN);
-	c.add(Restrictions.isNotNull("mobileNumber"));
-	c.add(Restrictions.ne("mobileNumber", ""));
-	if (!ObjectUtil.isEmpty(f)) {
-		if (!StringUtil.isEmpty(f.getFirstName())) {
-			c.add(Restrictions.like("firstName", f.getFirstName().trim(), MatchMode.ANYWHERE));
+			});
 		}
-
-		if (!StringUtil.isEmpty(f.getLastName())) {
-			c.add(Restrictions.like("lastName", f.getLastName().trim(), MatchMode.ANYWHERE));
-		}
-
-		if (!StringUtil.isEmpty(f.getMobileNumber())) {
-			c.add(Restrictions.like("mobileNumber", f.getMobileNumber().trim(), MatchMode.START));
-		}
-
-		if (!StringUtil.isEmpty(f.getVillageName())) {
-
-			c.add(Restrictions.like("v.name", f.getVillageName().trim(), MatchMode.ANYWHERE));
-		}
-
-		if (!StringUtil.isEmpty(f.getCityName())) {
-
-			c.add(Restrictions.like("c.name", f.getCityName().trim(), MatchMode.ANYWHERE));
-		}
-
-		if (!StringUtil.isEmpty(f.getFarmer_status())) {
-			c.add(Restrictions.eq("status", Integer.valueOf(f.getFarmer_status())));
-		}
-
-		if (!StringUtil.isEmpty(f.getBranchId())) {
-			c.add(Restrictions.eq("branchId", f.getBranchId()));
-		}
-	    if (f.getCity() != null && f.getCity().getLocality()  != null
-                && f.getCity().getLocality().getName()!= null) {
-            c.add(Restrictions.like("l.name", f.getCity().getLocality().getName().trim(), MatchMode.ANYWHERE));
-        }
-        if (f.getCity() != null && f.getCity().getLocality()  != null && f.getCity().getLocality().getState()!= null
-                && f.getCity().getLocality().getState().getName()!= null) {
-            c.add(Restrictions.like("s.name", f.getCity().getLocality().getState().getName().trim(), MatchMode.ANYWHERE));
-        }
-
-		if (!StringUtil.isEmpty(f.getFarmer_fpo())) {
-
-			c.add(Restrictions.eq("w.id", Long.valueOf(f.getFarmer_fpo().trim())));
-		}
-		 if (!StringUtil.isEmpty(f.getCropNames())) {
-             c.add(Restrictions.like("pp.name", f.getCropNames(), MatchMode.ANYWHERE));
-         }
-
-	}
-	// c.add(Restrictions.eq("statusCode", ESETxnStatus.SUCCESS.ordinal()));
-
-	return c.setProjection(Projections.projectionList().add(Projections.groupProperty("id"))).list();
-}
-
-@Override
-public List<Long> listProfilePrimaryId(Agent agent) {
-	Criteria c = getSessionFactory().getCurrentSession().createCriteria(Agent.class);
-	if (!ObjectUtil.isEmpty(agent)) {
-		if (!StringUtil.isEmpty(agent.getProfileId())) {
-			c.add(Restrictions.like("profileId", agent.getProfileId()));
-		}
-
-		if (agent.getPersonalInfo() != null && (!StringUtil.isEmpty(agent.getPersonalInfo().getFirstName())
-				|| !StringUtil.isEmpty(agent.getPersonalInfo().getLastName()))) {
-			c.createAlias("personalInfo", "pi");
-			if (agent.getPersonalInfo() != null && !StringUtil.isEmpty(agent.getPersonalInfo().getFirstName())) {
-				c.add(Restrictions.like("pi.firstName", agent.getPersonalInfo().getFirstName()));
-			}
-
-			if (agent.getPersonalInfo() != null && !StringUtil.isEmpty(agent.getPersonalInfo().getLastName())) {
-				c.add(Restrictions.like("pi.lastName", agent.getPersonalInfo().getLastName()));
-			}
-		}
-
-		if (!StringUtil.isEmpty(agent.getMobileno())) {
-			c.createAlias("contactInfo", "ci");
-			c.add(Restrictions.like("ci.mobileNumber", agent.getMobileno(), MatchMode.START));
-		}
-
-		if (!StringUtil.isEmpty(agent.getFs_status())) {
-			c.add(Restrictions.eq("status", Integer.valueOf(agent.getFs_status())));
-		}
-
-		if (!StringUtil.isEmpty(agent.getBranchId())) {
-			c.add(Restrictions.eq("branchId", agent.getBranchId()));
+		List ls = query.list();
+		session.flush();
+		session.close();
+		if (ls != null && ls.size() > 0) {
+			return (List<byte[]>) (ls);
+		} else {
+			return a;
 		}
 
 	}
-	return c.setProjection(Projections.projectionList().add(Projections.property("id"))).list();
-}
 
-@Override
-public List<Long> listWebUsersPrimaryId(User user) {
-	Criteria c = getSessionFactory().getCurrentSession().createCriteria(User.class);
-	if (!ObjectUtil.isEmpty(user)) {
-		if (!StringUtil.isEmpty(user.getUsername())) {
-			c.add(Restrictions.like("username", user.getUsername()));
-		}
-
-		if (user.getPersonalInfo() != null && (!StringUtil.isEmpty(user.getPersonalInfo().getFirstName())
-				|| !StringUtil.isEmpty(user.getPersonalInfo().getLastName()))) {
-			c.createAlias("personalInfo", "pi");
-			if (user.getPersonalInfo() != null && !StringUtil.isEmpty(user.getPersonalInfo().getFirstName())) {
-				c.add(Restrictions.like("pi.firstName", user.getPersonalInfo().getFirstName()));
+	public List<Long> listFarmerPrimaryId(Farmer f) {
+		Criteria c = getSessionFactory().getCurrentSession().createCriteria(Farmer.class);
+		c.createAlias("city", "c");
+		c.createAlias("village", "v");
+		// c.createAlias("samithi", "w");
+		c.createAlias("c.locality", "l");
+		c.createAlias("l.state", "s");
+		c.createAlias("farms", "fa", c.LEFT_JOIN);
+		c.createAlias("fa.farmCrops", "fc", c.LEFT_JOIN);
+		c.createAlias("fc.procurementVariety", "pv", c.LEFT_JOIN);
+		c.createAlias("pv.procurementProduct", "pp", c.LEFT_JOIN);
+		c.add(Restrictions.isNotNull("mobileNumber"));
+		c.add(Restrictions.ne("mobileNumber", ""));
+		if (!ObjectUtil.isEmpty(f)) {
+			if (!StringUtil.isEmpty(f.getFirstName())) {
+				c.add(Restrictions.like("firstName", f.getFirstName().trim(), MatchMode.ANYWHERE));
 			}
 
-			if (user.getPersonalInfo() != null && !StringUtil.isEmpty(user.getPersonalInfo().getLastName())) {
-				c.add(Restrictions.like("pi.lastName", user.getPersonalInfo().getLastName()));
+			if (!StringUtil.isEmpty(f.getLastName())) {
+				c.add(Restrictions.like("lastName", f.getLastName().trim(), MatchMode.ANYWHERE));
 			}
-		}
 
-		if (!StringUtil.isEmpty(user.getMobileno())) {
-			c.createAlias("contactInfo", "ci");
-			c.add(Restrictions.like("ci.mobileNumber", user.getMobileno(), MatchMode.START));
-		}
+			if (!StringUtil.isEmpty(f.getMobileNumber())) {
+				c.add(Restrictions.like("mobileNumber", f.getMobileNumber().trim(), MatchMode.START));
+			}
 
-		if (!StringUtil.isEmpty(user.getWu_status())) {
-			c.add(Restrictions.eq("status", Integer.valueOf(user.getWu_status())));
-		}
+			if (!StringUtil.isEmpty(f.getVillageName())) {
 
-		if (!StringUtil.isEmpty(user.getBranchId())) {
-			c.add(Restrictions.eq("branchId", user.getBranchId()));
+				c.add(Restrictions.like("v.name", f.getVillageName().trim(), MatchMode.ANYWHERE));
+			}
+
+			if (!StringUtil.isEmpty(f.getCityName())) {
+
+				c.add(Restrictions.like("c.name", f.getCityName().trim(), MatchMode.ANYWHERE));
+			}
+
+			if (!StringUtil.isEmpty(f.getFarmer_status())) {
+				c.add(Restrictions.eq("status", Integer.valueOf(f.getFarmer_status())));
+			}
+
+			if (!StringUtil.isEmpty(f.getBranchId())) {
+				c.add(Restrictions.eq("branchId", f.getBranchId()));
+			}
+			if (f.getCity() != null && f.getCity().getLocality() != null
+					&& f.getCity().getLocality().getName() != null) {
+				c.add(Restrictions.like("l.name", f.getCity().getLocality().getName().trim(), MatchMode.ANYWHERE));
+			}
+			if (f.getCity() != null && f.getCity().getLocality() != null && f.getCity().getLocality().getState() != null
+					&& f.getCity().getLocality().getState().getName() != null) {
+				c.add(Restrictions.like("s.name", f.getCity().getLocality().getState().getName().trim(),
+						MatchMode.ANYWHERE));
+			}
+
+			if (!StringUtil.isEmpty(f.getFarmer_fpo())) {
+
+				c.add(Restrictions.eq("w.id", Long.valueOf(f.getFarmer_fpo().trim())));
+			}
+			if (!StringUtil.isEmpty(f.getCropNames())) {
+				c.add(Restrictions.like("pp.name", f.getCropNames(), MatchMode.ANYWHERE));
+			}
+
 		}
+		// c.add(Restrictions.eq("statusCode", ESETxnStatus.SUCCESS.ordinal()));
+
+		return c.setProjection(Projections.projectionList().add(Projections.groupProperty("id"))).list();
 	}
-	return c.setProjection(Projections.projectionList().add(Projections.property("id"))).list();
-}
 
+	@Override
+	public List<Long> listProfilePrimaryId(Agent agent) {
+		Criteria c = getSessionFactory().getCurrentSession().createCriteria(Agent.class);
+		if (!ObjectUtil.isEmpty(agent)) {
+			if (!StringUtil.isEmpty(agent.getProfileId())) {
+				c.add(Restrictions.like("profileId", agent.getProfileId()));
+			}
 
-@Override
-public List<Object[]> listFarmerFarmInfoFarmCropsByVillageId(Object obj, String selectedStatus,
-		String plottingType) {
+			if (agent.getPersonalInfo() != null && (!StringUtil.isEmpty(agent.getPersonalInfo().getFirstName())
+					|| !StringUtil.isEmpty(agent.getPersonalInfo().getLastName()))) {
+				c.createAlias("personalInfo", "pi");
+				if (agent.getPersonalInfo() != null && !StringUtil.isEmpty(agent.getPersonalInfo().getFirstName())) {
+					c.add(Restrictions.like("pi.firstName", agent.getPersonalInfo().getFirstName()));
+				}
 
-	ProjectionList pList = Projections.projectionList();
+				if (agent.getPersonalInfo() != null && !StringUtil.isEmpty(agent.getPersonalInfo().getLastName())) {
+					c.add(Restrictions.like("pi.lastName", agent.getPersonalInfo().getLastName()));
+				}
+			}
+
+			if (!StringUtil.isEmpty(agent.getMobileno())) {
+				c.createAlias("contactInfo", "ci");
+				c.add(Restrictions.like("ci.mobileNumber", agent.getMobileno(), MatchMode.START));
+			}
+
+			if (!StringUtil.isEmpty(agent.getFs_status())) {
+				c.add(Restrictions.eq("status", Integer.valueOf(agent.getFs_status())));
+			}
+
+			if (!StringUtil.isEmpty(agent.getBranchId())) {
+				c.add(Restrictions.eq("branchId", agent.getBranchId()));
+			}
+
+		}
+		return c.setProjection(Projections.projectionList().add(Projections.property("id"))).list();
+	}
+
+	@Override
+	public List<Long> listWebUsersPrimaryId(User user) {
+		Criteria c = getSessionFactory().getCurrentSession().createCriteria(User.class);
+		if (!ObjectUtil.isEmpty(user)) {
+			if (!StringUtil.isEmpty(user.getUsername())) {
+				c.add(Restrictions.like("username", user.getUsername()));
+			}
+
+			if (user.getPersonalInfo() != null && (!StringUtil.isEmpty(user.getPersonalInfo().getFirstName())
+					|| !StringUtil.isEmpty(user.getPersonalInfo().getLastName()))) {
+				c.createAlias("personalInfo", "pi");
+				if (user.getPersonalInfo() != null && !StringUtil.isEmpty(user.getPersonalInfo().getFirstName())) {
+					c.add(Restrictions.like("pi.firstName", user.getPersonalInfo().getFirstName()));
+				}
+
+				if (user.getPersonalInfo() != null && !StringUtil.isEmpty(user.getPersonalInfo().getLastName())) {
+					c.add(Restrictions.like("pi.lastName", user.getPersonalInfo().getLastName()));
+				}
+			}
+
+			if (!StringUtil.isEmpty(user.getMobileno())) {
+				c.createAlias("contactInfo", "ci");
+				c.add(Restrictions.like("ci.mobileNumber", user.getMobileno(), MatchMode.START));
+			}
+
+			if (!StringUtil.isEmpty(user.getWu_status())) {
+				c.add(Restrictions.eq("status", Integer.valueOf(user.getWu_status())));
+			}
+
+			if (!StringUtil.isEmpty(user.getBranchId())) {
+				c.add(Restrictions.eq("branchId", user.getBranchId()));
+			}
+		}
+		return c.setProjection(Projections.projectionList().add(Projections.property("id"))).list();
+	}
+
+	@Override
+	public List<Object[]> listFarmerFarmInfoFarmCropsByVillageId(Object obj, String selectedStatus,
+			String plottingType) {
+
+		ProjectionList pList = Projections.projectionList();
 		Session session = getSessionFactory().getCurrentSession();
 		Criteria criteria = null;
 		List<Object[]> list = null;
@@ -13983,20 +14007,20 @@ public List<Object[]> listFarmerFarmInfoFarmCropsByVillageId(Object obj, String 
 			criteria.createAlias("f.city", "c");
 			criteria.createAlias("c.locality", "l");
 			criteria.createAlias("l.state", "s");
-			
-			if (!StringUtil.isEmpty(crops.getCropCode())) {				
+
+			if (!StringUtil.isEmpty(crops.getCropCode())) {
 				criteria.add(Restrictions.eq("pp.id", Long.valueOf(crops.getCropCode())));
 			}
 
 			if (!ObjectUtil.isEmpty(crops.getFarm()) && !ObjectUtil.isEmpty(crops.getFarm().getFarmer())) {
 
-				if (!ObjectUtil.isEmpty(crops.getFarm().getFarmer().getVillage())) {					
+				if (!ObjectUtil.isEmpty(crops.getFarm().getFarmer().getVillage())) {
 					criteria.add(Restrictions.eq("v.id", crops.getFarm().getFarmer().getVillage().getId()));
 				}
 
 				if (!ObjectUtil.isEmpty(crops.getFarm().getFarmer().getCity())
 						&& !ObjectUtil.isEmpty(crops.getFarm().getFarmer().getCity().getLocality())) {
-					
+
 					if (!ObjectUtil.isEmpty(crops.getFarm().getFarmer().getStateId())) {
 						criteria.add(Restrictions.eq("s.id",
 								crops.getFarm().getFarmer().getCity().getLocality().getState().getId()));
@@ -14039,123 +14063,220 @@ public List<Object[]> listFarmerFarmInfoFarmCropsByVillageId(Object obj, String 
 			pList.add(Projections.property("l.id"));
 			pList.add(Projections.property("c.id"));
 			pList.add(Projections.property("v.id"));
-			pList.add(Projections.property("pp.id"));			
+			pList.add(Projections.property("pp.id"));
 			criteria.setProjection(pList);
-			 list = criteria.list();
+			list = criteria.list();
 		} else if (obj instanceof Farm && plottingType.equalsIgnoreCase("1")) {
-				criteria = session.createCriteria(Farm.class);					
-				Farm crops = (Farm) obj;
-				criteria.createAlias("farmer", "f");
-				criteria.createAlias("f.village", "v");
-				criteria.createAlias("f.city", "c");
-				criteria.createAlias("c.locality", "l");
-				criteria.createAlias("l.state", "s");
-				//criteria.createAlias("procurementVariety", "pv");
-				//criteria.createAlias("pv.procurementProduct", "pp");
+			criteria = session.createCriteria(Farm.class);
+			Farm crops = (Farm) obj;
+			criteria.createAlias("farmer", "f");
+			criteria.createAlias("f.village", "v");
+			criteria.createAlias("f.city", "c");
+			criteria.createAlias("c.locality", "l");
+			criteria.createAlias("l.state", "s");
+			// criteria.createAlias("procurementVariety", "pv");
+			// criteria.createAlias("pv.procurementProduct", "pp");
 
-				if (!ObjectUtil.isEmpty(crops) && !ObjectUtil.isEmpty(crops.getFarmer())) {
+			if (!ObjectUtil.isEmpty(crops) && !ObjectUtil.isEmpty(crops.getFarmer())) {
 
-					if (!ObjectUtil.isEmpty(crops.getFarmer().getVillage())) {						
-						criteria.add(Restrictions.eq("v.id", crops.getFarmer().getVillage().getId()));
-					}
-
-					if (!ObjectUtil.isEmpty(crops.getFarmer().getCity())
-							&& !ObjectUtil.isEmpty(crops.getFarmer().getCity().getLocality())) {
-						
-
-						if (!ObjectUtil.isEmpty(crops.getFarmer().getStateId())) {
-							criteria.add(Restrictions.eq("s.id",
-									crops.getFarmer().getCity().getLocality().getState().getId()));
-						}
-
-						if (crops.getFarmer().getCity().getLocality().getId() > 0) {
-							criteria.add(Restrictions.eq("l.id",
-									crops.getFarmer().getCity().getLocality().getId()));
-						}
-					}
-					if (crops.getFarmer().getId() > 0) {
-						criteria.add(Restrictions.eq("f.id", crops.getFarmer().getId()));
-					}
-
-					if (crops.getFarmer().getBranchId() != null
-							&& !StringUtil.isEmpty(crops.getFarmer().getBranchId())) {
-						criteria.add(Restrictions.eq("f.branchId", crops.getFarmer().getBranchId()));
-					}
-
+				if (!ObjectUtil.isEmpty(crops.getFarmer().getVillage())) {
+					criteria.add(Restrictions.eq("v.id", crops.getFarmer().getVillage().getId()));
 				}
-				if (!StringUtil.isEmpty(selectedStatus) && selectedStatus != null) {
-					if (!selectedStatus.equalsIgnoreCase("2")) {
-						criteria.add(Restrictions.eq("f.status", Integer.valueOf(selectedStatus)));
-					} else {
-						criteria.add(Restrictions.isNotNull("f.status"));
+
+				if (!ObjectUtil.isEmpty(crops.getFarmer().getCity())
+						&& !ObjectUtil.isEmpty(crops.getFarmer().getCity().getLocality())) {
+
+					if (!ObjectUtil.isEmpty(crops.getFarmer().getStateId())) {
+						criteria.add(
+								Restrictions.eq("s.id", crops.getFarmer().getCity().getLocality().getState().getId()));
 					}
-				} else {
-					criteria.add(Restrictions.eq("f.status", 1));
+
+					if (crops.getFarmer().getCity().getLocality().getId() > 0) {
+						criteria.add(Restrictions.eq("l.id", crops.getFarmer().getCity().getLocality().getId()));
+					}
 				}
-				pList.add(Projections.property("id"));
-				pList.add(Projections.property("latitude"));
-				pList.add(Projections.property("longitude"));
-				pList.add(Projections.property("farmCode"));
-				pList.add(Projections.property("f.firstName"));
-				pList.add(Projections.property("farmName"));
-				pList.add(Projections.property("id"));
-				pList.add(Projections.property("f.id"));
-				pList.add(Projections.property("s.id"));
-				pList.add(Projections.property("l.id"));
-				pList.add(Projections.property("c.id"));
-				pList.add(Projections.property("v.id"));
-				//pList.add(Projections.property("p.id"));
-				criteria.setProjection(pList);
-				 list = criteria.list();
-			}else if (obj instanceof Farm && plottingType.equalsIgnoreCase("3")) {
-				Session sessions = getSessionFactory().openSession();
-				Query query = session.createSQLQuery("SELECT fmid,latitude,longitude,farmCode,firstName,farmName,farmrId,farmerId,stateId,districtId,talukId,villageId,cropId,ftype FROM( "
-						+ " SELECT fmc.id AS fmid,fmc.LATITUDE AS latitude,fmc.LONGITUDE AS longitude,fm.FARM_CODE AS farmCode,fr.FIRST_NAME AS firstName,fm.FARM_NAME AS farmName,fmc.id AS farmrId,fr.id AS farmerId,s.id as stateId,ld.id as districtId,c.id as talukId,fr.VILLAGE_ID as villageId,pp.id as cropId,'2' AS ftype "
-						+ " FROM FARM_CROPS fmc LEFT JOIN FARM fm ON fmc.FARM_ID = fm.id LEFT JOIN FARMER fr ON fm.FARMER_ID = fr.id left join city c on fr.CITY_ID=c.id left join location_detail ld on c.LOCATION_ID=ld.id left join state s on ld.STATE_ID=s.id left join procurement_variety pv on fmc.PROCUREMENT_CROPS_VARIETY_ID=pv.id left join procurement_product pp on pv.PROCUREMENT_PRODUCT_ID=pp.id "
-						+ "WHERE fr.STATUS = '1' UNION SELECT frm.id AS fmid,frm.LATITUDE AS latitude,frm.LONGITUDE AS longitude,frm.FARM_CODE AS farmCode, far.FIRST_NAME AS firstName,frm.FARM_NAME AS farmName,frm.id AS farmrId,far.id AS farmerId,s.id as stateId,ld.id as districtId,c.id as talukId,far.VILLAGE_ID as villageId,pp.id as cropId,'1' AS ftype  FROM FARM_CROPS fmcs left JOIN FARM frm ON fmcs.FARM_ID = frm.id left JOIN FARMER far ON frm.FARMER_ID = far.id "
-						+ "left join city c on far.CITY_ID=c.id left join location_detail ld on c.LOCATION_ID=ld.id left join state s on ld.STATE_ID=s.id left join procurement_variety pv on fmcs.PROCUREMENT_CROPS_VARIETY_ID=pv.id left join procurement_product pp on pv.PROCUREMENT_PRODUCT_ID=pp.id WHERE far.STATUS = '1' ) tt");
-				list = (List<Object[]>) query.list();
-				sessions.flush();
-				sessions.close();	
+				if (crops.getFarmer().getId() > 0) {
+					criteria.add(Restrictions.eq("f.id", crops.getFarmer().getId()));
+				}
+
+				if (crops.getFarmer().getBranchId() != null && !StringUtil.isEmpty(crops.getFarmer().getBranchId())) {
+					criteria.add(Restrictions.eq("f.branchId", crops.getFarmer().getBranchId()));
+				}
+
 			}
+			if (!StringUtil.isEmpty(selectedStatus) && selectedStatus != null) {
+				if (!selectedStatus.equalsIgnoreCase("2")) {
+					criteria.add(Restrictions.eq("f.status", Integer.valueOf(selectedStatus)));
+				} else {
+					criteria.add(Restrictions.isNotNull("f.status"));
+				}
+			} else {
+				criteria.add(Restrictions.eq("f.status", 1));
+			}
+			pList.add(Projections.property("id"));
+			pList.add(Projections.property("latitude"));
+			pList.add(Projections.property("longitude"));
+			pList.add(Projections.property("farmCode"));
+			pList.add(Projections.property("f.firstName"));
+			pList.add(Projections.property("farmName"));
+			pList.add(Projections.property("id"));
+			pList.add(Projections.property("f.id"));
+			pList.add(Projections.property("s.id"));
+			pList.add(Projections.property("l.id"));
+			pList.add(Projections.property("c.id"));
+			pList.add(Projections.property("v.id"));
+			// pList.add(Projections.property("p.id"));
+			criteria.setProjection(pList);
+			list = criteria.list();
+		} else if (obj instanceof Farm && plottingType.equalsIgnoreCase("3")) {
+			Session sessions = getSessionFactory().openSession();
+			Query query = session.createSQLQuery(
+					"SELECT fmid,latitude,longitude,farmCode,firstName,farmName,farmrId,farmerId,stateId,districtId,talukId,villageId,cropId,ftype FROM( "
+							+ " SELECT fmc.id AS fmid,fmc.LATITUDE AS latitude,fmc.LONGITUDE AS longitude,fm.FARM_CODE AS farmCode,fr.FIRST_NAME AS firstName,fm.FARM_NAME AS farmName,fmc.id AS farmrId,fr.id AS farmerId,s.id as stateId,ld.id as districtId,c.id as talukId,fr.VILLAGE_ID as villageId,pp.id as cropId,'2' AS ftype "
+							+ " FROM FARM_CROPS fmc LEFT JOIN FARM fm ON fmc.FARM_ID = fm.id LEFT JOIN FARMER fr ON fm.FARMER_ID = fr.id left join city c on fr.CITY_ID=c.id left join location_detail ld on c.LOCATION_ID=ld.id left join state s on ld.STATE_ID=s.id left join procurement_variety pv on fmc.PROCUREMENT_CROPS_VARIETY_ID=pv.id left join procurement_product pp on pv.PROCUREMENT_PRODUCT_ID=pp.id "
+							+ "WHERE fr.STATUS = '1' UNION SELECT frm.id AS fmid,frm.LATITUDE AS latitude,frm.LONGITUDE AS longitude,frm.FARM_CODE AS farmCode, far.FIRST_NAME AS firstName,frm.FARM_NAME AS farmName,frm.id AS farmrId,far.id AS farmerId,s.id as stateId,ld.id as districtId,c.id as talukId,far.VILLAGE_ID as villageId,pp.id as cropId,'1' AS ftype  FROM FARM_CROPS fmcs left JOIN FARM frm ON fmcs.FARM_ID = frm.id left JOIN FARMER far ON frm.FARMER_ID = far.id "
+							+ "left join city c on far.CITY_ID=c.id left join location_detail ld on c.LOCATION_ID=ld.id left join state s on ld.STATE_ID=s.id left join procurement_variety pv on fmcs.PROCUREMENT_CROPS_VARIETY_ID=pv.id left join procurement_product pp on pv.PROCUREMENT_PRODUCT_ID=pp.id WHERE far.STATUS = '1' ) tt");
+			list = (List<Object[]>) query.list();
+			sessions.flush();
+			sessions.close();
+		}
 		return list;
 	}
 
+	@Override
+	public Object[] findFarmersCountFromLotTraceByLotNo(String selectedLotNo) {
+		if (selectedLotNo != null && !StringUtil.isEmpty(selectedLotNo)) {
+			Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+			List query = session.createSQLQuery(
+					"select count(distinct ft.farmer_id),count(DISTINCT f.VILLAGE_ID) from farmer_traceability_data ft inner join farmer f on f.id=ft.FARMER_ID where ft.LOT_NO in("
+							+ selectedLotNo + ")")
+					.list();
+			return (Object[]) query.get(0);
+		} else
+			return null;
 
-@Override
-public Object[] findFarmersCountFromLotTraceByLotNo(String selectedLotNo) {
-	if(selectedLotNo!=null && !StringUtil.isEmpty(selectedLotNo)){
-	Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
-	List query = session.createSQLQuery("select count(distinct ft.farmer_id),count(DISTINCT f.VILLAGE_ID) from farmer_traceability_data ft inner join farmer f on f.id=ft.FARMER_ID where ft.LOT_NO in("+selectedLotNo+")").list();
-	return (Object[]) query.get(0);
-	}else return null;
-	
+	}
 
-}
+	@Override
+	public List<Object[]> listFarmerFarmInfoByLotNoFromFarmerTraceabilityData(String selectedLotNo, String branch) {
+		if (selectedLotNo != null && !StringUtil.isEmpty(selectedLotNo)) {
+			Session session = getSessionFactory().openSession();
 
-@Override
-public List<Object[]> listFarmerFarmInfoByLotNoFromFarmerTraceabilityData(String selectedLotNo, String branch) {
-	if(selectedLotNo!=null && !StringUtil.isEmpty(selectedLotNo)){
+			String queryStr = "SELECT f.id as farmer_id,fa.latitude,fa.LONGITUDE,fa.FARM_CODE,f.FIRST_NAME,fa.FARM_NAME,fa.id as farm_id,f.IS_FARMER_CERTIFIED FROM 	farmer_traceability_data ft INNER JOIN farmer f ON f.id = ft.FARMER_ID INNER JOIN farm fa ON fa.FARMER_ID = f.id WHERE fa.LONGITUDE is not null and fa.LONGITUDE<>'0' and fa.LONGITUDE<>'' and fa.LATITUDE is not null and fa.LATITUDE<>'0' and fa.LATITUDE<>'' and f.`STATUS`=1 and fa.`STATUS`=1 and	ft.LOT_NO IN ( :LOTNOS ) ";
+			if (branch != null && !StringUtil.isEmpty(branch)) {
+				queryStr += " and ft.BRANCH_ID= :BRANCHID";
+			}
+			SQLQuery query = session.createSQLQuery(queryStr);
+			query.setParameterList("LOTNOS", selectedLotNo.split(","));
+			if (branch != null && !StringUtil.isEmpty(branch)) {
+				query.setParameter("BRANCHID", branch);
+			}
+			List list = query.list();
+			session.flush();
+			session.close();
+			return list;
+		} else
+			return null;
+	}
+
+	@Override
+	public List<Object[]> fetchFarmerAndFarmCount() {
+		String query = "select " + 
+				"  temp.villageName as villageName, " + 
+				"  sum(temp.farmerCount) as farmerCount, " + 
+				"  sum(temp.farmCount) as farmCount " + 
+				"  from " + 
+				"  (" + 
+				"    select " + 
+				"      v.name as villageName, " + 
+				"      count(f.id) as farmerCount, " + 
+				"      (" + 
+				"        SELECT " + 
+				"          count(fa.id) " + 
+				"        FROM " + 
+				"          farm fa " + 
+				"        where " + 
+				"          fa.FARMER_ID = f.id" + 
+				"      ) as farmCount, " + 
+				"      v.id as villageId " + 
+				"    from " + 
+				"      farmer f " + 
+				"      inner join village v on v.id = f.village_id " + 
+				"    where " + 
+				"      f.status = 1 " + 
+				"      and f.status_code = 0 " + 
+				"    group by " + 
+				"      f.id, " + 
+				"      f.village_id" + 
+				"  ) temp " + 
+				"group by " + 
+				"  villageId";
 		Session session = getSessionFactory().openSession();
-		
-		String queryStr="SELECT f.id as farmer_id,fa.latitude,fa.LONGITUDE,fa.FARM_CODE,f.FIRST_NAME,fa.FARM_NAME,fa.id as farm_id,f.IS_FARMER_CERTIFIED FROM 	farmer_traceability_data ft INNER JOIN farmer f ON f.id = ft.FARMER_ID INNER JOIN farm fa ON fa.FARMER_ID = f.id WHERE fa.LONGITUDE is not null and fa.LONGITUDE<>'0' and fa.LONGITUDE<>'' and fa.LATITUDE is not null and fa.LATITUDE<>'0' and fa.LATITUDE<>'' and f.`STATUS`=1 and fa.`STATUS`=1 and	ft.LOT_NO IN ( :LOTNOS ) ";
-		if(branch!=null && !StringUtil.isEmpty(branch)){
-			queryStr+=" and ft.BRANCH_ID= :BRANCHID";
-		}
-		SQLQuery query = session.createSQLQuery(queryStr);
-		query.setParameterList("LOTNOS", selectedLotNo.split(","));
-		if(branch!=null && !StringUtil.isEmpty(branch)){
-		query.setParameter("BRANCHID", branch); 	
-		}
-		List list = query.list();
+		SQLQuery sqlQuery = session.createSQLQuery(query);
+		List list = sqlQuery.list();
 		session.flush();
 		session.close();
 		return list;
-		}else return null;
+	}
+
+	@Override
+	public Object[] populateDashboardCardDetails() {
+		String query = " select "
+				+ " (select count(f.id) from farmer f where  f.status = 1 and f.status_code = 0) as farmerCount,"
+				+ " (select count(fa.id) from farm fa inner join farmer f on f.id = fa.farmer_id where fa.status = 1 and f.status = 1 and f.status_code = 0) as farmCount,"
+				+ " (select count(p.id) from prof p where p.status = 1) as mobileUserCount,"
+				+ " sum(fdi.total_land_holding)  as totalArea"
+				+ " from farmer f"
+				+ " inner join farm fa on f.id = fa.farmer_id"
+				+ " inner join farm_detailed_info fdi on fdi.id = fa.farm_detailed_info_id"
+				+ " where fa.status = 1 and f.status = 1 and f.status_code = 0 ";
+		Session session = getSessionFactory().openSession();
+		SQLQuery sqlQuery = session.createSQLQuery(query);
+		List list = sqlQuery.list();
+		session.flush();
+		session.close();
+		return (Object[]) list.get(0);
+	}
+
+	@Override
+	public List<Object[]> fetchFarmerAndFarmCountByGroup() {
+		String query = " select " + 
+				"  temp.groupName as groupName, " + 
+				"  sum(temp.farmerCount) as farmerCount, " + 
+				"  sum(temp.farmCount) as farmCount " + 
+				"  from " + 
+				"  (" + 
+				"    select " + 
+				"      w.name as groupName, " + 
+				"      count(f.id) as farmerCount, " + 
+				"      (" + 
+				"        SELECT " + 
+				"          count(fa.id) " + 
+				"        FROM " + 
+				"          farm fa " + 
+				"        where " + 
+				"          fa.FARMER_ID = f.id" + 
+				"      ) as farmCount, " + 
+				"      w.id as groupId " + 
+				"    from " + 
+				"      farmer f " + 
+				"      inner join warehouse w on w.id = f.SAMITHI_ID " + 
+				"    where " + 
+				"      f.status = 1 " + 
+				"      and f.status_code = 0 and w.TYPEZ = 1 " + 
+				"    group by " + 
+				"      f.id, " + 
+				"      f.SAMITHI_ID" + 
+				"  ) temp " + 
+				" group by " + 
+				"  groupId ";
+		Session session = getSessionFactory().openSession();
+		SQLQuery sqlQuery = session.createSQLQuery(query);
+		List list = sqlQuery.list();
+		session.flush();
+		session.close();
+		return list;
+	}
+
+	
 }
-
-
-
-
-}
-

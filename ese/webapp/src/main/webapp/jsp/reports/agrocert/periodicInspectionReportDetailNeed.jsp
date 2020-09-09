@@ -223,7 +223,7 @@
 
 											<s:else>
 												<img align="middle" width="150" height="150" border="0"
-													class="noImgCls" src="img/no-image.png">
+													class="noImgCls" src="img/no-img.png">
 											</s:else>
 										</s:if>
 									</s:iterator>

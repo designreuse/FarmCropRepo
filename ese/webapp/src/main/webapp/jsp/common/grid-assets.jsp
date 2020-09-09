@@ -2,26 +2,39 @@
 <%@ taglib uri="/ese-tags" prefix="e"%>
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="sec"%>
-<%@ taglib prefix="sb" uri="/struts-bootstrap-tags" %>
+<%@ taglib prefix="sb" uri="/struts-bootstrap-tags"%>
 <!-- <link rel="stylesheet" type="text/css" media="screen" href="plugins/jplayer/jplayer.blue.monday.min.css" /> -->
 <%-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> --%>
-<link rel="stylesheet" type="text/css" media="screen" href="plugins/jqgrid/css/ui.jqgrid-bootstrap4.css" />
-	
-<script src="plugins/jqgrid/js/i18n/grid.locale-en.js" type="text/javascript"></script>
-<script src="plugins/jqgrid/js/jquery.jqGrid.min.js" type="text/javascript"></script>
-	
+<link rel="stylesheet" type="text/css" media="screen"
+	href="plugins/jqgrid/css/ui.jqgrid-bootstrap4.css" />
+
+<script src="plugins/jqgrid/js/i18n/grid.locale-en.js"
+	type="text/javascript"></script>
+<script src="plugins/jqgrid/js/jquery.jqGrid.min.js"
+	type="text/javascript"></script>
+
 <%-- <script type="text/javascript" src="plugins/html2PDF/html2canvas.js"></script>
 	<script type="text/javascript" src="plugins/html2PDF/jspdf.min.js"></script>
 	<script type="text/javascript" src="plugins/html2PDF/html2pdf.js"></script> --%>
 
-  <!-- DataTables -->
-        <link href="assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-        <link href="assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-        <link href="assets/libs/datatables.net-select-bs4/css//select.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-
-        <!-- Responsive datatable examples -->
-        <link href="assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />     
+<!-- DataTables -->
+<link
+	href="assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css"
+	rel="stylesheet" type="text/css" />
+<link
+	href="assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css"
+	rel="stylesheet" type="text/css" />
+<link
+	href="assets/libs/datatables.net-select-bs4/css//select.bootstrap4.min.css"
+	rel="stylesheet" type="text/css" />
+<link
+	href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css"
+	rel="stylesheet" type="text/css" />
+<!-- Responsive datatable examples -->
+<link
+	href="assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css"
+	rel="stylesheet" type="text/css" />
 
 <script src="js/dynamicReportRelated/dataTablePlugin/pdfmake.min.js"></script>
 <script src="js/dynamicReportRelated/dataTablePlugin/jszip.min.js"></script>
@@ -45,7 +58,7 @@
 	var reportWindowHeight="";
 	var postdata='<s:property value="postdata"/>';
 	var filterda='';
- jQuery.fn.dataTable.Api.register( 'sum()', function ( ) {
+/*  jQuery.fn.dataTable.Api.register( 'sum()', function ( ) {
 		return this.flatten().reduce( function ( a, b ) {
 			if ( typeof a === 'string' ) {
 				a = a.replace(/[^\d.-]/g, '') * 1;
@@ -57,7 +70,7 @@
 			return a + b;
 		}, 0 );
 	} ); 
-	
+	 */
 
 	/* jQuery.fn.dataTableExt.afnFiltering.push(
 			  function(oSettings, aData, iDataIndex) {
@@ -284,26 +297,34 @@
 </script>
 
 
- <!-- Required datatable js -->
-        <script src="assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
-        <script src="assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
-        <!-- Buttons examples -->
-        <script src="assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-        <script src="assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
-        <script src="assets/libs/jszip/jszip.min.js"></script>
-        <script src="assets/libs/pdfmake/build/pdfmake.min.js"></script>
-        <script src="assets/libs/pdfmake/build/vfs_fonts.js"></script>
-        <script src="assets/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
-        <script src="assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
-        <script src="assets/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+<!-- Required datatable js -->
+<script src="assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+<script
+	src="assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+<!-- Buttons examples -->
+<script
+	src="assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+<script
+	src="assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+<script src="assets/libs/jszip/jszip.min.js"></script>
+<script src="assets/libs/pdfmake/build/pdfmake.min.js"></script>
+<script src="assets/libs/pdfmake/build/vfs_fonts.js"></script>
+<script src="assets/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+<script src="assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+<script
+	src="assets/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
 
-        <script src="assets/libs/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
-        <script src="assets/libs/datatables.net-select/js/dataTables.select.min.js"></script>
-        
-        <!-- Responsive examples -->
-        <script src="assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-        <script src="assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+<script
+	src="assets/libs/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+<script
+	src="assets/libs/datatables.net-select/js/dataTables.select.min.js"></script>
 
-        <!-- Datatable init js -->
-        <script src="assets/js/pages/datatables.init.js"></script>
+<!-- Responsive examples -->
+<script
+	src="assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script
+	src="assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+
+<!-- Datatable init js -->
+<script src="assets/js/pages/datatables.init.js"></script>
 

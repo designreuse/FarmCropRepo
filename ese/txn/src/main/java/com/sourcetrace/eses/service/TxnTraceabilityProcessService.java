@@ -39,7 +39,7 @@ public class TxnTraceabilityProcessService implements ITxnTraceabilityProcessSer
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@POST
-	@Path("/processTxnRequest")
+	@Path("/mobileRequestCollection")
 	@Consumes({ "application/json", "application/xml" })
 	@WebMethod
 	public Response processRequest(Request request) {

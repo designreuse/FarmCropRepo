@@ -76,6 +76,8 @@ public class LocalityAction extends SwitchValidatorAction {
 	List<Locality> localities = new ArrayList<Locality>();
 
 	private String code;
+	private String localityName;
+	
 	/**
 	 * Gets the states list.
 	 * 
@@ -734,6 +736,42 @@ public class LocalityAction extends SwitchValidatorAction {
 
 	}
 
+	public void processCreateLocality() {
+		Locality locality = new Locality();
+		locality.setName(localityName);
+		locality.setState(locationService.findStateById(Long.valueOf(getSelectedState())));
+		
+		ESESystem preferences = preferncesService.findPrefernceById("1");
+		String codeGenType = preferences.getPreferences().get(ESESystem.CODE_TYPE);
+		if (codeGenType.equals("1") ) {
+			String districtCodeSeq = idGenerator.getLocalityHHIdSeq();
+			BigInteger codeSeq = new BigInteger(districtCodeSeq);
+			String maxCode = codeSeq.subtract(new BigInteger("1")).toString();
+			if (Integer.valueOf(maxCode) >= 9) {
+				addActionError(getLocaleProperty("error.localityExceed"));
+				
+			} else {
+				locality.setCode(districtCodeSeq);
+			}
+		} else {
+			locality.setCode(idGenerator.getDistrictIdSeq());
+		}
+		
+		locationService.addLocality(locality);
+		getJsonObject().put("msg", getText("msg.cropUpdated"));
+		getJsonObject().put("title", getText("title.success"));	
+		sendAjaxResponse(getJsonObject());
+	}
+	public void processUpdateLocality() {
+		Locality locality = locationService.findLocalityById(Long.valueOf(id));
+		locality.setName(localityName);
+		locality.setState(locationService.findStateById(Long.valueOf(getSelectedState())));
+		locationService.editLocality(locality);
+		getJsonObject().put("msg", getText("msg.cropUpdated"));
+		getJsonObject().put("title", getText("title.success"));	
+		sendAjaxResponse(getJsonObject());
+	}
+	
 	public IPreferencesService getPreferncesService() {
 		return preferncesService;
 	}
@@ -764,6 +802,14 @@ public class LocalityAction extends SwitchValidatorAction {
 
 	public void setCode(String code) {
 		this.code = code;
+	}
+
+	public String getLocalityName() {
+		return localityName;
+	}
+
+	public void setLocalityName(String localityName) {
+		this.localityName = localityName;
 	}
 
 }

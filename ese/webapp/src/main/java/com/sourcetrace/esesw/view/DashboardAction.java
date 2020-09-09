@@ -9,8 +9,9 @@
  */
 package com.sourcetrace.esesw.view;
 
-import java.io.IOException;
 import static java.util.stream.Collectors.joining;
+
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.Field;
 import java.text.DecimalFormat;
@@ -26,12 +27,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Function;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
-import org.apache.poi.util.SystemOutLogger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -4462,6 +4460,69 @@ public class DashboardAction extends ESEAction {
 			printAjaxResponse(plottingAreaBySowing, "text/html");
 	}
 
+	public void farmerInfoChartByVillage() {
+
+		List<Object[]> data = farmerService.fetchFarmerAndFarmCount();
+
+		JSONObject result = new JSONObject();
+
+		List<JSONObject> series = new ArrayList<JSONObject>();
+
+		JSONObject farmer = new JSONObject();
+		farmer.put("name", "Farmer");
+		farmer.put("data", data.stream().map(farmerCount -> farmerCount[1]).collect(Collectors.toList()));
+		series.add(farmer);
+
+		JSONObject farm = new JSONObject();
+		farm.put("name", "Farm");
+		farm.put("data", data.stream().map(farmCount -> farmCount[2]).collect(Collectors.toList()));
+		series.add(farm);
+
+		JSONObject x_cat = new JSONObject();
+
+		result.put("series", series);
+		result.put("x_categories", data.stream().map(village -> village[0]).collect(Collectors.toList()).toString());
+		printAjaxResponse(result, "text/html");
+
+	}
+	
+	public void farmerInfoChartByGroup() {
+
+		List<Object[]> data = farmerService.fetchFarmerAndFarmCountByGroup();
+
+		JSONObject result = new JSONObject();
+
+		List<JSONObject> series = new ArrayList<JSONObject>();
+
+		JSONObject farmer = new JSONObject();
+		farmer.put("name", "Farmer");
+		farmer.put("data", data.stream().map(farmerCount -> farmerCount[1]).collect(Collectors.toList()));
+		series.add(farmer);
+
+		JSONObject farm = new JSONObject();
+		farm.put("name", "Farm");
+		farm.put("data", data.stream().map(farmCount -> farmCount[2]).collect(Collectors.toList()));
+		series.add(farm);
+
+		JSONObject x_cat = new JSONObject();
+
+		result.put("series", series);
+		result.put("x_categories", data.stream().map(village -> village[0]).collect(Collectors.toList()).toString());
+		printAjaxResponse(result, "text/html");
+
+	}
+	
+	public void populateDashboardCardDetails() {
+		Object[] data = farmerService.populateDashboardCardDetails();
+		JSONObject result = new JSONObject();
+		result.put("farmerCount", String.valueOf(data[0]));
+		result.put("farmCount", String.valueOf(data[1]));
+		result.put("mobileUserCount", String.valueOf(data[2]));
+		result.put("totalArea", String.valueOf(data[3]));
+		printAjaxResponse(result, "text/html");
+	}
+	
+	
 	
 	public String getAgentId() {
 		return agentId;

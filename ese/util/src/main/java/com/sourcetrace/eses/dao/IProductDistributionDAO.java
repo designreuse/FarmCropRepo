@@ -2443,6 +2443,12 @@ public interface IProductDistributionDAO extends IESEDAO {
 
 	public List<String> listLotNoFromFarmerTraceabilityData();
 
+	public List<ProcurementProduct> listProcurementProductDesc();
+
+	public List<ProcurementProduct> listProcurementVarietyDesc();
+
+	public List<ProcurementProduct> listProcurementGradeDesc();
+
 	
 }
 

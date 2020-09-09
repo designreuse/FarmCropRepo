@@ -4,53 +4,7 @@
 <head>
 <META name="decorator" content="swithlayout">
 </head>
-<style>
-.hide {
-  display: none; }
-  
- .wizard-wrapper {
-          display: -webkit-box;
-          display: -ms-flexbox;
-          display: flex; }
-.wizard-icon {
-          font-size: 2.5rem;
-          margin-right: 1.1rem;
-          -webkit-transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, -webkit-box-shadow 0.15s ease;
-          transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, -webkit-box-shadow 0.15s ease;
-          transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
-          transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, -webkit-box-shadow 0.15s ease; }
-.wizard-icon .svg-icon svg g [fill] {
-            -webkit-transition: fill 0.3s ease;
-            transition: fill 0.3s ease;
-            fill: #B5B5C3; }
-.wizard-icon .svg-icon svg:hover g [fill] {
-            -webkit-transition: fill 0.3s ease;
-            transition: fill 0.3s ease; }
-.wizard-label {
-          display: -webkit-box;
-          display: -ms-flexbox;
-          display: flex;
-          -webkit-box-orient: vertical;
-          -webkit-box-direction: normal;
-          -ms-flex-direction: column;
-          flex-direction: column;
-          -webkit-box-pack: center;
-          -ms-flex-pack: center;
-          justify-content: center; }
-.wizard-label .wizard-title {
-            color: #181C32;
-            font-weight: 500;
-            font-size: 1.1rem; }
-.wizard-label .wizard-desc {
-            color: #7E8299; }
-.collapse-icon-custom{
-margin-top: -35px;
-}
 
-.aButtonClsWbg{
-margin-top: 29px;
-}
-</style>
 
 <s:form name="form" action="user_%{command}" method="post"
 	cssClass="fillform" enctype="multipart/form-data">
@@ -62,11 +16,12 @@ margin-top: 29px;
 	<s:hidden key="command" />
 	<s:hidden key="selecteddropdwon" id="listname" />
 	<s:hidden key="temp" id="temp" />
-	<div class="appContentWrapper marginBottom">
 
-		<div class="error">
-			<font color="red"> <s:actionerror theme="bootstrap" /> <s:fielderror theme="bootstrap"  /></font> <sup>*</sup>
-			<s:text name="reqd.field" />
+
+		<div class="ferror" id="errorDiv" class=" hide alert alert-danger">
+		<s:actionerror theme="bootstrap" /> 
+		<s:fielderror theme="bootstrap"  />
+			
 		</div>
 		
 <div id="accordion" class="custom-accordion pers_info" >
@@ -362,20 +317,11 @@ margin-top: 29px;
 							<div class="form-group">
 					<label for="txt"><s:text name="Enabled" /></label>
 					<div class="">
-						<input type="checkbox" name="user.enabled" id="switch6" switch="primary" checked />
-						<label for="switch6" data-on-label="YES" data-off-label="NO"></label>
+							<s:checkbox name="user.enabled"  cssClass="form-control" />
 					</div>
 				</div>
 				</div>
-	<%-- 			 <div class="col-md-4">
-			<div class="form-group">
-					<label for="txt"> <s:text name="Market Place Required" /> <sup
-						style="color: red;"> *</sup></label>
-					<div class="square-switch">
-						<input type="checkbox" name="user.isMarketPlace" id="square-switch3" switch="bool" checked />
-						<label for="square-switch3" data-on-label="YES" data-off-label="NO"></label>
-					</div>
-				</div></div> --%>
+	
 			
 	</div>
 </div>              
@@ -534,7 +480,7 @@ function onSubmit() {
 			 $("#userImageExist").val("1");
 			 $("#userImageString").val("");
 			 $("#customFile").val("");
-			 $('#image').attr('src', 'img/no-image.png');
+			 $('#image').attr('src', 'img/no-img.png');
 		 }
 		 
 	}

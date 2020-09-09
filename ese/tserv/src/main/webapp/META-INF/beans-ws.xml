@@ -10,7 +10,7 @@
   http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd">
 
 	<!-- General RESTFUL Web Service Configuration -->
-	<jaxrs:server id="restContainer" address="/rs">
+	<jaxrs:server id="restContainer" address="/generalServiceCollection">
 		<jaxrs:features>
 			<cxf:logging limit="-1" />
 			
@@ -41,7 +41,7 @@
 
 	 <!-- RESTFUL Web Service Configuration : Location Tracking-->
 	<jaxrs:server id="restLocContainer" name="TxnLocationProcessService"
-		serviceName="ITxnLocationProcessService" address="/rsl">
+		serviceName="ITxnLocationProcessService" address="/locationTrackServiceCollection">
 		<jaxrs:features>
 			<cxf:logging />
 		</jaxrs:features>
@@ -57,7 +57,7 @@
 
 	<!-- RESTFUL Web Service Configuration : Location Tracking -->
 	<jaxrs:server id="restTraceabilityContainer" name="TxnTraceabilityProcessService"
-		serviceName="ITxnTraceabilityProcessService" address="/rst">
+		serviceName="ITxnTraceabilityProcessService" address="/traceabilityServiceCollection">
 		<jaxrs:features>
 			<cxf:logging />
 		</jaxrs:features>
@@ -67,7 +67,7 @@
 	</jaxrs:server>
 	
 	<jaxrs:server id="restFarmerDetails" name="TxnFarmerDetailService"
-		serviceName="TxnFarmerDetailService" address="/FarmerDetails">
+		serviceName="TxnFarmerDetailService" address="/farmerDetailServiceCollection">
 		<jaxrs:features>
 			<cxf:logging />
 		</jaxrs:features>
@@ -91,7 +91,7 @@
 	
 	<!-- RESTFUL Web Service Configuration : Location Tracking -->
 	<jaxrs:server id="restFarmerTraceDetailsContainer" name="TxnFarmerTraceDetailsProcessService"
-		serviceName="ITxnFarmerTraceDetailsProcessService" address="/rsk">
+		serviceName="ITxnFarmerTraceDetailsProcessService" address="/farmerTraceabilityServiceCollection">
 		<jaxrs:features>
 			<cxf:logging />
 		</jaxrs:features>
@@ -100,7 +100,7 @@
 		</jaxrs:serviceBeans>
 	</jaxrs:server>
 	
-	<jaxrs:server id="restServicesScheduler" address="/rss">
+	<jaxrs:server id="restServicesScheduler" address="/schedulerServiceCollection">
 		<jaxrs:providers>
 	       <ref bean="jaxbProvider" />
 			<ref bean="jsonProvider" />
@@ -540,14 +540,14 @@
 		</property>
 	</bean> -->
 	
-	 <bean id="swagger2FeatureFs" class="com.sourcetrace.eses.interceptors.CutomSwaggerFeature">
-        <!-- customize some of the properties -->
+<!-- 	 <bean id="swagger2FeatureFs" class="com.sourcetrace.eses.interceptors.CutomSwaggerFeature">
+        customize some of the properties
        <property name="basePath" value="/agrotxn/rs"/>
         <property name="contact" value="sts@sourcetrace.com"/>
         <property name="description" value="API for Mobile Integration"/>
         <property name="prettyPrint" value="true"/>
          <property name="title" value="Source Trace API'S"/>
          <property name="scan" value="true"/>
-       </bean>
+       </bean> -->
 
 </beans>

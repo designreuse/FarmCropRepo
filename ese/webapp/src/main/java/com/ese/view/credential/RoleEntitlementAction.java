@@ -523,4 +523,14 @@ public class RoleEntitlementAction extends ESEAction {
 		this.branchId_F = branchId_F;
 	}
 	
+	
+	public Map<String, String> getAllRoles() {
+		roles = new ArrayList<Role>();
+		
+	//if (!branchId_F.equals("-1")) {
+			roles = roleService.listRoles();
+		//}
+		Map<String, String> map = ReflectUtil.buildMap(roles, new String[] { "id", "name" });
+		return map;
+	}
 }

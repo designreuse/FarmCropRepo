@@ -40,7 +40,7 @@ public interface ISecurityFilter {
 	public static final String BRANCH_FILTER_PARM = "branchIdParam";
 	public static final String USER_REC_ID = "USER_REC_ID";
 	public static final String TENANT_ID = "tenantId";
-	public static final String DEFAULT_TENANT_ID = "agro";
+	public static final String DEFAULT_TENANT_ID = "thefarmcorp";
 	public static final String LANGUAGE_MENU = "languageMenu";
 	public static final String MAPPED_BRANCHES = "branchesMap";
 	public static final String IS_MULTI_BRANCH_APP="IS_MULTI_BRANCH_APP";

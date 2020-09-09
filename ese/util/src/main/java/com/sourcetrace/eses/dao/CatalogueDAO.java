@@ -360,6 +360,18 @@ query.setParameterList("codes", codes);
 		session.close();
 		return list;
 	}
+
+	@Override
+	public List<Object[]> fetchCatalogueValues() {
+		Session session = getSessionFactory().openSession();
+		String queryString = "SELECT cv.id as catalogueId, cv.code as catalogueCode, cv.name as catalogueName, cv.typez as catalogueTypez, if(cv.status = 1 ,'Active','InActive') as catalogueStatus, f.name as farmCatalogueName "
+				+ " FROM catalogue_value cv inner join farm_catalogue f on f.catalogue_typez = cv.typez";
+		Query query = session.createSQLQuery(queryString);
+		List <Object[]>list = query.list();
+		session.flush();
+		session.close();
+		return list;
+	}
 	
 	
 }

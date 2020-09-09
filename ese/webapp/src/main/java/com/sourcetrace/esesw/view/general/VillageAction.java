@@ -32,6 +32,7 @@ import com.sourcetrace.esesw.entity.profile.Country;
 import com.sourcetrace.esesw.entity.profile.GramPanchayat;
 import com.sourcetrace.esesw.entity.profile.Locality;
 import com.sourcetrace.esesw.entity.profile.Municipality;
+import com.sourcetrace.esesw.entity.profile.ProcurementProduct;
 import com.sourcetrace.esesw.entity.profile.State;
 import com.sourcetrace.esesw.entity.profile.Village;
 import com.sourcetrace.esesw.view.SwitchValidatorAction;
@@ -59,6 +60,7 @@ public class VillageAction extends SwitchValidatorAction {
 	List<GramPanchayat> gramPanchayats = new ArrayList<GramPanchayat>();
 	private String name;
 	private String code;
+	private String villageName;
 
 	private IUniqueIDGenerator idGenerator;
 	private IPreferencesService preferncesService;
@@ -1032,6 +1034,8 @@ public class VillageAction extends SwitchValidatorAction {
 			e.printStackTrace();
 		}
 	}
+	
+	
 
 	@SuppressWarnings("unchecked")
 	public void populateStateList() {
@@ -1234,6 +1238,199 @@ public class VillageAction extends SwitchValidatorAction {
 		sendAjaxResponse(gramPanchayatArray);
 	}
 
+	public void populateCountryListData() {
+		List<Country> countryList = locationService.listCountries();
+		
+		JSONArray rows = new JSONArray();
+		countryList.stream().forEach(country -> {
+			List<String> data = new ArrayList<String>();
+			data.add('"'+country.getCode()+'"');
+			data.add('"'+country.getName()+'"');
+			data.add('"'+"<button type='button' class='btn btn-primary btn-unreg' data-toggle='modal' data-target='#slide' onclick='openCountryEditWindow("+country.getId()+",this)'  >Update</button>"+'"');
+			rows.add(data);
+		});
+		printAjaxResponse(rows, "text/html");
+	}
+	
+	public void populateStateListData() {
+		List<Country> countryList = locationService.listCountries();
+		
+		JSONArray rows = new JSONArray();
+		countryList.stream().forEach(country -> {
+			
+			country.getStates().stream().forEach(state -> {
+				List<String> data = new ArrayList<String>();
+				data.add('"'+state.getCode()+'"');
+				data.add('"'+state.getName()+'"');
+				data.add('"'+country.getName()+'"');
+				data.add('"'+"<button type='button' class='btn btn-primary btn-unreg' data-toggle='modal' data-target='#slide' onclick='openStateEditWindow("+state.getId()+",this)'  >Update</button>"+'"');
+				rows.add(data);
+			});
+			
+			
+		});
+		printAjaxResponse(rows, "text/html");
+	}
+	
+	public void populateDistrictListData() {
+		List<Country> countryList = locationService.listCountries();
+		
+		JSONArray rows = new JSONArray();
+		countryList.stream().forEach(country -> {
+			
+			country.getStates().stream().forEach(state -> {
+				
+				state.getLocalities().stream().forEach(locality -> {
+					List<String> data = new ArrayList<String>();
+					data.add('"'+locality.getCode()+'"');
+					data.add('"'+locality.getName()+'"');
+					data.add('"'+state.getName()+'"');
+					data.add('"'+country.getName()+'"');
+					data.add('"'+"<button type='button' class='btn btn-primary btn-unreg' data-toggle='modal' data-target='#slide' onclick='openLocalityEditWindow("+locality.getId()+",this)'  >Update</button>"+'"');
+					rows.add(data);
+				});
+				
+			});
+			
+			
+		});
+		printAjaxResponse(rows, "text/html");
+	}
+	
+	public void populateCityListData() {
+		List<Country> countryList = locationService.listCountries();
+		
+		JSONArray rows = new JSONArray();
+		countryList.stream().forEach(country -> {
+			
+			country.getStates().stream().forEach(state -> {
+				
+				state.getLocalities().stream().forEach(locality -> {
+					
+					locality.getMunicipalities().stream().forEach(city -> {
+						List<String> data = new ArrayList<String>();
+						data.add('"'+city.getCode()+'"');
+						data.add('"'+city.getName()+'"');
+						data.add('"'+locality.getName()+'"');
+						data.add('"'+state.getName()+'"');
+						data.add('"'+country.getName()+'"');
+						data.add('"'+"<button type='button' class='btn btn-primary btn-unreg' data-toggle='modal' data-target='#slide' onclick='openCityEditWindow("+city.getId()+",this)'  >Update</button>"+'"');
+						rows.add(data);
+					});
+					
+					
+				});
+				
+			});
+			
+			
+		});
+		printAjaxResponse(rows, "text/html");
+	}
+	
+	public void populateVillageListData() {
+		List<Country> countryList = locationService.listCountries();
+		
+		JSONArray rows = new JSONArray();
+		countryList.stream().forEach(country -> {
+			
+			country.getStates().stream().forEach(state -> {
+				
+				state.getLocalities().stream().forEach(locality -> {
+					
+					locality.getMunicipalities().stream().forEach(city -> {
+						
+						city.getVillages().stream().forEach(village -> {
+							List<String> data = new ArrayList<String>();
+							data.add('"'+village.getCode()+'"');
+							data.add('"'+village.getName()+'"');
+							data.add('"'+city.getName()+'"');
+							data.add('"'+locality.getName()+'"');
+							data.add('"'+state.getName()+'"');
+							data.add('"'+country.getName()+'"');
+							data.add('"'+"<button type='button' class='btn btn-primary btn-unreg' data-toggle='modal' data-target='#slide' onclick='openVillageEditWindow("+village.getId()+",this)'  >Update</button>"+'"');
+							rows.add(data);
+						});
+						
+						
+					});
+					
+					
+				});
+				
+			});
+			
+			
+		});
+		printAjaxResponse(rows, "text/html");
+	}
+	
+	
+	public Map<String, String> getCountryList() {
+		Map<String, String> result = new LinkedHashMap<>();
+		List<Country> countryList = locationService.listCountries();
+		countryList.stream().forEach(country -> {
+			result.put(String.valueOf(country.getId()), country.getCode() + " - " + country.getName());
+		});
+
+		return result;
+	}
+	
+
+	public Map<String, String> getStateList() {
+		Map<String, String> result = new LinkedHashMap<>();
+		
+		List<Country> countryList = locationService.listCountries();
+		
+		countryList.stream().forEach(country -> {
+			country.getStates().stream().forEach(state -> {
+				result.put(String.valueOf(state.getId()), state.getCode() + " - " + state.getName());
+			});
+			
+		});
+
+		return result;
+	}
+	
+	public Map<String, String> getLocalityList() {
+		Map<String, String> result = new LinkedHashMap<>();
+		
+		List<Country> countryList = locationService.listCountries();
+		
+		countryList.stream().forEach(country -> {
+			country.getStates().stream().forEach(state -> {
+				state.getLocalities().stream().forEach(locality -> {
+					result.put(String.valueOf(locality.getId()), locality.getCode() + " - " + locality.getName());
+				});
+				
+			});
+			
+		});
+
+		return result;
+	}
+	
+	public Map<String, String> getCityList() {
+		Map<String, String> result = new LinkedHashMap<>();
+		
+		List<Country> countryList = locationService.listCountries();
+		
+		countryList.stream().forEach(country -> {
+			country.getStates().stream().forEach(state -> {
+				state.getLocalities().stream().forEach(locality -> {
+					locality.getMunicipalities().stream().forEach(city -> {
+						result.put(String.valueOf(city.getId()), city.getCode() + " - " + city.getName());
+					});
+					
+				});
+				
+			});
+			
+		});
+
+		return result;
+	}
+	
 	/**
 	 * Gets the selected gram panchayat.
 	 * 
@@ -1292,4 +1489,38 @@ public class VillageAction extends SwitchValidatorAction {
 		this.code = code;
 	}
 
+	public String getVillageName() {
+		return villageName;
+	}
+
+	public void setVillageName(String villageName) {
+		this.villageName = villageName;
+	}
+
+	public void processCreateVillage() {
+		Municipality city = locationService.findMunicipalityById(Long.valueOf(getSelectedCity()));
+		Village village = new Village();
+		village.setCity(city);
+		village.setBranchId(getBranchId());
+		village.setCode(idGenerator.getVillageIdSeq());
+		village.setName(getVillageName());
+		locationService.addVillage(village);
+		getJsonObject().put("msg", getText("msg.cropUpdated"));
+		getJsonObject().put("title", getText("title.success"));	
+		sendAjaxResponse(getJsonObject());
+	}
+	
+	public void processUpdateVillage() {
+		Village village = locationService.findVillageById(Long.parseLong(id));
+		Municipality city = locationService.findMunicipalityById(Long.valueOf(getSelectedCity()));
+		
+		village.setCity(city);
+		village.setBranchId(getBranchId());
+		village.setName(getVillageName());
+		locationService.editVillage(village);
+		getJsonObject().put("msg", getText("msg.cropUpdated"));
+		getJsonObject().put("title", getText("title.success"));	
+		sendAjaxResponse(getJsonObject());
+	}
+	
 }

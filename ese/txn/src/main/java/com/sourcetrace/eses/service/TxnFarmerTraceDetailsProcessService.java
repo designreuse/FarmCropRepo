@@ -30,17 +30,17 @@ import com.sourcetrace.eses.util.StringUtil;
 @Component
 @Path("/")
 @Produces({ "application/json", "application/xml" })
-@WebService(targetNamespace = "http://service.eses.sourcetrace.com/", endpointInterface = "com.sourcetrace.eses.service.ITxnProcessService", portName = "tservport", serviceName = "TxnProcessServiceImpl")
+@WebService(targetNamespace = "http://farmer.thefarmcorp.com/", endpointInterface = "com.sourcetrace.eses.service.ITxnProcessService", portName = "tservport", serviceName = "TxnProcessServiceImpl")
 public class TxnFarmerTraceDetailsProcessService implements ITxnFarmerTraceDetailsProcessService {
 	private static final Logger LOGGER = Logger.getLogger(TxnProcessServiceImpl.class.getName());
 	public static final String TXN_ID = "txnId";
 	public static final String SERVER_ERROR = "SERVER_ERROR";
 
 	private Map<String, ITxnAdapter> txnAdapterMap;
-	@CrossOrigin(origins = "http://localhost:8080")
+	@CrossOrigin(origins = "*")
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@POST
-	@Path("/processTxnRequest")
+	@Path("/mobileRequestCollection")
 	@Consumes({ "application/json", "application/xml" })
 	@WebMethod
 	public Response processRequest(Request request) {

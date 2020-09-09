@@ -254,7 +254,7 @@ public class ESESystem {
 	public static final String ENABLE_BATCH_NO = "ENABLE_BATCH_NO";
 	public static final String BLRI_TENANT_ID = "blri";
 	public static final String KPF_TENANT_ID = "kpf";
-	public static final String AGRO_TENANT = "agro";
+	public static final String AGRO_TENANT = "thefarmcorp";
 	public static final String FINCOCOA_TENANT_ID = "fincocoa";
 	public static final String MOVCD_TENANT_ID = "movcd";
 	public static final String CRSDEMO_TENANT_ID = "crsdemo";

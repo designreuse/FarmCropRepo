@@ -2115,6 +2115,11 @@ public class ProductDistributionService implements IProductDistributionService {
 
 		return productDistributionDAO.listProcurementProduct();
 	}
+	
+	public List<ProcurementProduct> listProcurementProductDesc() {
+
+		return productDistributionDAO.listProcurementProductDesc();
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -12895,6 +12900,16 @@ public class ProductDistributionService implements IProductDistributionService {
 	public List<String> listLotNoFromFarmerTraceabilityData() {
 		// TODO Auto-generated method stub
 		return productDistributionDAO.listLotNoFromFarmerTraceabilityData();
+	}
+
+	@Override
+	public List<ProcurementProduct> listProcurementVarietyDesc() {
+		return productDistributionDAO.listProcurementVarietyDesc();
+	}
+
+	@Override
+	public List<ProcurementProduct> listProcurementGradeDesc() {
+		return productDistributionDAO.listProcurementGradeDesc();
 	}
 
 

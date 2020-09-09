@@ -24,7 +24,7 @@
 	</dependencies>
 	
 	<build>
-		<finalName>agrotxn</finalName>
+		<finalName>theFarmCorpMobile</finalName>
 	</build>
 	
 </project>

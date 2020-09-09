@@ -8,7 +8,7 @@
 		</layout>
 	</appender>
 	<appender name="FILE" class="org.apache.log4j.RollingFileAppender">
-		<param name="file" value="/var/log/ese/web-agro-multi.log" />
+		<param name="file" value="/var/log/ese/web-the-farm-corp.log" />
 		<param name="maxFileSize" value="5000KB" />
 		<param name="maxBackupIndex" value="50" />
 		<param name="append" value="true" />

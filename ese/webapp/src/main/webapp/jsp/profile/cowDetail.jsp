@@ -30,7 +30,7 @@
 														src="data:image/png;base64,<s:property value="cowImageByteString"/>">
 												</s:if> <s:else>
 													<img align="middle" width="150" height="100" border="0"
-														src="img/no-image.png">
+														src="img/no-img.png">
 
 												</s:else></td>
 										</tr>

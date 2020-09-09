@@ -689,7 +689,32 @@ public class ProcurementGradeAction extends SwitchValidatorAction {
 		jsonObject.put("name", name);
 		return jsonObject;
 	}
+	
+	public void processCreateGrade() {
+		ProcurementGrade grade = new ProcurementGrade();
+		grade.setName(gradeName);
+		grade.setProcurementVariety(productDistributionService
+				.findProcurementVariertyById(Long.valueOf(getProcurementVarietyId())));
+		grade.setPrice(Double.valueOf(gradePrice));
+		grade.setCode(idGenerator.getProcurementGradeIdSeq());
+		productDistributionService.addProcurementGrade(grade);
+		getJsonObject().put("msg", getText("msg.cropUpdated"));
+		getJsonObject().put("title", getText("title.success"));	
+		sendAjaxResponse(getJsonObject());
+	}
 
+	public void processUpdateGrade() {
+		ProcurementGrade grade = productDistributionService.findProcurementGradeById(Long.valueOf(id));
+		grade.setName(gradeName);
+		grade.setProcurementVariety(productDistributionService
+				.findProcurementVariertyById(Long.valueOf(getProcurementVarietyId())));
+		grade.setPrice(Double.valueOf(gradePrice));
+		productDistributionService.editProcurementGrade(grade);
+		getJsonObject().put("msg", getText("msg.cropUpdated"));
+		getJsonObject().put("title", getText("title.success"));	
+		sendAjaxResponse(getJsonObject());
+	}
+	
 	public List<ProcurementVariety> getProcurementVarietyList() {
 		return procurementVarietyList;
 	}

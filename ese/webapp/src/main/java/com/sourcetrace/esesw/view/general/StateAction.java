@@ -54,6 +54,7 @@ public class StateAction extends SwitchValidatorAction {
 
 	private String selectedCountry;
 	private String code;
+	private String stateName;
 
 	/**
 	 * Sets the location service.
@@ -494,6 +495,36 @@ public class StateAction extends SwitchValidatorAction {
 
 	public void setCode(String code) {
 		this.code = code;
+	}
+
+	public String getStateName() {
+		return stateName;
+	}
+
+	public void setStateName(String stateName) {
+		this.stateName = stateName;
+	}
+	
+	public void processCreateState() {
+		State state = new State();
+		state.setCode(idGenerator.getStateIdSeq());
+		state.setBranchId(getBranchId());
+		state.setName(getStateName());
+		state.setCountry(locationService.findCountryById(Long.valueOf(getSelectedCountry())));
+		locationService.addState(state);
+		getJsonObject().put("msg", getText("msg.cropUpdated"));
+		getJsonObject().put("title", getText("title.success"));	
+		sendAjaxResponse(getJsonObject());
+	}
+	
+	public void processUpdateState() {
+		State state = locationService.findStateById(Long.valueOf(id));
+		state.setName(getStateName());
+		state.setCountry(locationService.findCountryById(Long.valueOf(getSelectedCountry())));
+		locationService.editState(state);
+		getJsonObject().put("msg", getText("msg.cropUpdated"));
+		getJsonObject().put("title", getText("title.success"));	
+		sendAjaxResponse(getJsonObject());
 	}
 
 }

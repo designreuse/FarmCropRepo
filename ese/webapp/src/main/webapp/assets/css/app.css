@@ -26,34 +26,127 @@ File: Main Css File
 18. Extra Pages
 
 */
-@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap");
+/* devanagari */
 @font-face {
-  font-family: 'Inter';
+  font-family: 'Poppins';
   font-style: normal;
   font-weight: 300;
-  font-display: swap;
-  src: url("../fonts/inter-light.woff2?v=3.13") format("woff2"), url("../fonts/inter-light.woff?v=3.13") format("woff"); }
-
+  src: local('Poppins Light'), local('Poppins-Light'), url(../fonts/pxiByp8kv8JHgFVrLDz8Z11lFc-K.woff2) format('woff2');
+  unicode-range: U+0900-097F, U+1CD0-1CF6, U+1CF8-1CF9, U+200C-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FB;
+}
+/* latin-ext */
 @font-face {
-  font-family: 'Inter';
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Poppins Light'), local('Poppins-Light'), url(../fonts/pxiByp8kv8JHgFVrLDz8Z1JlFc-K.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Poppins Light'), local('Poppins-Light'), url(../fonts/pxiByp8kv8JHgFVrLDz8Z1xlFQ.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* devanagari */
+@font-face {
+  font-family: 'Poppins';
   font-style: normal;
   font-weight: 400;
-  font-display: swap;
-  src: url("../fonts/inter-regular.woff2?v=3.13") format("woff2"), url("../fonts/inter-regular.woff?v=3.13") format("woff"); }
-
+  src: local('Poppins Regular'), local('Poppins-Regular'), url(../fonts/pxiEyp8kv8JHgFVrJJbecmNE.woff2) format('woff2');
+  unicode-range: U+0900-097F, U+1CD0-1CF6, U+1CF8-1CF9, U+200C-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FB;
+}
+/* latin-ext */
 @font-face {
-  font-family: 'Inter';
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Poppins Regular'), local('Poppins-Regular'), url(../fonts/pxiEyp8kv8JHgFVrJJnecmNE.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Poppins Regular'), local('Poppins-Regular'), url(../fonts/pxiEyp8kv8JHgFVrJJfecg.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* devanagari */
+@font-face {
+  font-family: 'Poppins';
   font-style: normal;
   font-weight: 500;
-  font-display: swap;
-  src: url("../fonts/inter-medium.woff2?v=3.13") format("woff2"), url("../fonts/inter-medium.woff?v=3.13") format("woff"); }
-
+  src: local('Poppins Medium'), local('Poppins-Medium'), url(../fonts/pxiByp8kv8JHgFVrLGT9Z11lFc-K.woff2) format('woff2');
+  unicode-range: U+0900-097F, U+1CD0-1CF6, U+1CF8-1CF9, U+200C-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FB;
+}
+/* latin-ext */
 @font-face {
-  font-family: 'Inter';
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  src: local('Poppins Medium'), local('Poppins-Medium'), url(../fonts/pxiByp8kv8JHgFVrLGT9Z1JlFc-K.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  src: local('Poppins Medium'), local('Poppins-Medium'), url(../fonts/pxiByp8kv8JHgFVrLGT9Z1xlFQ.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* devanagari */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  src: local('Poppins SemiBold'), local('Poppins-SemiBold'), url(../fonts/pxiByp8kv8JHgFVrLEj6Z11lFc-K.woff2) format('woff2');
+  unicode-range: U+0900-097F, U+1CD0-1CF6, U+1CF8-1CF9, U+200C-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  src: local('Poppins SemiBold'), local('Poppins-SemiBold'), url(../fonts/pxiByp8kv8JHgFVrLEj6Z1JlFc-K.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  src: local('Poppins SemiBold'), local('Poppins-SemiBold'), url(../fonts/pxiByp8kv8JHgFVrLEj6Z1xlFQ.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* devanagari */
+@font-face {
+  font-family: 'Poppins';
   font-style: normal;
   font-weight: 700;
-  font-display: swap;
-  src: url("../fonts/inter-bold.woff2?v=3.13") format("woff2"), url("../fonts/iter-bold.woff?v=3.13") format("woff"); }
+  src: local('Poppins Bold'), local('Poppins-Bold'), url(../fonts/pxiByp8kv8JHgFVrLCz7Z11lFc-K.woff2) format('woff2');
+  unicode-range: U+0900-097F, U+1CD0-1CF6, U+1CF8-1CF9, U+200C-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Poppins Bold'), local('Poppins-Bold'), url(../fonts/pxiByp8kv8JHgFVrLCz7Z1JlFc-K.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Poppins Bold'), local('Poppins-Bold'), url(../fonts/pxiByp8kv8JHgFVrLCz7Z1xlFQ.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 
 #page-topbar {
   position: fixed;
@@ -1330,7 +1423,10 @@ body[data-layout="horizontal"][data-layout-size="boxed"] .container-fluid, body[
   .page-content,
   body {
     padding: 0;
-    margin: 0; }
+    margin: 0; 
+	font-family: Poppins, Helvetica, "sans-serif" !important;
+	
+	}
   .card {
     border: 0; } }
 
@@ -1853,7 +1949,7 @@ body[data-layout="horizontal"][data-layout-size="boxed"] .container-fluid, body[
     border-top: 2px dotted #505d69; }
 
 .irs {
-  font-family: "Nunito", sans-serif; }
+  font-family: Poppins, Helvetica, "sans-serif"; }
 
 .irs--round .irs-bar,
 .irs--round .irs-to,
@@ -2631,14 +2727,14 @@ div.dt-button-info {
 .apex-charts {
   min-height: 10px !important; }
   .apex-charts text {
-    font-family: "Nunito", sans-serif !important;
+    font-family: Poppins, Helvetica, "sans-serif" !important;
     fill: #adb5bd; }
   .apex-charts .apexcharts-canvas {
     margin: 0 auto; }
 
 .apexcharts-tooltip-title,
 .apexcharts-tooltip-text {
-  font-family: "Nunito", sans-serif !important; }
+  font-family: Poppins, Helvetica, "sans-serif" !important; }
 
 .apexcharts-legend-series {
   font-weight: 500; }
@@ -2649,7 +2745,7 @@ div.dt-button-info {
 
 .apexcharts-legend-text {
   color: #74788d !important;
-  font-family: "Nunito", sans-serif !important;
+  font-family: Poppins, Helvetica, "sans-serif" !important;
   font-size: 13px !important; }
 
 .apexcharts-pie-label {
@@ -2657,7 +2753,7 @@ div.dt-button-info {
 
 .apexcharts-yaxis text,
 .apexcharts-xaxis text {
-  font-family: "Nunito", sans-serif !important;
+  font-family: Poppins, Helvetica, "sans-serif" !important;
   fill: #adb5bd; }
 
 /* Flot chart */
@@ -2692,7 +2788,7 @@ div.dt-button-info {
   color: #eff2f7 !important;
   font-size: 12px !important;
   line-height: 18px !important;
-  font-family: "Nunito", sans-serif !important;
+  font-family: Poppins, Helvetica, "sans-serif" !important;
   font-weight: 500 !important; }
 
 .gmaps, .gmaps-panaroma {
@@ -2731,7 +2827,7 @@ div.dt-button-info {
   border: none;
   background: #343a40;
   color: #f8f9fa;
-  font-family: "Nunito", sans-serif;
+  font-family: Poppins, Helvetica, "sans-serif";
   font-size: 0.9rem;
   padding: 5px 8px; }
 
@@ -3432,7 +3528,7 @@ div.dt-button-info {
 .error-text {
   color: #ff3d60;
   position: relative; }
-  .error-text .error-img {
+.error-text .error-img {
     position: absolute;
     width: 120px;
     left: -15px;
@@ -3445,3 +3541,97 @@ div.dt-button-info {
         bottom: 38px; } }
 .hide {
   display: none; }
+  
+.wizard-wrapper {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+}
+
+.wizard-icon {
+	font-size: 2.5rem;
+	margin-right: 1.1rem;
+	-webkit-transition: color 0.15s ease, background-color 0.15s ease,
+		border-color 0.15s ease, -webkit-box-shadow 0.15s ease;
+	transition: color 0.15s ease, background-color 0.15s ease, border-color
+		0.15s ease, -webkit-box-shadow 0.15s ease;
+	transition: color 0.15s ease, background-color 0.15s ease, border-color
+		0.15s ease, box-shadow 0.15s ease;
+	transition: color 0.15s ease, background-color 0.15s ease, border-color
+		0.15s ease, box-shadow 0.15s ease, -webkit-box-shadow 0.15s ease;
+}
+
+.wizard-icon .svg-icon svg g [fill] {
+	-webkit-transition: fill 0.3s ease;
+	transition: fill 0.3s ease;
+	fill: #5664d2;
+}
+
+.wizard-icon .svg-icon svg:hover g [fill] {
+	-webkit-transition: fill 0.3s ease;
+	transition: fill 0.3s ease;
+}
+
+.wizard-label {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+}
+
+.wizard-label .wizard-title {
+	color: #181C32;
+	font-weight: 500;
+	font-size: 1.1rem;
+}
+
+.wizard-label .wizard-desc {
+	color: #7E8299;
+}
+
+.collapse-icon-custom {
+	display: inline-block;
+	width: 24px;
+	height: 24px;
+	line-height: 24px;
+	font-size: 16px;
+	background-color: #5664d2;
+	color: #fff;
+	border-radius: 50%;
+	text-align: center;
+	left: 10px;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+.responsiveDiv {
+    margin-top: 4.25rem!important;  
+    display: block;
+    width: 100%;
+    overflow-x:hidden; 
+    overflow-y:auto; 
+    -webkit-overflow-scrolling: touch;
+    
+}
+
+.deviceResponsiveDiv {
+    margin-top: 1.25rem!important;  
+    display: block;
+    width: 100%;
+    overflow-x:hidden; 
+    overflow-y:auto; 
+    -webkit-overflow-scrolling: touch;
+    
+} 
+.crop-custom-button-items {
+    margin-left: 17px;
+    margin-bottom: 0px;
+}
+ 

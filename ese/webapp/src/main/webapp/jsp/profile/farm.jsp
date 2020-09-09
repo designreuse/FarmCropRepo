@@ -1022,7 +1022,7 @@ $("#calendarFormat").datepicker({
                     fileid: id
                 }, function (data, status) {
                     if (status === '<s:text name="success"/>') {
-                        $('#image').attr("src", 'img/no-image.png');
+                        $('#image').attr("src", 'img/no-img.png');
                         $('#farmImageFileName').hide();
                         $("#farmImage").css({
                             "display": "block",
@@ -1037,7 +1037,7 @@ $("#calendarFormat").datepicker({
                 });
             } else if (id == undefined) {
 
-                $('#image').attr("src", 'img/no-image.png');
+                $('#image').attr("src", 'img/no-img.png');
                 $('#farmImageFileName').hide();
                 $("#farmImage").css({
                     "display": "block",
