@@ -528,7 +528,7 @@ public class RoleEntitlementAction extends ESEAction {
 		roles = new ArrayList<Role>();
 		
 	//if (!branchId_F.equals("-1")) {
-			roles = roleService.listRolesByTypeAndBranchIdExcludeBranch(roleService.listFilters().get(0).getId(), getBranchId_F());
+			roles = roleService.listRoles();
 		//}
 		Map<String, String> map = ReflectUtil.buildMap(roles, new String[] { "id", "name" });
 		return map;

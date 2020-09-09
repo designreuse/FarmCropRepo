@@ -244,9 +244,9 @@ public class RoleMenuAction extends ESEAction {
 	 */
 	public String list() throws Exception {
 		roles = new ArrayList<Role>();
-		if (!StringUtil.isEmpty(getBranchId())) {
+		//if (!StringUtil.isEmpty(getBranchId())) {
 			roles = roleService.listRoles();
-		}
+		//}
 		
 		if(getIsMultiBranch().equals("1") &&!StringUtil.isEmpty(getIsParentBranch())){
 			roles = roleService.listRoles();

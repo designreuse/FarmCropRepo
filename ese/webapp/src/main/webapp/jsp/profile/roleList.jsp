@@ -22,34 +22,12 @@ $(document).ready(function(){
 			datatype: "json",
 			styleUI : 'Bootstrap',
 			colNames:[
-						<s:if test='branchId==null'>
-						'<s:text name="app.branch"/>',
-						</s:if>
-						<s:if test='isMultiBranch=="1"&&(getIsParentBranch()==1||branchId==null)'>
-						'<s:text name="app.subBranch"/>',
-						</s:if>
+						
 		  		   	  '<s:text name="role.name"/>'
 		      	 ],
 
 		   colModel:[	
-				<s:if test='branchId==null'>
-					{name:'branchId',index:'branchId',width:125,sortable: false,width :125,search:true,stype: 'select',searchoptions: {
-						value: '<s:property value="parentBranchFilterText"/>',
-						dataEvents: [ 
-						          {
-						            type: "change",
-						            fn: function () {
-						            	console.log($(this).val());
-						             	getSubBranchValues($(this).val())
-						            }
-						        }
-						    ]
-						
-						}},	   				   		
-					</s:if>
-					 <s:if test='isMultiBranch=="1"&&(getIsParentBranch()==1||branchId==null)'>
-			   			{name:'subBranchId',index:'subBranchId',width:125,sortable: false,width :125,search:true,stype: 'select',searchoptions: { value: '<s:property value="childBranchFilterText"/>' }},	   				   		
-			   		</s:if>
+				
 		      	      {name:'name',index:'name', sortable:true, width:125}
 		      	 ],			
 		    height: 301, 

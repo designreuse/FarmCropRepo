@@ -195,25 +195,20 @@ public class RoleAction extends SwitchValidatorAction {
 		Role role = (Role) obj;
 		JSONObject jsonObject = new JSONObject();
 		JSONArray rows = new JSONArray();
-		if ((getIsMultiBranch().equalsIgnoreCase("1") && (getIsParentBranch().equals("1")||StringUtil.isEmpty(branchIdValue)))) {
-
-	      if(StringUtil.isEmpty(branchIdValue)){  
-           rows.add(!StringUtil.isEmpty(
-                    getBranchesMap().get(getParentBranchMap().get(role.getBranchId())))
-                            ? getBranchesMap()
-                                    .get(getParentBranchMap().get(role.getBranchId()))
-                            : getBranchesMap().get(role.getBranchId()));
-	      }
-        rows.add(!StringUtil.isEmpty(
-                getBranchesMap().get(getParentBranchMap().get(role.getBranchId())))
-                        ? getBranchesMap().get(role.getBranchId())
-                        : "");
-
-		} else {
-        if (StringUtil.isEmpty(branchIdValue)) {
-            rows.add(branchesMap.get(role.getBranchId()));
-        }
-    	}
+		/*
+		 * if ((getIsMultiBranch().equalsIgnoreCase("1") &&
+		 * (getIsParentBranch().equals("1")||StringUtil.isEmpty(branchIdValue)))) {
+		 * 
+		 * if(StringUtil.isEmpty(branchIdValue)){ rows.add(!StringUtil.isEmpty(
+		 * getBranchesMap().get(getParentBranchMap().get(role.getBranchId()))) ?
+		 * getBranchesMap() .get(getParentBranchMap().get(role.getBranchId())) :
+		 * getBranchesMap().get(role.getBranchId())); } rows.add(!StringUtil.isEmpty(
+		 * getBranchesMap().get(getParentBranchMap().get(role.getBranchId()))) ?
+		 * getBranchesMap().get(role.getBranchId()) : "");
+		 * 
+		 * } else { if (StringUtil.isEmpty(branchIdValue)) {
+		 * rows.add(branchesMap.get(role.getBranchId())); } }
+		 */
 		rows.add("<font color=\"#0000FF\" style=\"cursor:pointer;\">" + role.getName() + "</font>");
 		// rows.add(role.getFilter().getName());
 		// rows.add(role.getFilter());
