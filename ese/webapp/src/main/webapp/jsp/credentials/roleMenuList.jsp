@@ -197,10 +197,13 @@
 <br>
 
 <script type="text/javascript">
+	
+	
 	$(document)
 			.ready(
 					function() {
-						reloadSelect('#selectedRole', 'user_populateRoles.action?branchId_F=');
+						
+						
 						listview();
 						$('button')
 								.on(
@@ -218,6 +221,7 @@
 					});
 
 	function listview() {
+		
 		var selectedRoleValue = document.getElementById('selectedRole');
 		var strUser = selectedRoleValue.options[selectedRoleValue.selectedIndex].text;
 
