@@ -20,8 +20,8 @@
 		<div class="error">
 			<s:actionerror />
 			<s:fielderror />
-			<sup>*</sup>
-			<s:text name="reqd.field" />
+			<%-- <sup>*</sup>
+			<s:text name="reqd.field" /> --%>
 		</div>
 
 		<!-- new design start -->

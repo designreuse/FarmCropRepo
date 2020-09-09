@@ -76,9 +76,10 @@ select {
 
 							<div class="">
 								<s:select name="selectedRole" list="roles" listKey="id"
-								id="selectedRole" listValue="name" theme="simple"
-								cssStyle="display:none" cssClass="form-control input-sm select2"
-								onchange="loadMenusMultiSelectDropDown();" />
+									id="selectedRole" listValue="name" theme="simple"
+									
+									cssClass="form-control input-sm "
+									onchange="loadMenusMultiSelectDropDown();" />
 							</div>
 						</div>
 					</div>
@@ -90,22 +91,23 @@ select {
 							</label>
 							<div class="">
 								<s:select name="selectedParentMenu" list="parentMenus"
-								id="parentMenu" theme="simple"
-								onchange="listview();loadMenusMultiSelectDropDown();"
-								cssClass="form-control input-sm select2" />
+									id="parentMenu" theme="simple"
+									onchange="listview();loadMenusMultiSelectDropDown();"
+									cssClass="form-control input-sm " />
 							</div>
 						</div>
 					</div>
-					
+
 					<div class="col-md-4">
 						<div class="form-group ">
 							<label for="txt"> <s:text name="Choose Menus" /><sup
 								style="color: red;">*</sup>
 							</label>
 							<div class="">
-								<s:select name="selected" id="menus" list="allSubMenu" listKey="id"
-					listValue="name" headerKey="headerKey" multiple="true"
-					cssClass="select2 form-control select2-multiple" tabindex="10" />
+								<s:select name="selected" id="menus" list="allSubMenu"
+									listKey="id" listValue="name" headerKey="headerKey"
+									multiple="true"
+									cssClass="select2 form-control select2-multiple" tabindex="10" />
 							</div>
 						</div>
 					</div>
@@ -142,7 +144,7 @@ select {
 									<s:property value="roleName" />
 							</div> --%>
 						<div class="form-element">
-						<%-- 	<s:select name="selectedRole" list="roles" listKey="id"
+							<%-- 	<s:select name="selectedRole" list="roles" listKey="id"
 								id="selectedRole" listValue="name" theme="simple"
 								cssStyle="display:none" cssClass="form-control input-sm select2"
 								onchange="loadMenusMultiSelectDropDown();" /> --%>
@@ -162,7 +164,7 @@ select {
 
 				</div>
 
-				
+
 
 
 				<div class="flexiWrapper" style="margin-top: 10px;">

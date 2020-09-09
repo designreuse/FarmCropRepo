@@ -19,8 +19,8 @@
 			<div class="error">
 				<s:actionerror />
 				<s:fielderror />
-				<sup>*</sup>
-				<s:text name="reqd.field" />
+				<%-- <sup>*</sup>
+				<s:text name="reqd.field" /> --%>
 			</div>
 			
 			<!-- new design start -->
@@ -79,7 +79,7 @@
 								listKey="id" listValue="name" theme="simple"
 								onchange="listview()" headerKey="-1"
 								headerValue="%{getText('txt.select')}"
-								cssClass="col-md-6 form-control select2" />
+								cssClass="col-md-6 form-control " />
 							</div>
 						</div>
 					</div>
@@ -93,7 +93,7 @@
 								<s:select id="selectedParentMenu" name="selectedParentMenu"
 								list="parentMenus" headerKey="-1"
 								headerValue="%{getText('txt.select')}" theme="simple"
-								onchange="listview()" cssClass="form-control input-sm select2" />
+								onchange="listview()" cssClass="form-control input-sm " />
 							</div>
 						</div>
 					</div>

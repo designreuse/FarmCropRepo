@@ -51,8 +51,8 @@
 				<s:fielderror />
 
 
-				<sup>*</sup>
-				<s:text name="reqd.field" />
+				<%-- <sup>*</sup>
+				<s:text name="reqd.field" /> --%>
 			</div>
 			
 			<div id="accordion" class="custom-accordion pers_info">

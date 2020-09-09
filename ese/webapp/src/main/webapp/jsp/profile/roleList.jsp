@@ -12,76 +12,124 @@
 </div>
 
 <script type="text/javascript">
-$(document).ready(function(){	
+	$(document)
+			.ready(
+					function() {
 
-	jQuery("#detail").jqGrid(
-			{
-			url:'role_data.action',
-			mtype: 'POST',
-			pager: '#pagerForDetail',
-			datatype: "json",
-			styleUI : 'Bootstrap',
-			colNames:[
-						
-		  		   	  '<s:text name="role.name"/>'
-		      	 ],
+						jQuery("#detail")
+								.jqGrid(
+										{
+											url : 'role_data.action',
+											mtype : 'POST',
+											pager : '#pagerForDetail',
+											datatype : "json",
+											styleUI : 'Bootstrap',
+											colNames : [
 
-		   colModel:[	
-				
-		      	      {name:'name',index:'name', sortable:true, width:125}
-		      	 ],			
-		    height: 301, 
-			width: $("#baseDiv").width(),
-			scrollOffset: 0,
-			rowNum:10,
-			rowList : [10,25,50],
-			sortname: 'id',
-			sortorder: 'desc',
-			viewrecords: true,
-		    onSelectRow: function(id){ 
-			  document.updateform.id.value  =id;
-	          document.updateform.submit();      
-			},		
-	        onSortCol: function (index, idxcol, sortorder) {
-	        	if (this.p.lastsort >= 0 && this.p.lastsort !== idxcol
-	                   && this.p.colModel[this.p.lastsort].sortable !== false) {
-	               $(this.grid.headers[this.p.lastsort].el).find(">div.ui-jqgrid-sortable>span.s-ico").show();
-	           }
-	        }
-	   });
-	
-	jQuery("#detail").jqGrid("setLabel","branchId","",{"text-align":"center"});
-	jQuery("#detail").jqGrid("setLabel","name","",{"text-align":"center"});
+											'<s:text name="role.name"/>' ],
 
-	jQuery("#detail").jqGrid('navGrid','#pagerForDetail',{edit:false,add:false,del:false,search:false,refresh:true})
-	jQuery("#detail").jqGrid('filterToolbar',{stringResult: true,searchOnEnter : false});			
+											colModel : [
 
-	colModel = jQuery("#detail").jqGrid('getGridParam', 'colModel');
-    $('#gbox_' + $.jgrid.jqID(jQuery("#detail")[0].id) +
-        ' tr.ui-jqgrid-labels th.ui-th-column').each(function (i) {
-        var cmi = colModel[i], colName = cmi.name;
+											{
+												name : 'name',
+												index : 'name',
+												sortable : true,
+												width : 125
+											} ],
+											height : 301,
+											width : $("#baseDiv").width(),
+											scrollOffset : 0,
+											rowNum : 10,
+											rowList : [ 10, 25, 50 ],
+											sortname : 'id',
+											sortorder : 'desc',
+											viewrecords : true,
+											onSelectRow : function(id) {
+												document.updateform.id.value = id;
+												document.updateform.submit();
+											},
+											onSortCol : function(index, idxcol,
+													sortorder) {
+												if (this.p.lastsort >= 0
+														&& this.p.lastsort !== idxcol
+														&& this.p.colModel[this.p.lastsort].sortable !== false) {
+													$(
+															this.grid.headers[this.p.lastsort].el)
+															.find(
+																	">div.ui-jqgrid-sortable>span.s-ico")
+															.show();
+												}
+											}
+										});
 
-        if (cmi.sortable !== false) {
-            $(this).find('>div.ui-jqgrid-sortable>span.s-ico').show();
-        } else if (!cmi.sortable && colName !== 'rn' && colName !== 'cb' && colName !== 'subgrid') {
-            $(this).find('>div.ui-jqgrid-sortable').css({cursor: 'default'});
-        }
-    });
-});
+						jQuery("#detail").jqGrid("setLabel", "branchId", "", {
+							"text-align" : "center"
+						});
+						jQuery("#detail").jqGrid("setLabel", "name", "", {
+							"text-align" : "center"
+						});
 
+						jQuery("#detail").jqGrid('navGrid', '#pagerForDetail',
+								{
+									edit : false,
+									add : false,
+									del : false,
+									search : false,
+									refresh : true
+								})
+						jQuery("#detail").jqGrid('filterToolbar', {
+							stringResult : true,
+							searchOnEnter : false
+						});
+
+						colModel = jQuery("#detail").jqGrid('getGridParam',
+								'colModel');
+						$(
+								'#gbox_'
+										+ $.jgrid.jqID(jQuery("#detail")[0].id)
+										+ ' tr.ui-jqgrid-labels th.ui-th-column')
+								.each(
+										function(i) {
+											var cmi = colModel[i], colName = cmi.name;
+
+											if (cmi.sortable !== false) {
+												$(this)
+														.find(
+																'>div.ui-jqgrid-sortable>span.s-ico')
+														.show();
+											} else if (!cmi.sortable
+													&& colName !== 'rn'
+													&& colName !== 'cb'
+													&& colName !== 'subgrid') {
+												$(this)
+														.find(
+																'>div.ui-jqgrid-sortable')
+														.css({
+															cursor : 'default'
+														});
+											}
+										});
+					});
 </script>
 
 <sec:authorize ifAllGranted="profile.role.create">
-	<input type="BUTTON" id="add" value='<s:text name="Add"></s:text>'
-		onclick="document.createform.submit()" class="btn btn-sts" />
-</sec:authorize>
+		<button type="BUTTON" id="add" onclick="document.createform.submit()"
+			class="btn btn-success  ">
+			Add <i class="ri-menu-add-line align-middle ml-2"></i>
+		</button>
+		<%-- <input type="BUTTON" id="add" value='<s:text name="Add"></s:text>'
+		onclick="document.createform.submit()" class="btn btn-sts" /> --%>
+	</sec:authorize>
+
 <div class="appContentWrapper ">
-<div style="width: 99%;" id="baseDiv">
+	
 
-	<table id="detail"></table>
+	<div style="width: 99%;" id="baseDiv">
 
-	<div id="pagerForDetail"></div>
-</div>
+		<table id="detail"></table>
+
+		<div id="pagerForDetail"></div>
+	</div>
 </div>
 
 <s:form name="createform" action="role_create">
