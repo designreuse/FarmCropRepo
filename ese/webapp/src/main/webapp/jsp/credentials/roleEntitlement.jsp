@@ -1,16 +1,10 @@
 <%@ include file="/jsp/common/form-assets.jsp"%>
 <head>
 
-<style type="text/css">
-.alignTopLeft {
-	float: left;
-	width: 6em;
-}
-</style>
 <!-- add this meta information to select layout  -->
 <META name="decorator" content="swithlayout">
 </head>
-<s:form name="roleform">
+<s:form name="roleform" cssClass="fillform">
 	<s:hidden key="id" id="id" />
 	<s:select name="selectedRole" list="roles" listKey="id"
 		listValue="name" theme="simple" cssStyle="display:none" />
@@ -49,7 +43,7 @@
 									<h3 class="wizard-title">
 										<s:text name="info.roleMenuEnt" />
 									</h3>
-									<div class="wizard-desc">Role entitlement details</div>
+									<div class="wizard-desc">Setup Role Privilege Details</div>
 								</div>
 							</div>
 							<i
@@ -59,12 +53,14 @@
 				</a>
 
 			</div>
+			<div id="persInfo" class="collapse show" aria-labelledby="headingOne"
+				data-parent="#accordion">
 			<div class="card-body">
 
 
 				<div class="row">
 					<div class="col-md-4">
-						<div class="form-group farmerCode">
+						<div class="form-group Role">
 							<label for="txt"><s:text name="Role" /><sup
 								style="color: red;">*</sup> </label>
 
@@ -75,14 +71,14 @@
 					</div>
 
 					<div class="col-md-4">
-						<div class="form-group farmerCode">
+						<div class="form-group parentMenu">
 							<label for="txt"> <s:text name="parentMenu" /><sup
 								style="color: red;">*</sup>
 							</label>
 							<div class="">
 								<s:select name="selectedParentMenu" list="parentMenus"
 								theme="simple" onchange="listview()"
-								cssClass="form-control input-sm select2" />
+								cssClass="form-control" />
 							</div>
 						</div>
 					</div>
@@ -91,44 +87,11 @@
 
 				</div>
 
-
+</div>
 			</div>
 		</div>
 		<!-- new design end -->
 	
-		<div class="appContentWrapper marginBottom">
-
-			<div class="formContainerWrapper">
-				<%-- <h2>
-					<s:text name="info.roleMenuEnt" />
-				</h2> --%>
-
-				<div class="flexiWrapper">
-					<%-- <s:if test='branchId==null'>
-						<div class="flexi flexi10">
-							<label for="txt"><s:text name="app.branch" /></label>
-							<div class="form-element">
-								<s:property value="%{getBranchName(branchId_F)}" />
-							</div>
-						</div>
-					</s:if> --%>
-
-					<div class="flexi flexi10">
-						<%-- <label for="txt"><s:text name="Role" /></label>
-						<div class="form-element">
-							<s:property value="roleName" />
-						</div> --%>
-					</div>
-					<div class="flexi flexi10">
-						<%-- <label for="txt"> <s:text name="parentMenu" /></label>
-						<div class="form-element">
-							<s:select name="selectedParentMenu" list="parentMenus"
-								theme="simple" onchange="listview()"
-								cssClass="form-control input-sm select2" /> --%>
-						</div>
-					</div>
-				</div>
-			</div>
 			<div class="formContainerWrapper">
 				<div class="panel panel-default">
 					<table Class="fillform table table-bordered aspect-detail">
@@ -138,13 +101,7 @@
 									<div style="float: left">
 										<s:text name="roleentitlements" />
 									</div>
-									<div style="float: right">
-										<s:text name="select" />
-										&nbsp;<a href="javascript:void(0)"
-											onclick="javascript:Select(true)"><s:text name="all" /></a>
-										&nbsp;| <a href="javascript:void(0)"
-											onclick="javascript:Select(false)"><s:text name="none" /></a>
-									</div>
+							
 								</th>
 							</tr>
 							<tr>
@@ -196,18 +153,26 @@
 								</tr>
 							</s:iterator>
 						</tbody>
+							
 					</table>
+						<div style="float: left">
+										<s:text name="select" />
+										&nbsp;<a href="javascript:void(0)"
+											onclick="javascript:Select(true)"><s:text name="all" /></a>
+										&nbsp;| <a href="javascript:void(0)"
+											onclick="javascript:Select(false)"><s:text name="none" /></a>
+									</div>
 				</div>
 			</div>
-			<div class="yui-skin-sam">
+			<div class="button-items float-right">
 				<span id="button" class=""><span class="first-child">
-						<button type="button" class="save-btn btn btn-success">
-							<FONT color="#FFFFFF"> <b><s:text name="Save" /></b>
+						<button type="button" class="btn btn-success waves-effect waves-light">
+							<i class="ri-check-line align-middle mr-2"></i><FONT color="#FFFFFF"> <b><s:text name="Save" /></b>
 							</FONT>
 						</button>
 				</span></span><span id="cancel" class=""><span class="first-child"><a
-						href="roleEntitlement_list.action" class="cancel-btn btn btn-sts">
-							<FONT color="#FFFFFF"> <s:text name="cancel" />
+						href="roleEntitlement_list.action" class="btn btn-danger waves-effect waves-light">
+						<i class="ri-close-line align-middle mr-2"></i>	<FONT color="#FFFFFF"> <s:text name="cancel" />
 						</FONT>
 					</a></span></span>
 			</div>

@@ -3,10 +3,9 @@
 
 
 <head>
-<style type="text/css">
-.alignTopLeft {
-	float: left;
-	width: 6em;
+<style>
+label {
+    font-weight: 400;
 }
 </style>
 <!-- add this meta information to select layout  -->
@@ -14,17 +13,14 @@
 </head>
 
 
-<s:form name="roleform">
+<s:form name="roleform" cssClass="fillform">
 
-	<div class="appContentWrapper marginBottom">
-		<div class="error">
-			<s:actionerror />
-			<s:fielderror />
-			<%-- <sup>*</sup>
-			<s:text name="reqd.field" /> --%>
+	<div class="ferror" id="errorDiv" class=" hide alert alert-danger">
+			<s:actionerror theme="bootstrap" />
+			<s:fielderror theme="bootstrap" />
 		</div>
 
-		<!-- new design start -->
+	
 		<div id="accordion" class="custom-accordion pers_info">
 			<div class="card-header card mb-1 shadow-none">
 				<a href="#persInfo" class="text-dark" data-toggle="collapse"
@@ -56,7 +52,7 @@
 									<h3 class="wizard-title">
 										<s:text name="info.roleMenuEnt" />
 									</h3>
-									<div class="wizard-desc">Role entitlement details</div>
+									<div class="wizard-desc">Setup Role Privilege Details</div>
 								</div>
 							</div>
 							<i
@@ -66,35 +62,37 @@
 				</a>
 
 			</div>
+			<div id="persInfo" class="collapse show" aria-labelledby="headingOne"
+				data-parent="#accordion">
 			<div class="card-body">
 
 
 				<div class="row">
 					<div class="col-md-4">
-						<div class="form-group farmerCode">
+						<div class="form-group Role">
 							<label for="txt"><s:text name="Role" /><sup
 								style="color: red;">*</sup> </label>
 
 							<div class="">
 								<s:select id="selectedRole" name="selectedRole" list="allRoles"
-							listKey="key" listValue="value" theme="simple"
+							listKey="key" listValue="value"
 							onchange="listview()" headerKey="-1"
 							headerValue="%{getText('txt.select')}"
-							cssClass="form-control input-sm select2" />
+							cssClass="form-control" />
 							</div>
 						</div>
 					</div>
 
 					<div class="col-md-4">
-						<div class="form-group farmerCode">
+						<div class="form-group parentMenu">
 							<label for="txt"> <s:text name="parentMenu" /><sup
 								style="color: red;">*</sup>
 							</label>
 							<div class="">
 								<s:select name="selectedParentMenu" list="parentMenus"
-									theme="simple" onchange="listview()" headerKey="-1"
+									onchange="listview()" headerKey="-1"
 									headerValue="%{getText('txt.select')}"
-									cssClass="form-control input-sm select2" />
+									cssClass="form-control" />
 							</div>
 						</div>
 					</div>
@@ -102,61 +100,13 @@
 
 
 				</div>
-
+</div>
 
 			</div>
 		</div>
-		<!-- new design end -->
+	
 
-		<div class="formContainerWrapper">
-			<%-- <h2>
-				<s:text name="info.roleMenuEnt" />
-			</h2> --%>
-
-			<div class="flexiWrapper">
-				<s:if test='branchId==null'>
-					<div class="flexi flexi10">
-						<%-- <s:label theme="simple">
-							<s:text name="app.branch" />
-							<sup> *</sup>
-						</s:label>
-						<div class="form-element">
-							<s:select name="branchId_F" theme="simple" listKey="key"
-								listValue="value" list="branchesMap" headerKey="-1"
-								headerValue="%{getText('txt.select')}"
-								onchange="populateRoles(this)"
-								cssClass="form-control input-sm select2" />
-						</div> --%>
-					</div>
-				</s:if>
-				<div class="flexi flexi10">
-					<%-- <label class="alignTopLeft"> <s:text name="Role" /><sup>
-							*</sup>
-					</label> --%>
-					<div class="form-element">
-						<%-- <s:select id="selectedRole" name="selectedRole" list="roles"
-							listKey="id" listValue="name" theme="simple"
-							onchange="listview()" headerKey="-1"
-							headerValue="%{getText('txt.select')}"
-							cssClass="form-control input-sm select2" /> --%>
-					</div>
-				</div>
-
-				<div class="flexi flexi10">
-					<%-- <label class="alignTopLeft"> <s:text name="parentMenu" /><sup>
-							*</sup></label> --%>
-					<div class="form-element">
-						<%-- <s:select name="selectedParentMenu" list="parentMenus"
-							theme="simple" onchange="listview()" headerKey="-1"
-							headerValue="%{getText('txt.select')}"
-							cssClass="form-control input-sm select2" /> --%>
-					</div>
-				</div>
-			</div>
-
-
-		</div>
-	</div>
+		
 	<div class="appContentWrapper marginBottom">
 		<div class="formContainerWrapper" style="margin-top: 20px;">
 
@@ -189,17 +139,17 @@
 											value="key" />
 								</label></td>
 								<s:iterator status="stat1" value="value">
-									<td align="center"
+									<td class="checkbox" align="center"
 										style="text-align: center; padding-left: 0 !important; padding-right: 0 !important; min-width: 50px;">
 										<s:if test='value!=null && !("").equalsIgnoreCase(value)'>
 											<s:if
 												test='entitlements!=null && entitlements.size()>0 && entitlements.contains(value)'>
 												<s:checkbox name="newEntitlements" fieldValue="%{value}"
-													value="true" disabled="true" />
+													value="true" disabled="true" cssClass="form-check-input" />
 											</s:if>
 											<s:else>
 												<s:checkbox name="newEntitlements" fieldValue="%{value}"
-													disabled="true" />
+													disabled="true" cssClass="form-check-input"/>
 											</s:else>
 										</s:if>
 									</td>
@@ -212,13 +162,15 @@
 			</div>
 		</div>
 	</div>
-	<div id="EditDiv" class="yui-skin-sam">
-		<sec:authorize ifAllGranted="profile.role.entitlement.update">
+	<div id="EditDiv" class="button-items float-right">
+		
+		
+			<sec:authorize ifAllGranted="profile.role.entitlement.update">
 			<s:if test='"1".equalsIgnoreCase(selectedRole)'>
 				<span id="button" class=""><span class="first-child">
 						<button type="button" disabled="disabled"
-							class="disableBtn btn btn-success">
-							<FONT color="#FFFFFF"> <b><s:text name="Edit" /></b>
+							class="disableBtn btn btn-success waves-effect waves-light">
+							<i class="ri-check-line align-middle mr-2"></i><FONT color="#FFFFFF"> <b><s:text name="Edit" /></b>
 							</FONT>
 						</button>
 				</span></span>
@@ -226,14 +178,14 @@
 			<s:else>
 
 				<span id="button" class=" "><span class="first-child">
-						<button type="button" class="edit-btn btn btn-success">
-							<FONT color="#FFFFFF"> <b><s:text name="Edit" /></b>
+						<button type="button" class="edit-btn btn btn-success waves-effect waves-light">
+							<i class="ri-check-line align-middle mr-2"></i><FONT color="#FFFFFF"> <b><s:text name="Edit" /></b>
 							</FONT>
 						</button>
 				</span></span>
 			</s:else>
 		</sec:authorize>
-	</div>
+
 </s:form>
 
 <script type="text/javascript">

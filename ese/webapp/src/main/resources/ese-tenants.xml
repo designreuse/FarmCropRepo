@@ -11,7 +11,7 @@
 			<result name="input">/jsp/login.jsp</result>
 			<result name="emptyTenant">/jsp/404.jsp</result>
 			<result name="pageExpired">/jsp/expired.jsp</result>
-			<result name="redirect" type="redirectAction">dashboard_list</result>
+			<result name="redirect" type="redirectAction">dashboard_view</result>
 			<result name="red_url" type="redirectAction">${url}</result>
 			<param name="tenantId">wilmar</param>
 		</action>
@@ -20,7 +20,7 @@
 			<result name="input">/jsp/login.jsp</result>
 			<result name="emptyTenant">/jsp/404.jsp</result>
 			<result name="pageExpired">/jsp/expired.jsp</result>
-			<result name="redirect" type="redirectAction">dashboard_list</result>
+			<result name="redirect" type="redirectAction">dashboard_view</result>
 			<result name="red_url" type="redirectAction">${url}</result>
 			<param name="tenantId">pratibha</param>
 		</action>
@@ -29,7 +29,7 @@
 			<result name="input">/jsp/login.jsp</result>
 			<result name="emptyTenant">/jsp/404.jsp</result>
 			<result name="pageExpired">/jsp/expired.jsp</result>
-			<result name="redirect" type="redirectAction">dashboard_list</result>
+			<result name="redirect" type="redirectAction">dashboard_view</result>
 			<result name="red_url" type="redirectAction">${url}</result>
 			<param name="tenantId">thefarmcorp</param>
 		</action>
@@ -38,7 +38,7 @@
 			<result name="input">/jsp/login.jsp</result>
 			<result name="emptyTenant">/jsp/404.jsp</result>
 			<result name="pageExpired">/jsp/expired.jsp</result>
-			<result name="redirect" type="redirectAction">dashboard_list</result>
+			<result name="redirect" type="redirectAction">dashboard_view</result>
 			<result name="red_url" type="redirectAction">${url}</result>
 			<param name="tenantId">kpf</param>
 		</action>
@@ -47,7 +47,7 @@
 			<result name="input">/jsp/login.jsp</result>
 			<result name="emptyTenant">/jsp/404.jsp</result>
 			<result name="pageExpired">/jsp/expired.jsp</result>
-			<result name="redirect" type="redirectAction">dashboard_list</result>
+			<result name="redirect" type="redirectAction">dashboard_view</result>
 			<result name="red_url" type="redirectAction">${url}</result>
 			<param name="tenantId">chetna</param>
 		</action>
@@ -57,7 +57,7 @@
 			<result name="input">/jsp/login.jsp</result>
 			<result name="emptyTenant">/jsp/404.jsp</result>
 			<result name="pageExpired">/jsp/expired.jsp</result>
-			<result name="redirect" type="redirectAction">dashboard_list</result>
+			<result name="redirect" type="redirectAction">dashboard_view</result>
 			<result name="red_url" type="redirectAction">${url}</result>
 			<param name="tenantId">crsdemo</param>
 		</action>
@@ -67,7 +67,7 @@
 			<result name="input">/jsp/login.jsp</result>
 			<result name="emptyTenant">/jsp/404.jsp</result>
 			<result name="pageExpired">/jsp/expired.jsp</result>
-			<result name="redirect" type="redirectAction">dashboard_list</result>
+			<result name="redirect" type="redirectAction">dashboard_view</result>
 			<result name="red_url" type="redirectAction">${url}</result>
 			<param name="tenantId">iccoa</param>
 		</action>
@@ -77,7 +77,7 @@
 			<result name="input">/jsp/login.jsp</result>
 			<result name="emptyTenant">/jsp/404.jsp</result>
 			<result name="pageExpired">/jsp/expired.jsp</result>
-			<result name="redirect" type="redirectAction">dashboard_list</result>
+			<result name="redirect" type="redirectAction">dashboard_view</result>
 			<result name="red_url" type="redirectAction">${url}</result>
 			<param name="tenantId">afasa</param>
 		</action>
@@ -87,7 +87,7 @@
 			<result name="input">/jsp/login.jsp</result>
 			<result name="emptyTenant">/jsp/404.jsp</result>
 			<result name="pageExpired">/jsp/expired.jsp</result>
-			<result name="redirect" type="redirectAction">dashboard_list</result>
+			<result name="redirect" type="redirectAction">dashboard_view</result>
 			<result name="red_url" type="redirectAction">${url}</result>
 			<param name="tenantId">gar</param>
 		</action>
@@ -96,7 +96,7 @@
 			<result name="input">/jsp/login.jsp</result>
 			<result name="emptyTenant">/jsp/404.jsp</result>
 			<result name="pageExpired">/jsp/expired.jsp</result>
-			<result name="redirect" type="redirectAction">dashboard_list</result>
+			<result name="redirect" type="redirectAction">dashboard_view</result>
 			<result name="red_url" type="redirectAction">${url}</result>
 			<param name="tenantId">efk</param>
 		</action>
@@ -106,7 +106,7 @@
 			<result name="input">/jsp/login.jsp</result>
 			<result name="emptyTenant">/jsp/404.jsp</result>
 			<result name="pageExpired">/jsp/expired.jsp</result>
-			<result name="redirect" type="redirectAction">dashboard_list</result>
+			<result name="redirect" type="redirectAction">dashboard_view</result>
 			<result name="red_url" type="redirectAction">${url}</result>
 			<param name="tenantId">componesa</param>
 		</action>
@@ -115,7 +115,7 @@
 			<result name="input">/jsp/login.jsp</result>
 			<result name="emptyTenant">/jsp/404.jsp</result>
 			<result name="pageExpired">/jsp/expired.jsp</result>
-			<result name="redirect" type="redirectAction">dashboard_list</result>
+			<result name="redirect" type="redirectAction">dashboard_view</result>
 			<result name="red_url" type="redirectAction">${url}</result>
 			<param name="tenantId">worldvision</param>
 		</action>
@@ -124,7 +124,7 @@
 			<result name="input">/jsp/login.jsp</result>
 			<result name="emptyTenant">/jsp/404.jsp</result>
 			<result name="pageExpired">/jsp/expired.jsp</result>
-			<result name="redirect" type="redirectAction">dashboard_list</result>
+			<result name="redirect" type="redirectAction">dashboard_view</result>
 			<result name="red_url" type="redirectAction">${url}</result>
 			<param name="tenantId">fruitmaster</param>
 		</action>
@@ -132,7 +132,7 @@
 			<result name="input">/jsp/login.jsp</result>
 			<result name="emptyTenant">/jsp/404.jsp</result>
 			<result name="pageExpired">/jsp/expired.jsp</result>
-			<result name="redirect" type="redirectAction">dashboard_list</result>
+			<result name="redirect" type="redirectAction">dashboard_view</result>
 			<result name="red_url" type="redirectAction">${url}</result>
 			<param name="tenantId">griffith</param>
 		</action>

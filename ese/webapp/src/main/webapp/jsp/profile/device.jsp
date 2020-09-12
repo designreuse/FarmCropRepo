@@ -89,9 +89,9 @@
 									style="color: red;">*</sup>
 								</label>
 								<div class="">
-								<s:select id="deviceAddress" list="deviceAddressList" listKey="key"
-										listValue="value" name="dAddress" cssClass="form-control"
-							
+									<s:select id="deviceAddress" list="#{'0':'Serial Number','1':'Mac Address'}"
+								name="device.deviceAddress"
+								value="Serial Number" cssClass="form-control"
 								onchange="getDeviceAddress(this.value);" />
 								</div>
 							</div>

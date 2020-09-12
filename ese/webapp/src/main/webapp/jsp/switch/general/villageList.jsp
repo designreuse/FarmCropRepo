@@ -777,6 +777,8 @@
 	<div class="tab-content p-3 text-muted">
 
 		<div class="tab-pane active" id="country-tabs" role="tabpanel">
+		<div>
+		
 			<sec:authorize ifAllGranted="profile.procurementProduct.create">
 				<button type="BUTTON" id="add" data-toggle='modal'
 					data-target='#slide' onclick='openCountryCreateWindow();'
@@ -784,32 +786,56 @@
 					Add Country <i class="ri-menu-add-line align-middle ml-2"></i>
 				</button>
 			</sec:authorize>
-			<table id="countryTable" class="display" width="100%"></table>
+			
+			</div>
+			<br>
+			<br>
+			<div class="row">
+                            <div class="col-12">
+			<table id="countryTable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;"></table>
+			</div>
+			</div>
+			
 		</div>
 
 		<div class="tab-pane" id="state-tabs" role="tabpanel">
-			<sec:authorize ifAllGranted="profile.procurementProduct.create">
+		<div>
+		<sec:authorize ifAllGranted="profile.procurementProduct.create">
 				<button type="BUTTON" id="add" data-toggle='modal'
 					data-target='#slide' onclick='openStateCreateWindow();'
 					class="btn btn-success mb-2 float-right">
 					Add State <i class="ri-menu-add-line align-middle ml-2"></i>
 				</button>
 			</sec:authorize>
+		</div>
+			<br><br>
+		<div class="row">
+                            <div class="col-12">
 			<table id="stateTable" class="display" width="100%"></table>
+		</div>
+		</div>
 		</div>
 
 		<div class="tab-pane" id="locality-tabs" role="tabpanel">
-			<sec:authorize ifAllGranted="profile.procurementProduct.create">
+			<div>
+				<sec:authorize ifAllGranted="profile.procurementProduct.create">
 				<button type="BUTTON" id="add" data-toggle='modal'
 					data-target='#slide' onclick='openLocalityCreateWindow();'
 					class="btn btn-success mb-2 float-right">
 					Add Locality <i class="ri-menu-add-line align-middle ml-2"></i>
 				</button>
 			</sec:authorize>
+			</div>
+			<br><br>
+		<div class="row">
+             <div class="col-12">
 			<table id="localityTable" class="display" width="100%"></table>
+			</div>
+			</div>
 		</div>
 
 		<div class="tab-pane" id="city-tabs" role="tabpanel">
+			<div>
 			<sec:authorize ifAllGranted="profile.procurementProduct.create">
 				<button type="BUTTON" id="add" data-toggle='modal'
 					data-target='#slide' onclick='openCityCreateWindow();'
@@ -817,18 +843,29 @@
 					Add City <i class="ri-menu-add-line align-middle ml-2"></i>
 				</button>
 			</sec:authorize>
+			</div>
+			<br><br>
+			<div class="row">
+             <div class="col-12">
 			<table id="cityTable" class="display" width="100%"></table>
 		</div>
+		</div></div>
 
 		<div class="tab-pane" id="village-tabs" role="tabpanel">
-			<sec:authorize ifAllGranted="profile.procurementProduct.create">
+			<div>
+				<sec:authorize ifAllGranted="profile.procurementProduct.create">
 				<button type="BUTTON" id="add" data-toggle='modal'
 					data-target='#slide' onclick='openVillageCreateWindow();'
 					class="btn btn-success mb-2 float-right">
 					Add Village <i class="ri-menu-add-line align-middle ml-2"></i>
 				</button>
 			</sec:authorize>
+			</div>
+			<br><br>
+		<div class="row">
+             <div class="col-12">
 			<table id="villageTable" class="display" width="100%"></table>
+		</div></div>
 		</div>
 
 	</div>

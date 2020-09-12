@@ -138,20 +138,23 @@
  	
 </script>
 
-
-
-
-	
-	<div class="appContentWrapper marginBottom">
-		<div style="width: 99%;" id="baseDiv">
-			<sec:authorize ifAllGranted="profile.procurementProduct.create">
+<div>
+<sec:authorize ifAllGranted="profile.procurementProduct.create">
 				<button type="BUTTON" id="add" data-toggle='modal'
 					data-target='#slide' onclick='openCatalogueCreateWindow();'
 					class="btn btn-success mb-2 float-right">
 					Add <i class="ri-menu-add-line align-middle ml-2"></i>
 				</button>
 			</sec:authorize>
-			<table id="catalogueValueTable" class="display" width="100%"></table>
+			</div>
+			<br><br>
+
+
+	
+	<div class="row">
+                            <div class="col-12">
+			
+			<table id="catalogueValueTable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;"></table>
 		</div>
 	</div>
 

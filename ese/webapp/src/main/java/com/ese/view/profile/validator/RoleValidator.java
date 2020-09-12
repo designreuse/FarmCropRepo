@@ -55,7 +55,7 @@ public class RoleValidator implements IValidator {
 				errorCodes.put("pattern.name", "pattern.name");
 			}
 		} else {
-			errorCodes.put("empty.name", "empty.name");
+			errorCodes.put("empty.name", "empty.roleName");
 		}
 
 		return errorCodes;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="agrotxn">
+    <wb-module deploy-name="theFarmCorpMobile">
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
@@ -11,6 +11,6 @@
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="java-output-path" value="/tserv/target/classes"/>
-        <property name="context-root" value="agrotxn"/>
+        <property name="context-root" value="theFarmCorpMobile"/>
     </wb-module>
 </project-modules>

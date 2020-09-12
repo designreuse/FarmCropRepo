@@ -260,7 +260,7 @@ margin-top: -35px;
                             </div>
                             <div class="col-sm-6">
                                 <div class="text-sm-right d-none d-sm-block">
-                                    Crafted with <i class="mdi mdi-heart text-danger"></i> by WebFocus360
+                                    Crafted with <i class="mdi mdi-heart text-danger"></i> by <a href="http://www.thefarmcorp.com" >The Farm Corp</a>
                                 </div>
                             </div>
                         </div>

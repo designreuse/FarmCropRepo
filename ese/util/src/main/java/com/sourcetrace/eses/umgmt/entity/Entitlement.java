@@ -18,7 +18,7 @@ public class Entitlement implements GrantedAuthority, Auditable {
 
     private static final long serialVersionUID = 5173949203067260070L;
 
-    public static final String DASHBOARD_ENTITLEMENT = "dashboard.dashboard.list";
+    public static final String DASHBOARD_ENTITLEMENT = "dashboard.dashboard.view";
 
     private long id;
     private String authority;

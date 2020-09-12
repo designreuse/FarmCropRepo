@@ -18,8 +18,8 @@
 	<security:http pattern="/tmpKmlFiles/tmpKmlFile*" security="none"/>
 	<security:http  entry-point-ref="authenticationEntryPoint" access-decision-manager-ref="customAccessDecisionManager">
 		
-		<security:intercept-url pattern="/dashboard_list*" access="dashboard.dashboard.list" />
-		<security:intercept-url pattern="/dashboard_populate*" access="dashboard.dashboard.list" />		
+		<security:intercept-url pattern="/dashboard_view*" access="dashboard.dashboard.view" />
+		<security:intercept-url pattern="/dashboard_populate*" access="dashboard.dashboard.view" />		
 
 		<security:intercept-url pattern="/state_list*" access="profile.location.state.list,profile.location.village.list" />
 		<security:intercept-url pattern="/state_data*" access="profile.location.state.list,profile.location.village.list" />

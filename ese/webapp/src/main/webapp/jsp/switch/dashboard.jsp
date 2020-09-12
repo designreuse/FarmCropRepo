@@ -6,7 +6,7 @@
 <html>
 <head>
 <!-- add this meta information to select layout  -->
-
+<META name="decorator" content="swithlayout">
 </head>
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 

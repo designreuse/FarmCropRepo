@@ -12625,7 +12625,7 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 				 * results));
 				 */ }
 		}
-		if (!selectedFarmer.equalsIgnoreCase("") && !StringUtil.isEmpty(selectedFarmer)) {
+		if (!StringUtil.isEmpty(selectedFarmer) && !selectedFarmer.equalsIgnoreCase("") && !selectedFarmer.equalsIgnoreCase("null")) {
 			if (!ObjectUtil.isEmpty(farm.getFarmer().getId())) {
 				criteria.add(Restrictions.eq("f.id", Long.valueOf(selectedFarmer)));
 			}

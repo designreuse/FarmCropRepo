@@ -2,26 +2,18 @@
 
 
 <head>
-<style type="text/css">
-.alignTopLeft {
-	float: left;
-	width: 6em;
-}
-</style>
-<!-- add this meta information to select layout  -->
+
 <META name="decorator" content="swithlayout">
 </head>
 
 
 
-<s:form name="roleform">
+<s:form name="roleform" cssClass="fillform">
 
-			<div class="error">
-				<s:actionerror />
-				<s:fielderror />
-				<%-- <sup>*</sup>
-				<s:text name="reqd.field" /> --%>
-			</div>
+			<div class="ferror" id="errorDiv" class=" hide alert alert-danger">
+			<s:actionerror theme="bootstrap" />
+			<s:fielderror theme="bootstrap" />
+		</div>
 			
 			<!-- new design start -->
 			<div id="accordion" class="custom-accordion pers_info">
@@ -55,7 +47,7 @@
 									<h3 class="wizard-title">
 										<s:text name="info.roleMenu" />
 									</h3>
-									<div class="wizard-desc">Role menu details</div>
+									<div class="wizard-desc">Setup Role Menu Details</div>
 								</div>
 							</div>
 							<i
@@ -65,35 +57,37 @@
 				</a>
 
 			</div>
+				<div id="persInfo" class="collapse show" aria-labelledby="headingOne"
+				data-parent="#accordion">
 			<div class="card-body">
 
 
 				<div class="row">
 					<div class="col-md-4">
-						<div class="form-group farmerCode">
+						<div class="form-group Role">
 							<label for="txt"><s:text name="Role" /><sup
 								style="color: red;">*</sup> </label>
 
 							<div class="">
 								<s:select id="selectedRole" name="selectedRole" list="roles"
-								listKey="id" listValue="name" theme="simple"
+								listKey="id" listValue="name" 
 								onchange="listview()" headerKey="-1"
 								headerValue="%{getText('txt.select')}"
-								cssClass="col-md-6 form-control " />
+								cssClass="form-control " />
 							</div>
 						</div>
 					</div>
 
 					<div class="col-md-4">
-						<div class="form-group farmerCode">
+						<div class="form-group parentMenu">
 							<label for="txt"> <s:text name="parentMenu" /><sup
 								style="color: red;">*</sup>
 							</label>
 							<div class="">
 								<s:select id="selectedParentMenu" name="selectedParentMenu"
 								list="parentMenus" headerKey="-1"
-								headerValue="%{getText('txt.select')}" theme="simple"
-								onchange="listview()" cssClass="form-control input-sm " />
+								headerValue="%{getText('txt.select')}" 
+								onchange="listview()" cssClass="form-control" />
 							</div>
 						</div>
 					</div>
@@ -105,73 +99,7 @@
 
 			</div>
 		</div>
-			<!-- new design end -->
 			
-			<div class="formContainerWrapper">
-				<%-- <h2>
-					<s:text name="info.roleMenu" />
-				</h2> --%>
-
-				<div class="flexiWrapper">
-					<s:if test='branchId==null'>
-						<!-- <div class="flexi flexi10">
-							<label for="txt"><s:text name="app.branch" /></label>
-							<div class="form-element">
-								<s:select name="branchId_F" theme="simple" listKey="key"
-									listValue="value" list="branchesMap" headerKey="-1"
-									headerValue="%{getText('txt.select')}"
-									onchange="populateRoles(this)"
-									cssClass="form-control input-sm select2" />
-							</div>
-						</div>  -->
-					</s:if>
-					<s:else>
-						<s:if test='branchId==null'>
-							<div class="flexi flexi10">
-								<s:label theme="simple">
-									<s:text name="app.branch" />
-									<sup> *</sup>
-								</s:label>
-
-								<div class="form-element">
-									<s:select name="branchId_F" theme="simple" listKey="key"
-										listValue="value" list="branchesMap" headerKey="-1"
-										headerValue="%{getText('txt.select')}"
-										onchange="populateRoles(this)"
-										cssClass="form-control input-sm select2" />
-								</div>
-							</div>
-						</s:if>
-					</s:else>
-					<%-- <div class="flexi flexi10">
-						<label class="alignTopLeft"> <s:text name="Role" /><sup>
-								*</sup>
-						</label>
-
-						<div class="form-element">
-							<s:select id="selectedRole" name="selectedRole" list="roles"
-								listKey="id" listValue="name" theme="simple"
-								onchange="listview()" headerKey="-1"
-								headerValue="%{getText('txt.select')}"
-								cssClass="col-sm-4 form-control select2" />
-						</div>
-					</div>
-
-					<div class="flexi flexi10">
-						<label class="alignTopLeft"> <s:text name="parentMenu" />
-						</label>
-						<div class="form-element">
-							<s:select id="selectedParentMenu" name="selectedParentMenu"
-								list="parentMenus" headerKey="-1"
-								headerValue="%{getText('txt.select')}" theme="simple"
-								onchange="listview()" cssClass="form-control input-sm select2" />
-						</div>
-					</div> --%>
-
-				</div>
-				
-
-			</div>
 			<div class="appContentWrapper marginBottom">
 				<div class="row">
 					<div class="col-sm-12">
@@ -179,22 +107,21 @@
 						</table>
 					</div>
 				</div>
-				<div id="EditDiv" class="yui-skin-sam">
+				<div id="EditDiv" class="button-items float-right">
 				<sec:authorize ifAllGranted="profile.role.menu.update">
-					<span id="button" class=""><span class="first-child">
-							<button id="but2" type="button" class="save-btn btn btn-success">
-								<FONT color="#FFFFFF"> <b><s:text name="Edit" /></b>
-								</FONT>
-							</button>
-					</span></span>
+								
+						<button type="button" id="but2"
+				
+					class="btn btn-success waves-effect waves-light">
+					<i class="ri-check-line align-middle mr-2"></i> Edit Role Menu
+				</button>
 				</sec:authorize>
 			</div>
 			</div>
 			
 
 </s:form>
-<br>
-<br>
+
 
 <script type="text/javascript">
 	

@@ -2,7 +2,7 @@
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%@ taglib uri="/ese-tags" prefix="e"%>
 <head>
-<META name="decorator" content="swithlayout">
+<META name="decorator" content="exceptionlayout">
 </head>
 <body>
 <style>

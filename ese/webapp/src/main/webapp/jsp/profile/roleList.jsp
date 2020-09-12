@@ -77,11 +77,7 @@
 									search : false,
 									refresh : true
 								})
-						jQuery("#detail").jqGrid('filterToolbar', {
-							stringResult : true,
-							searchOnEnter : false
-						});
-
+						
 						colModel = jQuery("#detail").jqGrid('getGridParam',
 								'colModel');
 						$(
@@ -111,26 +107,18 @@
 										});
 					});
 </script>
-
-<sec:authorize ifAllGranted="profile.role.create">
-		<button type="BUTTON" id="add" onclick="document.createform.submit()"
-			class="btn btn-success  ">
-			Add <i class="ri-menu-add-line align-middle ml-2"></i>
-		</button>
-		<%-- <input type="BUTTON" id="add" value='<s:text name="Add"></s:text>'
-		onclick="document.createform.submit()" class="btn btn-sts" /> --%>
-	</sec:authorize>
-
-<div class="appContentWrapper ">
-	
-
-	<div style="width: 99%;" id="baseDiv">
-
-		<table id="detail"></table>
-
-		<div id="pagerForDetail"></div>
-	</div>
+<div>
+	<sec:authorize ifAllGranted="profile.role.create">
+			<button type="BUTTON" id="add" onclick="document.createform.submit()" class="btn btn-success mb-2 float-right" >Add Role <i class="ri-menu-add-line align-middle ml-2"></i></button>
+			</sec:authorize>
 </div>
+<div>
+	 <div class="table-responsive mt-3"  id="baseDiv">
+			<table class="table table-centered datatable dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;" id="detail"></table>
+			<div id="pagerForDetail"></div>
+		</div> 
+	</div>
+
 
 <s:form name="createform" action="role_create">
 </s:form>

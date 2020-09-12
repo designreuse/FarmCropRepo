@@ -145,7 +145,7 @@ $(document).ready(function(){
 	  		'<s:text name="%{getLocaleProperty('Updated UserName')}" />',
 	  			 '<s:text name="Print ID Card"/>'
 	  			 </s:if>
-	  		 '<s:text name="Print ID Card"/>'
+	  	/* 	 '<s:text name="Print ID Card"/>' */
 	      	 ],
 	   	colModel:[						
 
@@ -245,7 +245,7 @@ $(document).ready(function(){
 	   		{name:'lastUpdatedUsername',index:'lastUpdatedUsername',width:125,sortable:true},
 		    {name:'printQR',index:'printQR',width:125,sortable:true},
 		    </s:if>
-		    {name:'printQR',index:'printQR',width:125,sortable:true,search:false},
+		   /*  {name:'printQR',index:'printQR',width:125,sortable:true,search:false}, */
 	   		],
 	   	height: 401, 
 	    width: $("#baseDiv").width(), // assign parent div width

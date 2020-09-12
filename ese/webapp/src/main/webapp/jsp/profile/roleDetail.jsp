@@ -2,13 +2,11 @@
 <head>
 <META name="decorator" content="swithlayout">
 </head>
-<div class="error" style="margin-bottom: 0px;">
-	<s:fielderror />
-</div>
-<div id="warn" class="error" style="margin-bottom: 0px;">
-	<s:actionerror />
-</div>
-<div id="rolde">
+	<div class="ferror" id="errorDiv" class=" hide alert alert-danger">
+			<s:actionerror theme="bootstrap" />
+			<s:fielderror theme="bootstrap" />
+		</div>
+
 	<s:form name="roleform" action="role_update" cssClass="fillform">
 
 		<div id="accordion" class="custom-accordion pers_info">
@@ -42,7 +40,7 @@
 									<h3 class="wizard-title">
 										<s:text name="info.role" />
 									</h3>
-									<div class="wizard-desc">Role details</div>
+									<div class="wizard-desc">Setup Role Information Details</div>
 								</div>
 							</div>
 							<i
@@ -52,12 +50,14 @@
 				</a>
 
 			</div>
+				<div id="persInfo" class="collapse show" aria-labelledby="headingOne"
+				data-parent="#accordion">
 			<div class="card-body">
 
 
 				<div class="row">
 					<div class="col-md-4">
-						<div class="form-group farmerCode">
+						<div class="form-group roleName">
 							<label for="txt"><s:text name="roleName" /><sup
 								style="color: red;">*</sup> </label>
 
@@ -70,9 +70,8 @@
 					</div>
 
 					<div class="col-md-4">
-						<div class="form-group farmerCode">
-							<label for="txt"> <s:text name="isAdmin" /><sup
-								style="color: red;">*</sup>
+						<div class="form-group isAdmin">
+							<label for="txt"> <s:text name="isAdmin" />
 							</label>
 							<div class="">
 								<p class="form-control detailField" name="farmer.farmerCode">
@@ -87,110 +86,45 @@
 
 				</div>
 
-
-			</div>
-		</div>
-
-		<div class="flex-view-layout">
-			<div class="fullwidth">
-				<div class="flexWrapper">
-					<div class="flexLeft appContentWrapper">
-						<div class="formContainerWrapper dynamic-form-con">
-							<!--  <h2>
-								<s:text name="info.role" />
-							</h2> -->
-							<s:if test='branchId==null'>
-								<!-- <div class="dynamic-flexItem">
-						<p class="flexItem"><s:text name="app.branch" /></p>
-						<p class="flexItem"><s:property
-							value="%{getBranchName(role.branchId)}" /></p>
-					</div>  -->
-							</s:if>
-							<!-- <div class="dynamic-flexItem">
-								<p class="flexItem">
-									<s:text name="roleName" />
-								</p>
-								<p class="flexItem">
-									<s:property value="role.name" />
-								</p>
-							</div>
-							<div class="dynamic-flexItem">
-								<p class="flexItem">
-									<s:text name="isAdmin" />
-								</p>
-								<p class="flexItem">
-									<s:if test="role.isAdminUser == 'true'">YES</s:if>
-									<s:else>
-    					NO
-				</s:else>
-								</p>
-							</div> -->
-
-						</div>
-
-						<div class="flexItem flex-layout flexItemStyle">
-							<div class="button-group-container">
-								<s:if test='"Admin".equalsIgnoreCase(role.name)'>
-									<a id="update" class="btn btn-success" class="disableBtn"><s:text
-											name="edit.button" /></a>
-								</s:if>
-								<s:else>
-									<a id="update" class="btn btn-success"><s:text
-											name="edit.button" /></a>
-									<a id="delete" class="btn btn-danger"><s:text
-											name="delete.button" /></a>
-								</s:else>
-
-								<a id="cancel" class="btn btn-sts" href="role_list.action"><s:text
-										name="cancel.button" /></a>
-							</div>
-						</div>
-						<%-- <div class="yui-skin-sam">
-						<sec:authorize ifAllGranted="profile.role.update">
-				<span id="update" class=""><span class="first-child">
-						<s:if test='"Admin".equalsIgnoreCase(role.name)'>
-							<button type="button" disabled="disabled" class="disableBtn">
-								<FONT color="#FFFFFF"> <b><s:text name="edit.button" /></b>
-								</FONT>
-							</button>
-						</s:if> <s:else>
-							<button type="button" class="edit-btn btn btn-success">
-								<FONT color="#FFFFFF"> <b><s:text name="edit.button" /></b>
-								</FONT>
-							</button>
-						</s:else>
-
-				</span></span>
-			</sec:authorize>
-			<sec:authorize ifAllGranted="profile.role.delete">
-				<span id="delete" class=""><span class="first-child">
-						<s:if test='"Admin".equalsIgnoreCase(role.name)'>
-							<button type="button" disabled="disabled" class="disableBtn">
-								<FONT color="#FFFFFF"> <b><s:text
-											name="delete.button" /></b>
-								</font>
-							</button>
-						</s:if> <s:else>
-							<button type="button" class="delete-btn btn btn-warning">
-								<FONT color="#FFFFFF"> <b><s:text
-											name="delete.button" /></b>
-								</font>
-							</button>
-						</s:else>
-				</span></span>
-			</sec:authorize>
-			<span id="cancel" class=""><span class="first-child"><a
-					href="role_list.action" class="back-btn btn btn-sts"> <FONT
-						color="#FFFFFF"> <s:text name="back.button" />
-					</FONT>
-				</a></span></span>
-				</div> --%>
-					</div>
-				</div>
-			</div>
-		</div>
-	</s:form>
 </div>
+			</div>
+		</div>
+<div class="button-items float-right">
+									<s:if test='"Admin".equalsIgnoreCase(role.name)'>
+								
+											
+												<button type="button" id="update"
+										class="btn btn-success waves-effect waves-light">
+										<i class="ri-check-line align-middle mr-2"></i>Edit
+									</button>
+								</s:if><s:else>
+								
+								
+									<button type="button" id="update"
+										class="btn btn-success waves-effect waves-light">
+										<i class="ri-check-line align-middle mr-2"></i>Edit
+									</button>
+
+									<button type="button" id="delete"
+										class="btn btn-danger waves-effect waves-light">
+										<i class="ri-close-line align-middle mr-2"></i>
+										<s:text name="delete.button" />
+									</button>
+								
+								
+								</s:else>
+								
+								<button type="button" id="cancel" onclick="onCancel();"
+									class="btn btn-warning waves-effect waves-light">
+									<i class="ri-error-warning-line align-middle mr-2"></i>
+									<s:text name="back.button" />
+								</button>
+
+							</div>
+							
+
+	</s:form>
+
 <s:form name="deleteform" action="role_delete.action">
 	<s:hidden key="id" />
 </s:form>
@@ -214,5 +148,10 @@ $(document).ready(function () {
     });
 });
 
+function onCancel(){
+	
+		window.location.href="role_list.action";
+
+}
 
 </script>

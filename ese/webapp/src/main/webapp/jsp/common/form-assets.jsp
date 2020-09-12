@@ -2,15 +2,7 @@
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%@ taglib uri="/ese-tags" prefix="e"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
-<!--<script language="javascript" src="javascript/datepicker_full.js"></script>-->
-<!--<link href="css/main_table.css" rel="stylesheet" type="text/css" />-->
-<!-- <link rel="stylesheet" href="plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css"> -->
- <%-- <link rel="stylesheet" href="plugins/select2/select2.min.css"> 
-<link rel="stylesheet" href="plugins/datepicker/css/datepicker.css">
-<script src="plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-<script src="plugins/select2/select2.min.js"></script>
- <script src="plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
- --%>
+
  <link href="assets/libs/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
 <link href="assets/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
  <link href="assets/libs/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css" rel="stylesheet">
@@ -27,10 +19,7 @@
         <script src="assets/libs/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
 
         <script src="assets/js/pages/form-advanced.init.js"></script>
-        
-           <script src="assets/libs/parsleyjs/parsley.min.js"></script>
 
-        <script src="assets/js/pages/form-validation.init.js"></script>
 <script src="js/form-elements.js"></script>
 <script src="js/form-validation.js"></script> 
 <script type="text/javascript">
