@@ -2086,5 +2086,23 @@ public class SamithiAction extends SwitchValidatorAction {
 		this.selectedVillage = selectedVillage;
 	}
 
+	public void populateSamithiTableData() {
+		List<Warehouse> samithiList = locationService.listOfSamithi();
+		JSONArray rows = new JSONArray();
+
+		samithiList.stream().filter(f -> f.getTypez() != null && f.getTypez().intValue() == Warehouse.WarehouseTypes.SAMITHI.ordinal()).forEach(s -> {
+			
+			List<String> data = new ArrayList<String>();
+			data.add('"' + s.getCode() + '"');
+			data.add('"' + s.getName() + '"');
+
+			data.add('"' + "<button type='button' class='btn btn-info'  onclick='redirectSamithiDetailPage(" + s.getId()
+					+ ",this)'  >Info</button>" + '"');
+
+			rows.add(data);
+		});
+		printAjaxResponse(rows, "text/html");
+	}
+	
 	
 }
