@@ -704,4 +704,21 @@ public void getHarvestSeasonList() {
 	printAjaxResponse(jsonObject, "text/html");
 }
 
+public void populateSeasonTableData() {
+	List<HarvestSeason> seasonList = farmerService.listHarvestSeasons();
+	JSONArray rows = new JSONArray();
+	
+	seasonList.stream().forEach(s -> {
+		List<String> data = new ArrayList<String>();
+		data.add('"' + s.getCode() + '"');
+		data.add('"' + s.getName() + '"');
+		data.add('"' + String.valueOf(s.getFromPeriod()) + '"');
+		data.add('"' + String.valueOf(s.getToPeriod()) + '"');
+		data.add('"' + "<button type='button' class='btn btn-info'  onclick='redirectSeasonDetailPage("
+				+ String.valueOf(s.getId()) + ",this)'  >Info</button>" + '"');
+		rows.add(data);
+	});
+	printAjaxResponse(rows, "text/html");
+}
+
 }

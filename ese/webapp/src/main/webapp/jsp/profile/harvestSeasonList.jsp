@@ -8,74 +8,10 @@
 <script type="text/javascript">
 $(document).ready(function(){
 
-	jQuery("#detail").jqGrid(
-			{
-			url:'harvestSeason_data.action?currentPage='+document.updateform.currentPage.value,
-			pager: '#pagerForDetail',
-			datatype: "json",
-			 styleUI : 'Bootstrap',
-			 postData:{
-   			  "postdata" :  function(){	
-   	   			return  decodeURI(postdata);
-   			  } 
-   	   	},
-			colNames:[
-			  
-		  		   	  '<s:text name="harvestSeason.code" />',
-		  		      '<s:text name="%{getLocaleProperty('harvestSeason.name')}" /> ',
-		  		   
-		  		      '<s:text name="harvestSeason.fromPeriod" />',
-		  		   	  '<s:text name="harvestSeason.toPeriod" />'
-		  		   	  
-		  		   	 
-		      	 ],
-
-		   colModel : [
-					
-		      	      {name:'code',index:'code',sortable:true, width:125},
-		      	      {name:'name',index:'name', sortable:true, width:125}, 
-		      	   
-		      	      {name:'fromPeriod',index:'fromPeriod',sortable:true, width:125,searchoptions:{dataInit:datePick,attr:{readonly:true}}},
-		      	      {name:'toPeriod',index:'toPeriod', sortable:true,width:125,searchoptions:{dataInit:datePick,attr:{readonly:true}}},
-		      	    
-		      	      /* {name:'currentSeason',index:'currentSeason',width:125,sortable: false, width :125, search:true, stype: 'select', searchoptions: { value: ':<s:text name="filter.allStatus"/>;1:<s:text name="status1"/>;0:<s:text name="status0"/>' }}*/
-		      	 ],			
-		    height: 301, 
-			width: $("#baseDiv").width(),
-			scrollOffset: 0,
-			rowNum:10,
-			rowList : [10,25,50],
-			sortname: 'id',
-			sortorder: 'desc',
-			viewrecords: true,
-		    onSelectRow: function(id){ 
-			  document.updateform.id.value  =id;
-			  postDataSubmit();
-	          document.updateform.submit();      
-			},		
-	        onSortCol: function (index, idxcol, sortorder) {
-		        if (this.p.lastsort >= 0 && this.p.lastsort !== idxcol
-	                    && this.p.colModel[this.p.lastsort].sortable !== false) {
-	                $(this.grid.headers[this.p.lastsort].el).find(">div.ui-jqgrid-sortable>span.s-ico").show();
-	            }
-	        }
-	   });
-	jQuery("#detail").jqGrid('navGrid','#pagerForDetail',{edit:false,add:false,del:false,search:false,refresh:true})
-	jQuery("#detail").jqGrid('filterToolbar',{stringResult: true,searchOnEnter : false});		
-	retainFields();
-
-	colModel = jQuery("#detail").jqGrid('getGridParam', 'colModel');
-    $('#gbox_' + $.jgrid.jqID(jQuery("#detail")[0].id) +
-        ' tr.ui-jqgrid-labels th.ui-th-column').each(function (i) {
-        var cmi = colModel[i], colName = cmi.name;
-
-        if (cmi.sortable !== false) {
-            $(this).find('>div.ui-jqgrid-sortable>span.s-ico').show();
-        } else if (!cmi.sortable && colName !== 'rn' && colName !== 'cb' && colName !== 'subgrid') {
-            $(this).find('>div.ui-jqgrid-sortable').css({cursor: 'default'});
-        }
-    });
-    postdata =  '';
+	loadSeasonTable();
+	
+	
+    postdata =  ''; 
 });
 
 datePick = function(elem)
@@ -91,6 +27,40 @@ datePick = function(elem)
 )};
 
 
+function loadSeasonTable(){
+	$.ajax({
+		url : "harvestSeason_populateSeasonTableData.action",
+		async : false,
+		type : 'post',
+		success : function(result) {
+
+			var data = JSON.parse(result);
+			$('#seasonGrid').DataTable({
+				"data" : data,
+				"order" : [],
+				"columns" : [ {
+					title : "Code"
+				}, {
+					title : "Name"
+				}, {
+					title : "From Period"
+				}, {
+					title : "To Period"
+				}, {
+					title : "Action"
+				}]
+			});
+
+		}
+	});
+}
+
+
+function redirectSeasonDetailPage(id,obj){
+	document.updateform.id.value  = id;
+	document.updateform.submit();  
+}
+
 </script>
 
 	<div>
@@ -101,12 +71,24 @@ datePick = function(elem)
 
 </div>
 
-<div>
+
+<br>
+	<br>
+
+	<div class="row">
+		<div class="col-md-12">
+			<table id="seasonGrid"
+				class="table table-bordered dt-responsive nowrap"
+				style="border-collapse: collapse; border-spacing: 0; width: 100%;"></table>
+		</div>
+	</div>
+
+<!-- <div>
 	 <div class="table-responsive mt-3"  id="baseDiv">
 			<table class="table table-centered datatable dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;" id="detail"></table>
 			<div id="pagerForDetail"></div>
 		</div> 
-	</div>
+	</div> -->
 <s:form name="createform" action="harvestSeason_create">
 </s:form>
 
