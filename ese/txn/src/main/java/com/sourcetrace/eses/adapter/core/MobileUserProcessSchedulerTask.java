@@ -58,6 +58,7 @@ public class MobileUserProcessSchedulerTask {
 
 					HttpURLConnection conection = (HttpURLConnection) url.openConnection();
 					int responseCode = conection.getResponseCode();
+					
 					// String responseMsg = conection.getResponseMessage();
 					System.out.println(url.getPath());
 					if (responseCode == 200) {

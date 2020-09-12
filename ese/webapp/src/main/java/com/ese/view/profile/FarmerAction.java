@@ -12713,5 +12713,25 @@ if(getCurrentTenantId().equalsIgnoreCase("symrise") || getCurrentTenantId().equa
 	}
 	 
 
+	public void populateFarmerTableData() {
+		List<Object[]> farmerList = farmerService.fetchFarmerTableData();
+		JSONArray rows = new JSONArray();
+
+		farmerList.stream().forEach(f -> {
+			List<String> data = new ArrayList<String>();
+			data.add('"' + String.valueOf(f[0]) + '"');
+			data.add('"' + String.valueOf(f[1]) + '"');
+			data.add('"' + String.valueOf(f[2]) + '"');
+			data.add('"' + String.valueOf(f[3]) + '"');
+			data.add('"' + String.valueOf(f[4]) + '"');
+			//data.add('"' + String.valueOf(f[5]) + '"');
+			data.add('"' + String.valueOf(f[6]) + '"');
+			data.add('"' + "<button type='button' class='btn btn-info'  onclick='redirectFarmerDetailPage("
+					+ String.valueOf(f[7]) + ",this)'  >Info</button>" + '"');
+
+			rows.add(data);
+		});
+		printAjaxResponse(rows, "text/html");
+	}
     
 }

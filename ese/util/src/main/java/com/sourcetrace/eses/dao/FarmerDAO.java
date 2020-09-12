@@ -14278,5 +14278,23 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 		return list;
 	}
 
+	@Override
+	public List<Object[]> fetchFarmerTableData() {
+		String query = " select "
+				+" f.FARMER_CODE,f.FIRST_NAME,f.LAST_NAME,v.NAME as villageName ,w.NAME as groupName,"
+				+ " if(f.IS_FARMER_CERTIFIED = 1 , 'Yes' , 'No') as farmerCertified ,"
+				+ " if(f.STATUS = 1 , 'Active' , 'InActive') as farmerStatus, "
+				+ " f.ID "
+				+ " FROM farmer f "
+				+ " left join village v on f.VILLAGE_ID = v.ID "
+				+ " left join warehouse w on f.SAMITHI_ID = w.ID";
+		Session session = getSessionFactory().openSession();
+		SQLQuery sqlQuery = session.createSQLQuery(query);
+		List<Object[]> list = sqlQuery.list();
+		session.flush();
+		session.close();
+		return list;
+	}
+
 	
 }
