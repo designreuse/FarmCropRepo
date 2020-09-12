@@ -591,5 +591,9 @@ public interface IAgentDAO extends IESEDAO {
 	public List<Object[]> listAgrotxnDetailsByAgentIdAndTxnType(List<String> agentId, List<String> txnList);
 	
 	 public List<String> findAgentNameByWareHouseId(long coOperativeId);
+
+	public List<Object[]> fetchAvailableAgentsToProcess();
+
+	public void setMarketPlaceEnableForAgents(List<String> profIds);
 	
 }
