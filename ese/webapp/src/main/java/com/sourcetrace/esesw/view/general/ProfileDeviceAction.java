@@ -118,8 +118,7 @@ public class ProfileDeviceAction extends SwitchValidatorAction {
 	/**
 	 * Sets the device service.
 	 * 
-	 * @param deviceService
-	 *            the new device service
+	 * @param deviceService the new device service
 	 */
 	public void setDeviceService(IDeviceService deviceService) {
 
@@ -159,8 +158,7 @@ public class ProfileDeviceAction extends SwitchValidatorAction {
 	/**
 	 * Sets the id.
 	 * 
-	 * @param id
-	 *            the new id
+	 * @param id the new id
 	 */
 	public void setId(String id) {
 
@@ -170,8 +168,7 @@ public class ProfileDeviceAction extends SwitchValidatorAction {
 	/**
 	 * Sets the device.
 	 * 
-	 * @param device
-	 *            the new device
+	 * @param device the new device
 	 */
 	public void setDevice(Device device) {
 
@@ -191,8 +188,7 @@ public class ProfileDeviceAction extends SwitchValidatorAction {
 	/**
 	 * Sets the device list.
 	 * 
-	 * @param deviceList
-	 *            the new device list
+	 * @param deviceList the new device list
 	 */
 	public void setDeviceList(List<Device> deviceList) {
 
@@ -234,8 +230,7 @@ public class ProfileDeviceAction extends SwitchValidatorAction {
 	 * Update.
 	 * 
 	 * @return the string
-	 * @throws Exception
-	 *             the exception
+	 * @throws Exception the exception
 	 */
 	public String update() throws Exception {
 
@@ -335,14 +330,13 @@ public class ProfileDeviceAction extends SwitchValidatorAction {
 	 * Data.
 	 * 
 	 * @return the string
-	 * @throws Exception
-	 *             the exception
+	 * @throws Exception the exception
 	 * @see com.sourcetrace.esesw.view.SwitchAction#data()
 	 */
 	public String data() throws Exception {
 
 		Map<String, String> searchRecord = getJQGridRequestParam();
-				
+
 		Device filter = new Device();
 
 		if (!StringUtil.isEmpty(searchRecord.get("branchId"))) {
@@ -376,7 +370,7 @@ public class ProfileDeviceAction extends SwitchValidatorAction {
 		if (!StringUtil.isEmpty(searchRecord.get("serialNumber"))) {
 			filter.setSerialNumber(searchRecord.get("serialNumber").trim());
 		}
-		
+
 		/*
 		 * if (!StringUtil.isEmpty(searchRecord.get("deviceType"))) {
 		 * filter.setDeviceType(searchRecord.get("deviceType").trim()); }
@@ -399,8 +393,7 @@ public class ProfileDeviceAction extends SwitchValidatorAction {
 			filter.setAgent(agent);
 
 		}
-		
-		
+
 		filter.setIsRegistered(Device.DEVICE_REGISTERED);
 		Map data = reportService.listWithEntityFiltering(getDir(), getSort(), getStartIndex(), getResults(), filter,
 				getPage());
@@ -431,7 +424,7 @@ public class ProfileDeviceAction extends SwitchValidatorAction {
 			filter.setAgent(agent);
 
 		}
-		if(!StringUtil.isEmpty(searchRecord.get("lastUpdatedUsername"))){
+		if (!StringUtil.isEmpty(searchRecord.get("lastUpdatedUsername"))) {
 			filter.setName(searchRecord.get("lastUpdatedUsername").trim());
 		}
 		filter.setIsRegistered(Device.DEVICE_NOT_REGISTERED);
@@ -443,8 +436,7 @@ public class ProfileDeviceAction extends SwitchValidatorAction {
 	/**
 	 * To json.
 	 * 
-	 * @param obj
-	 *            the obj
+	 * @param obj the obj
 	 * @return the JSON object
 	 * @see com.sourcetrace.esesw.view.SwitchAction#toJSON(java.lang.Object)
 	 */
@@ -507,16 +499,13 @@ public class ProfileDeviceAction extends SwitchValidatorAction {
 			 */
 			rows.add(!StringUtil.isEmpty(device.getName()) ? device.getName() : getText("NA"));
 			/*
-			 * rows
-			 * .add("<button type=\"button\"  title='"+getText("button.update")
+			 * rows .add("<button type=\"button\"  title='"+getText("button.update")
 			 * +"' class=\"btn btn-primary btn-unreg\" onclick=\"openModel('" +
 			 * String.valueOf(device.getSerialNumber())+"','"+device.getId()
-			 * +"')\"  data-toggle='modal' data-target='#popUp'>"
-			 * +getText("button.update") +
-			 * "</button> <button type=\"button\" title='"+getText(
-			 * "button.delete")
-			 * +"'  class=\"btnDel btn btn-danger\" onclick=\"deleteUnregisteredDevice("
-			 * + device.getId() +
+			 * +"')\"  data-toggle='modal' data-target='#popUp'>" +getText("button.update")
+			 * + "</button> <button type=\"button\" title='"+getText( "button.delete")
+			 * +"'  class=\"btnDel btn btn-danger\" onclick=\"deleteUnregisteredDevice(" +
+			 * device.getId() +
 			 * ")\" data-toggle=\"deleteButton\" data-target=\"deleteForm\" >"
 			 * +getText("button.delete") + "</button>");
 			 */
@@ -583,20 +572,19 @@ public class ProfileDeviceAction extends SwitchValidatorAction {
 	}
 
 	/*
-	 * @SuppressWarnings("unchecked") public String validateUnReg() throws
-	 * Exception {
+	 * @SuppressWarnings("unchecked") public String validateUnReg() throws Exception
+	 * {
 	 * 
 	 * JSONObject unRegObj = new JSONObject(); Map<String, String> fieldErrors =
-	 * getValidator().getValidationErrors(this.device); if
-	 * (LOGGER.isInfoEnabled()) { LOGGER.info("validate() Errors " +
-	 * fieldErrors); } if (fieldErrors.size() == 0) { unRegObj.put("status",
-	 * "1"); } else { unRegObj.put("status", "0"); } JSONArray array = new
-	 * JSONArray(); if (!ObjectUtil.isEmpty(fieldErrors)) { for
-	 * (Map.Entry<String, String> errorEntry : fieldErrors.entrySet()) {
+	 * getValidator().getValidationErrors(this.device); if (LOGGER.isInfoEnabled())
+	 * { LOGGER.info("validate() Errors " + fieldErrors); } if (fieldErrors.size()
+	 * == 0) { unRegObj.put("status", "1"); } else { unRegObj.put("status", "0"); }
+	 * JSONArray array = new JSONArray(); if (!ObjectUtil.isEmpty(fieldErrors)) {
+	 * for (Map.Entry<String, String> errorEntry : fieldErrors.entrySet()) {
 	 * JSONObject errorObj = new JSONObject(); errorObj.put("key",
-	 * errorEntry.getKey()); errorObj.put("value",
-	 * getText(errorEntry.getValue())); array.add(errorObj); } }
-	 * unRegObj.put("message", array); sendResponse(unRegObj); return null; }
+	 * errorEntry.getKey()); errorObj.put("value", getText(errorEntry.getValue()));
+	 * array.add(errorObj); } } unRegObj.put("message", array);
+	 * sendResponse(unRegObj); return null; }
 	 */
 
 	/**
@@ -606,7 +594,9 @@ public class ProfileDeviceAction extends SwitchValidatorAction {
 	 */
 	public Map<String, String> getAgentListNotMapWithDevice() {
 		List<Agent> agentList = new ArrayList<>();
-		if (!getCurrentTenantId().equalsIgnoreCase("chetna") && !getCurrentTenantId().equalsIgnoreCase(ESESystem.PRATIBHA_TENANT_ID) && !getCurrentTenantId().equalsIgnoreCase(ESESystem.LIVELIHOOD_TENANT_ID)) {
+		if (!getCurrentTenantId().equalsIgnoreCase("chetna")
+				&& !getCurrentTenantId().equalsIgnoreCase(ESESystem.PRATIBHA_TENANT_ID)
+				&& !getCurrentTenantId().equalsIgnoreCase(ESESystem.LIVELIHOOD_TENANT_ID)) {
 			agentList = agentService.listAgentNotMappedwithDevice();
 		} else {
 			agentList = agentService.listAgentByAgentTypeNotMappedwithDevice();
@@ -632,8 +622,7 @@ public class ProfileDeviceAction extends SwitchValidatorAction {
 	/**
 	 * Sets the agent service.
 	 * 
-	 * @param agentService
-	 *            the new agent service
+	 * @param agentService the new agent service
 	 */
 	public void setAgentService(IAgentService agentService) {
 
@@ -643,8 +632,7 @@ public class ProfileDeviceAction extends SwitchValidatorAction {
 	/**
 	 * Sets the agent id.
 	 * 
-	 * @param agentId
-	 *            the new agent id
+	 * @param agentId the new agent id
 	 */
 	public void setAgentId(String agentId) {
 
@@ -665,8 +653,7 @@ public class ProfileDeviceAction extends SwitchValidatorAction {
 	 * Reset.
 	 * 
 	 * @return the string
-	 * @throws Exception
-	 *             the exception
+	 * @throws Exception the exception
 	 */
 	public String reset() throws Exception {
 
@@ -721,8 +708,7 @@ public class ProfileDeviceAction extends SwitchValidatorAction {
 	/**
 	 * Sets the un map agent.
 	 * 
-	 * @param unMapAgent
-	 *            the new un map agent
+	 * @param unMapAgent the new un map agent
 	 */
 	public void setUnMapAgent(boolean unMapAgent) {
 
@@ -742,8 +728,7 @@ public class ProfileDeviceAction extends SwitchValidatorAction {
 	/**
 	 * Sets the agent name.
 	 * 
-	 * @param agentName
-	 *            the new agent name
+	 * @param agentName the new agent name
 	 */
 	public void setAgentName(String agentName) {
 
@@ -773,8 +758,7 @@ public class ProfileDeviceAction extends SwitchValidatorAction {
 	/**
 	 * Sets the list device status.
 	 * 
-	 * @param listDeviceStatus
-	 *            the list device status
+	 * @param listDeviceStatus the list device status
 	 */
 	public void setListDeviceStatus(Map<Boolean, String> listDeviceStatus) {
 
@@ -794,8 +778,7 @@ public class ProfileDeviceAction extends SwitchValidatorAction {
 	/**
 	 * Sets the list device types.
 	 * 
-	 * @param listDeviceTypes
-	 *            the list device types
+	 * @param listDeviceTypes the list device types
 	 */
 	public void setListDeviceTypes(Map<String, String> listDeviceTypes) {
 
@@ -838,8 +821,7 @@ public class ProfileDeviceAction extends SwitchValidatorAction {
 	/**
 	 * Sets the pending mtnt exists.
 	 * 
-	 * @param pendingMTNTExists
-	 *            the new pending mtnt exists
+	 * @param pendingMTNTExists the new pending mtnt exists
 	 */
 	public void setPendingMTNTExists(boolean pendingMTNTExists) {
 
@@ -857,8 +839,7 @@ public class ProfileDeviceAction extends SwitchValidatorAction {
 	/**
 	 * Sets the agents.
 	 * 
-	 * @param agents
-	 *            the new agents
+	 * @param agents the new agents
 	 */
 	public void setAgents(List<Agent> agents) {
 
@@ -888,8 +869,7 @@ public class ProfileDeviceAction extends SwitchValidatorAction {
 	/**
 	 * Sets the profile id.
 	 * 
-	 * @param profileId
-	 *            the new profile id
+	 * @param profileId the new profile id
 	 */
 	public void setProfileId(String profileId) {
 
@@ -909,8 +889,7 @@ public class ProfileDeviceAction extends SwitchValidatorAction {
 	/**
 	 * Sets the hold.
 	 * 
-	 * @param hold
-	 *            the new hold
+	 * @param hold the new hold
 	 */
 	public void setHold(String hold) {
 
@@ -920,8 +899,7 @@ public class ProfileDeviceAction extends SwitchValidatorAction {
 	/**
 	 * Sets the process stock transfer.
 	 * 
-	 * @param processStockTransfer
-	 *            the new process stock transfer
+	 * @param processStockTransfer the new process stock transfer
 	 */
 	public void setProcessStockTransfer(ProcessStockTransferImpl processStockTransfer) {
 
@@ -931,8 +909,7 @@ public class ProfileDeviceAction extends SwitchValidatorAction {
 	/**
 	 * Sets the request for.
 	 * 
-	 * @param requestFor
-	 *            the new request for
+	 * @param requestFor the new request for
 	 */
 	public void setRequestFor(String requestFor) {
 
@@ -942,8 +919,7 @@ public class ProfileDeviceAction extends SwitchValidatorAction {
 	/**
 	 * Sets the delete device exist in txn.
 	 * 
-	 * @param deleteDeviceExistInTxn
-	 *            the new delete device exist in txn
+	 * @param deleteDeviceExistInTxn the new delete device exist in txn
 	 */
 	public void setDeleteDeviceExistInTxn(boolean deleteDeviceExistInTxn) {
 
@@ -1054,21 +1030,19 @@ public class ProfileDeviceAction extends SwitchValidatorAction {
 	/**
 	 * Gets the m d5 string.
 	 * 
-	 * @param macAddress
-	 *            the mac address
+	 * @param macAddress the mac address
 	 * @return the m d5 string
 	 */
 	public String convertMacToSerial(String macAddress) {
 
 		/*
 		 * String md5Value = null; try { MessageDigest md =
-		 * MessageDigest.getInstance("MD5"); byte[] dataBytes =
-		 * macAddress.getBytes(); md.update(dataBytes); byte[] mdbytes =
-		 * md.digest();
+		 * MessageDigest.getInstance("MD5"); byte[] dataBytes = macAddress.getBytes();
+		 * md.update(dataBytes); byte[] mdbytes = md.digest();
 		 * 
-		 * StringBuffer sb = new StringBuffer(); for (int i = 0; i <
-		 * mdbytes.length; i++) { sb.append(Integer.toString((mdbytes[i] & 0xff)
-		 * + 0x100, 16).substring(1)); } md5Value = sb.toString();
+		 * StringBuffer sb = new StringBuffer(); for (int i = 0; i < mdbytes.length;
+		 * i++) { sb.append(Integer.toString((mdbytes[i] & 0xff) + 0x100,
+		 * 16).substring(1)); } md5Value = sb.toString();
 		 * LOGGER.info("Device MD5 Value->" + sb.toString());
 		 * 
 		 * } catch (Exception e) { e.printStackTrace(); } return md5Value;
@@ -1309,8 +1283,9 @@ public class ProfileDeviceAction extends SwitchValidatorAction {
 			cell.setCellValue(snoCount.incrementAndGet());
 			if (StringUtil.isEmpty(branchIdValue)) {
 				cell = row.createCell(colNum++);
-				cell.setCellValue(new HSSFRichTextString(!StringUtil.isEmpty(branchesMap.get(device.getBranch()))
-						? (branchesMap.get(device.getBranch())) : ""));
+				cell.setCellValue(new HSSFRichTextString(
+						!StringUtil.isEmpty(branchesMap.get(device.getBranch())) ? (branchesMap.get(device.getBranch()))
+								: ""));
 			}
 
 			cell = row.createCell(colNum++);
@@ -1325,7 +1300,7 @@ public class ProfileDeviceAction extends SwitchValidatorAction {
 			cell.setCellValue(new HSSFRichTextString(
 					StringUtil.isEmpty(device.getSerialNumber()) ? getText("NA") : device.getSerialNumber()));
 
-					cell = row.createCell(colNum++);
+			cell = row.createCell(colNum++);
 			cell.setCellValue(new HSSFRichTextString(device.isEnabled() ? getText("enabled") : getText("disabled")));
 
 			if (ObjectUtil.isEmpty(device.getAgent())) {
@@ -1340,7 +1315,7 @@ public class ProfileDeviceAction extends SwitchValidatorAction {
 								+ device.getAgent().getProfileId()
 						: device.getAgent().getProfileId()));
 			}
-		
+
 			cell = row.createCell(colNum++);
 			cell.setCellValue(new HSSFRichTextString(
 					!StringUtil.isEmpty(device.getAppversion()) ? device.getAppversion() : getText("")));
@@ -1414,7 +1389,6 @@ public class ProfileDeviceAction extends SwitchValidatorAction {
 		this.preferncesService = preferncesService;
 	}
 
-	
 	@SuppressWarnings("unchecked")
 	protected JSONObject getJSONObject(Object id, Object name) {
 
@@ -1423,7 +1397,7 @@ public class ProfileDeviceAction extends SwitchValidatorAction {
 		jsonObject.put("name", name);
 		return jsonObject;
 	}
-	
+
 	public void populateVersion() {
 
 		String version = "";
@@ -1438,7 +1412,59 @@ public class ProfileDeviceAction extends SwitchValidatorAction {
 		sendAjaxResponse(jArray);
 
 	}
-	
-	
 
+	public void populateRegisterDeviceGridData() {
+		List<Device> deviceList = deviceService.listDevices();
+		JSONArray rows = new JSONArray();
+
+		deviceList.stream().forEach(d -> {
+			List<String> data = new ArrayList<String>();
+			data.add('"' + d.getCode() + '"');
+			data.add('"' + d.getName() + '"');
+			data.add('"' + d.getSerialNumber() + '"');
+			data.add('"' + (d.isEnabled() ? getText("enabled") : getText("disabled")) + '"');
+
+			if (ObjectUtil.isEmpty(d.getAgent())) {
+				data.add('"' + getText("NA") + '"');
+			} else {
+
+				data.add('"' + (!StringUtil.isEmpty(d.getAgent().getProfileId())
+						? d.getAgent().getPersonalInfo().getFirstName() + " "
+								+ d.getAgent().getPersonalInfo().getLastName() + "-" + d.getAgent().getProfileId()
+						: d.getAgent().getProfileId()) + '"');
+
+			}
+
+			data.add('"' + (!StringUtil.isEmpty(d.getAppversion()) ? d.getAppversion() : getText("")) + '"');
+			data.add('"' + (!StringUtil.isEmpty(d.getLogintime()) ? d.getLogintime() : getText("")) + '"');
+			data.add('"' + "<button type='button' class='btn btn-info'  onclick='redirectRegisterDeviceDetailPage("
+					+ d.getId() + ",this)'  >Info</button>" + '"');
+
+			rows.add(data);
+		});
+		printAjaxResponse(rows, "text/html");
+	}
+
+	public void populateUnRegisterDeviceGridData() {
+		
+		List<Device> deviceList = deviceService.listUnRegisteredDevices();
+		JSONArray rows = new JSONArray();
+		deviceList.stream().forEach(d -> {
+
+			List<String> data = new ArrayList<String>();
+			data.add('"' + (DateUtil.convertDateToString(d.getModifiedTime(), DateUtil.DATE_FORMAT_2)) + '"');
+			data.add('"' + d.getSerialNumber() + '"');
+			data.add('"' + (!StringUtil.isEmpty(d.getName()) ? d.getName() : getText("NA")) + '"');
+			data.add('"' + "<button type='button'  title='" + getText("button.update") + "' onclick=openModel('"
+					+ String.valueOf(d.getSerialNumber())+"'" + "," + "'"+ d.getId()+"'"
+					+ ")  class='btn btn-primary btn-unreg' data-toggle='modal' data-target='#slide'>"
+					+ getText("button.update") + "</button> <button type='button' title='" + getText("button.delete")
+					+ "'  class='btnDel btn btn-danger' onclick=deleteUnregisteredDevice(" + d.getId()
+					+ ") data-toggle='deleteButton' data-target='deleteForm' >" + getText("button.delete")
+					+ "</button>" + '"');
+			rows.add(data);
+		});
+		printAjaxResponse(rows, "text/html");
+	}
+	
 }

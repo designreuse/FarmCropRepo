@@ -49,6 +49,10 @@ public class DeviceDAO extends ESEDAO implements IDeviceDAO {
     public List<Device> listDevices() {
         return list("FROM Device d where d.isRegistered=1");
     }
+    
+    public List<Device> listUnRegisteredDevices() {
+        return list("FROM Device d where d.isRegistered=0");
+    }
 
     /*
 	 * (non-Javadoc)

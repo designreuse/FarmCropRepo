@@ -347,4 +347,9 @@ public class DeviceService implements IDeviceService {
 
         return deviceDAO.findDeviceBySerialNumber(serialNumber, tenantId);
     }
+
+	@Override
+	public List<Device> listUnRegisteredDevices() {
+		 return deviceDAO.listUnRegisteredDevices();
+	}
 }
