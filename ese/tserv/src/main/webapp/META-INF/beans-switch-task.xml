@@ -28,9 +28,11 @@
       <task:scheduled ref="offlineBaleGenerationSchedulerTask" method="process" fixed-delay="120000" initial-delay="0"/>
       <task:scheduled ref="offlineTransferSpinningSchedulerTask" method="process" fixed-delay="120000" initial-delay="0"/>
       <task:scheduled ref="offlineFarmCropCalendarSchedulerTask" method="process" fixed-delay="120000" initial-delay="0"/> -->
-       <task:scheduled ref="offlineTxnScheduler" method="process" fixed-delay="1200000" initial-delay="0"/>
+      <task:scheduled ref="offlineTxnScheduler" method="process" fixed-delay="1200000" initial-delay="0"/>
+      
     </task:scheduled-tasks> 
  
      <task:scheduler id="stsScheduler" pool-size="20" />
+	<task:annotation-driven></task:annotation-driven>
 	
 </beans>

@@ -2841,4 +2841,33 @@ private String[] selGroupArry;
   
         return str; 
     } 
+	
+	public void populateMobileUserTableData() {
+		List<Agent> farmerList = agentService.listAgent();
+		JSONArray rows = new JSONArray();
+
+		farmerList.stream().forEach(a -> {
+			List<String> data = new ArrayList<String>();
+			data.add('"' + a.getProfileId() + '"');
+			data.add('"' + (a.getPersonalInfo() != null ? a.getPersonalInfo().getFirstName() : "NA") + '"');
+			data.add('"' + (a.getPersonalInfo() != null ? a.getPersonalInfo().getLastName() : "NA") + '"');
+			data.add('"' + (a.getContactInfo() != null ? a.getContactInfo().getMobileNumber() : "NA") + '"');
+
+			if (a.getCreateTime() != null) {
+				String txnTime = a.getCreateTime().toString();
+				String res = txnTime.substring(0, 19);
+				data.add('"' + res + '"');
+			} else {
+				data.add('"' + "NA" + '"');
+			}
+
+			data.add('"' + ((!StringUtil.isEmpty(a.getVersion()) && a.getVersion() != null) ? a.getVersion() : "NA") + '"');
+			data.add('"' + getText("bodStatus" + a.getBodStatus()) + '"');
+			data.add('"' + "<button type='button' class='btn btn-info'  onclick='redirectMobileUserDetailPage(" + a.getId()
+					+ ",this)'  >Info</button>" + '"');
+
+			rows.add(data);
+		});
+		printAjaxResponse(rows, "text/html");
+	}
 }

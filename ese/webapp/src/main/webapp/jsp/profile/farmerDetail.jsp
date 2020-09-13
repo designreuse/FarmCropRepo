@@ -2414,6 +2414,8 @@ if('<s:property value="getBranchId()"/>'=='Individual'){
 									</a>
 
 								</div>
+									<div id="persInfo" class="collapse show" aria-labelledby="headingOne"
+				data-parent="#accordion">
 								<div class="card-body">
 
 
@@ -2518,6 +2520,7 @@ if('<s:property value="getBranchId()"/>'=='Individual'){
 											</p>
 										</div>
 									</div>
+								</div>
 								</div>
 							</div>
 							<div id="accordion" class="custom-accordion contact_info">

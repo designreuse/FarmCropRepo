@@ -28,7 +28,7 @@
 			<result name="input">/jsp/login.jsp</result>
 			<result name="emptyTenant">/jsp/404.jsp</result>
 			<result name="pageExpired">/jsp/expired.jsp</result>
-			<result name="redirect" type="redirectAction">dashboard_list</result>
+			<result name="redirect" type="redirectAction">dashboard_view</result>
 			<result name="red_url" type="redirectAction">${url}</result>
 			<param name="tenantId">{2}</param>
 		</action>
@@ -44,12 +44,13 @@
 
 		<action name="home_*" method="{1}" class="homeAction">
 			<result name="list">/jsp/switch/home.jsp</result>
-			<result name="dashboard" type="redirectAction">dashboard_list</result>
-			<result name="resetPassword" type="redirectAction">dashboard_list</result>
+			<result name="dashboard" type="redirectAction">dashboard_view</result>
+			<result name="resetPassword" type="redirectAction">dashboard_view</result>
 		</action>
 
 		<action name="dashboard_*" method="{1}" class="dashboardAction">
 			<result name="success">/jsp/switch/dashboard.jsp</result>
+			<result name="view">/jsp/switch/dashboard.jsp</result>
 			<result name="list">/jsp/switch/dashboard.jsp</result>
 		</action>
 
@@ -342,7 +343,7 @@
 			<result type="redirectAction" name="redirect">farmer_list</result>
 			<result type="redirectAction" name="redirectType">farmer_list?type=${type}
 			</result>
-		
+			<result name="report">/jsp/profile/farmerListReportDT.jsp</result>
 			<result name="xls" type="stream">
 				<param name="contentType">application/xls</param>
 				<param name="inputName">fileInputStream</param>

@@ -23,7 +23,8 @@ $.fn.regexMask = function(mask) {
 $(document).ready(function(){
 	//$( "#dialog-form" ).hide();
 	
-
+	loadRegisterDeviceGrid();
+	loadUnRegisterDeviceGrid();
 	
 	latestVersion();
 	
@@ -32,99 +33,10 @@ $(document).ready(function(){
     
 	$( "#popUp" ).hide();
 	//$( "#tabs" ).tabs();
-	
-	$("#detail").jqGrid(
-			{
-			url:'device_data.action',
-			pager: '#pagerForDetail',
-			mtype: 'POST',
-			datatype: "json",
-			styleUI : 'Bootstrap',
-			colNames:[
-					 
-		  		   	  '<s:text name="profile.device.code" />',
-		  		      '<s:text name="profile.device.name" />',
-		  		      '<s:text name="profile.device.serialNumber" />',
-		  		   	  '<s:text name="profile.device.status" />',
-		  		      '<s:text name="agentName" />',
-		  		    '<s:text name="surveyMaster.version" />',
-		  		    '<s:text name="lastLogin" />'
-		      	 ],
 
-		   colModel : [		
-
-		      	      {name:'code',index:'code',sortable:true, width:125},
-		      	      {name:'name',index:'name', sortable:true, width:125},
-		      	      {name:'serialNumber',index:'serialNumber',sortable:true, width:125},
-		      	      {name:'enabled',index:'enabled',width:125,sortable: false, width :125, search:true, stype: 'select', searchoptions: { value: ':<s:text name="filter.allStatus"/>;1:<s:text name="deviceStatus1"/>;0:<s:text name="deviceStatus0"/>' }},
-		      	      {name:'agentName',index:'agentName', sortable:true, width:125},
-		      	    {name:'appversion',index:'appversion', sortable:true,search:false, width:125},
-		      	    {name:'logintime',index:'logintime', sortable:true,search:false, width:125}
-		      	 ],			
-		    height: 301, 
-			width: 989,
-			scrollOffset: 0,
-			rowNum:15,
-			rowList : [15,30,45],
-			sortname: 'id',
-			sortorder: 'desc',
-			viewrecords: true,
-		    onSelectRow: function(id){ 
-			  document.deviceDetailForm.id.value  =id;
-	          document.deviceDetailForm.submit();      
-			},		
-	        onSortCol: function (index, idxcol, sortorder) {
-		        if (this.p.lastsort >= 0 && this.p.lastsort !== idxcol
-	                    && this.p.colModel[this.p.lastsort].sortable !== false) {
-	                $(this.grid.headers[this.p.lastsort].el).find(">div.ui-jqgrid-sortable>span.s-ico").show();
-	            }
-	        }
-	   });
-	
-	
-	
-	jQuery("#detail").jqGrid('navGrid','#pagerForDetail',{edit:false,add:false,del:false,search:false,refresh:true})
-	jQuery("#detail").jqGrid('filterToolbar',{stringResult: true,searchOnEnter : false});			
-
-	
-
-    jQuery("#unRegDetail").jqGrid(
-			{
 			
-				url:'device_dataUnReg.action',
-			pager: '#unRegPagerForDetail',
-			datatype: "json",
-			styleUI : 'Bootstrap',
-			colNames:[
-			          '<s:text name="device.transactionDate" />',
-		  		      '<s:text name="device.serialNo" />',
-		  		      '<s:text name="device.fieldStaff" />',
-		  		      '<s:text name="Action"/>'
-		  			
-		      	 ],
 
-		   colModel : [
-					 {name:'modifiedTime',index:'modifiedTime',sortable:false,search:false, width:125},
-		      	     {name:'serialNo',index:'serialNo', sortable:true, width:125},
-		      	     {name:'lastUpdatedUsername',index:'lastUpdatedUsername',sortable:true,width:125},
-		      	   	 {name:'update',index:'update', sortable:false, width:125,search:false,align:'center'}
-		      	 
-		      	 ],			
-		    height: 501, 
-			width: $("#baseDiv").width(),
-			rowNum:15,
-			rowList : [15,30,45],
-			sortname: 'id',
-			sortorder: 'desc',
-			viewrecords: true,
-		    	
-	        onSortCol: function (index, idxcol, sortorder) {
-		        if (this.p.lastsort >= 0 && this.p.lastsort !== idxcol
-	                    && this.p.colModel[this.p.lastsort].sortable !== false) {
-	                $(this.grid.headers[this.p.lastsort].el).find(">div.ui-jqgrid-sortable>span.s-ico").show();
-	            }
-	        }
-	   });
+	
    
    
 
@@ -228,6 +140,75 @@ function latestVersion() {
 	}); 
  });
 }
+
+function loadRegisterDeviceGrid(){
+	$.ajax({
+		url : "device_populateRegisterDeviceGridData.action",
+		async : false,
+		type : 'post',
+		success : function(result) {
+
+			var data = JSON.parse(result);
+			$('#registerGrid').DataTable({
+				"data" : data,
+				"order" : [],
+				"columns" : [ {
+					title : "Code"
+				},{
+					title : "Name"
+				}, {
+					title : "Serial Number"
+				}, {
+					title : "Status"
+				}, {
+					title : "Mobile User"
+				}, {
+					title : "Version"
+				}, {
+					title : "Last Login"
+				}, {
+					title : "Action"
+				} ]
+			});
+
+		}
+	});
+}
+
+function redirectRegisterDeviceDetailPage(id, obj) {
+	document.deviceDetailForm.id.value  =id;
+    document.deviceDetailForm.submit();  
+}
+
+
+function loadUnRegisterDeviceGrid(){
+	$.ajax({
+		url : "device_populateUnRegisterDeviceGridData.action",
+		async : false,
+		type : 'post',
+		success : function(result) {
+
+			var data = JSON.parse(result);
+			$('#unRegisterGrid').DataTable({
+				"data" : data,
+				"order" : [],
+				"columns" : [ {
+					title : '<s:text name="device.transactionDate" />'
+				},{
+					title : '<s:text name="device.serialNo" />'
+				}, {
+					title : '<s:text name="device.fieldStaff" />'
+				}, {
+					title : '<s:text name="Action"/>'
+				}]
+			});
+
+		}
+	});
+}
+
+
+
 </script>
 <body>
 	<div class="ferror" id="warn" class=" hide alert alert-danger">
@@ -303,10 +284,16 @@ function latestVersion() {
 					<s:text name="Latest Version"/>: <span id="version" />	</span>				
 		</div>
 
-	 <div class="deviceResponsiveDiv table table-striped table-hover mt-3"  id="baseDiv">
-			<table class="table table-centered datatable dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;" id="detail"></table>
-			<div id="pagerForDetail"></div>
-		</div> 
+	 <br>
+	<br>
+
+	<div class="row">
+		<div class="col-md-12">
+			<table id="registerGrid"
+				class="table table-bordered dt-responsive nowrap"
+				style="border-collapse: collapse; border-spacing: 0; width: 100%;"></table>
+		</div>
+	</div> 
 
 					</div>
 					
@@ -318,10 +305,22 @@ function latestVersion() {
 					</div>
 				</div>
 		
-				 <div class="deviceResponsiveDiv table table-striped table-hover  mt-3"  id="baseDiv2">
+		
+		<br>
+	<br>
+
+	<div class="row">
+		<div class="col-md-12">
+			<table id="unRegisterGrid"
+				class="table table-bordered dt-responsive nowrap"
+				style="border-collapse: collapse; border-spacing: 0; width: 100%;"></table>
+		</div>
+	</div>
+		
+				<!--  <div class="deviceResponsiveDiv table table-striped table-hover  mt-3"  id="baseDiv2">
 			<table class="table table-centered datatable dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;" id="unRegDetail"></table>
 			<div id="unRegPagerForDetail"></div>
-		</div> 
+		</div>  -->
 			
 			</div>		
 					
@@ -406,3 +405,4 @@ function latestVersion() {
 
 </body>
 </html>
+	

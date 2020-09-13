@@ -35,9 +35,13 @@
 		reloadSelect('#selectRole', 'user_populateRoles.action?branchId_F='
 				+ branchId);
 	}
+	function onCancel(){
+		location.href="role_list.action";
+	
+	}
+	
 </script>
 
-<div id="rolcr">
 	<s:form name="roleform" action="role" cssClass="fillform">
 		<s:hidden key="id" />
 		<s:if test='"update".equalsIgnoreCase(command)'>
@@ -45,15 +49,11 @@
 		</s:if>
 		<s:hidden key="command" />
 		<s:hidden name="role.filter.id" value="1" />
-		<div class="appContentWrapper marginBottom">
-			<div class="error">
-				<s:actionerror />
-				<s:fielderror />
-
-
-				<%-- <sup>*</sup>
-				<s:text name="reqd.field" /> --%>
-			</div>
+		
+	<div class="ferror" id="errorDiv" class=" hide alert alert-danger">
+			<s:actionerror theme="bootstrap" />
+			<s:fielderror theme="bootstrap" />
+		</div>
 
 			<div id="accordion" class="custom-accordion pers_info">
 				<div class="card-header card mb-1 shadow-none">
@@ -86,7 +86,7 @@
 										<h3 class="wizard-title">
 											<s:text name="info.role" />
 										</h3>
-										<div class="wizard-desc">Role details</div>
+										<div class="wizard-desc">Setup Role Information Details</div>
 									</div>
 								</div>
 								<i
@@ -96,34 +96,33 @@
 					</a>
 
 				</div>
+				<div id="persInfo" class="collapse show" aria-labelledby="headingOne"
+				data-parent="#accordion">
 				<div class="card-body">
 
 
 					<div class="row">
 						<div class="col-md-4">
-							<div class="form-group farmerCode">
+							<div class="form-group roleName">
 								<label for="txt"><s:text name="roleName" /><sup
 									style="color: red;">*</sup> </label>
 
 								<div class="">
 									<s:textfield size="23" maxlength="45" name="role.name"
-										theme="simple" cssClass="form-control input-sm" />
+										cssClass="form-control input-sm" />
 								</div>
 							</div>
 						</div>
 
 						<div class="col-md-4">
-							<div class="form-group farmerCode">
-								<label for="txt"> <s:text name="isAdmin" /><sup
-									style="color: red;">*</sup>
+							<div class="form-group isAdmin">
+								<label for="txt"> <s:text name="isAdmin" />
 								</label>
 								<div class="">
-									<%-- <s:checkbox name="role.isAdminUser" theme="simple" /> --%>
-
-
+									
 									<s:select headerKey="-1" headerValue="%{getText('txt.select')}"
 										list="#{'true':'Yes', 'false':'No'}" name="role.isAdminUser"
-										theme="simple" cssClass="col-md-6 form-control " />
+										cssClass="form-control " />
 								</div>
 							</div>
 						</div>
@@ -135,168 +134,37 @@
 
 				</div>
 			</div>
-
-
-			<div class="formContainerWrapper">
-				<!-- <h2>
-					<s:text name="info.role" />
-				</h2> -->
-				<div class="flexiWrapper">
-					<s:if test='isMultiBranch==1'>
-
-
-						<s:if test='branchId==null'>
-							<!-- <s:if test='"create".equalsIgnoreCase(command)'>
-									<s:label theme="simple">
-										<s:text name="app.branch" />
-									</s:label>
-									<div class="form-element">
-										<s:select name="branchId_F" id="branchSelect" theme="simple"
-											listKey="key" listValue="value" list="parentBranches"
-											headerKey="" headerValue="%{getText('txt.select')}"
-											onchange="populateSubBranch(this)"
-											cssClass="form-control input-sm select2" />
-									</div>
-								</s:if> -->
-							<s:if test='"update".equalsIgnoreCase(command)'>
-								<div class="flexi flexi10">
-									<label for="txt"><s:text name="app.subBranch" /></label>
-									<div class="form-element">
-										<s:property value="%{getBranchName(role.parentBranchId)}" />
-									</div>
-								</div>
-							</s:if>
-						</s:if>
-
-
-
-
-						<%-- <s:if test='isMultiBranch=="1"&&(getIsParentBranch()==1||branchId==null)'>
-						<div class="flexi flexi10">
-						<s:if test='"create".equalsIgnoreCase(command)'>
-							<label for="txt"><s:text name="app.subBranch" /></label>
-							<div class="form-element">
-								<s:select name="subBranchId_F" id="subBranchSelect" theme="simple"
-											listKey="key" listValue="value" list="subBranchesMap"
-											headerKey="" headerValue="%{getText('txt.select')}"
-											onchange="populateRoleMulti(this)"
-											cssClass="form-control input-sm select2" />
-							</div>
-						</s:if>	
-						  <s:if test='"update".equalsIgnoreCase(command)'>
-								<div class="flexi flexi10">
-									<label for="txt">	<s:text name="app.subBranch" /></label>
-									<div class="form-element">
-											<s:property value="%{getBranchName(role.branchId)}" /><s:hidden name="role.branchId" />
-									</div>
-								</div>
-							</s:if>
-						</div>
-					</s:if> --%>
-						<s:if
-							test='isMultiBranch=="1"&&(getIsParentBranch()==1||branchId==null)'>
-							<div class="flexi flexi10">
-								<s:if test='"create".equalsIgnoreCase(command)'>
-									<label for="txt"><s:text name="app.subBranch" /></label>
-									<div class="form-element">
-										<s:select name="subBranchId_F" id="subBranchSelect"
-											theme="simple" listKey="key" listValue="value"
-											list="subBranchesMap" headerKey=""
-											headerValue="%{getText('txt.select')}"
-											onchange="populateRoleMulti(this)"
-											cssClass="form-control input-sm select2" />
-									</div>
-								</s:if>
-								<s:if test='"update".equalsIgnoreCase(command)'>
-									<div class="flexi flexi10">
-										<label for="txt"> <s:text name="app.subBranch" /></label>
-										<div class="form-element">
-											<s:property value="%{getBranchName(role.branchId)}" />
-											<s:hidden name="role.branchId" />
-										</div>
-									</div>
-								</s:if>
-							</div>
-						</s:if>
-
-					</s:if>
-					<s:else>
-						<s:if test='branchId==null'>
-							<!-- <s:if test='"create".equalsIgnoreCase(command)'>
-						
-							<div class="flexi flexi10">
-									<label for="txt"><s:text name="app.branch" /><sup> *</sup></label>
-									<div class="form-element">
-										<s:select name="branchId_F" theme="simple" listKey="key"
-										listValue="value" list="branchesMap" headerKey="-1"
-										headerValue="%{getText('txt.select')}"
-										cssClass="form-control input-sm select2" />
-									</div>
-								</div>
-						</s:if> -->
-							<s:if test='"update".equalsIgnoreCase(command)'>
-								<s:hidden name="branchId_F" value="%{role.branchId}" />
-								<!-- <div class="flexi flexi10">
-									<label for="txt">	<s:text name="app.branch" /></label>
-									<div class="form-element">
-										<s:property value="%{getBranchName(role.branchId)}" />
-									</div>
-								</div>  -->
-							</s:if>
-						</s:if>
-
-					</s:else>
-					<div class="flexi flexi10">
-						<!--	<label for="txt"><s:text name="roleName" /><sup> *</sup></label>
-									  <div class="form-element"><s:textfield size="23" maxlength="45" name="role.name"
-							theme="simple" cssClass="form-control input-sm" />
-										</div>  -->
-					</div>
-
-					<div class="flexi flexi10">
-						<!--  <label for="txt"><s:text name="isAdmin" /></label>
-										 <div class="form-element"><s:checkbox name="role.isAdminUser" theme="simple" />
-										</div> -->
-					</div>
-				</div>
-
-				<div>
-					<s:if test="command =='create'">
-						<span id="button" class=""><span class="first-child">
-								<button type="button" class="save-btn btn btn-success">
-									<FONT color="#FFFFFF"> <b><s:text name="save.button" /></b>
-									</FONT>
-								</button>
-						</span></span>
-						<span class=""><span class="first-child"><a
-								id="cancel.link" href="role_list.action"
-								class="cancel-btn btn btn-sts"> <FONT color="#FFFFFF">
-										<s:text name="cancel.button" />
-								</FONT>
-							</a></span></span>
-					</s:if>
-					<s:else>
-						<span id="button" class=""><span class="first-child">
-								<button type="button" class="save-btn btn btn-success">
-									<FONT color="#FFFFFF"> <b><s:text
-												name="update.button" /></b>
-									</FONT>
-								</button>
-						</span></span>
-						<span class=""><span class="first-child"><a
-								id="cancel.link" href="role_list.action"
-								class="cancel-btn btn btn-sts"> <FONT color="#FFFFFF">
-										<s:text name="cancel.button" />
-								</FONT>
-							</a></span></span>
-					</s:else>
-				</div>
-
-
-			</div>
-		</div>
-	</s:form>
 </div>
+
+	
+
+		<div class="button-items float-right">
+		
+		
+			<s:if test="command =='create'">
+				<button type="button" id="buttonAdd1"
+					
+					class="btn btn-success waves-effect waves-light">
+					<i class="ri-check-line align-middle mr-2"></i> Save
+				</button>
+			</s:if>
+			<s:else>
+				<button type="submit" id="buttonUpdate"
+					
+					class="btn btn-primary waves-effect waves-light">
+					<i class="ri-error-warning-line align-middle mr-2"></i> Update
+				</button>
+			</s:else>
+			<button type="button" onclick="onCancel();"
+				class="btn btn-danger waves-effect waves-light">
+				<i class="ri-close-line align-middle mr-2"></i> Cancel
+			</button>
+
+				</div>
+
+
+
+	</s:form>
 
 
 
@@ -311,4 +179,9 @@
 		});
 
 	});
+	
+	function onCancel(){
+		location.href="role_list.action";
+	
+	}
 </script>

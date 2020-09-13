@@ -21,6 +21,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import com.ese.entity.util.ESESystem;
+import com.google.appengine.repackaged.com.google.gson.JsonObject;
 import com.sourcetrace.eses.entity.BranchMaster;
 import com.sourcetrace.eses.service.ILocationService;
 import com.sourcetrace.eses.service.IPreferencesService;
@@ -776,6 +777,8 @@ public class VillageAction extends SwitchValidatorAction {
 		}
 		return countryMap;
 	}
+	
+	
 
 	/**
 	 * Gets the location service.
@@ -1521,6 +1524,70 @@ public class VillageAction extends SwitchValidatorAction {
 		getJsonObject().put("msg", getText("msg.cropUpdated"));
 		getJsonObject().put("title", getText("title.success"));	
 		sendAjaxResponse(getJsonObject());
+	}
+	
+	public void refreshCountriesList() {
+		List<Country> countryList = locationService.listCountries();
+
+		JSONObject data = new JSONObject();
+
+		countryList.stream().forEach(c -> {
+
+			data.put(c.getId(), c.getCode()+" - "+c.getName());
+
+		});
+		printAjaxResponse(data, "text/html");
+	}
+	
+	public void refreshStateList() {
+		List<Country> countryList = locationService.listCountries();
+
+		JSONObject data = new JSONObject();
+
+		countryList.stream().forEach(c -> {
+			c.getStates().stream().forEach(s -> {
+				data.put(s.getId(), s.getCode()+" - "+s.getName());
+			});
+
+		});
+		printAjaxResponse(data, "text/html");
+	}
+	
+	public void refreshLocalityList() {
+		List<Country> countryList = locationService.listCountries();
+
+		JSONObject data = new JSONObject();
+
+		countryList.stream().forEach(c -> {
+			c.getStates().stream().forEach(s -> {
+				s.getLocalities().stream().forEach(l -> {
+					data.put(l.getId(), l.getCode()+" - "+l.getName());
+				});
+				
+			});
+
+		});
+		printAjaxResponse(data, "text/html");
+	}
+	
+	public void refreshCityList() {
+		List<Country> countryList = locationService.listCountries();
+
+		JSONObject data = new JSONObject();
+
+		countryList.stream().forEach(c -> {
+			c.getStates().stream().forEach(s -> {
+				s.getLocalities().stream().forEach(l -> {
+					l.getMunicipalities().stream().forEach(city -> {
+						data.put(city.getId(), city.getCode()+" - "+city.getName());
+					});
+					
+				});
+				
+			});
+
+		});
+		printAjaxResponse(data, "text/html");
 	}
 	
 }

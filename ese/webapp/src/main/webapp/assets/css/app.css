@@ -3634,4 +3634,132 @@ div.dt-button-info {
     margin-left: 17px;
     margin-bottom: 0px;
 }
- 
+
+.customGMap{
+	height : 500px;
+}
+ .popUpWrapper {
+  width: 100%;
+  height: 100%;
+  position: relative; }
+
+.popupWidget {
+  width: 410px;
+  min-height: 500px;
+  background: #fff;
+  position: absolute;
+  right: 630px;
+  top: 0; 
+  }
+  .popupWidget .close {
+    width: 28px;
+    height: 28px;
+    background: #5664d2;
+    opacity: 1 !important;
+    position: relative;
+    right: 0;
+    top: 0; }
+    .popupWidget .close a {
+      width: 100%;
+      height: 100%;
+      font-size: 16px;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none; }
+
+.popupheader {
+  background: url("../images/popupHdr.png") no-repeat;
+  height: 76px;
+  width: 100%; }
+  .popupheader .frmrImageWrapper {
+    width: 115px;
+    height: 115px;
+    background: rgb(128, 0, 255);
+    border: solid 2px #fff;
+    border-radius: 50% 50%;
+    position: absolute;
+    top: 20px;
+    left: 20px; }
+  .popupheader .lstEdtTxt {
+    font-size: 13px;
+    text-align: right;
+    color: #fff;
+    padding-top: 55px;
+    padding-right: 6px;
+    text-shadow: 2px 2px 2px #000; }
+
+.popupContent {
+  padding: 0 10px;
+  border-right: solid 1px rgba(0, 0, 0, 0.2); }
+  .popupContent .frmrNameWrapper {
+    padding: 5px 0 10px; }
+    .popupContent .frmrNameWrapper h4, .popupContent .frmrNameWrapper h6 {
+      padding-left: 145px;
+      padding-top: 5px;
+      margin: 0; }
+  .popupContent .crpDetailsWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border-bottom: solid 1px rgba(0, 0, 0, 0.2); }
+    .popupContent .crpDetailsWrapper .column {
+      border-right: solid 1px rgba(0, 0, 0, 0.2); }
+    .popupContent .crpDetailsWrapper .column:last-child {
+      border-right: none; }
+    .popupContent .crpDetailsWrapper .crpDetails, .popupContent .crpDetailsWrapper .crpAreaDetails {
+      padding: 0 10px 0 0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start; }
+      .popupContent .crpDetailsWrapper .crpDetails .crpIcnImg, .popupContent .crpDetailsWrapper .crpAreaDetails .crpIcnImg {
+        width: 64px;
+        height: 64px; }
+        .popupContent .crpDetailsWrapper .crpDetails .crpIcnImg img, .popupContent .crpDetailsWrapper .crpAreaDetails .crpIcnImg img {
+          width: 100%;
+          height: 100%; }
+      .popupContent .crpDetailsWrapper .crpDetails h4, .popupContent .crpDetailsWrapper .crpDetails h6, .popupContent .crpDetailsWrapper .crpAreaDetails h4, .popupContent .crpDetailsWrapper .crpAreaDetails h6 {
+        margin: 0; }
+      .popupContent .crpDetailsWrapper .crpDetails h4, .popupContent .crpDetailsWrapper .crpAreaDetails h4 {
+        color: #5664d2;
+        margin-bottom: 5px; }
+  .popupContent .farmerDetailsWrapper ul {
+    margin: 0;
+    padding: 0; }
+    .popupContent .farmerDetailsWrapper ul li {
+      margin: 0;
+      padding: 10px;
+      border-bottom: solid 1px rgba(0, 0, 0, 0.2);
+      display: flex;
+      justify-content: center;
+      align-items: center; }
+      .popupContent .farmerDetailsWrapper ul li .column {
+        flex: 1; }
+        .popupContent .farmerDetailsWrapper ul li .column p strong {
+          display: block;
+          font-weight: 16px; }
+    .popupContent .farmerDetailsWrapper ul li:last-child {
+      border-bottom: none; }
+  .popupContent .farmerDetailsWrapper .viewmore {
+    float: right;
+    padding: 10px;
+    background: #5664d2;
+    margin-right: -10px; }
+    .popupContent .farmerDetailsWrapper .viewmore a {
+      text-decoration: none;
+      color: #fff; }
+ .mapWrapper {
+  width: 100%;
+  position: relative; }
+
+.mapOverlay {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999999 !important;
+  display: none;
+  transition: all 2.5s; }

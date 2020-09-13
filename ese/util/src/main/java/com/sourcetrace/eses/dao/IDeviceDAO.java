@@ -191,4 +191,6 @@ public interface IDeviceDAO extends IESEDAO {
 		public Integer findDeviceCountByMonth(Date sDate,Date eDate);
 		
 		public Device findDeviceBySerialNumber(String serialNumber, String tenantId);
+
+		public List<Device> listUnRegisteredDevices();
 }

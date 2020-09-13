@@ -153,6 +153,12 @@ public class DashboardAction extends ESEAction {
 		this.selectedCooperative = selectedCooperative;
 	}
 
+	public String view() throws Exception {
+		Calendar currentDate = Calendar.getInstance();
+        int iYear = currentDate.get(Calendar.YEAR);
+        setCurrentYear(String.valueOf(iYear));
+		return LIST;
+	}
 	public String list() throws Exception {
 		Calendar currentDate = Calendar.getInstance();
         int iYear = currentDate.get(Calendar.YEAR);

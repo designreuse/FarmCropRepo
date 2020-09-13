@@ -2698,5 +2698,9 @@ public List<Object[]> listLoanLedgerByDate(String date,String branchId);
 
 	public List<Object[]> fetchFarmerAndFarmCountByGroup();
 
+	public List<Object[]> fetchFarmerTableData();
+
+	public List<Object[]> fetchFarmerListReportGridData();
+
 
 }

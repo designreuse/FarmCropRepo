@@ -2810,7 +2810,7 @@ function isAlphabet(evt) {
 									<sup style="color: red;">*</sup>
 								</label>
 								<div class="">
-									<s:select cssClass="form-control select2"
+									<s:select cssClass="form-control"
 										id="certificationType" name="farmer.certificationType"
 										list="certificationTypes" headerKey="-1"
 										headerValue="%{getText('txt.select')}" />

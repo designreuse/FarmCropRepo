@@ -64,7 +64,6 @@
 <s:form name="form" cssClass="fillform">
 	<s:hidden key="currentPage" />
 	<s:hidden key="id" />
-	<s:hidden key="harvestSeason.id" />
 	<s:hidden key="command" />
 	<s:hidden key="harvestSeason.id" id="harvestSeasonId" />
 	<div id="accordion" class="custom-accordion season_info" >
@@ -162,7 +161,7 @@
 
  <div class="button-items float-right">
  	<sec:authorize ifAllGranted="profile.season.update">
-	<button type="submit" id="update" class="btn btn-success waves-effect waves-light">
+	<button type="button" id="update" class="btn btn-success waves-effect waves-light">
 			<i class="ri-check-line align-middle mr-2"></i>Edit
 		</button>
 		

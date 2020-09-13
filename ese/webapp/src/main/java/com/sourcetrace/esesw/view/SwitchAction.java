@@ -139,6 +139,7 @@ public class SwitchAction extends ActionSupport
 	protected static final String OTHERS = "99";
 	protected static final String DELETE = "delete";
 	protected static final String LIST = "list";
+	protected static final String REPORT = "report";
 	protected static final String TITLE_PREFIX = "title.";
 	protected static final String HEADING = "heading";
 	protected static final String EMPTY = "";
@@ -999,6 +1000,8 @@ public class SwitchAction extends ActionSupport
 		request.setAttribute(HEADING, getText(LIST));
 		return LIST;
 	}
+	
+
 
 	/**
 	 * Gets the sesssion id.

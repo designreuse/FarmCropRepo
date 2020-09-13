@@ -406,7 +406,7 @@
 
 				<div id="map"></div>
 				<div class="chartIcnWrapper">
-					<a href="dashboard_list.action" title="Go to Dashboard"> <i
+					<a href="dashboard_view.action" title="Go to Dashboard"> <i
 						class="fa fa-bar-chart" onmouseover="this.href" aria-hidden="true"></i>
 					</a>
 

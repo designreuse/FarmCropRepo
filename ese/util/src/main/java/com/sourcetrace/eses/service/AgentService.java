@@ -1443,4 +1443,16 @@ public class AgentService implements IAgentService {
         return agentDAO.findAgentNameByWareHouseId(coOperativeId);
     }
 
+	@Override
+	public List<Object[]> fetchAvailableAgentsToProcess() {
+		 return agentDAO.fetchAvailableAgentsToProcess();
+		
+	}
+
+	@Override
+	public void setMarketPlaceEnableForAgents(List<String> profIds) {
+		 agentDAO.setMarketPlaceEnableForAgents(profIds);
+		
+	}
+
 }

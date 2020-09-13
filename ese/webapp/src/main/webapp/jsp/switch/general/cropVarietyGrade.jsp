@@ -3,6 +3,7 @@
 <html>
 <head>
 <META name="decorator" content="swithlayout">
+
 </head>
 
 <script type="text/javascript">
@@ -485,7 +486,7 @@
 
 	<!-- Nav tabs -->
 	<ul class="nav nav-pills nav-justified" role="tablist">
-		<li class="nav-item waves-effect waves-light"><a
+		<li class="nav-item waves-effect waves-light" style="padding: 10px;"><a
 			class="nav-link active  border py-10 d-flex flex-grow-1 rounded flex-column align-items-center"
 			data-toggle="pill" href="#crop-tabs"> <span
 				class="nav-icon py-2 w-auto"> <span
@@ -509,7 +510,7 @@
 				class="nav-text font-size-lg py-2 font-weight-bold text-center">Crop
 					Details</span>
 		</a></li>
-		<li class="nav-item waves-effect waves-light"><a
+		<li class="nav-item waves-effect waves-light" style="padding: 10px;"><a
 			class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center"
 			data-toggle="pill" href="#variety-tabs"> <span
 				class="nav-icon py-2 w-auto"> <span
@@ -532,7 +533,7 @@
 				class="nav-text font-size-lg py-2 font-weight-bolder text-center">Variety
 					Details</span>
 		</a></li>
-		<li class="nav-item waves-effect waves-light"><a
+		<li class="nav-item waves-effect waves-light" style="padding: 10px;"><a
 			class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center"
 			data-toggle="pill" href="#grade-tabs"> <span
 				class="nav-icon py-2 w-auto"> <span
@@ -561,7 +562,10 @@
 
 	<div class="tab-content p-3 text-muted">
 
+
 		<div class="tab-pane active" id="crop-tabs" role="tabpanel">
+		<div>
+	
 			<sec:authorize ifAllGranted="profile.procurementProduct.create">
 				<button type="BUTTON" id="add" data-toggle='modal'
 					data-target='#slide' onclick='openCropCreateWindow();'
@@ -569,30 +573,54 @@
 					Add Crop <i class="ri-menu-add-line align-middle ml-2"></i>
 				</button>
 			</sec:authorize>
-			<table id="cropTable" class="display" width="100%"></table>
+	
+	
+	</div>
+	<br>
+	<br>
+	<div class="row">
+                            <div class="col-12">
+			<table id="cropTable"  class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;"></table>
 		</div>
-
+</div>
+</div>
 		<div class="tab-pane" id="variety-tabs" role="tabpanel">
-			<sec:authorize ifAllGranted="profile.procurementProduct.create">
+			<div>
+	
+				<sec:authorize ifAllGranted="profile.procurementProduct.create">
 				<button type="BUTTON" id="add" data-toggle='modal'
 					data-target='#slide' onclick='openVarietyCreateWindow();'
 					class="btn btn-success mb-2 float-right">
 					Add Variety <i class="ri-menu-add-line align-middle ml-2"></i>
 				</button>
 			</sec:authorize>
-			<table id="varietyTable" class="display" width="100%"></table>
+	
+	
+	</div>
+		<br><br>	
+		<div class="row">
+                            <div class="col-12">
+			<table id="varietyTable"  class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;"></table>
+		</div>
+		</div>
 		</div>
 
 		<div class="tab-pane" id="grade-tabs" role="tabpanel">
-			<sec:authorize ifAllGranted="profile.procurementProduct.create">
+		
+		<div><sec:authorize ifAllGranted="profile.procurementProduct.create">
 				<button type="BUTTON" id="add" data-toggle='modal'
 					data-target='#slide' onclick='openGradeCreateWindow();'
 					class="btn btn-success mb-2 float-right">
 					Add Grade <i class="ri-menu-add-line align-middle ml-2"></i>
 				</button>
-			</sec:authorize>
-			<table id="gradeTable" class="display" width="100%"></table>
+			</sec:authorize></div>
+			<br><br>
+			<div class="row">
+                            <div class="col-12">
+			<table id="gradeTable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;"></table>
 		</div>
+		</div>
+	</div>
 
 	</div>
 

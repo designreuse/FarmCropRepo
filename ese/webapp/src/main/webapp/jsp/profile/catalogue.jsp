@@ -102,12 +102,10 @@ var survey = '';
 	</s:if>
 	<s:hidden key="command" />
 				<div class="appContentWrapper marginBottom">
-					<div class="error">
-					<sup>*</sup>
-					<s:text name="reqd.field" />
-					<s:actionerror />
-					<s:fielderror />
-				</div>
+				<div class="ferror" id="errorDiv" class=" hide alert alert-danger">
+			<s:actionerror theme="bootstrap" />
+			<s:fielderror theme="bootstrap" />
+		</div>
 				<div class="formContainerWrapper">
 				<h2>
 				<s:property value="%{getLocaleProperty('info.catalogue')}" />

@@ -177,6 +177,8 @@
 
 
 	<script type="text/javascript">
+	
+	$(document).ready(function () {
 		$("#fromCalendar").datepicker({
 			format : "mm/yyyy",
 			startView : "months",
@@ -188,6 +190,11 @@
 			startView : "months",
 			minViewMode : "months"
 		});
+	});
+	
+	function onCancel(){
+		 document.cancelform.submit();
+	}
 
 		function onSubmit() {
 

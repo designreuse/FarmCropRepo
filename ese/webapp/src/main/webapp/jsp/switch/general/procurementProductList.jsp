@@ -764,7 +764,7 @@ $("#variety").click(function() {
 
 	<!-- Nav tabs -->
 				<ul class="nav nav-pills nav-justified" role="tablist">
-					<li class="nav-item waves-effect waves-light"><a
+					<li class="nav-item waves-effect waves-light" style="padding:10px;"><a
 			class="nav-link active  border py-10 d-flex flex-grow-1 rounded flex-column align-items-center"
 			data-toggle="pill"
 			href="#crop-tabs">
@@ -788,7 +788,7 @@ $("#variety").click(function() {
 			</span> <span
 				class="nav-text font-size-lg py-2 font-weight-bold text-center">Crop Details</span>
 		</a></li>
-					<li class="nav-item waves-effect waves-light"><a
+					<li class="nav-item waves-effect waves-light" style="padding:10px;"><a
 			class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center"
 			data-toggle="pill"
 			href="#variety-tabs">
@@ -811,7 +811,7 @@ $("#variety").click(function() {
 			</span> <span
 				class="nav-text font-size-lg py-2 font-weight-bolder text-center">Variety Details</span>
 		</a></li>
-					<li class="nav-item waves-effect waves-light"><a
+					<li class="nav-item waves-effect waves-light" style="padding:10px;"><a
 			class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center"
 			data-toggle="pill"
 			href="#grade-tabs">

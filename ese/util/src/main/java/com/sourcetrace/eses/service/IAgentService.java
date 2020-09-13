@@ -675,4 +675,8 @@ public interface IAgentService {
 	
 	public List<String> findAgentNameByWareHouseId(long coOperativeId);
 
+	public List<Object[]> fetchAvailableAgentsToProcess();
+
+	public void setMarketPlaceEnableForAgents(List<String> profIds);
+
 }

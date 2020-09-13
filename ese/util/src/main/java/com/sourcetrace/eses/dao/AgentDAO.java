@@ -1709,4 +1709,60 @@ public class AgentDAO extends ESEDAO implements IAgentDAO {
         return list;
     }
 
+	@Override
+	public List<Object[]> fetchAvailableAgentsToProcess() {
+		 Session session = getSessionFactory().openSession();    
+	        String queryString = " select "
+	        		+"  t.PROFILE_ID, "
+	        		+"  t.firstName, "
+	        		+"  t.lastName, "
+	        		+"  t.email, "
+	        		+"  t.mobileNumber, "
+	        		+"  count(t.PROFILE_ID) as txnCount "
+	        		+" from "
+	        		+"  ("
+	        		+" SELECT "
+	        		+"  l.PROFILE_ID, "
+	        		+"  CASE WHEN ld.txn_type = 308 THEN max(ld.txn_count) END as farmerCount, "
+	        		+"  CASE WHEN ld.txn_type = 359 THEN max(ld.txn_count) END as farmCount, "
+	        		+"  ld.txn_type, "
+	        		+"  pi.first_name as firstName, "
+	        		+"  pi.last_name as lastName, "
+	        		+"  ci.email as email, "
+	        		+"  ci.mobile as mobileNumber "
+	        		+" FROM "
+	        		+"  prof p "
+	        		+"  inner join cont_info ci on p.cont_info_id = ci.id "
+	        		+"  inner join pers_info pi on p.pers_info_id = pi.id "
+	        		+"  inner join agent_access_log l on p.prof_id = l.profile_id "
+	        		+"  inner join agent_access_log_detail ld on ld.access_id = l.id "
+	        		+" where "
+	        		+"  ld.txn_type in (308, 359) "
+	        		+ " and p.isMarketPlace is not true "
+	        		+" group by "
+	        		+"   p.prof_id, ld.txn_type "
+	        		+" having "
+	        		+"  farmerCount >= 5 "
+	        		+"  or farmCount >= 5"
+	        		+"  ) t "
+	        		+" having "
+	        		+"  txnCount = 2";
+	        Query query = session.createSQLQuery(queryString);
+	        List list = query.list();
+	        session.flush();
+	        session.close();
+	        return list;
+	}
+
+	@Override
+	public void setMarketPlaceEnableForAgents(List<String> profIds) {
+		Session session = getSessionFactory().openSession();
+		String queryString = " UPDATE prof p SET p.isMarketPlace = true WHERE p.prof_id in (:profid) ";
+		Query query = session.createSQLQuery(queryString);
+		query.setParameterList("profid", profIds);
+		int flag = query.executeUpdate();
+		session.flush();
+		session.close();
+	}
+
 }
