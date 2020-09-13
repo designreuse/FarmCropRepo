@@ -465,4 +465,20 @@ public class RoleAction extends SwitchValidatorAction {
 		jsonObject.put("name", name);
 		return jsonObject;
 	}
+	
+	public void populateRoleGridData() {
+		List<Role> roleList = roleService.listRoles();
+		JSONArray rows = new JSONArray();
+
+		roleList.stream().forEach(r -> {
+			List<String> data = new ArrayList<String>();
+			data.add('"' + r.getName() + '"');
+			data.add('"' + "<button type='button' class='btn btn-info'  onclick='redirectRoleDetailPage("
+					+ r.getId() + ",this)'  >Info</button>" + '"');
+
+			rows.add(data);
+		});
+		printAjaxResponse(rows, "text/html");
+	}
+	
 }

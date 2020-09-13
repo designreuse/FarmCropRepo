@@ -16,108 +16,55 @@
 			.ready(
 					function() {
 
-						jQuery("#detail")
-								.jqGrid(
-										{
-											url : 'role_data.action',
-											mtype : 'POST',
-											pager : '#pagerForDetail',
-											datatype : "json",
-											styleUI : 'Bootstrap',
-											colNames : [
-
-											'<s:text name="role.name"/>' ],
-
-											colModel : [
-
-											{
-												name : 'name',
-												index : 'name',
-												sortable : true,
-												width : 125
-											} ],
-											height : 301,
-											width : $("#baseDiv").width(),
-											scrollOffset : 0,
-											rowNum : 10,
-											rowList : [ 10, 25, 50 ],
-											sortname : 'id',
-											sortorder : 'desc',
-											viewrecords : true,
-											onSelectRow : function(id) {
-												document.updateform.id.value = id;
-												document.updateform.submit();
-											},
-											onSortCol : function(index, idxcol,
-													sortorder) {
-												if (this.p.lastsort >= 0
-														&& this.p.lastsort !== idxcol
-														&& this.p.colModel[this.p.lastsort].sortable !== false) {
-													$(
-															this.grid.headers[this.p.lastsort].el)
-															.find(
-																	">div.ui-jqgrid-sortable>span.s-ico")
-															.show();
-												}
-											}
-										});
-
-						jQuery("#detail").jqGrid("setLabel", "branchId", "", {
-							"text-align" : "center"
-						});
-						jQuery("#detail").jqGrid("setLabel", "name", "", {
-							"text-align" : "center"
-						});
-
-						jQuery("#detail").jqGrid('navGrid', '#pagerForDetail',
-								{
-									edit : false,
-									add : false,
-									del : false,
-									search : false,
-									refresh : true
-								})
+						loadRoleTable();
 						
-						colModel = jQuery("#detail").jqGrid('getGridParam',
-								'colModel');
-						$(
-								'#gbox_'
-										+ $.jgrid.jqID(jQuery("#detail")[0].id)
-										+ ' tr.ui-jqgrid-labels th.ui-th-column')
-								.each(
-										function(i) {
-											var cmi = colModel[i], colName = cmi.name;
-
-											if (cmi.sortable !== false) {
-												$(this)
-														.find(
-																'>div.ui-jqgrid-sortable>span.s-ico')
-														.show();
-											} else if (!cmi.sortable
-													&& colName !== 'rn'
-													&& colName !== 'cb'
-													&& colName !== 'subgrid') {
-												$(this)
-														.find(
-																'>div.ui-jqgrid-sortable')
-														.css({
-															cursor : 'default'
-														});
-											}
-										});
+						
 					});
+	
+	function loadRoleTable(){
+		$.ajax({
+			url : "role_populateRoleGridData.action",
+			async : false,
+			type : 'post',
+			success : function(result) {
+
+				var data = JSON.parse(result);
+				$('#roleGrid').DataTable({
+					"data" : data,
+					"order" : [],
+					"columns" : [ {
+						title : "Role Name"
+					}, {
+						title : "Action"
+					} ]
+				});
+
+			}
+		});
+	}
+	
+	function redirectRoleDetailPage(id, obj) {
+		document.updateform.id.value = id;
+		document.updateform.submit();
+	}
 </script>
 <div>
 	<sec:authorize ifAllGranted="profile.role.create">
 			<button type="BUTTON" id="add" onclick="document.createform.submit()" class="btn btn-success mb-2 float-right" >Add Role <i class="ri-menu-add-line align-middle ml-2"></i></button>
 			</sec:authorize>
 </div>
-<div>
-	 <div class="table-responsive mt-3"  id="baseDiv">
-			<table class="table table-centered datatable dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;" id="detail"></table>
-			<div id="pagerForDetail"></div>
-		</div> 
+<br>
+	<br>
+
+	<div class="row">
+		<div class="col-md-12">
+			<table id="roleGrid"
+				class="table table-bordered dt-responsive nowrap"
+				style="border-collapse: collapse; border-spacing: 0; width: 100%;"></table>
+		</div>
 	</div>
+
+
 
 
 <s:form name="createform" action="role_create">
