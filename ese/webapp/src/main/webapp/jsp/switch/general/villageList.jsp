@@ -876,7 +876,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 				<h5 id="cropSlideHead" class="modal-title mt-0">Add Crop Information</h5>
-					<button type="button"  class="close"
+					<button type="button"  class="close" id="model-close-btn"
 						data-dismiss="modal" aria-label="Close">  <span aria-hidden="true">&times;</span></button>
 					
 				</div>
