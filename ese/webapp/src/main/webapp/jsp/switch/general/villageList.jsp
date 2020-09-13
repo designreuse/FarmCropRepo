@@ -3,35 +3,43 @@
 <html>
 <head>
 <META name="decorator" content="swithlayout">
-  <!-- JAVASCRIPT -->
-        <script src="assets/libs/jquery/jquery.min.js"></script>
-        <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="assets/libs/metismenu/metisMenu.min.js"></script>
-        <script src="assets/libs/simplebar/simplebar.min.js"></script>
-        <script src="assets/libs/node-waves/waves.min.js"></script>
-		<script src="assets/js/app.js"></script>
-        <!-- Required datatable js -->
-        <script src="assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
-        <script src="assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
-        <!-- Buttons examples -->
-        <script src="assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-        <script src="assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
-        <script src="assets/libs/jszip/jszip.min.js"></script>
-        <script src="assets/libs/pdfmake/build/pdfmake.min.js"></script>
-        <script src="assets/libs/pdfmake/build/vfs_fonts.js"></script>
-        <script src="assets/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
-        <script src="assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
-        <script src="assets/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+<!-- JAVASCRIPT -->
+<script src="assets/libs/jquery/jquery.min.js"></script>
+<script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/libs/metismenu/metisMenu.min.js"></script>
+<script src="assets/libs/simplebar/simplebar.min.js"></script>
+<script src="assets/libs/node-waves/waves.min.js"></script>
+<script src="assets/js/app.js"></script>
+<!-- Required datatable js -->
+<script src="assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+<script
+	src="assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+<!-- Buttons examples -->
+<script
+	src="assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+<script
+	src="assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+<script src="assets/libs/jszip/jszip.min.js"></script>
+<script src="assets/libs/pdfmake/build/pdfmake.min.js"></script>
+<script src="assets/libs/pdfmake/build/vfs_fonts.js"></script>
+<script src="assets/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+<script src="assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+<script
+	src="assets/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
 
-        <script src="assets/libs/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
-        <script src="assets/libs/datatables.net-select/js/dataTables.select.min.js"></script>
-        
-        <!-- Responsive examples -->
-        <script src="assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-        <script src="assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+<script
+	src="assets/libs/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+<script
+	src="assets/libs/datatables.net-select/js/dataTables.select.min.js"></script>
 
-        <!-- Datatable init js -->
-        <script src="assets/js/pages/datatables.init.js"></script>
+<!-- Responsive examples -->
+<script
+	src="assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script
+	src="assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+
+<!-- Datatable init js -->
+<script src="assets/js/pages/datatables.init.js"></script>
 </head>
 
 <script type="text/javascript">
@@ -57,7 +65,7 @@
 				var data = JSON.parse(result);
 				$('#countryTable').DataTable({
 					"data" : data,
-					"order": [],
+					"order" : [],
 					"columns" : [ {
 						title : "Code"
 					}, {
@@ -83,7 +91,7 @@
 				var data = JSON.parse(result);
 				$('#stateTable').DataTable({
 					"data" : data,
-					"order": [],
+					"order" : [],
 					"columns" : [ {
 						title : "Code"
 					}, {
@@ -111,7 +119,7 @@
 				var data = JSON.parse(result);
 				$('#localityTable').DataTable({
 					"data" : data,
-					"order": [],
+					"order" : [],
 					"columns" : [ {
 						title : "Code"
 					}, {
@@ -140,7 +148,7 @@
 				var data = JSON.parse(result);
 				$('#cityTable').DataTable({
 					"data" : data,
-					"order": [],
+					"order" : [],
 					"columns" : [ {
 						title : "Code"
 					}, {
@@ -170,7 +178,7 @@
 				var data = JSON.parse(result);
 				$('#villageTable').DataTable({
 					"data" : data,
-					"order": [],
+					"order" : [],
 					"columns" : [ {
 						title : "Code"
 					}, {
@@ -219,24 +227,36 @@
 		});
 	}
 
-	function processCreateCountry() {
-		var data = {
-			"countryName" : $("#countryName_create").val()
-		};
+	function processCreateCountry(obj) {
+		$(obj).prop('disabled', true);
+		var countryName = $("#countryName_create").val();
 
-		$.ajax({
-			url : "country_processCreateCountry.action",
-			async : false,
-			type : 'post',
-			data : data,
-			success : function(result) {
+		if (!isEmpty(countryName)) {
 
-				$("#countryTable").DataTable().destroy();
-				loadCountryTable();
-				$("#model-close-btn").click();
-				hideTables();
-			}
-		});
+			var data = {
+				"countryName" : countryName
+			};
+
+			$.ajax({
+				url : "country_processCreateCountry.action",
+				async : false,
+				type : 'post',
+				data : data,
+				success : function(result) {
+
+					$("#countryTable").DataTable().destroy();
+					loadCountryTable();
+					$("#model-close-btn").click();
+					hideTables();
+					reloadCountryDropDown();
+					$(obj).prop('disabled', false);
+				}
+			});
+		} else {
+			alert("Country Name is empty");
+			$(obj).prop('disabled', false);
+		}
+
 	}
 
 	function openCountryEditWindow(id, obj) {
@@ -253,27 +273,38 @@
 		});
 	}
 
-	function processUpdateCountry() {
+	function processUpdateCountry(obj) {
+		$(obj).prop('disabled', true);
+		var countryName = $("#countryName_update").val();
 
-		var data = {
-			"id" : $("#countryId").val(),
-			"countryName" : $("#countryName_update").val()
-		};
+		if (!isEmpty(countryName)) {
 
-		$.ajax({
-			url : "country_processUpdateCountry.action",
-			async : false,
-			type : 'post',
-			data : data,
-			success : function(result) {
+			var data = {
+				"id" : $("#countryId").val(),
+				"countryName" : countryName
+			};
 
-				$("#countryTable").DataTable().destroy();
-				loadCountryTable();
-				$("#model-close-btn").click();
-				hideTables();
+			$.ajax({
+				url : "country_processUpdateCountry.action",
+				async : false,
+				type : 'post',
+				data : data,
+				success : function(result) {
 
-			}
-		});
+					$("#countryTable").DataTable().destroy();
+					loadCountryTable();
+					$("#model-close-btn").click();
+					hideTables();
+					reloadCountryDropDown();
+					$(obj).prop('disabled', false);
+
+				}
+			});
+		} else {
+			alert("Country Name is empty");
+			$(obj).prop('disabled', false);
+		}
+
 	}
 	/* country related functionalities end */
 
@@ -294,30 +325,45 @@
 		});
 	}
 
-	function processCreateState() {
-		var data = {
-			"selectedCountry" : $("#selectedCountry_create").val(),
-			"stateName" : $("#stateName_create").val()
-		};
+	function processCreateState(obj) {
+		$(obj).prop('disabled', true);
+		var country = $("#selectedCountry_create").val();
+		var stateName = $("#stateName_create").val();
 
-		$.ajax({
-			url : "state_processCreateState.action",
-			async : false,
-			type : 'post',
-			data : data,
-			success : function(result) {
+		if (!isEmpty(stateName) && !isEmpty(country) && country != '-1') {
+			var data = {
+				"selectedCountry" : country,
+				"stateName" : stateName
+			};
 
-				$("#stateTable").DataTable().destroy();
-				loadStateTable();
-				$("#model-close-btn").click();
-				hideTables();
+			$.ajax({
+				url : "state_processCreateState.action",
+				async : false,
+				type : 'post',
+				data : data,
+				success : function(result) {
 
-				$('#selectedCountry_create option').prop('selected',
-						function() {
-							return this.defaultSelected;
-						});
-			}
-		});
+					$("#stateTable").DataTable().destroy();
+					loadStateTable();
+					$("#model-close-btn").click();
+					hideTables();
+
+					/* $('#selectedCountry_create option').prop('selected',
+							function() {
+								return this.defaultSelected;
+							}); */
+					reloadStateDropDown();
+					$(obj).prop('disabled', false);
+				}
+			});
+		} else if (isEmpty(stateName)) {
+			alert("State Name is empty");
+			$(obj).prop('disabled', false);
+		} else if (isEmpty(country) || country == '-1') {
+			alert("Country is empty");
+			$(obj).prop('disabled', false);
+		}
+
 	}
 
 	function openStateEditWindow(id, obj) {
@@ -338,31 +384,47 @@
 		});
 	}
 
-	function processUpdateState() {
-		var data = {
-			"id" : $("#stateId").val(),
-			"selectedCountry" : $("#selectedCountry_update").val(),
-			"stateName" : $("#stateName_update").val()
-		};
+	function processUpdateState(obj) {
+		$(obj).prop('disabled', true);
+		var country = $("#selectedCountry_update").val();
+		var stateName = $("#stateName_update").val();
 
-		$.ajax({
-			url : "state_processUpdateState.action",
-			async : false,
-			type : 'post',
-			data : data,
-			success : function(result) {
+		if (!isEmpty(stateName) && !isEmpty(country) && country != '-1') {
+			var data = {
+				"id" : $("#stateId").val(),
+				"selectedCountry" : $("#selectedCountry_update").val(),
+				"stateName" : $("#stateName_update").val()
+			};
 
-				$("#stateTable").DataTable().destroy();
-				loadStateTable();
-				$("#model-close-btn").click();
-				hideTables();
-				$('#selectedCountry_update option').prop('selected',
-						function() {
-							return this.defaultSelected;
-						});
+			$.ajax({
+				url : "state_processUpdateState.action",
+				async : false,
+				type : 'post',
+				data : data,
+				success : function(result) {
 
-			}
-		});
+					$("#stateTable").DataTable().destroy();
+					loadStateTable();
+					$("#model-close-btn").click();
+					hideTables();
+					/* $('#selectedCountry_update option').prop('selected',
+							function() {
+								return this.defaultSelected;
+							}); */
+
+					reloadStateDropDown();
+					$(obj).prop('disabled', false);
+
+				}
+			});
+		} else if (isEmpty(stateName)) {
+			alert("State Name is empty");
+			$(obj).prop('disabled', false);
+		} else if (isEmpty(country) || country == '-1') {
+			alert("Country is empty");
+			$(obj).prop('disabled', false);
+		}
+
 	}
 
 	/*  state related functionalities end */
@@ -385,30 +447,45 @@
 		});
 	}
 
-	function processCreateLocality() {
-		var data = {
-			"selectedState" : $("#selectedState_create").val(),
-			"localityName" : $("#localityName_create").val()
-		};
+	function processCreateLocality(obj) {
+		$(obj).prop('disabled', true);
+		var localityName = $("#localityName_create").val();
+		var state = $("#selectedState_create").val();
 
-		$.ajax({
-			url : "locality_processCreateLocality.action",
-			async : false,
-			type : 'post',
-			data : data,
-			success : function(result) {
+		if (!isEmpty(localityName) && !isEmpty(state) && state != '-1') {
+			var data = {
+				"selectedState" : state,
+				"localityName" : localityName
+			};
 
-				$("#localityTable").DataTable().destroy();
-				loadLocalityTable();
-				$("#model-close-btn").click();
-				hideTables();
+			$.ajax({
+				url : "locality_processCreateLocality.action",
+				async : false,
+				type : 'post',
+				data : data,
+				success : function(result) {
 
-				$('#selectedState_create option').prop('selected', function() {
-					return this.defaultSelected;
-				});
+					$("#localityTable").DataTable().destroy();
+					loadLocalityTable();
+					$("#model-close-btn").click();
+					hideTables();
 
-			}
-		});
+					/* $('#selectedState_create option').prop('selected', function() {
+						return this.defaultSelected;
+					}); */
+
+					reloadLocalityDropDown();
+					$(obj).prop('disabled', false);
+				}
+			});
+		} else if (isEmpty(localityName)) {
+			alert("Locality Name is empty");
+			$(obj).prop('disabled', false);
+		} else if (isEmpty(state) || state == '-1') {
+			alert("State is empty");
+			$(obj).prop('disabled', false);
+		}
+
 	}
 
 	function openLocalityEditWindow(id, obj) {
@@ -430,38 +507,54 @@
 		});
 	}
 
-	function processUpdateLocality() {
-		var data = {
-			"id" : $("#localityId").val(),
-			"selectedState" : $("#selectedState_update").val(),
-			"localityName" : $("#localityName_update").val()
-		};
+	function processUpdateLocality(obj) {
+		$(obj).prop('disabled', true);
+		var localityName = $("#localityName_update").val();
+		var state = $("#selectedState_update").val();
 
-		$.ajax({
-			url : "locality_processUpdateLocality.action",
-			async : false,
-			type : 'post',
-			data : data,
-			success : function(result) {
+		if (!isEmpty(localityName) && !isEmpty(state) && state != '-1') {
+			var data = {
+				"id" : $("#localityId").val(),
+				"selectedState" : state,
+				"localityName" : localityName
+			};
 
-				$("#localityTable").DataTable().destroy();
-				loadLocalityTable();
-				$("#model-close-btn").click();
-				hideTables();
+			$.ajax({
+				url : "locality_processUpdateLocality.action",
+				async : false,
+				type : 'post',
+				data : data,
+				success : function(result) {
 
-				$('#selectedState_create option').prop('selected', function() {
-					return this.defaultSelected;
-				});
+					$("#localityTable").DataTable().destroy();
+					loadLocalityTable();
+					$("#model-close-btn").click();
+					hideTables();
 
-			}
-		});
+					/* $('#selectedState_create option').prop('selected', function() {
+						return this.defaultSelected;
+					}); */
+
+					reloadLocalityDropDown();
+					$(obj).prop('disabled', false);
+
+				}
+			});
+		} else if (isEmpty(localityName)) {
+			alert("Locality Name is empty");
+			$(obj).prop('disabled', false);
+		} else if (isEmpty(state) || state == '-1') {
+			alert("State is empty");
+			$(obj).prop('disabled', false);
+		}
+
 	}
 
 	/* locality related functionalities end */
 
 	/* City related functionalities start */
-	
-	function openCityCreateWindow(){
+
+	function openCityCreateWindow() {
 		hideTables();
 		$("#cityCreateTable").show();
 
@@ -476,12 +569,16 @@
 			closeOnEscape : true
 		});
 	}
-	
-	
-	function processCreateCity(){
-		var data = {
-				"selectedDistrict" : $("#selectedLocality_create").val(),
-				"cityName" : $("#cityName_create").val()
+
+	function processCreateCity(obj) {
+		$(obj).prop('disabled', true);
+		var cityName = $("#cityName_create").val();
+		var locality = $("#selectedLocality_create").val();
+
+		if (!isEmpty(cityName) && !isEmpty(locality) && locality != '-1') {
+			var data = {
+				"selectedDistrict" : locality,
+				"cityName" : cityName
 			};
 
 			$.ajax({
@@ -496,18 +593,28 @@
 					$("#model-close-btn").click();
 					hideTables();
 
-					$('#selectedLocality_create option').prop('selected', function() {
+					/* $('#selectedLocality_create option').prop('selected', function() {
 						return this.defaultSelected;
-					});
+					}); */
 
+					reloadCityDropDown();
+					$(obj).prop('disabled', false);
 				}
 			});
+		} else if (isEmpty(cityName)) {
+			alert("City Name is empty");
+			$(obj).prop('disabled', false);
+		} else if (isEmpty(locality) || locality == '-1') {
+			alert("Locality is empty");
+			$(obj).prop('disabled', false);
+		}
+
 	}
-	
-	function openCityEditWindow(id,obj) {
+
+	function openCityEditWindow(id, obj) {
 		hideTables();
-		var existingCityName = $(obj).closest('td').prev('td').prev('td')
-				.prev('td').prev('td').text();
+		var existingCityName = $(obj).closest('td').prev('td').prev('td').prev(
+				'td').prev('td').text();
 
 		$("#cityId").val(id);
 		$("#cityName_update").val(existingCityName);
@@ -523,11 +630,16 @@
 		});
 	}
 
-	function processUpdateCity(){
-		var data = {
+	function processUpdateCity(obj) {
+		$(obj).prop('disabled', true);
+		var cityName = $("#cityName_update").val();
+		var locality = $("#selectedLocality_update").val();
+
+		if (!isEmpty(cityName) && !isEmpty(locality) && locality != '-1') {
+			var data = {
 				"id" : $("#cityId").val(),
-				"selectedDistrict" : $("#selectedLocality_update").val(),
-				"cityName" : $("#cityName_update").val()
+				"selectedDistrict" : locality,
+				"cityName" : cityName
 			};
 
 			$.ajax({
@@ -542,19 +654,30 @@
 					$("#model-close-btn").click();
 					hideTables();
 
-					$('#selectedLocality_update option').prop('selected', function() {
+					/* $('#selectedLocality_update option').prop('selected', function() {
 						return this.defaultSelected;
-					});
+					}); */
+
+					reloadCityDropDown();
+					$(obj).prop('disabled', false);
 
 				}
 			});
+		} else if (isEmpty(cityName)) {
+			alert("City Name is empty");
+			$(obj).prop('disabled', false);
+		} else if (isEmpty(locality) || locality == '-1') {
+			alert("Locality is empty");
+			$(obj).prop('disabled', false);
+		}
+
 	}
-	
+
 	/* City related functionalities end */
-	
+
 	/* Village related functionalities start  */
-	
-	function openVillageCreateWindow(){
+
+	function openVillageCreateWindow() {
 		hideTables();
 		$("#villageCreateTable").show();
 
@@ -569,11 +692,16 @@
 			closeOnEscape : true
 		});
 	}
-	
-	function processCreateVillage(){
-		var data = {
-				"selectedCity" : $("#selectedCity_create").val(),
-				"villageName" : $("#villageName_create").val()
+
+	function processCreateVillage(obj) {
+		$(obj).prop('disabled', true);
+		var villageName = $("#villageName_create").val();
+		var city = $("#selectedCity_create").val();
+
+		if (!isEmpty(villageName) && !isEmpty(city) && city != '-1') {
+			var data = {
+				"selectedCity" : city,
+				"villageName" : villageName
 			};
 
 			$.ajax({
@@ -588,15 +716,25 @@
 					$("#model-close-btn").click();
 					hideTables();
 
-					$('#selectedCity_create option').prop('selected', function() {
-						return this.defaultSelected;
-					});
+					$('#selectedCity_create option').prop('selected',
+							function() {
+								return this.defaultSelected;
+							});
+					$(obj).prop('disabled', false);
 
 				}
 			});
+		} else if (isEmpty(villageName)) {
+			alert("Village Name is empty");
+			$(obj).prop('disabled', false);
+		} else if (isEmpty(city) || city == '-1') {
+			alert("City is empty");
+			$(obj).prop('disabled', false);
+		}
+
 	}
-	
-	function openVillageEditWindow(id,obj) {
+
+	function openVillageEditWindow(id, obj) {
 		hideTables();
 		var existingVillageName = $(obj).closest('td').prev('td').prev('td')
 				.prev('td').prev('td').prev('td').text();
@@ -614,12 +752,17 @@
 			closeOnEscape : true
 		});
 	}
-	
-	function processUpdateVillage(){
-		var data = {
+
+	function processUpdateVillage(obj) {
+		$(obj).prop('disabled', true);
+		var villageName = $("#villageName_update").val();
+		var city = $("#selectedCity_update").val();
+
+		if (!isEmpty(villageName) && !isEmpty(city) && city != '-1') {
+			var data = {
 				"id" : $("#villageId").val(),
-				"selectedCity" : $("#selectedCity_update").val(),
-				"villageName" : $("#villageName_update").val()
+				"selectedCity" : city,
+				"villageName" : villageName
 			};
 
 			$.ajax({
@@ -634,24 +777,174 @@
 					$("#model-close-btn").click();
 					hideTables();
 
-					$('#selectedCity_update option').prop('selected', function() {
-						return this.defaultSelected;
-					});
+					$('#selectedCity_update option').prop('selected',
+							function() {
+								return this.defaultSelected;
+							});
+					$(obj).prop('disabled', false);
 
 				}
 			});
-	}
-	
-	/* Village related functionalities end */
-	
+		} else if (isEmpty(villageName)) {
+			alert("Village Name is empty");
+			$(obj).prop('disabled', false);
+		} else if (isEmpty(city) || city == '-1') {
+			alert("City is empty");
+			$(obj).prop('disabled', false);
+		}
 
+	}
+
+	/* Village related functionalities end */
+
+	/* refresh dropdown functions start */
+
+	function reloadCountryDropDown() {
+
+		$
+				.ajax({
+					url : "village_refreshCountriesList.action",
+					async : false,
+					type : 'post',
+					success : function(result) {
+						var obj = JSON.parse(result);
+
+						var country_create = $('#selectedCountry_create');
+						country_create.find('option').remove();
+						$('<option>').val("-1").text("Select").appendTo(
+								country_create);
+
+						var country_update = $('#selectedCountry_update');
+						country_update.find('option').remove();
+						$('<option>').val("-1").text("Select").appendTo(
+								country_update);
+
+						for ( var key in obj) {
+							if (obj.hasOwnProperty(key)) {
+								var val = obj[key];
+								//console.log(key +" - "+val);
+								$('<option>').val(key).text(val).appendTo(
+										country_create);
+								$('<option>').val(key).text(val).appendTo(
+										country_update);
+							}
+						}
+
+					}
+				});
+
+	}
+
+	function reloadStateDropDown() {
+
+		$
+				.ajax({
+					url : "village_refreshStateList.action",
+					async : false,
+					type : 'post',
+					success : function(result) {
+						var obj = JSON.parse(result);
+
+						var state_create = $('#selectedState_create');
+						state_create.find('option').remove();
+						$('<option>').val("-1").text("Select").appendTo(
+								state_create);
+
+						var state_update = $('#selectedState_update');
+						state_update.find('option').remove();
+						$('<option>').val("-1").text("Select").appendTo(
+								state_update);
+
+						for ( var key in obj) {
+							if (obj.hasOwnProperty(key)) {
+								var val = obj[key];
+								//console.log(key +" - "+val);
+								$('<option>').val(key).text(val).appendTo(
+										state_create);
+								$('<option>').val(key).text(val).appendTo(
+										state_update);
+							}
+						}
+
+					}
+				});
+
+	}
+
+	function reloadLocalityDropDown() {
+
+		$.ajax({
+			url : "village_refreshLocalityList.action",
+			async : false,
+			type : 'post',
+			success : function(result) {
+				var obj = JSON.parse(result);
+
+				var locality_create = $('#selectedLocality_create');
+				locality_create.find('option').remove();
+				$('<option>').val("-1").text("Select")
+						.appendTo(locality_create);
+
+				var locality_update = $('#selectedLocality_update');
+				locality_update.find('option').remove();
+				$('<option>').val("-1").text("Select")
+						.appendTo(locality_update);
+
+				for ( var key in obj) {
+					if (obj.hasOwnProperty(key)) {
+						var val = obj[key];
+						//console.log(key +" - "+val);
+						$('<option>').val(key).text(val).appendTo(
+								locality_create);
+						$('<option>').val(key).text(val).appendTo(
+								locality_update);
+					}
+				}
+
+			}
+		});
+
+	}
+
+	function reloadCityDropDown() {
+
+		$.ajax({
+			url : "village_refreshCityList.action",
+			async : false,
+			type : 'post',
+			success : function(result) {
+				var obj = JSON.parse(result);
+
+				var city_create = $('#selectedCity_create');
+				city_create.find('option').remove();
+				$('<option>').val("-1").text("Select").appendTo(city_create);
+
+				var city_update = $('#selectedCity_update');
+				city_update.find('option').remove();
+				$('<option>').val("-1").text("Select").appendTo(city_update);
+
+				for ( var key in obj) {
+					if (obj.hasOwnProperty(key)) {
+						var val = obj[key];
+						//console.log(key +" - "+val);
+						$('<option>').val(key).text(val).appendTo(city_create);
+						$('<option>').val(key).text(val).appendTo(city_update);
+					}
+				}
+
+			}
+		});
+
+	}
+
+	/* refresh dropdown functions end */
 </script>
 
 <body>
 
 	<!-- Nav tabs -->
 	<ul class="nav nav-pills nav-justified" role="tablist">
-		<li class="nav-item waves-effect waves-light" style="padding:10px"><a
+		<li class="nav-item waves-effect waves-light" style="padding: 10px"><a
 			class="nav-link active  border py-10 d-flex flex-grow-1 rounded flex-column align-items-center"
 			data-toggle="pill" href="#country-tabs"> <span
 				class="nav-icon py-2 w-auto"> <span
@@ -675,7 +968,7 @@
 				class="nav-text font-size-lg py-2 font-weight-bold text-center">Country
 					Details</span>
 		</a></li>
-		<li class="nav-item waves-effect waves-light" style="padding:10px"><a
+		<li class="nav-item waves-effect waves-light" style="padding: 10px"><a
 			class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center"
 			data-toggle="pill" href="#state-tabs"> <span
 				class="nav-icon py-2 w-auto"> <span
@@ -698,7 +991,7 @@
 				class="nav-text font-size-lg py-2 font-weight-bolder text-center">State
 					Details</span>
 		</a></li>
-		<li class="nav-item waves-effect waves-light" style="padding:10px"><a
+		<li class="nav-item waves-effect waves-light" style="padding: 10px"><a
 			class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center"
 			data-toggle="pill" href="#locality-tabs"> <span
 				class="nav-icon py-2 w-auto"> <span
@@ -723,7 +1016,7 @@
 					Details</span>
 		</a></li>
 
-		<li class="nav-item waves-effect waves-light" style="padding:10px"><a
+		<li class="nav-item waves-effect waves-light" style="padding: 10px"><a
 			class="nav-link   border py-10 d-flex flex-grow-1 rounded flex-column align-items-center"
 			data-toggle="pill" href="#city-tabs"> <span
 				class="nav-icon py-2 w-auto"> <span
@@ -748,7 +1041,7 @@
 					Details</span>
 		</a></li>
 
-		<li class="nav-item waves-effect waves-light" style="padding:10px"><a
+		<li class="nav-item waves-effect waves-light" style="padding: 10px"><a
 			class="nav-link border py-10 d-flex flex-grow-1 rounded flex-column align-items-center"
 			data-toggle="pill" href="#village-tabs"> <span
 				class="nav-icon py-2 w-auto"> <span
@@ -777,108 +1070,114 @@
 	<div class="tab-content p-3 text-muted">
 
 		<div class="tab-pane active" id="country-tabs" role="tabpanel">
-		<div>
-		
-			<sec:authorize ifAllGranted="profile.procurementProduct.create">
-				<button type="BUTTON" id="add" data-toggle='modal'
-					data-target='#slide' onclick='openCountryCreateWindow();'
-					class="btn btn-success mb-2 float-right">
-					Add Country <i class="ri-menu-add-line align-middle ml-2"></i>
-				</button>
-			</sec:authorize>
-			
+			<div>
+
+				<sec:authorize ifAllGranted="profile.procurementProduct.create">
+					<button type="BUTTON" id="add" data-toggle='modal'
+						data-target='#slide' onclick='openCountryCreateWindow();'
+						class="btn btn-success mb-2 float-right">
+						Add Country <i class="ri-menu-add-line align-middle ml-2"></i>
+					</button>
+				</sec:authorize>
+
 			</div>
-			<br>
-			<br>
+			<br> <br>
 			<div class="row">
-                            <div class="col-12">
-			<table id="countryTable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;"></table>
+				<div class="col-12">
+					<table id="countryTable"
+						class="table table-bordered dt-responsive nowrap"
+						style="border-collapse: collapse; border-spacing: 0; width: 100%;"></table>
+				</div>
 			</div>
-			</div>
-			
+
 		</div>
 
 		<div class="tab-pane" id="state-tabs" role="tabpanel">
-		<div>
-		<sec:authorize ifAllGranted="profile.procurementProduct.create">
-				<button type="BUTTON" id="add" data-toggle='modal'
-					data-target='#slide' onclick='openStateCreateWindow();'
-					class="btn btn-success mb-2 float-right">
-					Add State <i class="ri-menu-add-line align-middle ml-2"></i>
-				</button>
-			</sec:authorize>
-		</div>
-			<br><br>
-		<div class="row">
-                            <div class="col-12">
-			<table id="stateTable" class="display" width="100%"></table>
-		</div>
-		</div>
+			<div>
+				<sec:authorize ifAllGranted="profile.procurementProduct.create">
+					<button type="BUTTON" id="add" data-toggle='modal'
+						data-target='#slide' onclick='openStateCreateWindow();'
+						class="btn btn-success mb-2 float-right">
+						Add State <i class="ri-menu-add-line align-middle ml-2"></i>
+					</button>
+				</sec:authorize>
+			</div>
+			<br> <br>
+			<div class="row">
+				<div class="col-12">
+					<table id="stateTable" class="display" width="100%"></table>
+				</div>
+			</div>
 		</div>
 
 		<div class="tab-pane" id="locality-tabs" role="tabpanel">
 			<div>
 				<sec:authorize ifAllGranted="profile.procurementProduct.create">
-				<button type="BUTTON" id="add" data-toggle='modal'
-					data-target='#slide' onclick='openLocalityCreateWindow();'
-					class="btn btn-success mb-2 float-right">
-					Add Locality <i class="ri-menu-add-line align-middle ml-2"></i>
-				</button>
-			</sec:authorize>
+					<button type="BUTTON" id="add" data-toggle='modal'
+						data-target='#slide' onclick='openLocalityCreateWindow();'
+						class="btn btn-success mb-2 float-right">
+						Add Locality <i class="ri-menu-add-line align-middle ml-2"></i>
+					</button>
+				</sec:authorize>
 			</div>
-			<br><br>
-		<div class="row">
-             <div class="col-12">
-			<table id="localityTable" class="display" width="100%"></table>
-			</div>
+			<br> <br>
+			<div class="row">
+				<div class="col-12">
+					<table id="localityTable" class="display" width="100%"></table>
+				</div>
 			</div>
 		</div>
 
 		<div class="tab-pane" id="city-tabs" role="tabpanel">
 			<div>
-			<sec:authorize ifAllGranted="profile.procurementProduct.create">
-				<button type="BUTTON" id="add" data-toggle='modal'
-					data-target='#slide' onclick='openCityCreateWindow();'
-					class="btn btn-success mb-2 float-right">
-					Add City <i class="ri-menu-add-line align-middle ml-2"></i>
-				</button>
-			</sec:authorize>
+				<sec:authorize ifAllGranted="profile.procurementProduct.create">
+					<button type="BUTTON" id="add" data-toggle='modal'
+						data-target='#slide' onclick='openCityCreateWindow();'
+						class="btn btn-success mb-2 float-right">
+						Add City <i class="ri-menu-add-line align-middle ml-2"></i>
+					</button>
+				</sec:authorize>
 			</div>
-			<br><br>
+			<br> <br>
 			<div class="row">
-             <div class="col-12">
-			<table id="cityTable" class="display" width="100%"></table>
+				<div class="col-12">
+					<table id="cityTable" class="display" width="100%"></table>
+				</div>
+			</div>
 		</div>
-		</div></div>
 
 		<div class="tab-pane" id="village-tabs" role="tabpanel">
 			<div>
 				<sec:authorize ifAllGranted="profile.procurementProduct.create">
-				<button type="BUTTON" id="add" data-toggle='modal'
-					data-target='#slide' onclick='openVillageCreateWindow();'
-					class="btn btn-success mb-2 float-right">
-					Add Village <i class="ri-menu-add-line align-middle ml-2"></i>
-				</button>
-			</sec:authorize>
+					<button type="BUTTON" id="add" data-toggle='modal'
+						data-target='#slide' onclick='openVillageCreateWindow();'
+						class="btn btn-success mb-2 float-right">
+						Add Village <i class="ri-menu-add-line align-middle ml-2"></i>
+					</button>
+				</sec:authorize>
 			</div>
-			<br><br>
-		<div class="row">
-             <div class="col-12">
-			<table id="villageTable" class="display" width="100%"></table>
-		</div></div>
+			<br> <br>
+			<div class="row">
+				<div class="col-12">
+					<table id="villageTable" class="display" width="100%"></table>
+				</div>
+			</div>
 		</div>
 
 	</div>
 
 	<div id="slide" class="modal fade bs-example-modal-center"
-		role="dialog" >
+		role="dialog">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
 				<div class="modal-header">
-				<h5 id="cropSlideHead" class="modal-title mt-0">Add Crop Information</h5>
-					<button type="button"  class="close" id="model-close-btn"
-						data-dismiss="modal" aria-label="Close">  <span aria-hidden="true">&times;</span></button>
-					
+					<h5 id="cropSlideHead" class="modal-title mt-0">Add Crop
+						Information</h5>
+					<button type="button" class="close" id="model-close-btn"
+						data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+
 				</div>
 
 				<div class="modal-body">
@@ -898,7 +1197,7 @@
 						<tr class="odd">
 							<td colspan="2">
 								<button type="button" Class="btnSrch btn btn-success"
-									onclick="processCreateCountry();">
+									onclick="processCreateCountry(this);">
 									<s:text name="save" />
 								</button>
 								<button type="button" Class="btnClr btn btn-warning" id="cancel"
@@ -928,7 +1227,7 @@
 						<tr class="odd">
 							<td colspan="2">
 								<button type="button" Class="btnSrch btn btn-success"
-									onclick="processUpdateCountry();">
+									onclick="processUpdateCountry(this);">
 									<s:text name="save" />
 								</button>
 								<button type="button" Class="btnClr btn btn-warning" id="cancel"
@@ -965,7 +1264,7 @@
 						<tr class="odd">
 							<td colspan="2">
 								<button type="button" Class="btnSrch btn btn-success"
-									onclick="processCreateState();">
+									onclick="processCreateState(this);">
 									<s:text name="save" />
 								</button>
 								<button type="button" Class="btnClr btn btn-warning" id="cancel"
@@ -1004,7 +1303,7 @@
 						<tr class="odd">
 							<td colspan="2">
 								<button type="button" Class="btnSrch btn btn-success"
-									onclick="processUpdateState();">
+									onclick="processUpdateState(this);">
 									<s:text name="save" />
 								</button>
 								<button type="button" Class="btnClr btn btn-warning" id="cancel"
@@ -1039,7 +1338,7 @@
 						<tr class="odd">
 							<td colspan="2">
 								<button type="button" Class="btnSrch btn btn-success"
-									onclick="processCreateLocality();">
+									onclick="processCreateLocality(this);">
 									<s:text name="save" />
 								</button>
 								<button type="button" Class="btnClr btn btn-warning" id="cancel"
@@ -1076,7 +1375,7 @@
 						<tr class="odd">
 							<td colspan="2">
 								<button type="button" Class="btnSrch btn btn-success"
-									onclick="processUpdateLocality();">
+									onclick="processUpdateLocality(this);">
 									<s:text name="save" />
 								</button>
 								<button type="button" Class="btnClr btn btn-warning" id="cancel"
@@ -1111,7 +1410,7 @@
 						<tr class="odd">
 							<td colspan="2">
 								<button type="button" Class="btnSrch btn btn-success"
-									onclick="processCreateCity();">
+									onclick="processCreateCity(this);">
 									<s:text name="save" />
 								</button>
 								<button type="button" Class="btnClr btn btn-warning" id="cancel"
@@ -1149,7 +1448,7 @@
 						<tr class="odd">
 							<td colspan="2">
 								<button type="button" Class="btnSrch btn btn-success"
-									onclick="processUpdateCity();">
+									onclick="processUpdateCity(this);">
 									<s:text name="save" />
 								</button>
 								<button type="button" Class="btnClr btn btn-warning" id="cancel"
@@ -1188,7 +1487,7 @@
 						<tr class="odd">
 							<td colspan="2">
 								<button type="button" Class="btnSrch btn btn-success"
-									onclick="processCreateVillage();">
+									onclick="processCreateVillage(this);">
 									<s:text name="save" />
 								</button>
 								<button type="button" Class="btnClr btn btn-warning" id="cancel"
@@ -1226,7 +1525,7 @@
 						<tr class="odd">
 							<td colspan="2">
 								<button type="button" Class="btnSrch btn btn-success"
-									onclick="processUpdateVillage();">
+									onclick="processUpdateVillage(this);">
 									<s:text name="save" />
 								</button>
 								<button type="button" Class="btnClr btn btn-warning" id="cancel"
@@ -1246,9 +1545,9 @@
 	</div>
 
 
-	
-	
 
-	
+
+
+
 </body>
 </html>
