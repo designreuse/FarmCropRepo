@@ -343,7 +343,7 @@
 			<result type="redirectAction" name="redirect">farmer_list</result>
 			<result type="redirectAction" name="redirectType">farmer_list?type=${type}
 			</result>
-		
+			<result name="report">/jsp/profile/farmerListReportDT.jsp</result>
 			<result name="xls" type="stream">
 				<param name="contentType">application/xls</param>
 				<param name="inputName">fileInputStream</param>

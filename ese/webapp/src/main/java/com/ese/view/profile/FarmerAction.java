@@ -571,6 +571,16 @@ public class FarmerAction extends SwitchValidatorAction {
 		request.setAttribute(HEADING, getText("farmerlist"));
 		return LIST;
 	}
+	
+	public String report() throws Exception {
+
+		if (getCurrentPage() != null) {
+			setCurrentPage(getCurrentPage());
+		}
+		reLocalizeMenu();
+		request.setAttribute(HEADING, getText(REPORT));
+		return REPORT;
+	}
 
 	/**
 	 * Builds the filter data map.
@@ -12729,6 +12739,27 @@ if(getCurrentTenantId().equalsIgnoreCase("symrise") || getCurrentTenantId().equa
 			data.add('"' + "<button type='button' class='btn btn-info'  onclick='redirectFarmerDetailPage("
 					+ String.valueOf(f[7]) + ",this)'  >Info</button>" + '"');
 
+			rows.add(data);
+		});
+		printAjaxResponse(rows, "text/html");
+	}
+	
+	public void populateFarmerListReportGridData() {
+		List<Object[]> farmerList = farmerService.fetchFarmerListReportGridData();
+		JSONArray rows = new JSONArray();
+		
+		farmerList.stream().forEach(f -> {
+			List<String> data = new ArrayList<String>();
+			data.add('"' + String.valueOf(f[0]) + '"');
+			data.add('"' + String.valueOf(f[1]) + '"');
+			data.add('"' + String.valueOf(f[2]) + '"');
+			data.add('"' + String.valueOf(f[3]) + '"');
+			data.add('"' + String.valueOf(f[4]) + '"');
+			data.add('"' + String.valueOf(f[5]) + '"');
+			data.add('"' + String.valueOf(f[6]) + '"');
+			data.add('"' + String.valueOf(f[7]) + '"');
+			data.add('"' + String.valueOf(f[8]) + '"');
+			data.add('"' + String.valueOf(f[9]) + '"');
 			rows.add(data);
 		});
 		printAjaxResponse(rows, "text/html");

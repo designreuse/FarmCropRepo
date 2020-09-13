@@ -14296,5 +14296,27 @@ public class FarmerDAO extends ESEDAO implements IFarmerDAO {
 		return list;
 	}
 
+	@Override
+	public List<Object[]> fetchFarmerListReportGridData() {
+		
+		String query = " select ifnull(f.FARMER_CODE,'NA'),f.FIRST_NAME,ifnull(f.GENDER,'NA'),ifnull(f.AGE,'NA'),ifnull(hs.NAME,'NA') as seasonName,"
+				+ " v.NAME as villageName,c.NAME as cityName,ld.NAME as localityName,s.NAME as stateName,cntry.NAME as countryName"
+				+ " from farmer f"
+				+ " inner join harvest_season hs on f.season_code = hs.code"
+				+ " inner join village v on f.VILLAGE_ID = v.ID"
+				+ " inner join  city c on v.CITY_ID = c.ID"
+				+ " inner join location_detail ld on c.LOCATION_ID = ld.ID"
+				+ " inner join state s on ld.STATE_ID = s.ID"
+				+ " inner join country cntry on s.COUNTRY_ID = cntry.ID"
+				+ " where f.status = 1 and f.status_code = 0";
+
+		Session session = getSessionFactory().openSession();
+		SQLQuery sqlQuery = session.createSQLQuery(query);
+		List<Object[]> list = sqlQuery.list();
+		session.flush();
+		session.close();
+		return list;
+	}
+
 	
 }

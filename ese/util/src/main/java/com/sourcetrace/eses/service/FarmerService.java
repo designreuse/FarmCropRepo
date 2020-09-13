@@ -7986,4 +7986,9 @@ boolean updatedS=false;
 	public List<Object[]> fetchFarmerTableData() {
 		return farmerDAO.fetchFarmerTableData();
 	}
+
+	@Override
+	public List<Object[]> fetchFarmerListReportGridData() {
+		return farmerDAO.fetchFarmerListReportGridData();
+	}
 }

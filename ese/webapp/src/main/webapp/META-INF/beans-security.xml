@@ -319,8 +319,8 @@
 		<security:intercept-url pattern="/harvestSeason_delete*" access="profile.season.delete" />
 		<security:intercept-url pattern="/harvestSeason_data*" access="profile.season.list"/>
 		
-		
-		 <security:intercept-url pattern="/farmerReport_list*" access="report.farmerList.list" />
+		<security:intercept-url pattern="/farmer_report*" access="report.farmerList.list" />
+		<security:intercept-url pattern="/farmerReport_list*" access="report.farmerList.list" />
 		<security:intercept-url pattern="/farmerReport_detail*" access="report.farmerList.list" />
 		<security:intercept-url pattern="/farmerReport_data*" access="report.farmerList.list" />
 		<!-- <security:intercept-url pattern="/farmerReport_detail*" access="report.farmerList.list" /> -->
