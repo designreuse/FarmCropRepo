@@ -1341,6 +1341,27 @@ public class UserAction extends SwitchValidatorAction {
 		return jsonObject;
 	}
 
+	
+	public void populateUserGridData() {
+		List<User> userList = userService.listUsers();
+		JSONArray rows = new JSONArray();
+
+		userList.stream().forEach(u -> {
+			List<String> data = new ArrayList<String>();
+			data.add('"' + u.getUsername() + '"');
+			data.add('"' + (u.getPersonalInfo() != null ? u.getPersonalInfo().getFirstName() : "NA") + '"');
+			data.add('"' + (u.getPersonalInfo() != null ? u.getPersonalInfo().getLastName() : "NA") + '"');
+			data.add('"' + (u.getContactInfo() != null ? u.getContactInfo().getMobileNumber() : "NA") + '"');
+			data.add('"' + (!ObjectUtil.isEmpty(u.getRole()) ? u.getRole().getName() : "NA") + '"');
+			data.add('"' + (u.isEnabled() ? getText("enabled") : getText("disabled")) + '"');
+			data.add('"' + "<button type='button' class='btn btn-info'  onclick='redirectUserDetailPage(" + u.getId()
+					+ ",this)'  >Info</button>" + '"');
+
+			rows.add(data);
+		});
+		printAjaxResponse(rows, "text/html");
+	}
+	
 	/**
 	 * Sets the roles.
 	 * 
